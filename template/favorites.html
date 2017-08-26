@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="css/materialize.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico:400,700&effect=3d-float" rel="stylesheet">
+  </head>
+  <body>
+    <div class="navbar-fixed">
+      <nav class="header">
+        <div class="nav-wrapper">
+          <a class="brand-logo font-effect-3d-float logo hide-on-small-only" href="#!">More-Recipies</a>
+          <a href="#" data-activates="dashboard" class="button-collapse"><i class="material-icons">menu</i></a>         
+            <ul class="right hide-on-med-and-down return">
+              <li>
+                <a class="dropdown-button" href="#" data-activates="user-dropdown"><span class="fa fa-lg fa-user-circle"></span> Kayode Adeola <span class="fa fa-lg fa-caret-down"></span></a>
+              </li>
+            </ul> 
+        </div>
+      </nav>
+    </div>
+    <!-- <div class="row">
+      <div class="col l3">
+        <ul id="slide-out" class="side-nav fixed">
+          <div  class="teal darken-2">
+            <div id="profile-page-header" class="card teal darken-2">
+              <div class="card-image">
+                <img class="responsive-img" id="dash-img" src="css/img/dash.jpg" alt="user-background">
+                <figure class="card-profile-image">
+                  <img src="css/img/holder-profile.png" alt="profile image" class="z-depth-2 responsive-img">
+                </figure>
+              </div>
+              <ul class="collection">
+                <li>
+                  <a class="collection-item " href="">Dashboard</a>
+                </li>
+                <li>
+                  <a class="collection-item " href="">Dashboard</a>
+                </li>
+                <li>
+                  <a class="collection-item " href="">Dashboard</a>
+                </li>
+                <li>
+                  <a class="collection-item " href="">Dashboard</a>
+                </li>
+                <li>
+                  <a class="collection-item " href=""></a>
+                </li>
+                <li>
+                  <a class="collection-item " href=""></a>
+                </li>
+                <li>
+                  <a class="collection-item " href=""></a>
+                </li>
+                <li>
+                  <a class="collection-item " href=""></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </ul>
+      </div>
+      <div id="dash-header" class="col l9 m12 s12">
+        <div class="card-panel grey lighten-4">
+          <span class="card-content">
+            <h5>Welcome Kayode!</h5>
+            <span>Dashboard/My Recicpes</span>
+          </span>
+        </div>
+      </div>
+    </div> -->
+    <div class="row">
+      <div id="dash-panel" class="col l3 teal darken-2 hide-on-med-and-down">
+        <div  class="teal darken-2">
+        <div id="profile-page-header" class="card teal darken-2 z-depth-0">
+          <div class="card-image">
+            <img class="responsive-img" id="dash-img" src="css/img/dash.jpg" alt="user-background">
+            <figure class="card-profile-image">
+              <img src="css/img/user.jpg" alt="profile image" class="z-depth-2 responsive-img">
+            </figure>
+          </div>
+          <div id="dash-links" >
+            <div class="collection">
+              <a id="dashboard-parent" href="#!" class="collection-item"><strong>Dashboard</strong> <span class="right fa fa-user-circle"></a>
+              <br>
+              <a href="#" class="collection-item">My Profile <span class="right fa fa-user-circle"></a>
+              <a href="#" class="collection-item">My Recipes <span class="right fa fa-user-circle"></a>
+              <a href="#!" class="collection-item active">Favorite Recipes <span class="right fa fa-user-circle"></a>
+              <a href="#!" class="collection-item">Notifications <span class="red new badge">10</span></a>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="row">
+      <div id="dash-panel" class="col l3 teal darken-2 hide-on-med-and-down">
+        <div  class="teal darken-2">
+        <div id="profile-page-header" class="card teal darken-2 z-depth-0">
+          <div class="card-image">
+            <img class="responsive-img" id="dash-img" src="css/img/dash.jpg" alt="user-background">
+            <figure class="card-profile-image">
+              <img src="css/img/user.jpg" alt="profile image" class="z-depth-2 responsive-img">
+            </figure>
+          </div>
+          <div id="dash-links" >
+            <div class="collection">
+              <a id="dashboard-parent" href="#!" class="collection-item"><strong>Dashboard</strong> <span class="right fa fa-user-circle"></a>
+              <br>
+              <a id="recipes-link" href="#" class="collection-item">My Profile <span class="right fa fa-user-circle"></a>
+              <a href="#" class="collection-item">My Recipes <span class="right fa fa-user-circle"></a>
+              <a href="#!" class="collection-item active">Favorite Recipes <span class="right fa fa-user-circle"></a>
+              <a href="#!" class="collection-item">Notifications <span class="red new badge">10</span></a>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div id="user-recipes" class="col l9 m12 s12 offset-l3">
+        <div class="card-panel grey lighten-4">
+          <span class="card-content">
+            <h5>Welcome Kayode!</h5>
+            <span>Dashboard/Favorite Recipes</span>
+          </span>
+        </div>
+         <div id="favorite-recipes" class="row"> 
+          <div class="col l6 m8 s12 offset-m2">
+            <div class="card large">
+              <div class="card-image">
+                <img class="activator" src="css/img/cake2.jpg" alt="">
+              </div>
+              <div class="card-content">
+                <span class="card-title ">Frosty Chocolat</span>
+                <a id="edit" class="chip blue white-text modal-trigger" href="#modal-edit">Edit</a><span>
+                <a id="delete" class="chip white-text red modal-trigger" href="#modal-delete">Delete</a>
+                <i class="fa fa-thumbs-down right grey-text" href=""> 2</i>
+                <i class="fa fa-thumbs-up right grey-text" href=""> 25</i>
+                <p class="grey-text">Posted 2 Aug 17, 10:55am<i class="fa fa-comment right black-text">12</i></p>
+                </span>         
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col l3 m8 s12 offset-m2">
+            <div class="card">
+              <div class="card-image">
+                <img class="activator" src="css/img/spice.jpg" alt="">
+              </div>
+              <div class="card-content">
+                <span class="card-title activator">Hot Spice<i class="material-icons right">more_vert</i></span>         
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Hot Spice<i class="material-icons right">close</i></span>
+                <br>
+                <a class="chip blue white-text" href="">Edit</a><span>
+                <a class="chip white-text red" href="">Delete</a>
+                <p class="grey-text">Posted 2 Aug 17, 10:55am
+                <i class="fa fa-comment right black-text">12</i>
+                <i class="fa fa-thumbs-down right grey-text" href=""> 2</i>
+                <i class="fa fa-thumbs-up right grey-text" href=""> 25</i>
+                </p>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col l3 m8 s12 offset-m2">
+            <div class="card">
+              <div class="card-image">
+                <img class="activator" src="css/img/spice.jpg" alt="">
+              </div>
+              <div class="card-content">
+                <span class="card-title activator">Hot Spice<i class="material-icons right">more_vert</i></span>         
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Hot Spice<i class="material-icons right">close</i></span>
+                <br>
+                <a class="chip blue white-text" href="">Edit</a><span>
+                <a class="chip white-text red" href="">Delete</a>
+                <p class="grey-text">Posted 2 Jul 17, 1:55pm
+                <i class="fa fa-comment right black-text">12</i>
+                <i class="fa fa-thumbs-down right grey-text" href=""> 11</i>
+                <i class="fa fa-thumbs-up right grey-text" href=""> 98</i>
+                </p>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col l3 m8 s12 offset-m2">
+            <div class="card">
+              <div class="card-image">
+                <img class="activator" src="css/img/burger.jpg" alt="">
+              </div>
+              <div class="card-content">
+                <span class="card-title activator">HamBurger<i class="material-icons right">more_vert</i></span>         
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Hamburger<i class="material-icons right">close</i></span>
+                <br>
+                <a class="chip blue white-text" href="">Edit</a><span>
+                <a class="chip white-text red" href="">Delete</a>
+                <p class="grey-text">Posted 2 Jul 17, 1:55pm
+                <i class="fa fa-comment right black-text">12</i>
+                <i class="fa fa-thumbs-down right grey-text" href=""> 11</i>
+                <i class="fa fa-thumbs-up right grey-text" href=""> 98</i>
+                </p>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col l3 m8 s12 offset-m2">
+            <div class="card">
+              <div class="card-image">
+                <img class="activator" src="css/img/burger.jpg" alt="">
+              </div>
+              <div class="card-content">
+                <span class="card-title activator">HamBurger<i class="material-icons right">more_vert</i></span>         
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Hamburger<i class="material-icons right">close</i></span>
+                <br>
+                <a class="chip blue white-text" href="">Edit</a><span>
+                <a class="chip white-text red" href="">Delete</a>
+                <p class="grey-text">Posted 2 Jul 17, 1:55pm
+                <i class="fa fa-comment right black-text">12</i>
+                <i class="fa fa-thumbs-down right grey-text" href=""> 11</i>
+                <i class="fa fa-thumbs-up right grey-text" href=""> 98</i>
+                </p>
+                </span>
+              </div>
+            </div>
+          </div>
+          </div>
+         </div> 
+      </div> 
+    </div>
+    </div>
+    <ul id="user-dropdown" class="dropdown-content">
+      <li><a class="" href="#!"><span class="fa fa-lg fa-user-circle"></span> Edit Profile</a></li>
+      <li><a href="#!"><span class="fa fa-lg fa-user-circle"></span> Settings</a></li>
+      <li class="divider"></li>
+      <li><a href="#!"><span class="fa fa-lg fa-user-circle"></span> Logout</a></li>
+    </ul>
+    <footer>
+      
+    </footer>
+    <ul class="side-nav" id="dashboard">
+      <div id="dash-panel" class="col l3 teal darken-2">
+        <div  class="teal darken-2">
+        <div id="profile-page-header" class="card teal darken-2 z-depth-0">
+          <div class="card-image">
+            <img class="responsive-img" id="dash-img" src="css/img/dash.jpg" alt="user-background">
+            <figure class="card-profile-image">
+              <img src="css/img/user.jpg" alt="profile image" class="z-depth-2 responsive-img">
+            </figure>
+          </div>
+          <div id="dash-links" >
+            <div class="collection">
+              <a id="dashboard-parent" href="#!" class="collection-item"><strong>Dashboard</strong> <span class="right fa fa-user-circle"></a>
+              <br>
+              <a href="#" class="collection-item">My Profile <span class="right fa fa-user-circle"></a>
+              <a href="#!" class="collection-item">My Recipes <span class="right fa fa-user-circle"></a>
+              <a href="#!" class="collection-item active">Favorite Recipes <span class="right fa fa-user-circle"></a>
+              <a href="#!" class="collection-item">Notifications <span class="red new badge">10</span></a>
+            </div>
+          </div> 
+        </div>
+        </div>
+      </div>
+    </ul>
+    <div id="modal-edit" class="modal">
+      <div class="modal-content">
+        <div class="row">
+          <form class="col s12 l12">
+            <div class="row">
+              <div class="input-field col-s12 l12 m12">
+                <input id="title" type="text" class="validate">
+                <label class="active" for="title">Title</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col-s12 l12 m12">
+                <textarea id="content" class="materialize-textarea"></textarea>
+                <label class="active" for="content">Content</label>
+              </div>
+            </div>
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>Upload Image</span>
+                <input type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+          </form>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn white-text teal">Update</a>
+        </div>
+      </div>
+      <div id="modal-delete" class="modal">
+      <div class="modal-content">
+        <h5>Are you sure you want to delete this recipe post</h5>
+        <p>This action cannot be undone</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn white-text blue">Cancel</a>
+        <a href="#!" class="modal-action waves-effect waves-green btn-flat btn white-text red">Delete</a>
+      </div>
+    </div>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
