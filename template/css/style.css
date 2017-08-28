@@ -12,6 +12,7 @@
 
 html, body, .block {
   height: 100%;
+  overflow-x: hidden;
  }
 
 #nav-search input[type=search]:not(.browser-default) {
@@ -209,4 +210,66 @@ a#post-btn:hover {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: black;
   font-weight: bold;
+}
+
+
+.tabs-vertical .tabs {
+  background-color: #00796b;
+  height: auto;
+  flex-direction: column;
+}
+
+.tabs-vertical .tab {
+  width: 100%;
+  flex-grow: 1;
+  display: block;
+  float: left;
+  text-align: left;
+  line-height: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 0;
+  text-transform: none;
+  text-overflow: ellipsis; 
+}
+
+.tabs-vertical .tab .active {
+  transition: border-color .5s ease;
+  border-right: 3px solid coral;
+}
+
+.tabs-vertical .tab a {
+  color: #3f51b5;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: color 0.28s ease; 
+}
+
+.tabs-vertical .tab a.active {
+  background: #8591d5;;
+}
+
+.tabs-vertical .tab a:hover {
+  color: #8591d5;
+  background: #8591d5;
+}
+
+.tabs-vertical .tab a:hover {
+  color: #8591d5;
+  background: #8591d5;
+}
+.tabs-vertical .tab.disabled a {
+  color: #8591d5;
+  cursor: default; 
+}
+
+.tabs-vertical .indicator {
+  display: none; 
+}
+
+#not-badge {
+  margin-top: 14px;
 }
