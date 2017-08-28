@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="css/materialize.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico:400,700&effect=3d-float" rel="stylesheet">
+  </head>
+  <body>
+    <div class="navbar-fixed">
+      <nav class="header">
+        <div class="nav-wrapper">
+          <a class="brand-logo font-effect-3d-float logo hide-on-small-only" href="#!">More-Recipies</a>
+          <a href="#" data-activates="navlink" class="button-collapse"><i class="material-icons">menu</i></a>         
+          <ul class="right hide-on-med-and-down">
+            <li class="">
+              <form id="nav-search" class="">
+                <i><input class="teal-text white input-fa" type="search" placeholder="&#xf002; Search"></i>
+              </form>
+            </li>
+            <li class="active">
+              <a class="" href="#"><i class="fa fa-heart"></i> Top Recipes</a>
+            </li>
+            <li class="">
+              <a id="new-post" class="modal-trigger" href="#modal-newpost"><i class="fa fa-paper-plane"></i> New Post</a>
+            </li>
+            <li class="">
+              <a class="waves-effect waves-light btn navbtn" href="login.html">Log In</a>
+            </li>
+            <li class="">
+              <a class="waves-effect waves-light btn navbtn" href="register.html">Sign Up</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <ul class="side-nav" id="navlink">
+      <li class="">
+        <form class="">
+          <input class="" type="text" placeholder="Search">
+        </form>
+      </li> 
+      <li class="">
+        <a class="" href="#">Top Recipes</a>
+      </li>
+      <li class="">
+        <a class="" href="#">New Post</a>
+      </li>
+      <li class="">
+        <a class="" href="login.html">Log In</a>
+      </li>
+      <li class="">
+        <a class="" href="register.html">Sign Up</a>
+      </li>
+    </ul>
+    <div id="recipe-img" class="hide-on-small-only">
+      <div class="card z-depth-0">
+        <div class="card-image">
+          <img class="responsive-img" src="css/img/cake.jpg" alt="">
+          <span class="card-title">Recipes</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col l3 m4 s12 offset-l1">
+        <span class=""><h5>Ingredients</h5></span>
+        <p class="divider"></p>
+        <ul>
+          <li>Baking Flour</li>
+          <li>Chocolate bars</li>
+          <li>Margarine</li>
+          <li>Sugar</li>
+        </ul>
+      </div>
+      <div class="col l7 m8 s12">
+        <div class="row">
+        <div class="col l12 m12 s12">
+          <h4>Instructions</h4>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
+            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
+            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
+            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+          </p>
+        </div>
+        <div class="col l12 m12 s12">
+          <div class="card">
+            <div class="card-image">
+              <img class="materialboxed" src="css/img/cake2.jpg" alt="">
+              <span class="card-title">
+                <a class="btn btn-floating right red" href="">-5</a>
+                <a class="btn btn-floating right blue-grey" href="">+23</a>
+                <a class="btn btn-floating right white" href=""><i class="fa fa-heart red-text"></i></a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+    </div>
+    <div id="modal-newpost" class="modal">
+      <div class="modal-content">
+        <div class="row">
+          <form class="col s12 l12">
+            <div class="row">
+              <div class="input-field col-s12 l12 m12">
+                <input id="new-title" type="text" class="validate">
+                <label class="active" for="title">Title</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col-s12 l12 m12">
+                <textarea id="new-content" class="materialize-textarea"></textarea>
+                <label class="active" for="title">Content</label>
+              </div>
+            </div>
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>Upload Image</span>
+                <input type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+          </form>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn white-text teal"><i class="fa fa-paper-plane"></i> Post</a>
+        </div>
+      </div>
+    <div id="comment-box" class="row">
+      <div class="col l10 m12 s12 offset-l1">
+        <form>
+          <div class="input-field">
+            <textarea class="materialize-textarea" id="reviews" type="text" placeholder=" Add a comment.."></textarea>
+          </div>
+          <a id="post-btn" class="btn btn-flat right" href="#">Post</a>
+        </form>
+      </div>
+    </div>
+    <div id="comment-posts" class="row">
+      <div class="col l10 offset-l1 m12 s12">
+        <ul>
+          <li>
+            <img class="secondary-content circle left" src="css/img/user.jpg" height="40px" alt="">
+            <span class=""> <strong class="teal-text">Kayode Adeola</strong> <span class="grey-text"> August 23, 2017 8:52pm</span></span>
+          </li>
+          <li>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
+              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
+              commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
+              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+              cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+            </p>
+            <span class="secondary-content btn btn-flat">Reply</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-footer blue-grey darken-2">
+      <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+      </div>
+    </div>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
