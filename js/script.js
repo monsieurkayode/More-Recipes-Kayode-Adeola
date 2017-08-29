@@ -5,6 +5,7 @@
     $("#modal-delete").modal();
     $("#modal-edit").modal();
     $("#modal-register").modal();
+    $("#modal-login").modal();
     // $("#edit").on("click", function() {
     //   $("#modal-edit").modal();
     // });
