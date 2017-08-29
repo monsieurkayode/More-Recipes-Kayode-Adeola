@@ -4,6 +4,7 @@
     $(".dropdown-button").dropdown();
     $("#modal-delete").modal();
     $("#modal-edit").modal();
+    $("#modal-register").modal();
     // $("#edit").on("click", function() {
     //   $("#modal-edit").modal();
     // });
