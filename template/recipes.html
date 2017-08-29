@@ -14,7 +14,7 @@
     <div class="navbar-fixed">
       <nav class="header">
         <div class="nav-wrapper">
-          <a class="brand-logo font-effect-3d-float logo hide-on-small-only" href="#!">More-Recipies</a>
+          <a class="brand-logo font-effect-3d-float logo hide-on-small-only" href="index.html">More-Recipies</a>
           <a href="#" data-activates="navlink" class="button-collapse"><i class="material-icons">menu</i></a>         
           <ul class="right hide-on-med-and-down">
             <li class="">
@@ -29,10 +29,10 @@
               <a id="new-post" class="modal-trigger" href="#modal-newpost"><i class="fa fa-pencil-square-o"></i> New Post</a>
             </li>
             <li class="">
-              <a class="waves-effect waves-light btn navbtn" href="login.html">Log In</a>
+              <a class="waves-effect waves-light btn navbtn modal-trigger" href="#modal-login">Log In</a>
             </li>
             <li class="">
-              <a class="waves-effect waves-light btn navbtn" href="register.html">Sign Up</a>
+              <a class="waves-effect waves-light btn navbtn modal-trigger" href="#modal-register">Sign Up</a>
             </li>
           </ul>
         </div>
@@ -131,7 +131,7 @@
           <div class="col l6">
             <div class="card">
               <div class="card-image">
-                <img class="activator" src="css/img/spice.jpg" alt="">
+                <a href="recipe-view.html"><img class="activator" src="css/img/spice.jpg" alt=""></a>
               </div>
               <div class="card-content">
                 <span class="card-title activator">Hot Spice<i class="material-icons right">more_vert</i></span>         
@@ -139,12 +139,10 @@
               <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">Hot Spice<i class="material-icons right">close</i></span>
                 <br>
-                <a class="chip blue white-text" href="">Edit</a><span>
-                <a class="chip white-text red" href="">Delete</a>
-                <p class="grey-text">Posted 2 Aug 17, 10:55am
-                <i class="fa fa-comment right black-text">12</i>
-                <i class="fa fa-thumbs-down right grey-text" href=""> 2</i>
-                <i class="fa fa-thumbs-up right grey-text" href=""> 25</i>
+                <a class="chip teal white-text" href="#">Spice</a>
+                <a class="chip blue white-text right" href="#">+5</a>
+                <a class="chip red white-text right" href="#">-1</a>
+                <span>
                 </p>
                 </span>
               </div>
@@ -289,23 +287,23 @@
         <p class="divider"></p>
         <div id="trending">
           <ul class="collection">
-            <a href="#"><li class="collection-item avatar">
+            <a href="recipe-view.html"><li class="collection-item avatar">
               <img src="css/img/cake2.jpg" alt="" class="z-depth-1 square">
               <span class="title red-text">Frosty Chocolat</span>
             </a></li>
-            <a href="#"><li class="collection-item avatar">
+            <a href="recipe-view.html"><li class="collection-item avatar">
               <img src="css/img/burger.jpg" alt="" class="z-depth-1 square">
               <span class="title red-text">Hamburger</span>
             </a></li>
-            <a href="#"><li class="collection-item avatar">
+            <a href="recipe-view.html"><li class="collection-item avatar">
               <img src="css/img/spice.jpg" alt="" class="z-depth-1 square">
               <span class="title red-text">Hot Spice</span>
             </a></li>
-            <a href=""><li class="collection-item avatar">
+            <a href="recipe-view.html"><li class="collection-item avatar">
               <img src="css/img/coffee.jpg" alt="" class="z-depth-1 square">
               <span class="title red-text">Coffee</span>
             </a></li>
-            <a href=""><li class="collection-item avatar">
+            <a href="recipe-view.html"><li class="collection-item avatar">
               <img src="css/img/fishmeal.jpg" alt="" class="z-depth-1 square">
               <span class="title red-text">Sushi</span>
             </a></li>
@@ -346,9 +344,91 @@
             </div>
           </form>
         </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn white-text blue"><i class="fa fa-paper-plane"></i> Post</a>
+      </div>
+    </div>
+    <div id="modal-register" class="modal">
+      <div class="modal-content">
+        <div class="row center-align">
+          <div class="col s12 l12 m12">
+            <div class="card blue-grey darken-1">
+              <div class="card-content white-text">
+                <h5>Lorep ipsum dotae amet.....</h5>
+              </div>
+            </div>
+              <form>
+                <div class="row">
+                  <div class="input-field col l12 m12 s12">
+                    <i class="material-icons prefix">email</i>
+                    <input id="email" type="email" class="validate" required>
+                    <label for="email">Email</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col l12 m12 s12">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="username" type="text" class="validate" required>
+                    <label for="username" data-error="Username is invalid">Username</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col l12 m12 s12">
+                    <i class="material-icons prefix">lock_outline</i>
+                    <input id="password" type="password" class="validate" required>
+                    <label for="password" data-error="Invalid password" data-success="Strong password">Password</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col l12 m12 s12">
+                    <i class="material-icons prefix">lock</i>
+                    <input id="confirm-password" type="password" class="validate" required>
+                    <label for="confirm-password">Confirm Password</label>
+                  </div>
+                </div>
+                <div class="col s12 l12 m12 center-align">
+                  <button class="btn waves-effect waves-light white-text" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn white-text blue"><i class="fa fa-paper-plane"></i> Post</a>
+      </div>
+      <div id="modal-login" class="modal">
+      <div class="modal-content">
+        <div class="row center-align">
+          <div class="col s12 l12 m12">
+            <div class="card blue-grey darken-1">
+              <div class="card-content white-text">
+                <h5>Lorep ipsum dotae amet.....</h5>
+              </div>
+            </div>
+              <form>
+                <div class="row">
+                  <div class="input-field col l12 m12 s12">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="username" type="text" class="validate" required>
+                    <label for="username">Username</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col l12 m12 s12">
+                    <i class="material-icons prefix">lock_outline</i>
+                    <input id="password" type="password" class="validate" required>
+                    <label for="password">Password</label>
+                  </div>
+                </div>
+                <div class="col s12 l12 m12">
+                  <button class="btn waves-effect waves-light white-text" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     <div class="page-footer blue-grey darken-2">
