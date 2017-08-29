@@ -273,3 +273,17 @@ a#post-btn:hover {
 #not-badge {
   margin-top: 14px;
 }
+
+#modal-register {
+  overflow-y: hidden;
+  max-height: 85%;
+  max-width: 35%
+}
+
+#modal-login {
+  position: fixed;
+  top: 500px;
+  overflow-y: hidden;
+  max-height: 85%;
+  max-width: 35%
+} 
