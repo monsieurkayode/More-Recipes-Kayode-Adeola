@@ -13,7 +13,7 @@
 html, body, .block {
   height: 100%;
   overflow-x: hidden;
- }
+}
 
 #nav-search input[type=search]:not(.browser-default) {
   height: 30px;
@@ -279,4 +279,9 @@ a#post-btn:hover {
   overflow-y: hidden;
   max-height: 85%;
   max-width: 35%
+}
+
+#modal-register .modal-content,
+#modal-login .modal-content{
+  padding: 0;
 }
