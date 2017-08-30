@@ -17,6 +17,21 @@
     "Express",
     "React"
   ],
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "exclude": [
+      "server/test/"
+    ],
+    "reporter": [
+      "lcov",
+      "text",
+      "html"
+    ],
+    "sourceMap": false,
+    "instrument": true
+  },
   "author": "Kayode Adeola",
   "license": "ISC",
   "bugs": {
