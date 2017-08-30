@@ -1,0 +1,26 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID: ""
+language: node_js
+node_js:
+  - 6.10.0
+cache:
+  directories:
+    - node_modules
+branches:
+  only:
+  - develop
+addons:
+  jwt:
+    secure: "zxerth5603UHdjdjdndblepocnvbehwocvvjisjkvdkohschcaxzsawagdchdcxfscvfdsyhxbxgsdbv"
+  code_climate:
+    repo_token: ""
+script:
+  - npm run tests
+before_script:
+  - psql -c 'drop database if exists travis;' -U postgres
+  - psql -c 'create database travis;' -U postgres
+after_script:
+  - npm run coverage
+services:
+  - postgresql
