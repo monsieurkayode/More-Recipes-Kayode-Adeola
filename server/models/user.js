@@ -18,10 +18,6 @@ const userModel = (sequelize, DataTypes) => {
           args: true,
           msg: 'Username cannot be empty'
         },
-        is: {
-          args: /^[A-Za-z0-9]+$/gi,
-          msg: 'Username must contain letter and numbers only',
-        }
       },
     },
     email: {
