@@ -1,0 +1,43 @@
+{
+  "name": "more-recipes",
+  "version": "1.0.0",
+  "description": "A recipe sharing web application",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --watch server --exec babel-node ./bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monsieurkayode/More-Recipes.git"
+  },
+  "keywords": [
+    "Javascript",
+    "Node",
+    "Express",
+    "React"
+  ],
+  "author": "Kayode Adeola",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/monsieurkayode/More-Recipes/issues"
+  },
+  "homepage": "https://github.com/monsieurkayode/More-Recipes#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.5.0",
+    "eslint-config": "^0.3.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.3.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "morgan": "^1.8.2",
+    "nodemon": "^1.11.0"
+  }
+}
