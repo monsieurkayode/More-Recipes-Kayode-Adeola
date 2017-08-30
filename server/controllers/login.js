@@ -1,6 +1,13 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import db from '../models/index';
 
+dotenv.load();
+const secret = process.env.secretKey;
+const issuer = process.env.issuer;
+const jwtid = process.env.jwtid;
+const expiresIn = process.env.expiresIn;
 const User = db.User;
 
 const login = {
@@ -16,9 +23,12 @@ const login = {
         }
         const check = bcrypt.compareSync(req.body.password, user.password);
         if (check) {
+          const token = jwt.sign({ user }, secret,
+            { issuer, jwtid, expiresIn });
           res.status(200).send({
             success: true,
-            message: 'Login Successful',
+            message: 'Token successfully generated',
+            Token: token,
           });
         } if (user && !check) {
           res.status(401).send({

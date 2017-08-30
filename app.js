@@ -3,7 +3,8 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import router from './server/routes/index';
 
-const userRoute = router.user;
+const userRoute = router.user,
+recipeRoute = router.recipe;
 
 // Set up the express app
 const app = express();
@@ -19,6 +20,7 @@ app.disable('x-powered-by');
 app.use(express.static('template'));
 
 app.use(userRoute);
+app.use(recipeRoute);
 
 app.get('/api', (req, res) => {
   res.status(200).send({
