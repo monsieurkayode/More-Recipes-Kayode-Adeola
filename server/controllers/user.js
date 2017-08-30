@@ -27,6 +27,27 @@ const createUser = {
       })
       .catch(error => res.status(400).send(error));
   },
+  deactivateAccount(req, res) {
+    return User
+      .findById(req.decoded.user.id)
+      .then((user) => {
+        if (!user) {
+          return res.status(404).send({
+            success: false,
+            message: 'User not found'
+          });
+        }
+        return user
+          .destroy()
+          .then(() => {
+            res.status(200).send({
+              success: true,
+              message: 'User account successfully deactivated'
+            });
+          });
+      })
+      .catch(error => res.status(404).send(error));
+  },
 };
 
 export default createUser;

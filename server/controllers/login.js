@@ -9,7 +9,7 @@ const issuer = process.env.issuer;
 const jwtid = process.env.jwtid;
 const expiresIn = process.env.expiresIn;
 const User = db.User;
-
+console.log(User)
 const login = {
   signin(req, res) {
     return User
