@@ -1,4 +1,3 @@
-
 const favoriteModel = (sequelize, DataTypes) => {
   const Favorite = sequelize.define('Favorite', {
     userId: {
