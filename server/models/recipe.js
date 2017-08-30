@@ -11,10 +11,6 @@ const recipeModel = (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg: 'Title cannot be empty'
-        },
-        is: {
-          args: /^[A-Za-z0-9]+$/gi,
-          msg: 'Title must contain letter and numbers only',
         }
       }
     },
