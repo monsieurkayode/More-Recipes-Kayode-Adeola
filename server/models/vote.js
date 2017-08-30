@@ -1,15 +1,25 @@
-'use strict';
-module.exports = function(sequelize, DataTypes) {
-  var Vote = sequelize.define('Vote', {
-    userId: DataTypes.INTEGER,
-    recipeId: DataTypes.INTEGER,
-    option: DataTypes.INTEGER
+const voteModel = (sequelize, DataTypes) => {
+  const Vote = sequelize.define('Vote', {
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    recipeId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    option: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }
   }, {
     classMethods: {
-      associate: function(models) {
+      associate: (models) => {
         // associations can be defined here
       }
     }
   });
   return Vote;
 };
+
+export default voteModel;
