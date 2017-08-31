@@ -9,7 +9,7 @@
   "test": {
     "username": "postgres",
     "password": "sadeeq",
-    "database": "more_recipes_test",
+    "database": "travis",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "logging": false
