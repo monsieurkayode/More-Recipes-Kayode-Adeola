@@ -11,6 +11,8 @@ engines:
         enabled: false
       linebreak-style:
         enabled: false
+      import/extensions:
+        enabled: false
   fixme:
     enabled: true
 ratings:
