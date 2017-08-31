@@ -1,6 +1,6 @@
 env:
   global:
-    - CC_TEST_REPORTER_ID: ""
+    - CC_TEST_REPORTER_ID: "73226daa262de1c4ef28ac50be0b48c2b512b763a1a5aa33d3276a2a8ccd0e98"
 language: node_js
 node_js:
   - 6.10.0
@@ -14,7 +14,7 @@ addons:
   jwt:
     secure: "zxerth5603UHdjdjdndblepocnvbehwocvvjisjkvdkohschcaxzsawagdchdcxfscvfdsyhxbxgsdbv"
   code_climate:
-    repo_token: ""
+    repo_token: "73226daa262de1c4ef28ac50be0b48c2b512b763a1a5aa33d3276a2a8ccd0e98"
 script:
   - npm run tests
 before_script:
