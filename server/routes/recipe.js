@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/api/v1/recipes', auth, recipeValidation.basicValidation, recipeController.create);
 router.get('/api/v1/recipes', auth, recipeController.getRecipes);
 router.get('/api/v1/recipes/user', auth, recipeController.getUserRecipes);
-router.put('/api/v1/recipes/:recipeId', auth, recipeValidation.recipeExists, recipeValidation.basicValidation, recipeController.update);
+router.put('/api/v1/recipes/:recipeId', auth, recipeValidation.recipeExists, recipeController.update);
 router.delete('/api/v1/recipes/:recipeId', auth, recipeValidation.recipeExists, recipeController.delete);
 
 export default router;
