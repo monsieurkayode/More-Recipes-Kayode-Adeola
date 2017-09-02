@@ -6,7 +6,7 @@ dotenv.load();
 const User = db.User;
 const secret = process.env.secretKey;
 
-const createUser = {
+const userController = {
   signup(req, res) {
     return User
       .create(req.body, { fields: Object.keys(req.body) })
@@ -20,7 +20,7 @@ const createUser = {
         res.status(201).send({
           success: true,
           message: 'Account successfully created',
-          id: jwt.decode(token).userId,
+          userId: jwt.decode(token).userId,
           username: jwt.decode(token).username,
           email: jwt.decode(token).email
         });
@@ -50,4 +50,4 @@ const createUser = {
   },
 };
 
-export default createUser;
+export default userController;
