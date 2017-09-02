@@ -13,9 +13,17 @@ const reviewModel = (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {
+    timestamps: true,
+    createdAt: true,
     classMethods: {
       associate: (models) => {
         // associations can be defined here
+        Review.belongsTo(models.Recipe, {
+          foreignKey: 'recipeId'
+        });
+        Review.belongsTo(models.User, {
+          foreignKey: 'userId'
+        });
       }
     }
   });

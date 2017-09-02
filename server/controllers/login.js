@@ -10,7 +10,7 @@ const jwtid = process.env.jwtid;
 const expiresIn = process.env.expiresIn;
 const User = db.User;
 
-const login = {
+const loginController = {
   signin(req, res) {
     return User
       .findOne({ where: { username: req.body.username } })
@@ -28,7 +28,7 @@ const login = {
           res.status(200).send({
             success: true,
             message: 'Token successfully generated',
-            Token: token,
+            Token: token
           });
         } if (user && !check) {
           res.status(401).send({
@@ -41,4 +41,4 @@ const login = {
   },
 };
 
-export default login;
+export default loginController;

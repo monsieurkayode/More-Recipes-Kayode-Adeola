@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
+      recipeName: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -19,14 +19,13 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      author: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        onDelete: 'CASCADE',
         references: {
           model: 'Users',
           key: 'id',
-          as: 'author'
+          as: 'userId'
         }
       },
       createdAt: {

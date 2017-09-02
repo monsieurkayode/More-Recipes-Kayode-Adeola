@@ -1,6 +1,6 @@
 const recipeModel = (sequelize, DataTypes) => {
   const Recipe = sequelize.define('Recipe', {
-    title: {
+    recipeName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -27,8 +27,11 @@ const recipeModel = (sequelize, DataTypes) => {
       associate: (models) => {
         // associations can be defined here
         Recipe.belongsTo(models.User, {
-          foreignKey: 'author',
-          onDelete: 'CASCADE'
+          foreignKey: 'userId'
+        });
+        Recipe.hasMany(models.Review, {
+          foreignKey: 'recipeId',
+          as: 'reviews'
         });
       }
     }
