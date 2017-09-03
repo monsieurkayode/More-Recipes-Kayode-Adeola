@@ -9,7 +9,7 @@ const voteModel = (sequelize, DataTypes) => {
       allowNull: false
     },
     option: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BOOLEAN,
       allowNull: false
     }
   }, {

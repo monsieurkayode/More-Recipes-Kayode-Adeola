@@ -16,7 +16,7 @@ module.exports = {
         allowNull: false
       },
       option: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BOOLEAN,
         allowNull: false
       }
     }),

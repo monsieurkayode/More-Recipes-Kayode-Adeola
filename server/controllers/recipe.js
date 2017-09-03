@@ -1,6 +1,7 @@
 import db from '../models/index';
 
 const Recipe = db.Recipe;
+const Review = db.Review;
 
 const recipeController = {
   create(req, res) {
@@ -74,6 +75,11 @@ const recipeController = {
   getRecipes(req, res) {
     return Recipe
       .all({
+        include: [{
+          model: Review,
+          as: 'reviews',
+          attributes: ['userId', 'comment']
+        }],
         attributes:
         [['id', 'recipeId'], 'recipeName', 'ingredients', 'instructions']
       })

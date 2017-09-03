@@ -13,8 +13,6 @@ const reviewModel = (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {
-    timestamps: true,
-    createdAt: true,
     classMethods: {
       associate: (models) => {
         // associations can be defined here
