@@ -7,10 +7,11 @@ const voteController = {
     return Recipe
       .findOne({ where: { id: req.params.recipeId } })
       .then((recipe) => {
-        recipe.increment('upvote');
-        recipe.reload().then(() => res.status(200).send({
-          message: `${recipe.recipeName} has ${recipe.upvote} upvote`
-        }));
+        recipe.increment('upvote').then(() => {
+          recipe.reload().then(() => res.status(200).send({
+            message: `${recipe.recipeName} has ${recipe.upvote} upvote`
+          }));
+        });
       })
       .catch(error => res.status(400).json(error));
   },
@@ -18,10 +19,11 @@ const voteController = {
     return Recipe
       .findOne({ where: { id: req.params.recipeId } })
       .then((recipe) => {
-        recipe.decrement('downvote');
-        recipe.reload().then(() => res.status(200).send({
-          message: `${recipe.recipeName} has ${recipe.downvote} downvote`
-        }));
+        recipe.decrement('downvote').then(() => {
+          recipe.reload().then(() => res.status(200).send({
+            message: `${recipe.recipeName} has ${recipe.downvote} downvote`
+          }));
+        });
       })
       .catch(error => res.status(400).json(error));
   },

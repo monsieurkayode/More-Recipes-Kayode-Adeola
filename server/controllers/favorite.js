@@ -22,10 +22,16 @@ const favoriteController = {
       .catch(error => res.status(400).send(error));
   },
   getUserFavorites(req, res) {
+    const userId = req.params.userId;
     return Favorite
-      .findAll({ where: { userId: req.params.userId } })
+      .findAll({ where: { userId } })
       .then((favorites) => {
-        if (!favorites) {
+        if (req.decoded.user.id !== req.params.userId) {
+          return res.status(401).send({
+            message: 'Access denied!'
+          });
+        }
+        if (!favorites.length) {
           return res.status(204).send({
             message: 'Your favorite recipe list is empty'
           });

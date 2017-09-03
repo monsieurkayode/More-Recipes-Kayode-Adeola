@@ -42,14 +42,14 @@ const recipeModel = (sequelize, DataTypes) => {
       associate: (models) => {
         // associations can be defined here
         Recipe.belongsTo(models.User, {
-          foreignKey: 'userId',
+          foreignKey: 'userId'
         });
         Recipe.hasMany(models.Review, {
           foreignKey: 'recipeId',
           as: 'reviews'
         });
         Recipe.hasMany(models.Favorite, {
-          foreignKey: 'recipeId',
+          foreignKey: 'recipeId'
         });
       }
     }

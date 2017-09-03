@@ -1,8 +1,13 @@
 import db from '../models/index';
 
-const Recipe = db.Recipe;
-const Review = db.Review;
-const User = db.User;
+const Recipe = db.Recipe,
+  Review = db.Review,
+  User = db.User,
+  Favorite = db.Favorite,
+  keys = [
+    'id', 'views', 'upvote', 'downvote',
+    'recipeName', 'ingredients', 'instructions'
+  ];
 
 const recipeController = {
   create(req, res) {
@@ -16,21 +21,19 @@ const recipeController = {
         fields: ['recipeName', 'ingredients', 'instructions', 'userId']
       })
       .then((recipe) => {
-        recipe.increment('views');
-        recipe.reload()
-          .then(() => {
-            res.status(201).send({
-              success: true,
-              message: 'Successfully created new recipe',
-              recipeId: recipe.id,
-              recipeName: recipe.recipeName,
-              ingredients: recipe.ingredients,
-              instructions: recipe.instructions,
-              views: recipe.views,
-              upvote: recipe.upvote,
-              downvote: recipe.downvote
+        recipe.increment('views').then(() => {
+          recipe.reload()
+            .then(() => {
+              res.status(201).send({
+                success: true,
+                message: 'Successfully created new recipe',
+                recipeId: recipe.id,
+                recipeName: recipe.recipeName,
+                ingredients: recipe.ingredients,
+                instructions: recipe.instructions,
+              });
             });
-          });
+        });
       })
       .catch(error => res.status(400).json(error));
   },
@@ -96,11 +99,7 @@ const recipeController = {
             attributes: ['username', 'createdAt']
           }]
         }],
-        attributes:
-        [
-          'id', 'views', 'upvote', 'downvote',
-          'recipeName', 'ingredients', 'instructions'
-        ]
+        attributes: keys
       })
       .then(recipes => res.status(200).send(recipes))
       .catch(error => res.status(400).send(error));
@@ -108,10 +107,7 @@ const recipeController = {
   getUserRecipes(req, res) {
     return Recipe
       .findAll({ where: { userId: req.decoded.user.id },
-        attributes: [
-          'id', 'userId', 'views', 'upvote',
-          'downvote', 'recipeName', 'ingredients', 'instructions'
-        ],
+        attributes: keys
       })
       .then((recipes) => {
         if (!recipes) {
@@ -129,11 +125,7 @@ const recipeController = {
       order = req.query.order;
     return Recipe
       .findAll({
-        attributes:
-        [
-          'id', 'userId', 'views', 'upvote',
-          'downvote', 'recipeName', 'ingredients', 'instructions'
-        ],
+        attributes: keys,
         order: [[sort, order]],
         limit: 5
       })
@@ -142,7 +134,9 @@ const recipeController = {
   },
   viewRecipe(req, res) {
     return Recipe
-      .findOne({ where: { id: req.params.recipeId } })
+      .findOne({ where: { id: req.params.recipeId },
+        attributes: keys
+      })
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).send({
@@ -150,11 +144,14 @@ const recipeController = {
             message: 'No recipe found'
           });
         }
-        recipe.increment('views');
-        recipe.reload()
-          .then(() => res.status(200).send({
-            recipe
-          }));
+        recipe.increment('views').then(() => {
+          recipe.reload({
+            attributes: keys
+          })
+            .then(() => res.status(200).send({
+              recipe
+            }));
+        });
       })
       .catch(error => res.status(400).send(error));
   },
@@ -162,10 +159,22 @@ const recipeController = {
     const ingredients = req.query.ingredients;
     return Recipe
       .findAll({ where: { ingredients },
+        attributes: keys
+      })
+      .then(recipes => res.status(200).send(recipes))
+      .catch(error => res.status(400).send(error));
+  },
+  searchRecipesByCategory(req, res) {
+    const category = req.query.category;
+    return Favorite
+      .findAll({ where: { category },
+        include: [{
+          model: Recipe,
+          attributes: keys
+        }],
         attributes:
         [
-          'id', 'userId', 'views', 'upvote',
-          'downvote', 'recipeName', 'ingredients', 'instructions'
+          'category'
         ]
       })
       .then(recipes => res.status(200).send(recipes))
