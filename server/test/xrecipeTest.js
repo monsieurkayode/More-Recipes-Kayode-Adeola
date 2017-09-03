@@ -98,7 +98,7 @@ describe('Modify recipe post', () => {
       .type('form')
       .send(editRecipe[0])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(201);
+        expect(res.statusCode).to.equal(200);
         expect(res.body.success).to.equal(true);
         expect(res.body.message).to.equal('Recipe successfully updated');
         if (err) return done(err);
@@ -116,7 +116,7 @@ describe('Delete recipe post', () => {
       .set('x-access-token', userData[0])
       .set('Content-Type', 'application/json')
       .end((err, res) => {
-        expect(res.statusCode).to.equal(201);
+        expect(res.statusCode).to.equal(200);
         expect(res.body.success).to.equal(true);
         expect(res.body.message).to.equal('Recipe successfully deleted');
         if (err) return done(err);

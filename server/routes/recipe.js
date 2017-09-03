@@ -1,5 +1,6 @@
 import express from 'express';
 import auth from '../middlewares/auth';
+import validate from '../middlewares/validateParams';
 import recipeController from '../controllers/recipe';
 import recipeValidation from '../middlewares/recipeValidation';
 import userValidation from '../middlewares/userValidation';
@@ -11,7 +12,7 @@ router.get('/api/v1/recipes', auth, userValidation.validUser, recipeController.g
 router.get('/api/v1/recipes/trending', auth, userValidation.validUser, recipeController.getTopRecipes);
 router.get('/api/v1/recipes/user', auth, userValidation.validUser, recipeController.getUserRecipes);
 router.put('/api/v1/recipes/:recipeId', auth, userValidation.validUser, recipeValidation.recipeExists, recipeController.update);
-router.get('/api/v1/recipes/:recipeId', auth, userValidation.validUser, recipeValidation.recipeExists, recipeController.viewRecipe);
-router.delete('/api/v1/recipes/:recipeId', auth, userValidation.validUser, recipeValidation.recipeExists, recipeController.delete);
+router.get('/api/v1/recipes/:recipeId', auth, validate, userValidation.validUser, recipeValidation.recipeExists, recipeController.viewRecipe);
+router.delete('/api/v1/recipes/:recipeId', auth, validate, userValidation.validUser, recipeValidation.recipeExists, recipeController.delete);
 
 export default router;
