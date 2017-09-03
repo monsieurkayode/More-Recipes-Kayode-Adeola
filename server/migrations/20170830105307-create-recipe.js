@@ -28,6 +28,21 @@ module.exports = {
           as: 'userId'
         }
       },
+      upvote: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      downvote: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      views: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

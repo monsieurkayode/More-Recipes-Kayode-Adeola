@@ -21,17 +21,35 @@ const recipeModel = (sequelize, DataTypes) => {
     instructions: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    upvote: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    },
+    downvote: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    },
+    views: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
     }
   }, {
     classMethods: {
       associate: (models) => {
         // associations can be defined here
         Recipe.belongsTo(models.User, {
-          foreignKey: 'userId'
+          foreignKey: 'userId',
         });
         Recipe.hasMany(models.Review, {
           foreignKey: 'recipeId',
           as: 'reviews'
+        });
+        Recipe.hasMany(models.Favorite, {
+          foreignKey: 'recipeId',
         });
       }
     }

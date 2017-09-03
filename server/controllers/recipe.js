@@ -7,20 +7,29 @@ const recipeController = {
   create(req, res) {
     return Recipe
       .create({
-        recipeName: req.body.title,
+        recipeName: req.body.recipeName,
         ingredients: req.body.ingredients,
         instructions: req.body.instructions,
         userId: req.decoded.user.id
+      }, {
+        fields: ['recipeName', 'ingredients', 'instructions', 'userId']
       })
       .then((recipe) => {
-        res.status(201).send({
-          success: true,
-          message: 'Successfully created new recipe',
-          recipeId: recipe.id,
-          recipeName: recipe.recipeName,
-          ingredients: recipe.ingredients,
-          instructions: recipe.instructions
-        });
+        recipe.increment('views');
+        recipe.reload()
+          .then(() => {
+            res.status(201).send({
+              success: true,
+              message: 'Successfully created new recipe',
+              recipeId: recipe.id,
+              recipeName: recipe.recipeName,
+              ingredients: recipe.ingredients,
+              instructions: recipe.instructions,
+              views: recipe.views,
+              upvote: recipe.upvote,
+              downvote: recipe.downvote
+            });
+          });
       })
       .catch(error => res.status(400).json(error));
   },
@@ -53,7 +62,9 @@ const recipeController = {
   },
   delete(req, res) {
     return Recipe
-      .findOne({ where: { userId: req.decoded.user.id, id: req.params.recipeId } })
+      .findOne({ where:
+        { userId: req.decoded.user.id, id: req.params.recipeId }
+      })
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).send({
@@ -81,7 +92,7 @@ const recipeController = {
           attributes: ['userId', 'comment']
         }],
         attributes:
-        [['id', 'recipeId'], 'recipeName', 'ingredients', 'instructions']
+        [['id', 'recipeId'], 'recipeName', 'ingredients', 'instructions', 'views', 'upvote', 'downvote']
       })
       .then(recipes => res.status(200).send(recipes))
       .catch(error => res.status(400).send(error));
@@ -97,6 +108,34 @@ const recipeController = {
           });
         }
         return res.status(200).send(recipes);
+      })
+      .catch(error => res.status(400).json(error));
+  },
+  getTopRecipes(req, res) {
+    return Recipe
+      .all({
+        attributes: ['id', 'userId', 'recipeName', 'ingredients', 'instructions', 'views', 'upvote', 'downvote'],
+        order: [['upvote', 'DESC']],
+        limit: 5
+      })
+      .then(recipes => res.status(200).send(recipes))
+      .catch(error => res.status(400).json(error));
+  },
+  viewRecipe(req, res) {
+    return Recipe
+      .findOne({ where: { id: req.params.recipeId } })
+      .then((recipe) => {
+        if (!recipe) {
+          return res.status(404).send({
+            success: false,
+            message: 'No recipe found'
+          });
+        }
+        recipe.increment('views');
+        recipe.reload()
+          .then(() => res.status(200).send({
+            recipe
+          }));
       })
       .catch(error => res.status(400).json(error));
   }
