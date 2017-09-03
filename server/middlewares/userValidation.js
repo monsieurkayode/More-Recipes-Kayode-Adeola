@@ -76,7 +76,7 @@ const userValidation = {
   },
   validUser(req, res, next) {
     User
-      .findById(req.decoded.user.id)
+      .findById(req.params.userId || req.decoded.user.id)
       .then((user) => {
         if (!user) {
           return res.status(401).send({

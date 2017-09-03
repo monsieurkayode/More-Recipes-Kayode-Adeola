@@ -8,6 +8,6 @@ const router = express.Router();
 
 router.post('/api/v1/users/:recipeId/favorites', auth, userValidation.validUser, favoriteValidation.validRecipe, favoriteValidation.favoriteExists, favoriteController.addFavorite);
 router.put('/api/v1/users/:recipeId/favorites', auth, userValidation.validUser, favoriteValidation.validRecipe, favoriteController.addRecipeCategory);
-router.get('/api/v1/users/favorites', auth, userValidation.validUser, favoriteController.getUserFavorites);
+router.get('/api/v1/users/:userId/recipes', auth, userValidation.validUser, favoriteController.getUserFavorites);
 
 export default router;

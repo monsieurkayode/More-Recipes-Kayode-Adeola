@@ -2,6 +2,7 @@ import db from '../models/index';
 
 const Recipe = db.Recipe;
 const Review = db.Review;
+const User = db.User;
 
 const recipeController = {
   create(req, res) {
@@ -89,17 +90,29 @@ const recipeController = {
         include: [{
           model: Review,
           as: 'reviews',
-          attributes: ['userId', 'comment']
+          attributes: ['userId', 'comment'],
+          include: [{
+            model: User,
+            attributes: ['username', 'createdAt']
+          }]
         }],
         attributes:
-        [['id', 'recipeId'], 'recipeName', 'ingredients', 'instructions', 'views', 'upvote', 'downvote']
+        [
+          'id', 'views', 'upvote', 'downvote',
+          'recipeName', 'ingredients', 'instructions'
+        ]
       })
       .then(recipes => res.status(200).send(recipes))
       .catch(error => res.status(400).send(error));
   },
   getUserRecipes(req, res) {
     return Recipe
-      .findAll({ where: { userId: req.decoded.user.id } })
+      .findAll({ where: { userId: req.decoded.user.id },
+        attributes: [
+          'id', 'userId', 'views', 'upvote',
+          'downvote', 'recipeName', 'ingredients', 'instructions'
+        ],
+      })
       .then((recipes) => {
         if (!recipes) {
           return res.status(404).send({
@@ -112,10 +125,16 @@ const recipeController = {
       .catch(error => res.status(400).json(error));
   },
   getTopRecipes(req, res) {
+    const sort = req.query.sort,
+      order = req.query.order;
     return Recipe
-      .all({
-        attributes: ['id', 'userId', 'recipeName', 'ingredients', 'instructions', 'views', 'upvote', 'downvote'],
-        order: [['upvote', 'DESC']],
+      .findAll({
+        attributes:
+        [
+          'id', 'userId', 'views', 'upvote',
+          'downvote', 'recipeName', 'ingredients', 'instructions'
+        ],
+        order: [[sort, order]],
         limit: 5
       })
       .then(recipes => res.status(200).send(recipes))
@@ -137,7 +156,20 @@ const recipeController = {
             recipe
           }));
       })
-      .catch(error => res.status(400).json(error));
+      .catch(error => res.status(400).send(error));
+  },
+  searchRecipesByIngredients(req, res) {
+    const ingredients = req.query.ingredients;
+    return Recipe
+      .findAll({ where: { ingredients },
+        attributes:
+        [
+          'id', 'userId', 'views', 'upvote',
+          'downvote', 'recipeName', 'ingredients', 'instructions'
+        ]
+      })
+      .then(recipes => res.status(200).send(recipes))
+      .catch(error => res.status(400).send(error));
   }
 };
 

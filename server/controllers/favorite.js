@@ -23,7 +23,7 @@ const favoriteController = {
   },
   getUserFavorites(req, res) {
     return Favorite
-      .findAll({ where: { userId: req.decoded.user.id } })
+      .findAll({ where: { userId: req.params.userId } })
       .then((favorites) => {
         if (!favorites) {
           return res.status(204).send({
