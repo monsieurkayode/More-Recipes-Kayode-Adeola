@@ -138,9 +138,7 @@ const recipeController = {
   },
   viewRecipe(req, res) {
     return Recipe
-      .findOne({ where: { id: req.params.recipeId },
-        attributes: keys
-      })
+      .findOne({ where: { id: req.params.recipeId } })
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).send({
@@ -150,11 +148,9 @@ const recipeController = {
         }
         recipe.increment('views').then(() => {
           recipe.reload({
-            attributes: keys
+            // attributes: keys
           })
-            .then(() => res.status(200).send({
-              recipe
-            }));
+            .then(() => res.status(200).send(recipe));
         });
       })
       .catch(error => res.status(400).send(error));

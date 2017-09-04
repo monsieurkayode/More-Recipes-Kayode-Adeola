@@ -3,14 +3,12 @@ import 'mocha';
 import supertest from 'supertest';
 import app from '../../app';
 import users from '../seeders/userSeeder';
-import recipes from '../seeders/recipeSeeder';
+import review from '../seeders/reviewSeeder';
 
 
 const server = supertest.agent(app),
   expect = require('chai').expect,
   validUsersLogin = users.validUsersLogin,
-  recipePosts = recipes.recipePosts,
-  editRecipe = recipePosts.every,
   userData = [];
 
 describe('User Login', () => {
@@ -50,113 +48,88 @@ describe('User Login', () => {
   });
 });
 
-describe('Create recipe post', () => {
-  it('allows a registered and logged in user post a recipe', (done) => {
+describe('Review a recipe', () => {
+  it('allows logged in user review a posted recipe', (done) => {
     server
-      .post('/api/v1/recipes')
+      .post('/api/v1/recipes/2/reviews')
       .set('Connection', 'keep alive')
       .set('Accept', 'application/json')
-      .set('x-access-token', userData[0])
+      .set('x-access-token', userData[1])
       .set('Content-Type', 'application/json')
       .type('form')
-      .send(recipePosts[0])
+      .send(review[0])
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
         expect(res.body.success).to.equal(true);
-        expect(res.body.message).to.equal('Successfully created new recipe');
+        expect(res.body.comment).to.be.equal('This is an awesome recipe');
         if (err) return done(err);
         done();
       });
   });
-  it('allows a registered and logged in user post a recipe', (done) => {
+  it('allows logged in user review a posted recipe', (done) => {
     server
-      .post('/api/v1/recipes')
+      .post('/api/v1/recipes/2/reviews')
       .set('Connection', 'keep alive')
       .set('Accept', 'application/json')
       .set('x-access-token', userData[0])
       .set('Content-Type', 'application/json')
       .type('form')
-      .send(recipePosts[1])
+      .send(review[1])
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
         expect(res.body.success).to.equal(true);
-        expect(res.body.message).to.equal('Successfully created new recipe');
+        expect(res.body.comment).to.be.equal('It would be nice if you could throw in some ginger');
         if (err) return done(err);
         done();
       });
   });
-});
-
-describe('Modify recipe post', () => {
-  it('allows a logged in user modify his or her posted recipe', (done) => {
+  it('allows logged in user review a posted recipe', (done) => {
     server
-      .put('/api/v1/recipes/1')
+      .post('/api/v1/recipes/2/reviews')
       .set('Connection', 'keep alive')
       .set('Accept', 'application/json')
-      .set('x-access-token', userData[0])
+      .set('x-access-token', userData[1])
       .set('Content-Type', 'application/json')
       .type('form')
-      .send(editRecipe[0])
+      .send(review[2])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
+        expect(res.statusCode).to.equal(201);
         expect(res.body.success).to.equal(true);
-        expect(res.body.message).to.equal('Recipe successfully updated');
+        expect(res.body.message).to.equal('Review successfully posted');
+        expect(res.body.comment).to.be.equal('Pretty please can I have some?');
         if (err) return done(err);
         done();
       });
   });
 });
 
-describe('Delete recipe post', () => {
-  it('allows a logged in user delete his or her posted recipe', (done) => {
+describe('Vote a recipe', () => {
+  it('allows logged in user upvote a posted recipe', (done) => {
     server
-      .delete('/api/v1/recipes/1')
+      .put('/api/v1/recipes/2/upvote')
       .set('Connection', 'keep alive')
       .set('Accept', 'application/json')
       .set('x-access-token', userData[0])
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.success).to.equal(true);
-        expect(res.body.message).to.equal('Recipe successfully deleted');
+        expect(res.body.message).to.be.equal('Coleslaw Salad has 1 upvote');
         if (err) return done(err);
         done();
       });
   });
-});
-
-describe('Keep records of recipe views', () => {
-  it('show the number of times a recipe has been viewed', (done) => {
+  it('allows logged in user downvote a posted recipe', (done) => {
     server
-      .get('/api/v1/recipes/2')
+      .put('/api/v1/recipes/2/downvote')
       .set('Connection', 'keep alive')
       .set('Accept', 'application/json')
-      .set('x-access-token', userData[0])
+      .set('x-access-token', userData[1])
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.views).to.equal(2);
+        expect(res.body.message).to.be.equal('Coleslaw Salad has -1 downvote');
         if (err) return done(err);
         done();
       });
   });
 });
-
-describe('View top recipes', () => {
-  it('show recipes with highest upvote first', (done) => {
-    server
-      .get('/api/v1/recipes/sort')
-      .query({ sort: 'upvote', order: 'desc' })
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[0])
-      .set('Content-Type', 'application/json')
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        expect(res.body[0].recipeName).to.equal('Coleslaw Salad');
-        if (err) return done(err);
-        done();
-      });
-  });
-});
-
