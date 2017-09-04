@@ -5,10 +5,10 @@ const Recipe = db.Recipe;
 
 const recipeValidation = {
   basicValidation(req, res, next) {
-    if (!req.body.title || isEmpty(req.body.title)) {
+    if (!req.body.recipeName || isEmpty(req.body.recipeName)) {
       return res.status(406).send({
         success: false,
-        message: 'Please enter your recipe title'
+        message: 'Please enter a recipe name'
       });
     }
     if (!req.body.ingredients || isEmpty(req.body.ingredients)) {

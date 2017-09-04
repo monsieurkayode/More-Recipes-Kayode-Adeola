@@ -7,11 +7,23 @@ const favoriteModel = (sequelize, DataTypes) => {
     recipeId: {
       type: DataTypes.INTEGER,
       allowNull: false
-    }
+    },
+    category: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
   }, {
+    timestamps: false,
     classMethods: {
       associate: (models) => {
-        // associations can be defined here
+        Favorite.belongsTo(models.User, {
+          foreignKey: 'userId',
+          onDelete: 'CASCADE'
+        });
+        Favorite.belongsTo(models.Recipe, {
+          foreignKey: 'recipeId',
+          onDelete: 'CASCADE'
+        });
       }
     }
   });

@@ -66,7 +66,7 @@ const userValidation = {
       .then((user) => {
         if (!user) next();
         else {
-          res.status(409).send({
+          return res.status(409).send({
             success: false,
             message: 'Email already exists'
           });
@@ -76,12 +76,12 @@ const userValidation = {
   },
   validUser(req, res, next) {
     User
-      .findById(req.decoded.user.id)
+      .findById(req.params.userId || req.decoded.user.id)
       .then((user) => {
         if (!user) {
           return res.status(401).send({
             success: false,
-            message: 'Access denied, you need to register'
+            message: 'Oops! 401. Seems you haven\'t created an account yet'
           });
         }
         next();

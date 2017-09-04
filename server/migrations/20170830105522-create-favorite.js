@@ -9,19 +9,27 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Users',
+          key: 'id',
+          as: 'userId'
+        }
       },
       recipeId: {
         type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Recipes',
+          key: 'id',
+          as: 'recipeId'
+        }
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+      category: {
+        type: Sequelize.STRING,
+        allowNull: true
       }
     }),
   down: queryInterface => queryInterface.dropTable('Favorites')

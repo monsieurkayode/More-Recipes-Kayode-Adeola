@@ -16,16 +16,8 @@ module.exports = {
         allowNull: false
       },
       option: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BOOLEAN,
         allowNull: false
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     }),
   down: queryInterface => queryInterface.dropTable('Votes')

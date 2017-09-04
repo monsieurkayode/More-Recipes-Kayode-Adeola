@@ -55,8 +55,16 @@ const userModel = (sequelize, DataTypes) => {
       associate(models) {
         // associations can be defined 
         User.hasMany(models.Recipe, {
-          foreignKey: 'author',
+          foreignKey: 'userId',
           as: 'recipes'
+        });
+        User.hasMany(models.Review, {
+          foreignKey: 'userId',
+          as: 'reviews'
+        });
+        User.hasMany(models.Favorite, {
+          foreignKey: 'userId',
+          as: 'favoriteRecipes'
         });
       }
     }
