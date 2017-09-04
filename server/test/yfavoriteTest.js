@@ -96,4 +96,35 @@ describe('Favorite a recipe', () => {
       });
   });
 });
-
+describe('Search recipes', () => {
+  it('shows recipes with search by ingredients', (done) => {
+    server
+      .get('/api/v1/recipes/ingredients')
+      .query({ ingredients: 'cabbage' })
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body[0].recipeName).to.equal('Coleslaw Salad');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('shows recipes with search by category', (done) => {
+    server
+      .get('/api/v1/recipes/category')
+      .query({ category: 'smoothies' })
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body[0].Recipe.recipeName).to.equal('Coleslaw Salad');
+        if (err) return done(err);
+        done();
+      });
+  });
+});

@@ -124,3 +124,39 @@ describe('Delete recipe post', () => {
       });
   });
 });
+
+describe('Keep records of recipe views', () => {
+  it('show the number of times a recipe has been viewed', (done) => {
+    server
+      .get('/api/v1/recipes/2')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.views).to.equal(2);
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
+describe('View top recipes', () => {
+  it('show recipes with highest upvote first', (done) => {
+    server
+      .get('/api/v1/recipes/sort')
+      .query({ sort: 'upvote', order: 'desc' })
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body[0].recipeName).to.equal('Coleslaw Salad');
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
