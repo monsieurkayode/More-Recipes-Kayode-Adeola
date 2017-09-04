@@ -1,5 +1,8 @@
 import db from '../models/index';
-import searchByIngredients from '../helpers/search';
+import search from '../helpers/search';
+
+const searchByIngredients = search.searchByIngredients;
+const searchByCategory = search.searchByCategory;
 
 const Recipe = db.Recipe,
   Review = db.Review,
@@ -169,7 +172,7 @@ const recipeController = {
   searchRecipesByCategory(req, res) {
     const category = req.query.category;
     return Favorite
-      .findAll({ where: { category },
+      .all({
         include: [{
           model: Recipe,
           attributes: keys
@@ -179,7 +182,10 @@ const recipeController = {
           'category'
         ]
       })
-      .then(recipes => res.status(200).send(recipes))
+      .then((recipes) => {
+        const result = searchByCategory(category, recipes);
+        res.status(200).send(result);
+      })
       .catch(error => res.status(400).send(error));
   }
 };

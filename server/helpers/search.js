@@ -6,4 +6,12 @@ const searchByIngredients = (query, obj) => {
     }).length > 0);
 };
 
-export default searchByIngredients;
+const searchByCategory = (query, obj) => {
+  const result = [];
+  return obj.filter(eachObj => eachObj.category.toLowerCase()
+    .split(',').filter((element) => {
+      return element.indexOf(query) > -1;
+    }).length > 0);
+};
+
+export default { searchByIngredients, searchByCategory };
