@@ -102,3 +102,34 @@ describe('Review a recipe', () => {
       });
   });
 });
+
+describe('Vote a recipe', () => {
+  it('allows logged in user upvote a posted recipe', (done) => {
+    server
+      .put('/api/v1/recipes/2/upvote')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.message).to.be.equal('Coleslaw Salad has 1 upvote');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('allows logged in user downvote a posted recipe', (done) => {
+    server
+      .put('/api/v1/recipes/2/downvote')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.message).to.be.equal('Coleslaw Salad has -1 downvote');
+        if (err) return done(err);
+        done();
+      });
+  });
+});
