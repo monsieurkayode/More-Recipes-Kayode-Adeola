@@ -162,7 +162,9 @@ const recipeController = {
   searchRecipesByIngredients(req, res) {
     const ingredients = req.query.ingredients;
     return Recipe
-      .all()
+      .all({
+        attributes: keys
+      })
       .then((recipes) => {
         const result = searchByIngredients(ingredients, recipes);
         res.status(200).send(result);
