@@ -15,7 +15,7 @@ const voteModel = (sequelize, DataTypes) => {
   }, {
     timestamps: false,
     classMethods: {
-      associate: (models) => {
+      associate: () => {
         // associations can be defined here
       }
     }
