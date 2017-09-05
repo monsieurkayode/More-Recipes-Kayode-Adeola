@@ -12,37 +12,37 @@ const userValidation = {
     req.body.email = cleanString(req.body.email);
     if (!req.body.username) {
       return res.status(400).send({
-        success: false,
+        status: 'fail',
         message: 'Please enter a username'
       });
     }
     if (!isAlphaNumeric(req.body.username)) {
       return res.status(400).send({
-        success: false,
+        status: 'fail',
         message: 'Username must contain alphabets and numbers only'
       });
     }
     if (req.body.username.length < 3) {
       return res.status(400).send({
-        success: false,
+        status: 'fail',
         message: 'Username should be at least three characters'
       });
     }
     if (!req.body.email || !isEmail(req.body.email)) {
       return res.status(400).send({
-        success: false,
+        status: 'fail',
         message: 'Invalid Email, please enter a valid email'
       });
     }
     if (!req.body.password) {
       return res.status(400).send({
-        success: false,
+        status: 'fail',
         message: 'Please enter a password'
       });
     }
     if (req.body.password.length < 6) {
       return res.status(400).send({
-        success: false,
+        status: 'fail',
         message: 'Password should be at least six characters long'
       });
     }
@@ -54,7 +54,7 @@ const userValidation = {
         if (!user) next();
         else {
           return res.status(409).send({
-            success: false,
+            status: 'fail',
             message: 'Username already exists'
           });
         }
@@ -67,7 +67,7 @@ const userValidation = {
         if (!user) next();
         else {
           return res.status(409).send({
-            success: false,
+            status: 'fail',
             message: 'Email already exists'
           });
         }
@@ -80,7 +80,7 @@ const userValidation = {
       .then((user) => {
         if (!user) {
           return res.status(401).send({
-            success: false,
+            status: 'fail',
             message: 'Oops! 401. Seems you haven\'t created an account yet'
           });
         }

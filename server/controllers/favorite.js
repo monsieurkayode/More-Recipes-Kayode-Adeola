@@ -13,7 +13,7 @@ const favoriteController = {
       .then((favoritedRecipe) => {
         if (!favoritedRecipe) {
           return res.status(404).send({
-            success: false,
+            status: 'fail',
             message: 'Recipe not found'
           });
         }
@@ -44,7 +44,7 @@ const favoriteController = {
         .update({ category: req.body.category || recipe.category })
         .then(() => {
           res.status(200).send({
-            success: true,
+            status: 'success',
             message: `Recipe added to ${recipe.category}`
           });
         }))

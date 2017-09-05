@@ -11,12 +11,12 @@ const auth = (req, res, next) => {
       if (err) {
         if (err.name === 'TokenExpiredError') {
           return res.status(403).json({
-            success: false,
+            status: 'fail',
             message: 'Your session has expired, sign in again'
           });
         }
         return res.status(403).json({
-          success: false,
+          status: 'fail',
           message: 'Failed to authenticate token'
         });
       }
@@ -25,7 +25,7 @@ const auth = (req, res, next) => {
     });
   } else {
     return res.status(403).send({
-      success: false,
+      status: 'fail',
       message: 'No token provided'
     });
   }

@@ -12,7 +12,7 @@ const reviewController = {
       })
       .then((review) => {
         res.status(201).send({
-          success: true,
+          status: 'success',
           message: 'Review successfully posted',
           id: review.id,
           comment: review.comment
