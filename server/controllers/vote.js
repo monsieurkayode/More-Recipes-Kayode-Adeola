@@ -1,31 +1,100 @@
 import db from '../models/index';
 
 const Recipe = db.Recipe;
+const Vote = db.Vote;
 
 const voteController = {
   upvote(req, res) {
-    return Recipe
-      .findOne({ where: { id: req.params.recipeId } })
-      .then((recipe) => {
-        recipe.increment('upvote').then(() => {
-          recipe.reload().then(() => res.status(200).send({
-            message: `${recipe.recipeName} has ${recipe.upvote} upvote`
-          }));
+    return Vote
+      .findOrCreate({ where: {
+        userId: req.decoded.user.id,
+        recipeId: req.params.recipeId },
+      defaults: { option: true }
+      })
+      .spread((voter, created) => {
+        if (created) {
+          return Recipe
+            .findOne({ where: { id: req.params.recipeId } })
+            .then((recipe) => {
+              recipe.increment('upvote').then(() => {
+                recipe.reload().then(() => res.status(200).send({
+                  status: 'success',
+                  message: 'Your vote has been recorded',
+                  upvote: recipe.upvote,
+                  downvote: recipe.downvote
+                }));
+              });
+            });
+        } else if (!created && voter.option === false) {
+          voter.update({ option: true });
+          return Recipe
+            .findOne({ where: { id: req.params.recipeId } })
+            .then((recipe) => {
+              recipe.increment('upvote').then(() => {
+                recipe.decrement('downvote').then(() => {
+                  recipe.reload();
+                }).then(() => res.status(200).send({
+                  status: 'success',
+                  message: 'Your vote has been recorded',
+                  upvote: recipe.upvote,
+                  downvote: recipe.downvote
+                }));
+              });
+            });
+        }
+        console.log(voter.option)
+        return res.status(400).send({
+          status: 'fail',
+          message: 'User has already upvoted'
         });
       })
-      .catch(error => res.status(400).json(error));
+      .catch(error => res.status(400).send(error));
   },
   downvote(req, res) {
-    return Recipe
-      .findOne({ where: { id: req.params.recipeId } })
-      .then((recipe) => {
-        recipe.increment('downvote').then(() => {
-          recipe.reload().then(() => res.status(200).send({
-            message: `${recipe.recipeName} has ${recipe.downvote} downvote`
-          }));
+    return Vote
+      .findOrCreate({ where: {
+        userId: req.decoded.user.id,
+        recipeId: req.params.recipeId },
+      defaults: { option: false }
+      })
+      .spread((voter, created) => {
+        if (created) {
+          return Recipe
+            .findOne({ where: { id: req.params.recipeId } })
+            .then((recipe) => {
+              recipe.increment('downvote').then(() => {
+                recipe.reload().then(() => res.status(200).send({
+                  status: 'success',
+                  message: 'Your vote has been recorded',
+                  upvote: recipe.upvote,
+                  downvote: recipe.downvote
+                }));
+              });
+            });
+        } else if (!created && voter.option === true) {
+          voter.update({ option: false });
+          return Recipe
+            .findOne({ where: { id: req.params.recipeId } })
+            .then((recipe) => {
+              recipe.increment('downvote').then(() => {
+                recipe.decrement('upvote').then(() => {
+                  recipe.reload();
+                }).then(() => res.status(200).send({
+                  status: 'success',
+                  message: 'Your vote has been recorded',
+                  upvote: recipe.upvote,
+                  downvote: recipe.downvote
+                }));
+              });
+            });
+        }
+        console.log(voter.option)
+        return res.status(400).send({
+          status: 'fail',
+          message: 'User has already downvoted'
         });
       })
-      .catch(error => res.status(400).json(error));
+      .catch(error => res.status(400).send(error));
   },
 };
 
