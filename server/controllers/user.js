@@ -18,11 +18,11 @@ const userController = {
           }, secret
         );
         res.status(201).send({
-          success: true,
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          status: 'success',
           message: 'Account successfully created',
-          userId: jwt.decode(token).userId,
-          username: jwt.decode(token).username,
-          email: jwt.decode(token).email
         });
       })
       .catch(error => res.status(400).send(error));
