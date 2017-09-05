@@ -19,7 +19,7 @@ const voteController = {
     return Recipe
       .findOne({ where: { id: req.params.recipeId } })
       .then((recipe) => {
-        recipe.decrement('downvote').then(() => {
+        recipe.increment('downvote').then(() => {
           recipe.reload().then(() => res.status(200).send({
             message: `${recipe.recipeName} has ${recipe.downvote} downvote`
           }));

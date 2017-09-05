@@ -23,7 +23,7 @@ describe('User Login', () => {
       .end((err, res) => {
         userData[0] = res.body.Token;
         expect(res.statusCode).to.equal(200);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Token successfully generated');
         if (err) return done(err);
         done();
@@ -40,7 +40,7 @@ describe('User Login', () => {
       .end((err, res) => {
         userData[1] = res.body.Token;
         expect(res.statusCode).to.equal(200);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Token successfully generated');
         if (err) return done(err);
         done();
@@ -76,7 +76,7 @@ describe('Favorite a recipe', () => {
       .send(favorite[0])
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Recipe added to Smoothies');
         if (err) return done(err);
         done();
