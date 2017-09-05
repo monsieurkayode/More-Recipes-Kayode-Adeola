@@ -25,7 +25,7 @@ describe('User Login', () => {
       .end((err, res) => {
         userData[0] = res.body.Token;
         expect(res.statusCode).to.equal(200);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Token successfully generated');
         if (err) return done(err);
         done();
@@ -42,7 +42,7 @@ describe('User Login', () => {
       .end((err, res) => {
         userData[1] = res.body.Token;
         expect(res.statusCode).to.equal(200);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Token successfully generated');
         if (err) return done(err);
         done();
@@ -62,7 +62,7 @@ describe('Create recipe post', () => {
       .send(recipePosts[0])
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Successfully created new recipe');
         if (err) return done(err);
         done();
@@ -79,7 +79,7 @@ describe('Create recipe post', () => {
       .send(recipePosts[1])
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Successfully created new recipe');
         if (err) return done(err);
         done();
@@ -99,7 +99,7 @@ describe('Modify recipe post', () => {
       .send(editRecipe[0])
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Recipe successfully updated');
         if (err) return done(err);
         done();
@@ -117,7 +117,7 @@ describe('Delete recipe post', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Recipe successfully deleted');
         if (err) return done(err);
         done();

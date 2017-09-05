@@ -62,7 +62,7 @@ describe('User Registration', () => {
       .send(testValidUsers[0])
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Account successfully created');
         if (err) return done(err);
         done();
@@ -78,7 +78,7 @@ describe('User Registration', () => {
       .send(testValidUsers[1])
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Account successfully created');
         if (err) return done(err);
         done();
@@ -97,7 +97,7 @@ describe('User Login', () => {
       .send(validUsersLogin[0])
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Token successfully generated');
         if (err) return done(err);
         done();
@@ -113,7 +113,7 @@ describe('User Login', () => {
       .send(validUsersLogin[1])
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Token successfully generated');
         if (err) return done(err);
         done();
@@ -132,7 +132,7 @@ describe('Disallow empty signup form fields', () => {
       .send(emptyUsername[0])
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body.success).to.equal(false);
+        expect(res.body.status).to.equal('fail');
         expect(res.body.message).to.equal('Please enter a username');
         if (err) return done(err);
         done();
@@ -148,7 +148,7 @@ describe('Disallow empty signup form fields', () => {
       .send(emptyPassword[0])
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body.success).to.equal(false);
+        expect(res.body.status).to.equal('fail');
         expect(res.body.message).to.equal('Please enter a password');
         if (err) return done(err);
         done();
@@ -164,7 +164,7 @@ describe('Disallow empty signup form fields', () => {
       .send(emptyEmail[0])
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body.success).to.equal(false);
+        expect(res.body.status).to.equal('fail');
         expect(res.body.message).to.equal(
           'Invalid Email, please enter a valid email'
         );
@@ -185,7 +185,7 @@ describe('Disallow login for unregistered user', () => {
       .send(invalidUsers[0])
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
-        expect(res.body.success).to.equal(false);
+        expect(res.body.status).to.equal('fail');
         expect(res.body.message).to.equal(
           'Invalid Authentication Details'
         );
@@ -203,7 +203,7 @@ describe('Disallow login for unregistered user', () => {
       .send(invalidUsers[1])
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
-        expect(res.body.success).to.equal(false);
+        expect(res.body.status).to.equal('fail');
         expect(res.body.message).to.equal(
           'Invalid Authentication Details'
         );
@@ -224,7 +224,7 @@ describe('Registered User Authentication', () => {
       .send(incorrectPassword[0])
       .end((err, res) => {
         expect(res.statusCode).to.equal(401);
-        expect(res.body.success).to.equal(false);
+        expect(res.body.status).to.equal('fail');
         expect(res.body.message).to.equal(
           'Invalid Authentication Details'
         );

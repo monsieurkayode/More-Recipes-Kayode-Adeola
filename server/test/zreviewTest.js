@@ -23,7 +23,7 @@ describe('User Login', () => {
       .end((err, res) => {
         userData[0] = res.body.Token;
         expect(res.statusCode).to.equal(200);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Token successfully generated');
         if (err) return done(err);
         done();
@@ -40,7 +40,7 @@ describe('User Login', () => {
       .end((err, res) => {
         userData[1] = res.body.Token;
         expect(res.statusCode).to.equal(200);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Token successfully generated');
         if (err) return done(err);
         done();
@@ -60,7 +60,7 @@ describe('Review a recipe', () => {
       .send(review[0])
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.comment).to.be.equal('This is an awesome recipe');
         if (err) return done(err);
         done();
@@ -77,7 +77,7 @@ describe('Review a recipe', () => {
       .send(review[1])
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.comment).to.be.equal('It would be nice if you could throw in some ginger');
         if (err) return done(err);
         done();
@@ -94,7 +94,7 @@ describe('Review a recipe', () => {
       .send(review[2])
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
-        expect(res.body.success).to.equal(true);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Review successfully posted');
         expect(res.body.comment).to.be.equal('Pretty please can I have some?');
         if (err) return done(err);
@@ -127,7 +127,7 @@ describe('Vote a recipe', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.message).to.be.equal('Coleslaw Salad has -1 downvote');
+        expect(res.body.message).to.be.equal('Coleslaw Salad has 1 downvote');
         if (err) return done(err);
         done();
       });
