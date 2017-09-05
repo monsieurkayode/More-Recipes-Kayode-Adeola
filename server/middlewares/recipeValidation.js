@@ -7,19 +7,19 @@ const recipeValidation = {
   basicValidation(req, res, next) {
     if (!req.body.recipeName || isEmpty(req.body.recipeName)) {
       return res.status(406).send({
-        success: false,
+        status: 'fail',
         message: 'Please enter a recipe name'
       });
     }
     if (!req.body.ingredients || isEmpty(req.body.ingredients)) {
       return res.status(406).send({
-        success: false,
+        status: 'fail',
         message: 'Ingredients field cannot be empty'
       });
     }
     if (!req.body.instructions || isEmpty(req.body.instructions)) {
       return res.status(406).send({
-        success: false,
+        status: 'fail',
         message: 'Instructions field cannot be empty'
       });
     }
@@ -31,7 +31,7 @@ const recipeValidation = {
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).send({
-            success: false,
+            status: 'fail',
             message: 'Recipe not found'
           });
         }

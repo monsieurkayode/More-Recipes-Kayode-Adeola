@@ -10,7 +10,7 @@ const favoriteValidation = {
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).send({
-            success: false,
+            status: 'fail',
             message: 'Recipe not found'
           });
         }
@@ -27,7 +27,7 @@ const favoriteValidation = {
       .then((favorite) => {
         if (favorite) {
           return res.status(409).send({
-            success: false,
+            status: 'fail',
             message: 'Recipe has already been favorited'
           });
         }
