@@ -17,7 +17,7 @@ const loginController = {
       .then((user) => {
         if (!user) {
           return res.status(404).send({
-            success: false,
+            status: 'fail',
             message: 'Invalid Authentication Details'
           });
         }
@@ -26,13 +26,13 @@ const loginController = {
           const token = jwt.sign({ user }, secret,
             { issuer, jwtid, expiresIn });
           res.status(200).send({
-            success: true,
+            status: 'success',
             message: 'Token successfully generated',
             Token: token
           });
         } if (user && !check) {
           res.status(401).send({
-            success: false,
+            status: 'fail',
             message: 'Invalid Authentication Details'
           });
         }
