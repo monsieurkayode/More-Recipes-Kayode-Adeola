@@ -97,7 +97,10 @@ const recipeController = {
       })
       .catch(error => res.status(400).json(error));
   },
-  getRecipes(req, res) {
+  getRecipes(req, res, next) {
+    if (req.query.ingredients ||
+      req.query.sort ||
+      req.query.category) return next();
     return Recipe
       .all({
         include: [{
@@ -130,7 +133,8 @@ const recipeController = {
       })
       .catch(error => res.status(400).json(error));
   },
-  getTopRecipes(req, res) {
+  getTopRecipes(req, res, next) {
+    if (req.query.ingredients || req.query.category) return next();
     const sort = req.query.sort,
       order = req.query.order;
     return Recipe
@@ -161,7 +165,8 @@ const recipeController = {
       })
       .catch(error => res.status(400).send(error));
   },
-  searchRecipesByIngredients(req, res) {
+  searchRecipesByIngredients(req, res, next) {
+    if (req.query.category) return next();
     const ingredients = req.query.ingredients;
     return Recipe
       .all({

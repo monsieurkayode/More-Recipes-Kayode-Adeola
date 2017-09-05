@@ -145,7 +145,7 @@ describe('Keep records of recipe views', () => {
 describe('View top recipes', () => {
   it('show recipes with highest upvote first', (done) => {
     server
-      .get('/api/v1/recipes/sort')
+      .get('/api/v1/recipes')
       .query({ sort: 'upvote', order: 'desc' })
       .set('Connection', 'keep alive')
       .set('Accept', 'application/json')

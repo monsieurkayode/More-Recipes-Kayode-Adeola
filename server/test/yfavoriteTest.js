@@ -99,7 +99,7 @@ describe('Favorite a recipe', () => {
 describe('Search recipes', () => {
   it('shows recipes with search by ingredients', (done) => {
     server
-      .get('/api/v1/recipes/ingredients')
+      .get('/api/v1/recipes')
       .query({ ingredients: 'cabbage' })
       .set('Connection', 'keep alive')
       .set('Accept', 'application/json')
@@ -114,7 +114,7 @@ describe('Search recipes', () => {
   });
   it('shows recipes with search by category', (done) => {
     server
-      .get('/api/v1/recipes/category')
+      .get('/api/v1/recipes')
       .query({ category: 'smoothies' })
       .set('Connection', 'keep alive')
       .set('Accept', 'application/json')
