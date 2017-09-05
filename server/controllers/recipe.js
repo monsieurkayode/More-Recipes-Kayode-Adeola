@@ -29,9 +29,12 @@ const recipeController = {
           recipe.reload()
             .then(() => {
               res.status(201).send({
-                success: true,
+                status: 'success',
                 message: 'Successfully created new recipe',
-                recipeId: recipe.id,
+                id: recipe.id,
+                views: recipe.views,
+                upvote: recipe.upvote,
+                downvote: recipe.downvote,
                 recipeName: recipe.recipeName,
                 ingredients: recipe.ingredients,
                 instructions: recipe.instructions,
@@ -49,7 +52,7 @@ const recipeController = {
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).send({
-            success: false,
+            status: 'fail',
             message: 'No recipe found'
           });
         }
@@ -57,9 +60,12 @@ const recipeController = {
           .update(req.body, { fields: Object.keys(req.body) })
           .then(() => {
             res.status(200).send({
-              success: true,
+              status: 'success',
               message: 'Recipe successfully updated',
-              recipeId: recipe.id,
+              id: recipe.id,
+              views: recipe.views,
+              upvote: recipe.upvote,
+              downvote: recipe.downvote,
               recipeName: recipe.recipeName,
               ingredients: recipe.ingredients,
               instructions: recipe.instructions
@@ -76,7 +82,7 @@ const recipeController = {
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).send({
-            success: false,
+            status: 'fail',
             message: 'No recipe found'
           });
         }
@@ -84,7 +90,7 @@ const recipeController = {
           .destroy()
           .then(() => {
             res.status(200).send({
-              success: true,
+              status: 'success',
               message: 'Recipe successfully deleted'
             });
           });
@@ -116,7 +122,7 @@ const recipeController = {
       .then((recipes) => {
         if (!recipes) {
           return res.status(404).send({
-            success: false,
+            status: 'fail',
             message: 'No recipe found'
           });
         }
@@ -142,7 +148,7 @@ const recipeController = {
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).send({
-            success: false,
+            status: 'fail',
             message: 'No recipe found'
           });
         }
