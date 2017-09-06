@@ -6,7 +6,8 @@
   "scripts": {
     "migrate": "sequelize db:migrate",
     "unmigrate": "sequelize db:migrate:undo:all",
-    "start": "nodemon --watch server --exec babel-node ./bin/www",
+    "start:dev": "nodemon --watch server --exec babel-node ./bin/www",
+    "start": "babel-node ./bin/www",
     "test": "SET NODE_ENV=test&& mocha --timeout 10000 --compilers js:babel-core/register server/test",
     "tests": "cross-env NODE_ENV=test nyc _mocha --report lcovonly --reporter spec --timeout 10000 server/test && cat ./coverage/lcov.info | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls"

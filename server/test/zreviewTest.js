@@ -113,7 +113,7 @@ describe('Vote a recipe', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.message).to.be.equal('Coleslaw Salad has 1 upvote');
+        expect(res.body.message).to.be.equal('Your vote has been recorded');
         if (err) return done(err);
         done();
       });
@@ -127,7 +127,7 @@ describe('Vote a recipe', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.message).to.be.equal('Coleslaw Salad has 1 downvote');
+        expect(res.body.message).to.be.equal('Your vote has been recorded');
         if (err) return done(err);
         done();
       });
