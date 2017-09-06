@@ -42,7 +42,6 @@ const voteController = {
               });
             });
         }
-        console.log(voter.option)
         return res.status(400).send({
           status: 'fail',
           message: 'User has already upvoted'
@@ -88,7 +87,6 @@ const voteController = {
               });
             });
         }
-        console.log(voter.option)
         return res.status(400).send({
           status: 'fail',
           message: 'User has already downvoted'
