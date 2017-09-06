@@ -9,7 +9,7 @@ const voteController = {
       .findOrCreate({ where: {
         userId: req.decoded.user.id,
         recipeId: req.params.recipeId },
-      defaults: { option: true }
+        defaults: { option: true }
       })
       .spread((voter, created) => {
         if (created) {
@@ -54,7 +54,7 @@ const voteController = {
       .findOrCreate({ where: {
         userId: req.decoded.user.id,
         recipeId: req.params.recipeId },
-      defaults: { option: false }
+        defaults: { option: false }
       })
       .spread((voter, created) => {
         if (created) {
