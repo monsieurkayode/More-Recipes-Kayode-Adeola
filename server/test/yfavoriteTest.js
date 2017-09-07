@@ -60,7 +60,7 @@ describe('Favorite a recipe', () => {
       .send(favorite[1])
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
-        expect(res.body.category).to.be.equal('Salad');
+        expect(res.body.message).to.be.equal('Recipe successfully added to favorites');
         if (err) return done(err);
         done();
       });

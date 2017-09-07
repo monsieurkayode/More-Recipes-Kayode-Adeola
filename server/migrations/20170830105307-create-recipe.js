@@ -11,6 +11,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      category: {
+        type: Sequelize.STRING,
+        defaultValue: ''
+      },
       ingredients: {
         type: Sequelize.STRING,
         allowNull: false

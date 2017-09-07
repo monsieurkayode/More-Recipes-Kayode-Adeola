@@ -10,7 +10,7 @@ const Recipe = db.Recipe,
   Favorite = db.Favorite,
   keys = [
     'id', 'views', 'upvote', 'downvote',
-    'recipeName', 'ingredients', 'instructions'
+    'recipeName', 'category', 'ingredients', 'instructions'
   ];
 
 const recipeController = {
@@ -18,11 +18,14 @@ const recipeController = {
     return Recipe
       .create({
         recipeName: req.body.recipeName,
+        category: req.body.category,
         ingredients: req.body.ingredients,
         instructions: req.body.instructions,
         userId: req.decoded.user.id
       }, {
-        fields: ['recipeName', 'ingredients', 'instructions', 'userId']
+        fields: [
+          'recipeName', 'ingredients', 'instructions', 'userId', 'category'
+        ]
       })
       .then((recipe) => {
         recipe.increment('views').then(() => {
@@ -36,6 +39,7 @@ const recipeController = {
                 upvote: recipe.upvote,
                 downvote: recipe.downvote,
                 recipeName: recipe.recipeName,
+                category: recipe.category,
                 ingredients: recipe.ingredients,
                 instructions: recipe.instructions,
               });
@@ -57,7 +61,12 @@ const recipeController = {
           });
         }
         return recipe
-          .update(req.body, { fields: Object.keys(req.body) })
+          .update({
+            recipeName: recipe.recipeName || req.body.recipeName,
+            category: recipe.category || req.body.category,
+            ingredients: recipe.ingredients || req.body.ingredients,
+            instructions: recipe.instructions || req.body.instructions
+          })
           .then(() => {
             res.status(200).send({
               status: 'success',
@@ -67,6 +76,7 @@ const recipeController = {
               upvote: recipe.upvote,
               downvote: recipe.downvote,
               recipeName: recipe.recipeName,
+              category: recipe.category,
               ingredients: recipe.ingredients,
               instructions: recipe.instructions
             });
@@ -157,9 +167,7 @@ const recipeController = {
           });
         }
         recipe.increment('views').then(() => {
-          recipe.reload({
-            // attributes: keys
-          })
+          recipe.reload()
             .then(() => res.status(200).send(recipe));
         });
       })
