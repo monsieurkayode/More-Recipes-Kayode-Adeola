@@ -9,7 +9,7 @@ const voteController = {
       .findOrCreate({ where: {
         userId: req.decoded.user.id,
         recipeId: req.params.recipeId },
-        defaults: { option: true }
+      defaults: { option: true }
       })
       .spread((voter, created) => {
         if (created) {
@@ -41,11 +41,21 @@ const voteController = {
                 }));
               });
             });
+        } else if (!created && voter.option === true) {
+          voter.destroy();
+          return Recipe
+            .findOne({ where: { id: req.params.recipeId } })
+            .then((recipe) => {
+              recipe.decrement('upvote').then(() => {
+                recipe.reload();
+              }).then(() => res.status(200).send({
+                status: 'success',
+                message: 'Your vote has been removed',
+                upvote: recipe.upvote,
+                downvote: recipe.downvote
+              }));
+            });
         }
-        return res.status(400).send({
-          status: 'fail',
-          message: 'User has already upvoted'
-        });
       })
       .catch(error => res.status(400).send(error));
   },
@@ -54,7 +64,7 @@ const voteController = {
       .findOrCreate({ where: {
         userId: req.decoded.user.id,
         recipeId: req.params.recipeId },
-        defaults: { option: false }
+      defaults: { option: false }
       })
       .spread((voter, created) => {
         if (created) {
@@ -86,14 +96,24 @@ const voteController = {
                 }));
               });
             });
+        } else if (!created && voter.option === false) {
+          voter.destroy();
+          return Recipe
+            .findOne({ where: { id: req.params.recipeId } })
+            .then((recipe) => {
+              recipe.decrement('downvote').then(() => {
+                recipe.reload();
+              }).then(() => res.status(200).send({
+                status: 'success',
+                message: 'Your vote has been removed',
+                upvote: recipe.upvote,
+                downvote: recipe.downvote
+              }));
+            });
         }
-        return res.status(400).send({
-          status: 'fail',
-          message: 'User has already downvoted'
-        });
       })
       .catch(error => res.status(400).send(error));
-  },
+  }
 };
 
 export default voteController;
