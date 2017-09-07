@@ -50,6 +50,12 @@ const userModel = (sequelize, DataTypes) => {
         const hash = bcrypt.hashSync(user.password, salt);
         user.password = hash;
       },
+      beforeUpdate: (user) => {
+        const saltRounds = 10;
+        const salt = bcrypt.genSaltSync(saltRounds);
+        const hash = bcrypt.hashSync(user.password, salt);
+        user.password = hash;
+      },
     },
     classMethods: {
       associate(models) {
