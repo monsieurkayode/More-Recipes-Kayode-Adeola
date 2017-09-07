@@ -10,7 +10,7 @@ const Recipe = db.Recipe,
   Favorite = db.Favorite,
   keys = [
     'id', 'views', 'upvote', 'downvote',
-    'recipeName', 'ingredients', 'instructions'
+    'recipeName', 'category', 'ingredients', 'instructions'
   ];
 
 const recipeController = {
