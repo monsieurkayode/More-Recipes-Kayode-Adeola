@@ -14,6 +14,10 @@ const recipeModel = (sequelize, DataTypes) => {
         }
       }
     },
+    category: {
+      type: DataTypes.STRING,
+      defaultValue: ''
+    },
     ingredients: {
       type: DataTypes.STRING,
       allowNull: false

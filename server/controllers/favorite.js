@@ -17,7 +17,10 @@ const favoriteController = {
             message: 'Recipe not found'
           });
         }
-        return res.status(201).send(favoritedRecipe);
+        return res.status(201).send({
+          status: 'success',
+          message: 'Recipe successfully added to favorites'
+        });
       })
       .catch(error => res.status(400).send(error));
   },
