@@ -2,6 +2,7 @@ import db from '../models/index';
 import isAlphaNumeric from '../helpers/isAlphaNum';
 import isEmail from '../helpers/isEmail';
 import cleanString from '../helpers/cleanString';
+import { successHandler, errorHandler } from '../helpers/responseHandler';
 
 const User = db.User;
 
@@ -10,40 +11,32 @@ const basicValidation = (req, res, next) => {
   req.body.password = cleanString(req.body.password);
   req.body.email = cleanString(req.body.email);
   if (!req.body.username) {
-    return res.status(400).send({
-      status: 'fail',
-      message: 'Please enter a username'
-    });
+    return errorHandler(400, 'Please enter a username', res);
   }
   if (!isAlphaNumeric(req.body.username)) {
-    return res.status(400).send({
-      status: 'fail',
-      message: 'Username must contain alphabets and numbers only'
-    });
+    return errorHandler(
+      400, 'Username must contain alphabets and numbers only', res
+    );
   }
   if (req.body.username.length < 3) {
-    return res.status(400).send({
-      status: 'fail',
-      message: 'Username should be at least three characters'
-    });
+    return errorHandler(
+      400, 'Username should be at least three characters', res
+    );
   }
   if (!req.body.email || !isEmail(req.body.email)) {
-    return res.status(400).send({
-      status: 'fail',
-      message: 'Invalid Email, please enter a valid email'
-    });
+    return errorHandler(
+      400, 'Invalid Email, please enter a valid email', res
+    );
   }
   if (!req.body.password) {
-    return res.status(400).send({
-      status: 'fail',
-      message: 'Please enter a password'
-    });
+    return errorHandler(
+      400, 'Please enter a password', res
+    );
   }
   if (req.body.password.length < 6) {
-    return res.status(400).send({
-      status: 'fail',
-      message: 'Password should be at least six characters long'
-    });
+    return errorHandler(
+      400, 'Password should be at least six characters long', res
+    );
   }
   next();
 };
@@ -53,13 +46,12 @@ const validateUsername = (req, res, next) => {
     .then((user) => {
       if (!user) next();
       else {
-        return res.status(409).send({
-          status: 'fail',
-          message: 'Username already exists'
-        });
+        return errorHandler(
+          409, 'Username already exists', res
+        );
       }
     })
-    .catch(error => res.status(404).send(error));
+    .catch(error => errorHandler(400, error));
 };
 
 const emailValidation = (req, res, next) => {
@@ -67,13 +59,12 @@ const emailValidation = (req, res, next) => {
     .then((user) => {
       if (!user) next();
       else {
-        return res.status(409).send({
-          status: 'fail',
-          message: 'Email already exists'
-        });
+        return errorHandler(
+          409, 'Email already exists', res
+        );
       }
     })
-    .catch(error => res.status(400).send(error));
+    .catch(error => errorHandler(400, error));
 };
 
 const validUser = (req, res, next) => {
@@ -81,10 +72,9 @@ const validUser = (req, res, next) => {
     .findById(req.params.userId || req.decoded.user.id)
     .then((user) => {
       if (!user) {
-        return res.status(401).send({
-          status: 'fail',
-          message: 'Oops! 401. Seems you haven\'t created an account yet'
-        });
+        return errorHandler(
+          401, 'Oops! 401. Seems you haven\'t created an account yet', res
+        );
       }
       next();
     });
