@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import db from '../models/index';
+import errorHandler from '../helpers/responseHandler';
 
 dotenv.load();
 const secret = process.env.secretKey;
