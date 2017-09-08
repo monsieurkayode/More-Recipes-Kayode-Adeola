@@ -112,7 +112,7 @@ describe('Search recipes', () => {
         done();
       });
   });
-  it('shows recipes with search by category', (done) => {
+  it('shows no recipes matches search if not found', (done) => {
     server
       .get('/api/v1/recipes')
       .query({ category: 'smoothies' })
@@ -122,7 +122,7 @@ describe('Search recipes', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body[0].Recipe.recipeName).to.equal('Coleslaw Salad');
+        expect(res.body.message).to.equal('No recipe matches your search');
         if (err) return done(err);
         done();
       });

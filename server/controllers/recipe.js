@@ -1,8 +1,4 @@
 import db from '../models/index';
-import search from '../helpers/search';
-
-const searchByIngredients = search.searchByIngredients;
-const searchByCategory = search.searchByCategory;
 
 const Recipe = db.Recipe,
   Review = db.Review,
@@ -143,19 +139,6 @@ const recipeController = {
       })
       .catch(error => res.status(400).json(error));
   },
-  getTopRecipes(req, res, next) {
-    if (req.query.ingredients || req.query.category) return next();
-    const sort = req.query.sort,
-      order = req.query.order;
-    return Recipe
-      .findAll({
-        attributes: keys,
-        order: [[sort, order]],
-        limit: 5
-      })
-      .then(recipes => res.status(200).send(recipes))
-      .catch(error => res.status(400).json(error));
-  },
   viewRecipe(req, res) {
     return Recipe
       .findOne({ where: { id: req.params.recipeId } })
@@ -173,38 +156,92 @@ const recipeController = {
       })
       .catch(error => res.status(400).send(error));
   },
+  getTopRecipes(req, res, next) {
+    if (!req.query.sort) return next();
+    const sort = req.query.sort,
+      order = (req.query.order).slice(0, 4);
+    return Recipe
+      .findAll({
+        attributes: keys,
+        order: [[sort, order]],
+        limit: 5
+      })
+      .then(recipes => res.status(200).send(recipes))
+      .catch(error => res.status(400).json(error));
+  },
   searchRecipesByIngredients(req, res, next) {
-    if (req.query.category) return next();
-    const ingredients = req.query.ingredients;
+    if (!req.query.ingredients) return next();
+    const ingredients = req.query.ingredients.split(' ');
+    const query = ingredients.map(keyword => ({
+      ingredients: {
+        $iLike: `%${keyword}%`
+      }
+    }));
     return Recipe
       .all({
+        where: { $or: query },
+        limit: 10,
         attributes: keys
       })
       .then((recipes) => {
-        const result = searchByIngredients(ingredients, recipes);
-        res.status(200).send(result);
+        if (!recipes.length) {
+          return res.status(200).send({
+            message: 'No recipe matches your search'
+          });
+        }
+        return res.status(200).send(recipes);
       })
       .catch(error => res.status(400).send(error));
   },
   searchRecipesByCategory(req, res) {
-    const category = req.query.category;
-    return Favorite
+    const category = req.query.category.split(' ');
+    const query = category.map(keyword => ({
+      category: {
+        $iLike: `%${keyword}%`
+      }
+    }));
+    return Recipe
       .all({
-        include: [{
-          model: Recipe,
-          attributes: keys
-        }],
-        attributes:
-        [
-          'category'
-        ]
+        where: { $or: query },
+        limit: 10,
+        attributes: keys
       })
       .then((recipes) => {
-        const result = searchByCategory(category, recipes);
-        res.status(200).send(result);
+        if (!recipes.length) {
+          return res.status(200).send({
+            message: 'No recipe matches your search'
+          });
+        }
+        return res.status(200).send(recipes);
       })
       .catch(error => res.status(400).send(error));
-  }
+  },
+  searchUserFavsByCategory(req, res) {
+    const category = req.query.category.split(' ');
+    const query = category.map(keyword => ({
+      category: {
+        $iLike: `%${keyword}%`
+      }
+    }));
+    return Favorite
+      .all({
+        where: { $or: query },
+        include: {
+          model: Recipe,
+          attributes: keys
+        },
+        attributes: ['category']
+      })
+      .then((recipes) => {
+        if (!recipes) {
+          return res.status(200).send({
+            message: 'No favorite recipe matches your search'
+          });
+        }
+        res.status(200).send(recipes);
+      })
+      .catch(error => res.status(400).send(error));
+  },
 };
 
 export default recipeController;
