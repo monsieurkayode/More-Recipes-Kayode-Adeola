@@ -1,17 +1,18 @@
-const successHandler = (code, body, res) => {
-  switch (code) {
-    case 201:
-      return res.status(201).json({
-        status: 'success',
-        message: body
-      });
-    default:
-      return res.status(200).json({
-        status: 'success',
-        message: body
-      });
-  }
-};
+// const successHandler = (code, body, res) => {
+//   switch (code) {
+//     case 201:
+//       return res.status(201).json({
+//         status: 'success',
+//         message: 'Account successfully created',
+//         data: body
+//       });
+//     default:
+//       return res.status(200).json({
+//         status: 'success',
+//         data: body
+//       });
+//   }
+// };
 
 const errorHandler = (code, err, res) => {
   switch (code) {
@@ -48,5 +49,5 @@ const errorHandler = (code, err, res) => {
   }
 };
 
-export { successHandler, errorHandler };
+export default errorHandler;
 

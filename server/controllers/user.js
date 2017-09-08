@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import db from '../models/index';
 import cleanString from '../helpers/cleanString';
+import { errorHandler } from '../helpers/responseHandler';
 
 dotenv.load();
 const User = db.User;
@@ -16,16 +17,13 @@ const signup = (req, res) => User
       message: 'Account successfully created',
     });
   })
-  .catch(error => res.status(400).send(error));
+  .catch(error => errorHandler(400, error, res));
 
 const changePassword = (req, res) => User
   .findById(req.decoded.user.id)
   .then((user) => {
     if (!user) {
-      return res.status(404).send({
-        status: 'fail',
-        message: 'User does not exist'
-      });
+      return errorHandler(404, 'User does not exist', res);
     }
     if (user && req.body.password && user.id === req.decoded.user.id) {
       if (cleanString(req.body.password).length > 5) {
@@ -38,9 +36,9 @@ const changePassword = (req, res) => User
           }));
       }
     }
-    return res.status(503).send({
+    return res.status(401).send({
       status: 'fail',
-      message: 'Your request could not be completed at this time'
+      message: 'Your request could not be authenticated'
     });
   })
   .catch(error => res.status(400).send(error));
