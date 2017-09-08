@@ -10,6 +10,7 @@ const basicValidation = (req, res, next) => {
   if (req.body.username && req.body.password && req.body.email) {
     req.body.username = cleanString(req.body.username);
     req.body.password = cleanString(req.body.password);
+    req.body.confirmPassword = cleanString(req.body.confirmPassword);
     req.body.email = cleanString(req.body.email);
 
     if (!req.body.username) {
@@ -38,6 +39,11 @@ const basicValidation = (req, res, next) => {
     if (req.body.password.length < 6) {
       return errorHandler(
         400, 'Password should be at least six characters long', res
+      );
+    }
+    if (req.body.password !== req.body.confirmPassword) {
+      return errorHandler(
+        409, 'Password does not match', res
       );
     }
   } else if (!req.body.username || !req.body.email || !req.body.password) {

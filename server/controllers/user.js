@@ -8,16 +8,15 @@ const User = db.User;
 
 const signup = (req, res) => User
   .create(req.body, { fields: Object.keys(req.body) })
-  .then((user) => {
+  .then(user =>
     res.status(201).send({
       id: user.id,
       username: user.username,
       email: user.email,
       status: 'success',
       message: 'Account successfully created',
-    });
-  })
-  .catch(error => errorHandler(400, error, res));
+    }))
+  .catch(error => res.status(400).send(error));
 
 const changePassword = (req, res) => User
   .findById(req.decoded.user.id)
