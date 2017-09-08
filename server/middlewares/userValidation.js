@@ -10,7 +10,7 @@ const basicValidation = (req, res, next) => {
   if (req.body.username && req.body.password && req.body.email) {
     req.body.username = cleanString(req.body.username);
     req.body.password = cleanString(req.body.password);
-    req.body.confirmPassword = cleanString(req.body.confirmPassword);
+    req.body.confirmPassword = req.body.confirmPassword;
     req.body.email = cleanString(req.body.email);
 
     if (!req.body.username) {
@@ -76,7 +76,7 @@ const validateUsername = (req, res, next) => {
         );
       }
     })
-    .catch(error => errorHandler(400, error, res));
+    .catch(error => res.status(400).send(error));
 };
 
 const emailValidation = (req, res, next) => {
@@ -89,7 +89,7 @@ const emailValidation = (req, res, next) => {
         );
       }
     })
-    .catch(error => errorHandler(400, error));
+    .catch(error => res.status(400).send(error));
 };
 
 const validUser = (req, res, next) => {
