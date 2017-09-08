@@ -41,9 +41,21 @@ const basicValidation = (req, res, next) => {
       );
     }
   } else if (!req.body.username || !req.body.email || !req.body.password) {
-    return errorHandler(
-      400, 'Please compelete all form fields', res
-    );
+    if (!req.body.username) {
+      return errorHandler(
+        400, 'Please enter a username', res
+      );
+    }
+    if (!req.body.email) {
+      return errorHandler(
+        400, 'Invalid Email, please enter a valid email', res
+      );
+    }
+    if (!req.body.password) {
+      return errorHandler(
+        400, 'Please enter a password', res
+      );
+    }
   }
   next();
 };
