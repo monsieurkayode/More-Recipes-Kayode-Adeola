@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import errorHandler from '../helpers/responseHandler';
 
 dotenv.load();
 const secret = process.env.secretKey;
@@ -10,24 +11,21 @@ const auth = (req, res, next) => {
     jwt.verify(token, secret, (err, decoded) => {
       if (err) {
         if (err.name === 'TokenExpiredError') {
-          return res.status(403).json({
-            status: 'fail',
-            message: 'Your session has expired, sign in again'
-          });
+          return errorHandler(
+            403, 'Your session has expired, sign in again', res
+          );
         }
-        return res.status(403).json({
-          status: 'fail',
-          message: 'Bad token'
-        });
+        return errorHandler(
+          403, 'Bad Token', res
+        );
       }
       req.decoded = decoded;
       next();
     });
   } else {
-    return res.status(403).send({
-      status: 'fail',
-      message: 'No token provided'
-    });
+    return errorHandler(
+      403, 'No Token provided', res
+    );
   }
 };
 export default auth;

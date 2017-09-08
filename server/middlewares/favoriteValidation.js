@@ -1,4 +1,5 @@
 import db from '../models/index';
+import errorHandler from '../helpers/responseHandler';
 
 const Favorite = db.Favorite;
 const Recipe = db.Recipe;
@@ -8,10 +9,9 @@ const validRecipe = (req, res, next) => {
     .find({ where: { id: req.params.recipeId } })
     .then((recipe) => {
       if (!recipe) {
-        return res.status(404).send({
-          status: 'fail',
-          message: 'Recipe not found'
-        });
+        return errorHandler(
+          404, 'Recipe not found', res
+        );
       }
       next();
     })
@@ -26,10 +26,9 @@ const favoriteExists = (req, res, next) => {
     })
     .then((favorite) => {
       if (favorite) {
-        return res.status(409).send({
-          status: 'fail',
-          message: 'Recipe has already been favorited'
-        });
+        return errorHandler(
+          409, 'Recipe has already been favorited', res
+        );
       }
       next();
     })
