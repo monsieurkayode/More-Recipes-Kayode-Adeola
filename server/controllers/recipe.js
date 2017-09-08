@@ -46,57 +46,42 @@ const update = (req, res) => Recipe
   .findOne({ where: {
     userId: req.decoded.user.id, id: req.params.recipeId }
   })
-  .then((recipe) => {
-    if (!recipe) {
-      return res.status(404).send({
-        status: 'fail',
-        message: 'No recipe found'
+  .then(recipe => recipe
+    .update({
+      recipeName: req.body.recipeName || recipe.recipeName,
+      category: req.body.category || recipe.category,
+      ingredients: req.body.ingredients || recipe.ingredients,
+      instructions: req.body.instructions || recipe.instructions
+    })
+    .then(() => {
+      res.status(200).send({
+        status: 'success',
+        message: 'Recipe successfully updated',
+        id: recipe.id,
+        views: recipe.views,
+        upvote: recipe.upvote,
+        downvote: recipe.downvote,
+        recipeName: recipe.recipeName,
+        category: recipe.category,
+        ingredients: recipe.ingredients,
+        instructions: recipe.instructions
       });
-    }
-    return recipe
-      .update({
-        recipeName: recipe.recipeName || req.body.recipeName,
-        category: recipe.category || req.body.category,
-        ingredients: recipe.ingredients || req.body.ingredients,
-        instructions: recipe.instructions || req.body.instructions
-      })
-      .then(() => {
-        res.status(200).send({
-          status: 'success',
-          message: 'Recipe successfully updated',
-          id: recipe.id,
-          views: recipe.views,
-          upvote: recipe.upvote,
-          downvote: recipe.downvote,
-          recipeName: recipe.recipeName,
-          category: recipe.category,
-          ingredients: recipe.ingredients,
-          instructions: recipe.instructions
-        });
-      });
-  })
+    }))
   .catch(error => res.status(400).json(error));
 
 const deleteRecipe = (req, res) => Recipe
-  .findOne({ where:
+  .findOne({
+    where:
         { userId: req.decoded.user.id, id: req.params.recipeId }
   })
-  .then((recipe) => {
-    if (!recipe) {
-      return res.status(404).send({
-        status: 'fail',
-        message: 'No recipe found'
+  .then(recipe => recipe
+    .destroy()
+    .then(() => {
+      res.status(200).send({
+        status: 'success',
+        message: 'Recipe successfully deleted'
       });
-    }
-    return recipe
-      .destroy()
-      .then(() => {
-        res.status(200).send({
-          status: 'success',
-          message: 'Recipe successfully deleted'
-        });
-      });
-  })
+    }))
   .catch(error => res.status(400).json(error));
 
 const getRecipes = (req, res, next) => {
@@ -128,7 +113,7 @@ const getUserRecipes = (req, res) => Recipe
     if (!recipes) {
       return res.status(404).send({
         status: 'fail',
-        message: 'No recipe found'
+        message: 'User has not posted any recipe'
       });
     }
     return res.status(200).send(recipes);
@@ -138,12 +123,6 @@ const getUserRecipes = (req, res) => Recipe
 const viewRecipe = (req, res) => Recipe
   .findOne({ where: { id: req.params.recipeId } })
   .then((recipe) => {
-    if (!recipe) {
-      return res.status(404).send({
-        status: 'fail',
-        message: 'No recipe found'
-      });
-    }
     recipe.increment('views').then(() => {
       recipe.reload()
         .then(() => res.status(200).send(recipe));
