@@ -6,10 +6,11 @@ const Vote = db.Vote;
 const voteController = {
   upvote(req, res) {
     return Vote
-      .findOrCreate({ where: {
-        userId: req.decoded.user.id,
-        recipeId: req.params.recipeId },
-      defaults: { option: true }
+      .findOrCreate({
+        where: {
+          userId: req.decoded.user.id,
+          recipeId: req.params.recipeId },
+        defaults: { option: true }
       })
       .spread((voter, created) => {
         if (created) {
@@ -61,10 +62,11 @@ const voteController = {
   },
   downvote(req, res) {
     return Vote
-      .findOrCreate({ where: {
-        userId: req.decoded.user.id,
-        recipeId: req.params.recipeId },
-      defaults: { option: false }
+      .findOrCreate({
+        where: {
+          userId: req.decoded.user.id,
+          recipeId: req.params.recipeId },
+        defaults: { option: false }
       })
       .spread((voter, created) => {
         if (created) {

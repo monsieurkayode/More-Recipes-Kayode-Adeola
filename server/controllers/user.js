@@ -35,12 +35,10 @@ const userController = {
             return user
               .update({
                 password: req.body.password
-              }).then(() => {
-                return res.status(200).send({
-                  status: 'success',
-                  message: 'Password changed successfully'
-                });
-              });
+              }).then(() => res.status(200).send({
+                status: 'success',
+                message: 'Password changed successfully'
+              }));
           }
         }
         return res.status(503).send({
