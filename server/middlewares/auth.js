@@ -17,7 +17,7 @@ const auth = (req, res, next) => {
         }
         return res.status(403).json({
           status: 'fail',
-          message: 'Failed to authenticate token'
+          message: 'Bad token'
         });
       }
       req.decoded = decoded;
