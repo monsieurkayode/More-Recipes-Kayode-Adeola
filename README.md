@@ -6,7 +6,7 @@
 ## Introduction
 **More-Recipes** is a recipe sharing and social connecting platform where users can show their cuisine expertise by posting recipes for other users to view and learn from. Everything about this application is detailed below:
 
-## Application 
+## Application Features
 * Users can create accounts on the application
 * Users can login to to use the accessible features provided
 * Users can create and post recipes
