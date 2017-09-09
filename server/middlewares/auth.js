@@ -1,7 +1,7 @@
 // import module dependencies
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import errorHandler from '../helpers/responseHandler';
+import { errorHandler } from '../helpers/responseHandler';
 
 // Load environment variables
 dotenv.load();
