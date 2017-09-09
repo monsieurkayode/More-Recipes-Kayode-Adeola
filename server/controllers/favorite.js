@@ -67,7 +67,6 @@ const addRecipeCategory = (req, res) => Favorite
         { userId: req.decoded.user.id, recipeId: req.params.recipeId }
   })
   .then((recipe) => {
-    console.log(req.body.category)
     if (req.body.category === 'undefined') {
       return res.status(200).send({
         status: 'success',
