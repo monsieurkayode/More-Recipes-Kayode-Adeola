@@ -14,19 +14,20 @@ const signin = (req, res) => User
   .findOne({ where: { username: req.body.username } })
   .then((user) => {
     if (!user) {
-      return res.status(404).send({
+      return res.status(401).send({
         status: 'fail',
         message: 'Invalid Authentication Details'
       });
     }
     const check = bcrypt.compareSync(req.body.password, user.password);
     if (check) {
-      const token = jwt.sign({ user }, secret,
+      const token = jwt.sign({ user: { id: user.id } }, secret,
         { issuer, jwtid, expiresIn });
       res.status(200).send({
         status: 'success',
         message: 'Token successfully generated',
-        Token: token
+        Token: token,
+        info: jwt.decode(token)
       });
     } if (user && !check) {
       res.status(401).send({

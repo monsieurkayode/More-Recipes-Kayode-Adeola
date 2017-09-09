@@ -1,21 +1,28 @@
 import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 import db from '../models/index';
 import cleanString from '../helpers/cleanString';
 import { errorHandler } from '../helpers/responseHandler';
 
 dotenv.load();
+const secret = process.env.secretKey;
+const issuer = process.env.issuer;
+const jwtid = process.env.jwtid;
+const expiresIn = process.env.expiresIn;
 const User = db.User;
 
 const signup = (req, res) => User
   .create(req.body, { fields: Object.keys(req.body) })
-  .then(user =>
+  .then((user) => {
+    const token = jwt.sign({
+      user: { id: user.id, username: user.username, email: user.email } },
+    secret, { issuer, jwtid, expiresIn });
     res.status(201).send({
-      id: user.id,
-      username: user.username,
-      email: user.email,
       status: 'success',
       message: 'Account successfully created',
-    }))
+      token
+    });
+  })
   .catch(error => res.status(400).send(error));
 
 const changePassword = (req, res) => User
