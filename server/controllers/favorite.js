@@ -66,15 +66,24 @@ const addRecipeCategory = (req, res) => Favorite
   .findOne({ where:
         { userId: req.decoded.user.id, recipeId: req.params.recipeId }
   })
-  .then(recipe => recipe
-  // Modify the category and persist modified data to the database
-    .update({ category: req.body.category || recipe.category })
-    .then(() => {
-      res.status(200).send({
+  .then((recipe) => {
+    console.log(req.body.category)
+    if (req.body.category === 'undefined') {
+      return res.status(200).send({
         status: 'success',
         message: `Recipe added to ${recipe.category}`
       });
-    }))
+    }
+    recipe
+    // Modify the category and persist modified data to the database
+      .update({ category: req.body.category || recipe.category })
+      .then(() => {
+        res.status(200).send({
+          status: 'success',
+          message: `Recipe added to ${recipe.category}`
+        });
+      });
+  })
   .catch(error => res.status(400).send(error));
 
 export { addFavorite, getUserFavorites, addRecipeCategory };
