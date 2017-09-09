@@ -2,12 +2,14 @@ const testValidUsers = [
   {
     username: 'patsiizy',
     password: 'passover',
+    confirmPassword: 'passover',
     email: 'patzii@gmail.com',
   },
 
   {
     username: 'sponge',
     password: 'squarepants',
+    confirmPassword: 'squarepants',
     email: 'spongebob@gmail.com',
   },
 
