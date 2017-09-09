@@ -7,7 +7,7 @@
 **More-Recipes** is a recipe sharing and social connecting platform where users can show their cuisine expertise by posting recipes for other users to view and learn from. Everything about this application is detailed below:
 
 ## Application 
-* Users can create accounts on ths application
+* Users can create accounts on the application
 * Users can login to to use the accessible features provided
 * Users can create and post recipes
 * Users can edit recipes they have posted
@@ -50,9 +50,12 @@ expiresIn = set expiration e.g **"24h"**
 * Migrate your database schema using 
 > $ `npm run migrate`
 * To start the application
-> $ `npm start`
+``` 
+> $ npm start
 > babel-node ./bin/www
 > Server listening on port 5000
+
+```
 
 ## Testing
 * Create a test database and name it travis
