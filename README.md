@@ -8,7 +8,7 @@
 
 ## Application Features
 * Users can create accounts on the application
-* Users can login to to use the accessible features provided
+* Users can login to use the accessible features provided
 * Users can create and post recipes
 * Users can edit recipes they have posted
 * Users can delete recipes they have posted
