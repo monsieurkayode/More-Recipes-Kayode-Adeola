@@ -54,11 +54,6 @@ const basicValidation = (req, res, next) => {
         400, 'Password should be at least six characters long', res
       );
     }
-    if (req.body.password !== req.body.confirmPassword) {
-      return errorHandler(
-        409, 'Password does not match', res
-      );
-    }
   } else if (!req.body.username || !req.body.email || !req.body.password) {
     if (!req.body.username) {
       return errorHandler(
@@ -142,4 +137,14 @@ const validUser = (req, res, next) => {
     });
 };
 
-export { basicValidation, validateUsername, emailValidation, validUser };
+const validatePassword = (req, res, next) => {
+  if (req.body.password !== req.body.confirmPassword) {
+    return errorHandler(
+      409, 'Password does not match', res
+    );
+  }
+  next();
+};
+
+export { basicValidation, validateUsername,
+  emailValidation, validUser, validatePassword };
