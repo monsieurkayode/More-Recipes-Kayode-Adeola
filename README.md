@@ -35,7 +35,8 @@
 > $ `npm install`
 * After successful installation, create a `.env` file which will be used to load environment variables **see sample below**
 * Create a databse to be used with application
-> DB_USERNAME = your database username
+``` 
+DB_USERNAME = your database username
 DB_PASSWORD = your database password
 DB_DATABASE = your database name
 DB_HOST = "127.0.0.1"
@@ -45,6 +46,7 @@ secretKey = your secret key
 issuer = your issuer
 jwtid = your jwt id
 expiresIn = set expiration e.g **"24h"**
+```
 * Migrate your database schema using 
 > $ `npm run migrate`
 * To start the application
