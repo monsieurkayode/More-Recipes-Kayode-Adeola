@@ -44,7 +44,7 @@ const changePassword = (req, res) => User
     }
     return res.status(401).send({
       status: 'fail',
-      message: 'Your request could not be authenticated'
+      message: 'Your request could not be authorized'
     });
   })
   .catch(error => res.status(400).send(error));
