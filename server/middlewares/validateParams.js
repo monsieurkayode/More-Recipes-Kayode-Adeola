@@ -1,6 +1,6 @@
 // Import module dependencies
 import isNumber from '../helpers/isNumber';
-import errorHandler from '../helpers/responseHandler';
+import { errorHandler } from '../helpers/responseHandler';
 
 /**
  * @description Middleware function for validating params
