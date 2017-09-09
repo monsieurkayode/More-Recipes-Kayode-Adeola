@@ -3,12 +3,10 @@
 [![Code Climate](https://codeclimate.com/github/monsieurkayode/More-Recipes-Kayode-Adeola/badges/gpa.svg)](https://codeclimate.com/github/monsieurkayode/More-Recipes-Kayode-Adeola)
 [![Issue Count](https://codeclimate.com/github/monsieurkayode/More-Recipes-Kayode-Adeola/badges/issue_count.svg)](https://codeclimate.com/github/monsieurkayode/More-Recipes-Kayode-Adeola)
 # More-Recipes
---------------
 ## Introduction
----------------
 **More-Recipes** is a recipe sharing and social connecting platform where users can show their cuisine expertise by posting recipes for other users to view and learn from. Everything about this application is detailed below:
+
 ## Application 
---------------
 * Users can create accounts on ths application
 * Users can login to to use the accessible features provided
 * Users can create and post recipes
@@ -21,14 +19,12 @@
 * Users can assign their favorite recipe to a category
 
 ## Technology Stack
--------------------
 * NodeJS
 * Sequelize ORM
 * Postgresql Relational Database
 * Materialize
 
 ## Getting Started
-------------------
 * Install **NodeJs** and **Postgresql** (PGAdmin 4 preferably) locally on your machine or signup to an online hosted database e.g ElephantSql
 * Clone the repository from bash or windows command
 > $ `git clone https://github.com/monsieurkayode/More-Recipes-Kayode-Adeola.git`
@@ -57,12 +53,10 @@ expiresIn = set expiration e.g **"24h"**
 > Server listening on port 5000
 
 ## Testing
-----------
 * Create a test database and name it travis
 * Run Test `$ npm test`
 
 ## Application Limitations
---------------------------
 * Users can only create account once with their username and  email
 * Users can login and obtain a token which is verified on every request
 * Users will have to obtain a fresh token after 24 hours when their session has expired
