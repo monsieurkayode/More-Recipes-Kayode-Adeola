@@ -1,5 +1,5 @@
 import db from '../models/index';
-import { errorHandler, recipeHandler } from '../helpers/responseHandler';
+import { recipeHandler } from '../helpers/responseHandler';
 
 const Recipe = db.Recipe,
   Review = db.Review,
@@ -89,7 +89,7 @@ const getUserRecipes = (req, res) => Recipe
     attributes: keys
   })
   .then((recipes) => {
-    if (!recipes) {
+    if (!recipes.length) {
       return res.status(404).send({
         status: 'fail',
         message: 'User has not posted any recipe'

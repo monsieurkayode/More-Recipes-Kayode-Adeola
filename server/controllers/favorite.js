@@ -8,18 +8,10 @@ const addFavorite = (req, res) => Favorite
     recipeId: req.params.recipeId,
     category: req.body.category
   })
-  .then((favoritedRecipe) => {
-    if (!favoritedRecipe) {
-      return res.status(404).send({
-        status: 'fail',
-        message: 'Recipe not found'
-      });
-    }
-    return res.status(201).send({
-      status: 'success',
-      message: 'Recipe successfully added to favorites'
-    });
-  })
+  .then(() => res.status(201).send({
+    status: 'success',
+    message: 'Recipe successfully added to favorites'
+  }))
   .catch(error => res.status(400).send(error));
 
 const getUserFavorites = (req, res) => {
