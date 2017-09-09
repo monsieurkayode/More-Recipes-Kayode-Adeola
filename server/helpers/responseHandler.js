@@ -1,19 +1,3 @@
-// const successHandler = (code, body, res) => {
-//   switch (code) {
-//     case 201:
-//       return res.status(201).json({
-//         status: 'success',
-//         message: 'Account successfully created',
-//         data: body
-//       });
-//     default:
-//       return res.status(200).json({
-//         status: 'success',
-//         data: body
-//       });
-//   }
-// };
-
 const errorHandler = (code, err, res) => {
   switch (code) {
     case 401:
