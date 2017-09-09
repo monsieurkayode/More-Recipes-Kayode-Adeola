@@ -1,7 +1,16 @@
+// Import module dependencies
 import db from '../models/index';
 
+// Assign variable to the database model
 const Review = db.Review;
 
+/**
+ * 
+ * @description controller function that handles posting reviews to recipes
+ * @param {object} req http request object to server
+ * @param {object} res http response object from server
+ * @returns {object} status message comment
+ */
 const postReview = (req, res) => Review
   .create({
     recipeId: req.params.recipeId,
@@ -12,7 +21,6 @@ const postReview = (req, res) => Review
     res.status(201).send({
       status: 'success',
       message: 'Review successfully posted',
-      id: review.id,
       comment: review.comment
     });
   })
