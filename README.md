@@ -20,6 +20,7 @@
 
 ## Technology Stack
 * NodeJS
+* Express
 * Sequelize ORM
 * Postgresql Relational Database
 * Materialize
@@ -56,6 +57,42 @@ expiresIn = set expiration e.g **"24h"**
 > Server listening on port 5000
 
 ```
+## Using the Application
+#### Routes
+* POST `api/v1/users/signup` for creation of new account. Required fields are:
+  * `username` Username containing alphabets and numbers only, mininmum of three characters
+  * `email` A valid email address of the new user
+  * `password` Password mininmum character length of six
+  * `confirmPassword` Should be same as password provided above
+* POST `api/v1/users/signin` for logging in to the application. Required fields are:
+  * `username` Username of registered user
+  * `password` Password of registered user
+* PUT `api/v1/users/changepassword` for changing password of an existing user. Required fields are:
+  * `password` old password
+  * `newPassword` new password
+* POST `api/v1/recipes` for creating new recipes posts. Required fields are:
+  * `recipeName` Name of the recipe
+  * `category`[optional] Category of the recipe
+  * `ingredients` Ingredients for preparing the recipe
+  * `instructions` Step by step guide on how recipe is prepared
+* GET `api/v1/recipes` for viewing all the posted recipes in the application
+* GET `api/v1/recipes?sort=upvote&order=descending` for viewing recipes with higehest number of upvotes
+* GET `api/v1/recipes?category=<keyword>` for getting all recipes by category that matches search query
+* GET `api/v1/recipes?ingredients=<keyword>` for getting all recipes with ingredients that matches search query
+* PUT `api/v1/recipes/<recipeId>` for modifying a recipe by a user who has posted it. Fields that can be modified:
+  * `recipeName`
+  * `category`
+  * `ingredients`
+  * `instructions`
+Required: `recipeId`[integer], the `id` of the recipe to be modified
+* DELETE `api/v1/recipes/<recipeId>` to delete a posted recipe. Required `recipeId`[integer], the `id` of the recipe
+* GET `api/v1/recipes/user` to get all recipes posted by and belonging to a user
+* PUT `api/v1/recipes/<recipeId>/upvote` to upvote a recipe. Required `recipeId`[integer], `id` of the recipe
+* PUT `api/v1/recipes/<recipeId>/downvote` to downvote a recipe. Required `recipeId`[integer], `id` of the recipe
+* POST `api/v1/recipes/<recipeId>/reviews` for reviewing a recipe by making comments on the recipe post. Required `recipeId`[integer], `id` of the recipe
+* POST `api/v1/users/<recipeId>/favorites` for adding a recipe to a list of user's favorite. Required `recipeId`[integer], `id` of the recipe
+* PUT `api/v1/users/<recipeId>/favorites` for adding a recipe on a user's favorite list to a category. Required `recipeId`[integer], `id` of the recipe
+* GET `api/v1/users/recipes/favorites` for viewing all the recipes in a user's favorite list.
 
 ## Testing
 * Create a test database and name it travis
