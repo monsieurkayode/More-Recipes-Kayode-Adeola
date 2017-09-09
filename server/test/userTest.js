@@ -184,7 +184,7 @@ describe('Disallow login for unregistered user', () => {
       .type('form')
       .send(invalidUsers[0])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(404);
+        expect(res.statusCode).to.equal(401);
         expect(res.body.status).to.equal('fail');
         expect(res.body.message).to.equal(
           'Invalid Authentication Details'
@@ -202,7 +202,7 @@ describe('Disallow login for unregistered user', () => {
       .type('form')
       .send(invalidUsers[1])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(404);
+        expect(res.statusCode).to.equal(401);
         expect(res.body.status).to.equal('fail');
         expect(res.body.message).to.equal(
           'Invalid Authentication Details'
