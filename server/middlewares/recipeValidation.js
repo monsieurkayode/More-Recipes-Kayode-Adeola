@@ -1,8 +1,17 @@
+// Import module dependencies
 import db from '../models/index';
 import isEmpty from '../helpers/isEmpty';
 
 const Recipe = db.Recipe;
 
+/**
+ * @description Middleware function for handles input
+ * validation for recipes
+ * @param {object} req http request object to server
+ * @param {object} res http response object from server
+ * @param {function} next 
+ * @returns {object} status message
+ */
 const recipeBasicValidation = (req, res, next) => {
   if (!req.body.recipeName || isEmpty(req.body.recipeName)) {
     return res.status(406).send({
@@ -25,6 +34,13 @@ const recipeBasicValidation = (req, res, next) => {
   next();
 };
 
+/**
+ * @description Middleware function for validating if a recipe exists
+ * @param {object} req http request object to server
+ * @param {object} res http response object from server
+ * @param {function} next 
+ * @returns {object} status message
+ */
 const recipeExists = (req, res, next) => {
   Recipe
     .find({ where: { id: req.params.recipeId } })
