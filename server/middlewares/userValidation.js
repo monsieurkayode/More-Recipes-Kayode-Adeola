@@ -13,7 +13,7 @@ const User = db.User;
  * before creating a new account
  * @param {object} req http request object to server
  * @param {object} res http response object from server
- * @param {function} next 
+ * @param {function} next
  * @returns {object} status message
  */
 const basicValidation = (req, res, next) => {
@@ -84,7 +84,7 @@ const basicValidation = (req, res, next) => {
  * already been used by another user, disallows new user from using same
  * @param {object} req http request object to server
  * @param {object} res http response object from server
- * @param {function} next 
+ * @param {function} next
  * @returns {object} status message
  */
 const validateUsername = (req, res, next) => {
@@ -105,7 +105,7 @@ const validateUsername = (req, res, next) => {
  * already been used by another user, disallows new user from using same
  * @param {object} req http request object to server
  * @param {object} res http response object from server
- * @param {function} next 
+ * @param {function} next
  * @returns {object} status message
  */
 const emailValidation = (req, res, next) => {
@@ -126,7 +126,7 @@ const emailValidation = (req, res, next) => {
  * registered or exists in the database
  * @param {object} req http request object to server
  * @param {object} res http response object from server
- * @param {function} next 
+ * @param {function} next
  * @returns {object} status message
  */
 const validUser = (req, res, next) => {

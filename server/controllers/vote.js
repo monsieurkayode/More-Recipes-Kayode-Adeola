@@ -6,7 +6,7 @@ const Recipe = db.Recipe;
 const Vote = db.Vote;
 
 /**
- * 
+ *
  * @description controller function that handles upvoting a posted recipe
  * A user that has upvoted on same recipe before will have his vote removed
  * if he/she tries to perform same upvote request
@@ -75,7 +75,7 @@ const upvote = (req, res) => Vote
   .catch(error => res.status(400).send(error));
 
 /**
- * 
+ *
  * @description controller function that handles downvoting a posted recipe
  * A user that has upvoted on same recipe before will have his vote removed
  * if he/she tries to perform same downvote request

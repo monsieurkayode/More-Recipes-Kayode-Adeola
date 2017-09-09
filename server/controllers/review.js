@@ -5,7 +5,6 @@ import db from '../models/index';
 const Review = db.Review;
 
 /**
- * 
  * @description controller function that handles posting reviews to recipes
  * @param {object} req http request object to server
  * @param {object} res http response object from server

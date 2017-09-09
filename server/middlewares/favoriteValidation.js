@@ -10,7 +10,7 @@ const Recipe = db.Recipe;
  * @description Middleware function for validating if a recipe exists
  * @param {object} req http request object to server
  * @param {object} res http response object from server
- * @param {function} next 
+ * @param {function} next
  * @returns {object} status message
  */
 const validRecipe = (req, res, next) => {
@@ -31,7 +31,7 @@ const validRecipe = (req, res, next) => {
  * @description Middleware function for validating if a favorite recipe exists
  * @param {object} req http request object to server
  * @param {object} res http response object from server
- * @param {function} next 
+ * @param {function} next
  * @returns {object} status message
  */
 const favoriteExists = (req, res, next) => {

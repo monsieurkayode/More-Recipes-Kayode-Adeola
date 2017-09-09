@@ -11,7 +11,7 @@ const secret = process.env.secretKey;
  * @description Middleware for token authentication
  * @param {object} req http request object to server
  * @param {object} res http response object from server
- * @param {function} next 
+ * @param {function} next
  * @returns {object} status message
  */
 const auth = (req, res, next) => {

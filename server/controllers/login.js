@@ -15,12 +15,10 @@ const expiresIn = process.env.expiresIn;
 const User = db.User;
 
 /**
- * 
  * @description controller function that handles login
  * @param {object} req http request object to server
  * @param {object} res http response object from server
  * @returns {object} status message token
- * 
  */
 const signin = (req, res) => User
   // Do a database query to check if user exists
@@ -56,6 +54,6 @@ const signin = (req, res) => User
   .catch(error => res.status(400).send(error));
 
 /**
- * @export signin
+ *@export signin
  */
 export default signin;

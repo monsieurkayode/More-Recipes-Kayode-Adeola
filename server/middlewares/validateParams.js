@@ -7,7 +7,7 @@ import errorHandler from '../helpers/responseHandler';
  * is an integer
  * @param {object} req http request object to server
  * @param {object} res http response object from server
- * @param {function} next 
+ * @param {function} next
  * @returns {object} status message
  */
 const validate = (req, res, next) => {

@@ -16,7 +16,7 @@ const expiresIn = process.env.expiresIn;
 const User = db.User;
 
 /**
- * 
+ *
  * @description controller function that handles creation of new user account
  * @param {object} req http request object to server
  * @param {object} res http response object from server
@@ -39,7 +39,6 @@ const signup = (req, res) => User
   .catch(error => res.status(400).send(error));
 
 /**
- * 
  * @description controller function that handles changing user password
  * @param {object} req http request object to server
  * @param {object} res http response object from server

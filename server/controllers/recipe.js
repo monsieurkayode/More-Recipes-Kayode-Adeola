@@ -14,7 +14,6 @@ const Recipe = db.Recipe,
   ];
 
 /**
- * 
  * @description controller function that handles creation of new recipes post
  * @param {object} req http request object to server
  * @param {object} res http response object from server
@@ -48,7 +47,6 @@ const create = (req, res) => Recipe
   .catch(error => res.status(400).json(error));
 
 /**
- * 
  * @description controller function that handles modification posted recipes
  * @param {object} req http request object to server
  * @param {object} res http response object from server
@@ -75,7 +73,6 @@ const update = (req, res) => Recipe
   .catch(error => res.status(400).json(error));
 
 /**
- * 
  * @description controller function that handles deletion of posted recipes
  * @param {object} req http request object to server
  * @param {object} res http response object from server
@@ -101,7 +98,6 @@ const deleteRecipe = (req, res) => Recipe
   .catch(error => res.status(400).json(error));
 
 /**
- * 
  * @description controller function that handles getting posted recipes
  * in the application if no search query was specified in url
  * @param {object} req http request object to server
@@ -136,7 +132,6 @@ const getRecipes = (req, res, next) => {
 };
 
 /**
- * 
  * @description controller function that handles getting allposted recipes
  * posted by a prticular user
  * @param {object} req http request object to server
@@ -164,7 +159,6 @@ const getUserRecipes = (req, res) => Recipe
   .catch(error => res.status(400).json(error));
 
 /**
- * 
  * @description controller function that handles detailed recipe view
  * and also increments the view count of the recipe for every view
  * @param {object} req http request object to server
@@ -184,7 +178,6 @@ const viewRecipe = (req, res) => Recipe
   .catch(error => res.status(400).send(error));
 
 /**
- * 
  * @description controller function that handles getting top recipes
  * using the upvote criteria, lists the top five recipes with the 
  * highest number of upvote
@@ -212,7 +205,6 @@ const getTopRecipes = (req, res, next) => {
 };
 
 /**
- * 
  * @description controller function that handles recipes 
  * search by ingredients
  * @param {object} req http request object to server
@@ -254,7 +246,6 @@ const searchRecipesByIngredients = (req, res, next) => {
 };
 
 /**
- * 
  * @description controller function that handles recipes 
  * search by category
  * @param {object} req http request object to server
@@ -291,7 +282,6 @@ const searchRecipesByCategory = (req, res) => {
 };
 
 /**
- * 
  * @description controller function that handles recipes 
  * search by category in a user favorite list
  * @param {object} req http request object to server
@@ -330,9 +320,6 @@ const searchUserFavsByCategory = (req, res) => {
     .catch(error => res.status(400).send(error));
 };
 
-/**
- * @export handlers
- */
 export { create, update, deleteRecipe, getRecipes,
   searchRecipesByIngredients, getUserRecipes, viewRecipe,
   getTopRecipes, searchRecipesByCategory, searchUserFavsByCategory };

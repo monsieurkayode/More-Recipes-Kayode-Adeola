@@ -5,12 +5,10 @@ import db from '../models/index';
 const Favorite = db.Favorite;
 
 /**
- * 
  * @description controller function for adding favorite recipes
  * @param {object} req http request object to server
  * @param {object} res http response object from server
  * @returns {object} status message
- * 
  */
 const addFavorite = (req, res) => Favorite
   // Take in input submitted from client side and create
