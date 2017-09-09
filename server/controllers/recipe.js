@@ -146,10 +146,9 @@ const getUserRecipes = (req, res) => Recipe
     attributes: keys
   })
   .then((recipes) => {
-    if (!recipes.length) {
+    if (recipes.length === 0) {
       // Notify user he/she has no posted recipes to display if none found
-      return res.status(404).send({
-        status: 'fail',
+      return res.status(200).send({
         message: 'User has not posted any recipe'
       });
     }
