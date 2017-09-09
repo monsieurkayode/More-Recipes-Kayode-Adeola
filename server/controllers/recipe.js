@@ -179,7 +179,7 @@ const viewRecipe = (req, res) => Recipe
 
 /**
  * @description controller function that handles getting top recipes
- * using the upvote criteria, lists the top five recipes with the 
+ * using the upvote criteria, lists the top five recipes with the
  * highest number of upvote
  * @param {object} req http request object to server
  * @param {object} res http response object from server
@@ -205,7 +205,7 @@ const getTopRecipes = (req, res, next) => {
 };
 
 /**
- * @description controller function that handles recipes 
+ * @description controller function that handles recipes
  * search by ingredients
  * @param {object} req http request object to server
  * @param {object} res http response object from server
@@ -216,12 +216,12 @@ const searchRecipesByIngredients = (req, res, next) => {
   // If query key does not match ingredients, call next on the next handler
   if (!req.query.ingredients) return next();
 
-  // Make provision for multiple ingredients query by delimiting 
+  // Make provision for multiple ingredients query by delimiting
   // query string using ' ' which is used to replace '+'
   const ingredients = req.query.ingredients.split(' ');
 
   // If multiple ingredients, map each keyword to an object and use
-  // the $or and $iLike for case insensitivity sequelize 
+  // the $or and $iLike for case insensitivity sequelize
   // complex query to perform search
   const query = ingredients.map(keyword => ({
     ingredients: {
@@ -246,14 +246,14 @@ const searchRecipesByIngredients = (req, res, next) => {
 };
 
 /**
- * @description controller function that handles recipes 
+ * @description controller function that handles recipes
  * search by category
  * @param {object} req http request object to server
  * @param {object} res http response object from server
  * @returns {object} status message recipe
  */
 const searchRecipesByCategory = (req, res) => {
-  // Make provision for multiple ingredients query by delimiting 
+  // Make provision for multiple ingredients query by delimiting
   // query string using ' ' which is used to replace '+'
   const category = req.query.category.split(' ');
 
@@ -282,14 +282,14 @@ const searchRecipesByCategory = (req, res) => {
 };
 
 /**
- * @description controller function that handles recipes 
+ * @description controller function that handles recipes
  * search by category in a user favorite list
  * @param {object} req http request object to server
  * @param {object} res http response object from server
  * @returns {object} status message recipe
  */
 const searchUserFavsByCategory = (req, res) => {
-  // Make provision for multiple category query by delimiting 
+  // Make provision for multiple category query by delimiting
   // query string using ' ' which is used to replace '+'
   const category = req.query.category.split(' ');
 
