@@ -30,11 +30,12 @@ app.use(voteRoute);
 
 app.get('/api', (req, res) => {
   res.status(200).send({
+    status: 'success',
     message: 'Status connected ok',
   });
 });
 
-app.get('*', (req, res) => res.status(404).send({
+app.all('*', (req, res) => res.status(404).send({
   message: 'Oops! 404. Page not Found',
 }));
 

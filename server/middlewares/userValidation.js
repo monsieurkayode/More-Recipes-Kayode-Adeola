@@ -2,7 +2,7 @@ import db from '../models/index';
 import isAlphaNumeric from '../helpers/isAlphaNum';
 import isEmail from '../helpers/isEmail';
 import cleanString from '../helpers/cleanString';
-import errorHandler from '../helpers/responseHandler';
+import { errorHandler } from '../helpers/responseHandler';
 
 const User = db.User;
 

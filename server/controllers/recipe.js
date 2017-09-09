@@ -1,4 +1,5 @@
 import db from '../models/index';
+import { errorHandler, recipeHandler } from '../helpers/responseHandler';
 
 const Recipe = db.Recipe,
   Review = db.Review,
@@ -25,18 +26,7 @@ const create = (req, res) => Recipe
     recipe.increment('views').then(() => {
       recipe.reload()
         .then(() => {
-          res.status(201).send({
-            status: 'success',
-            message: 'Successfully created new recipe',
-            id: recipe.id,
-            views: recipe.views,
-            upvote: recipe.upvote,
-            downvote: recipe.downvote,
-            recipeName: recipe.recipeName,
-            category: recipe.category,
-            ingredients: recipe.ingredients,
-            instructions: recipe.instructions,
-          });
+          recipeHandler(201, recipe, res);
         });
     });
   })
@@ -54,18 +44,7 @@ const update = (req, res) => Recipe
       instructions: req.body.instructions || recipe.instructions
     })
     .then(() => {
-      res.status(200).send({
-        status: 'success',
-        message: 'Recipe successfully updated',
-        id: recipe.id,
-        views: recipe.views,
-        upvote: recipe.upvote,
-        downvote: recipe.downvote,
-        recipeName: recipe.recipeName,
-        category: recipe.category,
-        ingredients: recipe.ingredients,
-        instructions: recipe.instructions
-      });
+      recipeHandler(200, recipe, res);
     }))
   .catch(error => res.status(400).json(error));
 
@@ -93,7 +72,7 @@ const getRecipes = (req, res, next) => {
       include: [{
         model: Review,
         as: 'reviews',
-        attributes: ['userId', 'comment'],
+        attributes: ['comment'],
         include: [{
           model: User,
           attributes: ['username', 'createdAt']

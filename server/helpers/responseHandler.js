@@ -49,5 +49,36 @@ const errorHandler = (code, err, res) => {
   }
 };
 
-export default errorHandler;
+const recipeHandler = (code, body, res) => {
+  switch (code) {
+    case 201:
+      return res.status(201).json({
+        status: 'success',
+        message: 'Successfully created new recipe',
+        id: body.id,
+        views: body.views,
+        upvote: body.upvote,
+        downvote: body.downvote,
+        recipeName: body.recipeName,
+        category: body.category,
+        ingredients: body.ingredients,
+        instructions: body.instructions,
+      });
+    default:
+      return res.status(200).json({
+        status: 'success',
+        message: 'Recipe successfully updated',
+        id: body.id,
+        views: body.views,
+        upvote: body.upvote,
+        downvote: body.downvote,
+        recipeName: body.recipeName,
+        category: body.category,
+        ingredients: body.ingredients,
+        instructions: body.instructions,
+      });
+  }
+};
+
+export { errorHandler, recipeHandler };
 
