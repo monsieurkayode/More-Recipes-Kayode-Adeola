@@ -139,9 +139,6 @@ const getRecipes = (req, res, next) => {
  * @returns {object} status message recipe
  */
 const getUserRecipes = (req, res) => Recipe
-  // Perform a database query by slecting all recipes with simple foreign key
-  // match from id decoded from token provided, also refine the return by
-  // specifying the attributes from keys
   .findAll({ where: { userId: req.decoded.user.id },
     attributes: keys
   })
@@ -152,7 +149,6 @@ const getUserRecipes = (req, res) => Recipe
         message: 'User has not posted any recipe'
       });
     }
-    // Return all recipes if found
     return res.status(200).send(recipes);
   })
   .catch(error => res.status(400).json(error));
