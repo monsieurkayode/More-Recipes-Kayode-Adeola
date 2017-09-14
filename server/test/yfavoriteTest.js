@@ -60,7 +60,56 @@ describe('Favorite a recipe', () => {
       .send(favorite[1])
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
+        expect(res.body.status).to.equal('success');
         expect(res.body.message).to.be.equal('Recipe successfully added to favorites');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('does not allow user add same favorite more than once', (done) => {
+    server
+      .post('/api/v1/users/2/favorites')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(favorite[1])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(409);
+        expect(res.body.message).to.be.equal('Recipe has already been favorited');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('does not allow user favorite non-existing recipe', (done) => {
+    server
+      .post('/api/v1/users/1/favorites')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(favorite[1])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(404);
+        expect(res.body.message).to.be.equal('Recipe not found');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('does not allow user edit category of valid recipe not favorited', (done) => {
+    server
+      .put('/api/v1/users/3/favorites')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(favorite[1])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(409);
+        expect(res.body.message).to.be.equal('Recipe has not been added to favorite');
         if (err) return done(err);
         done();
       });
@@ -82,6 +131,21 @@ describe('Favorite a recipe', () => {
         done();
       });
   });
+  it('returns existing favorite category if form is empty', (done) => {
+    server
+      .put('/api/v1/users/2/favorites')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Recipe added to Smoothies');
+        if (err) return done(err);
+        done();
+      });
+  });
   it('allows logged in user view his/her favorite recipes', (done) => {
     server
       .get('/api/v1/users/recipes/favorites')
@@ -91,6 +155,20 @@ describe('Favorite a recipe', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('return Your favorite recipe list is empty', (done) => {
+    server
+      .get('/api/v1/users/recipes/favorites')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.message).to.equal('Your favorite recipe list is empty');
         if (err) return done(err);
         done();
       });

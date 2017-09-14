@@ -42,7 +42,7 @@ const getUserFavorites = (req, res) => {
     .findAll({ where: { userId } })
     .then((favorites) => {
       if (!favorites.length) {
-        return res.status(204).send({
+        return res.status(200).send({
           message: 'Your favorite recipe list is empty'
         });
       }
