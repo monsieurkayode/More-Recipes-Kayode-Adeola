@@ -85,6 +85,23 @@ describe('Create recipe post', () => {
         done();
       });
   });
+  it('allows a registered and logged in user post a recipe', (done) => {
+    server
+      .post('/api/v1/recipes')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(recipePosts[1])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Successfully created new recipe');
+        if (err) return done(err);
+        done();
+      });
+  });
 });
 
 describe('Modify recipe post', () => {

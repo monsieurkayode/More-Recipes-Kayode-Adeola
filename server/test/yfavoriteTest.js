@@ -65,6 +65,54 @@ describe('Favorite a recipe', () => {
         done();
       });
   });
+  it('does not allow user add same favorite more than once', (done) => {
+    server
+      .post('/api/v1/users/2/favorites')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(favorite[1])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(409);
+        expect(res.body.message).to.be.equal('Recipe has already been favorited');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('does not allow user favorite non-existing recipe', (done) => {
+    server
+      .post('/api/v1/users/1/favorites')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(favorite[1])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(404);
+        expect(res.body.message).to.be.equal('Recipe not found');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('does not allow user edit category of valid recipe not favorited', (done) => {
+    server
+      .put('/api/v1/users/3/favorites')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(favorite[1])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(409);
+        expect(res.body.message).to.be.equal('Recipe has not been added to favorite');
+        if (err) return done(err);
+        done();
+      });
+  });
   it('allows logged in user edit favorite recipe category', (done) => {
     server
       .put('/api/v1/users/2/favorites')
