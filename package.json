@@ -10,7 +10,7 @@
     "heroku-postbuild": "npm run migrate",
     "start": "babel-node ./bin/www",
     "test": "SET NODE_ENV=test&& mocha --timeout 10000 --compilers js:babel-core/register server/test",
-    "tests": "cross-env NODE_ENV=test nyc _mocha --report lcovonly --reporter spec --timeout 10000 server/test ",
+    "tests": "cross-env NODE_ENV=test nyc _mocha --report lcovonly --reporter spec --timeout 10000 server/test && cat ./coverage/lcov.info | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
