@@ -124,6 +124,54 @@ describe('Modify recipe post', () => {
   });
 });
 
+describe('Search for Recipes', () => {
+  it('return No recipe matches your search', (done) => {
+    server
+      .get('/api/v1/recipes')
+      .query({ category: 'Jargons' })
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.message).to.equal('No recipe matches your search');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('get recipe that matches category', (done) => {
+    server
+      .get('/api/v1/recipes')
+      .query({ category: 'smooth' })
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body[0].recipeName).to.equal('Kiwi Smoothie on the Rocks');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('get recipe that matches ingredient', (done) => {
+    server
+      .get('/api/v1/recipes')
+      .query({ ingredients: 'spinach' })
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body[0].recipeName).to.equal('Coleslaw Salad');
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
 describe('Delete recipe post', () => {
   it('allows a logged in user delete his or her posted recipe', (done) => {
     server
