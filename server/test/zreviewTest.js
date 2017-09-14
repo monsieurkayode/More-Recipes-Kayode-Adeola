@@ -113,6 +113,94 @@ describe('Vote a recipe', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.upvote).to.equal(1);
+        expect(res.body.downvote).to.equal(0);
+        expect(res.body.message).to.be.equal('Your vote has been recorded');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('allows logged in user remove his upvote on a posted recipe', (done) => {
+    server
+      .put('/api/v1/recipes/2/upvote')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.upvote).to.equal(0);
+        expect(res.body.downvote).to.equal(0);
+        expect(res.body.message).to.be.equal('Your vote has been removed');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('allows logged in user downvote a posted recipe', (done) => {
+    server
+      .put('/api/v1/recipes/2/downvote')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.upvote).to.equal(0);
+        expect(res.body.downvote).to.equal(1);
+        expect(res.body.message).to.be.equal('Your vote has been recorded');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('allows logged in user remove downvote on a posted recipe', (done) => {
+    server
+      .put('/api/v1/recipes/2/downvote')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.upvote).to.equal(0);
+        expect(res.body.downvote).to.equal(0);
+        expect(res.body.message).to.be.equal('Your vote has been removed');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('allows logged in user upvote a posted recipe', (done) => {
+    server
+      .put('/api/v1/recipes/2/upvote')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.upvote).to.equal(1);
+        expect(res.body.downvote).to.equal(0);
+        expect(res.body.message).to.be.equal('Your vote has been recorded');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('allows user that has upvoted to downvote same recipe', (done) => {
+    server
+      .put('/api/v1/recipes/2/downvote')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.upvote).to.equal(0);
+        expect(res.body.downvote).to.equal(1);
         expect(res.body.message).to.be.equal('Your vote has been recorded');
         if (err) return done(err);
         done();
@@ -127,6 +215,26 @@ describe('Vote a recipe', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.upvote).to.equal(0);
+        expect(res.body.downvote).to.equal(2);
+        expect(res.body.message).to.be.equal('Your vote has been recorded');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('allows user upvote same recipe he/she has downvoted', (done) => {
+    server
+      .put('/api/v1/recipes/2/upvote')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.upvote).to.equal(1);
+        expect(res.body.downvote).to.equal(1);
         expect(res.body.message).to.be.equal('Your vote has been recorded');
         if (err) return done(err);
         done();
