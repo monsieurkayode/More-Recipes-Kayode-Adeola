@@ -247,3 +247,31 @@ describe('Registered User Authentication', () => {
       });
   });
 });
+
+describe('Token Authentication', () => {
+  it('return No Token Provided', (done) => {
+    server
+      .get('/api/v1/users/recipes')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(403);
+        expect(res.body.message).to.equal('No Token provided');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('return Bad Token', (done) => {
+    server
+      .get('/api/v1/users/recipes')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', 'yturuueiiwiwjh')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(403);
+        expect(res.body.message).to.equal('Bad Token');
+        if (err) return done(err);
+        done();
+      });
+  });
+});
