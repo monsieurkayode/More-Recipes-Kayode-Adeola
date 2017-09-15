@@ -77,6 +77,18 @@ const nullForm = [
   }
 ];
 
+const changePassword = [
+  {
+    password: 'passover',
+  },
+  {
+    password: 'pass',
+  },
+  {
+
+  },
+];
+
 export default {
   validUsersLogin,
   invalidUsers,
@@ -85,5 +97,6 @@ export default {
   emptyPassword,
   emptyEmail,
   incorrectPassword,
-  nullForm
+  nullForm,
+  changePassword
 };

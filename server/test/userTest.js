@@ -12,7 +12,9 @@ const testValidUsers = users.testValidUsers,
   emptyPassword = users.emptyPassword,
   emptyEmail = users.emptyEmail,
   incorrectPassword = users.incorrectPassword,
-  nullForm = users.nullForm;
+  nullForm = users.nullForm,
+  changePassword = users.changePassword,
+  userToken = [];
 
 const clearDb = dbSync.clearDb,
   server = supertest.agent(app),
@@ -96,6 +98,7 @@ describe('User Login', () => {
       .type('form')
       .send(validUsersLogin[0])
       .end((err, res) => {
+        userToken[0] = res.body.Token;
         expect(res.statusCode).to.equal(200);
         expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Token successfully generated');
@@ -270,6 +273,60 @@ describe('Token Authentication', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(403);
         expect(res.body.message).to.equal('Bad Token');
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
+describe('Change password feature', () => {
+  it('user should be able to change password', (done) => {
+    server
+      .put('/api/v1/users/changepassword')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', userToken[0])
+      .type('form')
+      .send(changePassword[0])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Password changed successfully');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('validate password length', (done) => {
+    server
+      .put('/api/v1/users/changepassword')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userToken[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(changePassword[1])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Your request could not be authorized');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('checks if password form is empty', (done) => {
+    server
+      .put('/api/v1/users/changepassword')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userToken[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(changePassword[2])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Your request could not be authorized');
         if (err) return done(err);
         done();
       });
