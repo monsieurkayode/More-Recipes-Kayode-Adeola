@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/monsieurkayode/More-Recipes-Kayode-Adeola.svg?branch=develop)](https://travis-ci.org/monsieurkayode/More-Recipes-Kayode-Adeola)
+[![Coverage Status](https://coveralls.io/repos/github/monsieurkayode/More-Recipes-Kayode-Adeola/badge.svg?maxAge=60?branch=develop)](https://coveralls.io/github/monsieurkayode/More-Recipes-Kayode-Adeola?branch=develop)
 [![Code Climate](https://codeclimate.com/github/monsieurkayode/More-Recipes-Kayode-Adeola/badges/gpa.svg)](https://codeclimate.com/github/monsieurkayode/More-Recipes-Kayode-Adeola)
 [![Issue Count](https://codeclimate.com/github/monsieurkayode/More-Recipes-Kayode-Adeola/badges/issue_count.svg)](https://codeclimate.com/github/monsieurkayode/More-Recipes-Kayode-Adeola)
 # More-Recipes
