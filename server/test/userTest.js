@@ -47,6 +47,22 @@ describe('Response Object', () => {
       .end((err, res) => {
         expect('Content-Type', /json/);
         expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
+describe('Catch invalid routes', () => {
+  it('return a 404 if route not found', (done) => {
+    server
+      .get('/api/yuruh')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(404);
+        expect(res.body.message).to.equal('Oops! 404. Page not Found');
         if (err) return done(err);
         done();
       });
@@ -82,6 +98,86 @@ describe('User Registration', () => {
         expect(res.statusCode).to.equal(201);
         expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Account successfully created');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('disallow special characters for username', (done) => {
+    server
+      .post('/api/v1/users/signup')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(testValidUsers[2])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Username must contain alphabets and numbers only');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('disallow username length less than three characters', (done) => {
+    server
+      .post('/api/v1/users/signup')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(testValidUsers[3])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Username should be at least three characters');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('disallow password length less than six characters', (done) => {
+    server
+      .post('/api/v1/users/signup')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(testValidUsers[4])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Password should be at least six characters long');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('validate if password matches', (done) => {
+    server
+      .post('/api/v1/users/signup')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(testValidUsers[5])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(409);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Password does not match');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('handle validation for empty form fields', (done) => {
+    server
+      .post('/api/v1/users/signup')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(testValidUsers[6])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Please enter a username');
         if (err) return done(err);
         done();
       });
