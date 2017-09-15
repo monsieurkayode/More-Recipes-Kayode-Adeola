@@ -25,6 +25,11 @@ const errorHandler = (code, err, res) => {
         status: 'fail',
         message: err
       });
+    case 422:
+      return res.status(422).json({
+        status: 'fail',
+        message: err
+      });
     default:
       return res.status(400).json({
         status: 'fail',

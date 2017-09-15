@@ -428,3 +428,20 @@ describe('Change password feature', () => {
       });
   });
 });
+
+describe('Validate params is an integer', () => {
+  it('return invalid message', (done) => {
+    server
+      .get('/api/v1/recipes/a')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userToken[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(422);
+        expect(res.body.message).to.equal('You have entered an invalid parameter');
+        if (err) return done(err);
+        done();
+      });
+  });
+});
