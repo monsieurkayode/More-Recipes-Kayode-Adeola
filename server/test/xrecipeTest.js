@@ -102,6 +102,57 @@ describe('Create recipe post', () => {
         done();
       });
   });
+  it('does not accept empty form for recipe name', (done) => {
+    server
+      .post('/api/v1/recipes')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(recipePosts[2])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(406);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Please enter a recipe name');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('does not accept empty form for ingredients', (done) => {
+    server
+      .post('/api/v1/recipes')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(recipePosts[3])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(406);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Ingredients field cannot be empty');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('does not accept empty form for instructions', (done) => {
+    server
+      .post('/api/v1/recipes')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(recipePosts[4])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(406);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Instructions field cannot be empty');
+        if (err) return done(err);
+        done();
+      });
+  });
 });
 
 describe('Modify recipe post', () => {
@@ -118,6 +169,23 @@ describe('Modify recipe post', () => {
         expect(res.statusCode).to.equal(200);
         expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Recipe successfully updated');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('validate if recipe exists in application', (done) => {
+    server
+      .put('/api/v1/recipes/10')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(editRecipe[0])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(404);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Recipe not found');
         if (err) return done(err);
         done();
       });

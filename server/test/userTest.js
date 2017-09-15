@@ -12,7 +12,9 @@ const testValidUsers = users.testValidUsers,
   emptyPassword = users.emptyPassword,
   emptyEmail = users.emptyEmail,
   incorrectPassword = users.incorrectPassword,
-  nullForm = users.nullForm;
+  nullForm = users.nullForm,
+  changePassword = users.changePassword,
+  userToken = [];
 
 const clearDb = dbSync.clearDb,
   server = supertest.agent(app),
@@ -45,6 +47,22 @@ describe('Response Object', () => {
       .end((err, res) => {
         expect('Content-Type', /json/);
         expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
+describe('Catch invalid routes', () => {
+  it('return a 404 if route not found', (done) => {
+    server
+      .get('/api/yuruh')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(404);
+        expect(res.body.message).to.equal('Oops! 404. Page not Found');
         if (err) return done(err);
         done();
       });
@@ -84,6 +102,86 @@ describe('User Registration', () => {
         done();
       });
   });
+  it('disallow special characters for username', (done) => {
+    server
+      .post('/api/v1/users/signup')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(testValidUsers[2])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Username must contain alphabets and numbers only');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('disallow username length less than three characters', (done) => {
+    server
+      .post('/api/v1/users/signup')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(testValidUsers[3])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Username should be at least three characters');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('disallow password length less than six characters', (done) => {
+    server
+      .post('/api/v1/users/signup')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(testValidUsers[4])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Password should be at least six characters long');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('validate if password matches', (done) => {
+    server
+      .post('/api/v1/users/signup')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(testValidUsers[5])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(409);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Password does not match');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('handle validation for empty form fields', (done) => {
+    server
+      .post('/api/v1/users/signup')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(testValidUsers[6])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Please enter a username');
+        if (err) return done(err);
+        done();
+      });
+  });
 });
 
 describe('User Login', () => {
@@ -96,6 +194,7 @@ describe('User Login', () => {
       .type('form')
       .send(validUsersLogin[0])
       .end((err, res) => {
+        userToken[0] = res.body.Token;
         expect(res.statusCode).to.equal(200);
         expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Token successfully generated');
@@ -270,6 +369,77 @@ describe('Token Authentication', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(403);
         expect(res.body.message).to.equal('Bad Token');
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
+describe('Change password feature', () => {
+  it('user should be able to change password', (done) => {
+    server
+      .put('/api/v1/users/changepassword')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('x-access-token', userToken[0])
+      .type('form')
+      .send(changePassword[0])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Password changed successfully');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('validate password length', (done) => {
+    server
+      .put('/api/v1/users/changepassword')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userToken[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(changePassword[1])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Your request could not be authorized');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('checks if password form is empty', (done) => {
+    server
+      .put('/api/v1/users/changepassword')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userToken[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(changePassword[2])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Your request could not be authorized');
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
+describe('Validate params is an integer', () => {
+  it('return invalid message', (done) => {
+    server
+      .get('/api/v1/recipes/a')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userToken[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(422);
+        expect(res.body.message).to.equal('You have entered an invalid parameter');
         if (err) return done(err);
         done();
       });

@@ -12,6 +12,24 @@ const recipePosts = [
     ingredients: 'Lettuce, Cabbage, Spinach',
     instructions: 'Make it a mix, be creative'
   },
+  {
+    recipeName: '',
+    category: 'Salad',
+    ingredients: 'Lettuce, Cabbage, Spinach',
+    instructions: 'Make it a mix, be creative'
+  },
+  {
+    recipeName: 'Coleslaw Salad',
+    category: 'Salad',
+    ingredients: '',
+    instructions: 'Make it a mix, be creative'
+  },
+  {
+    recipeName: 'Coleslaw Salad',
+    category: 'Salad',
+    ingredients: 'Lettuce, Cabbage, Spinach',
+    instructions: ''
+  },
 ];
 
 const editRecipe = [

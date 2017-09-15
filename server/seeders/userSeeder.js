@@ -5,14 +5,39 @@ const testValidUsers = [
     confirmPassword: 'passover',
     email: 'patzii@gmail.com',
   },
-
   {
     username: 'sponge',
     password: 'squarepants',
     confirmPassword: 'squarepants',
     email: 'spongebob@gmail.com',
   },
+  {
+    username: '56%67',
+    password: 'squarepants',
+    confirmPassword: 'squarepants',
+    email: 'spongebob@gmail.com',
+  },
+  {
+    username: 'sp',
+    password: 'squarepants',
+    confirmPassword: 'squarepants',
+    email: 'spongebob@gmail.com',
+  },
+  {
+    username: 'chucky',
+    password: 'squar',
+    confirmPassword: 'squarepants',
+    email: 'chucky@gmail.com',
+  },
+  {
+    username: 'chucky',
+    password: 'square',
+    confirmPassword: 'squar',
+    email: 'chucky@gmail.com',
+  },
+  {
 
+  }
 ];
 
 const validUsersLogin = [
@@ -77,6 +102,18 @@ const nullForm = [
   }
 ];
 
+const changePassword = [
+  {
+    password: 'passover',
+  },
+  {
+    password: 'pass',
+  },
+  {
+
+  },
+];
+
 export default {
   validUsersLogin,
   invalidUsers,
@@ -85,5 +122,6 @@ export default {
   emptyPassword,
   emptyEmail,
   incorrectPassword,
-  nullForm
+  nullForm,
+  changePassword
 };
