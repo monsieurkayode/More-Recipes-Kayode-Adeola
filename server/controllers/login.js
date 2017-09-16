@@ -35,7 +35,7 @@ const signin = (req, res) => User
     const check = bcrypt.compareSync(req.body.password, user.password);
     // If password verification passes generate a token and return to user
     if (check) {
-      const token = jwt.sign({ user: { id: user.id } }, secret,
+      const token = jwt.sign({ user: { id: user.id, username: user.username } }, secret,
         { issuer, jwtid, expiresIn });
       res.status(200).send({
         status: 'success',

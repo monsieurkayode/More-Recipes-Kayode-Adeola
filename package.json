@@ -70,6 +70,7 @@
     "jsonwebtoken": "^7.4.3",
     "mocha": "^3.5.0",
     "morgan": "^1.8.2",
+    "nodemailer": "^4.1.0",
     "nodemon": "^1.11.0",
     "pg": "^6.4.0",
     "pg-hstore": "^2.3.2",
