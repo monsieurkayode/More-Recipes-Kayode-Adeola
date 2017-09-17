@@ -19,60 +19,6 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-const upvoteNotification = (req, res, next) => {
-  Recipe
-    .findOne({
-      where: { id: req.params.recipeId },
-      include: {
-        model: User,
-        attributes: ['email']
-      }
-    })
-    .then((recipe) => {
-      const mailOptions = {
-        from: '"More-Recipes Admin" <emperoarkay@gmail.com@gmail.com>',
-        to: recipe.User.email,
-        subject: 'You have a new notification',
-        text: `${req.decoded.user.username} upvoted your recipe post`,
-      };
-
-      transporter.sendMail(mailOptions, (error, res) => {
-        if (error) {
-          console.log(error);
-        }
-        console.log('Email sent to: %s', res.envelope.to);
-        next();
-      });
-    });
-};
-
-const downvoteNotification = (req, res, next) => {
-  Recipe
-    .findOne({
-      where: { id: req.params.recipeId },
-      include: {
-        model: User,
-        attributes: ['email']
-      }
-    })
-    .then((recipe) => {
-      const mailOptions = {
-        from: '"More-Recipes Admin" <emperoarkay@gmail.com@gmail.com>',
-        to: recipe.User.email,
-        subject: 'You have a new notification',
-        text: `${req.decoded.user.username} downvoted your recipe post`,
-      };
-
-      transporter.sendMail(mailOptions, (error, res) => {
-        if (error) {
-          console.log(error);
-        }
-        console.log('Email sent to: %s', res.envelope.to);
-        next();
-      });
-    });
-};
-
 const reviewNotification = (req, res, next) => {
   Recipe
     .findOne({
@@ -100,4 +46,4 @@ const reviewNotification = (req, res, next) => {
     });
 };
 
-export { upvoteNotification, downvoteNotification, reviewNotification };
+export default reviewNotification;

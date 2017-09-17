@@ -1,6 +1,6 @@
 import express from 'express';
 import auth from '../middlewares/auth';
-import { reviewNotification } from '../middlewares/mailer';
+import reviewNotification from '../middlewares/mailer';
 import validate from '../middlewares/validateParams';
 import postReview from '../controllers/review';
 import { recipeExists } from '../middlewares/recipeValidation';
