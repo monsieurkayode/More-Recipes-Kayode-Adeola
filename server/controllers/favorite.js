@@ -53,6 +53,29 @@ const getUserFavorites = (req, res) => {
 };
 
 /**
+ * @description controller function to delete a user favorite recipe
+ * @param {object} req http request object to server
+ * @param {object} res http response object from server
+ * @returns {object} status message
+ */
+const deleteFavorite = (req, res) => {
+  // Use token generated to validate user identity
+  const userId = req.decoded.user.id,
+    recipeId = req.params.recipeId;
+  return Favorite
+  // Query the database to fetch all favorites unique to user's id
+  // Otherwise return all user's favorite recipe
+    .findOne({ where: { userId, recipeId } })
+    .then(favorite =>
+      favorite.destroy().then(() => res.status(200).send({
+        status: 'success',
+        message: 'Recipe successfully removed from favorites'
+      })))
+  // Catch error if any occurs
+    .catch(error => res.status(400).send(error));
+};
+
+/**
  * @description controller function for categorizing recipes
  * that have been added to a user's favorite recipe list
  * Note that this category is distinct from the global recipes category
@@ -85,4 +108,4 @@ const addRecipeCategory = (req, res) => Favorite
   })
   .catch(error => res.status(400).send(error));
 
-export { addFavorite, getUserFavorites, addRecipeCategory };
+export { addFavorite, getUserFavorites, addRecipeCategory, deleteFavorite };
