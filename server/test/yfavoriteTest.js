@@ -66,6 +66,40 @@ describe('Favorite a recipe', () => {
         done();
       });
   });
+  it('allows logged in user delete recipe he/she has favorited', (done) => {
+    server
+      .delete('/api/v1/users/2/favorites')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(favorite[1])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.be.equal('Recipe successfully removed from favorites');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('allows logged in user add recipe to favorite and category', (done) => {
+    server
+      .post('/api/v1/users/2/favorites')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(favorite[1])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.be.equal('Recipe successfully added to favorites');
+        if (err) return done(err);
+        done();
+      });
+  });
   it('does not allow user add same favorite more than once', (done) => {
     server
       .post('/api/v1/users/2/favorites')
