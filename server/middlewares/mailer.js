@@ -36,13 +36,8 @@ const reviewNotification = (req, res, next) => {
         text: `${req.decoded.user.username} commented on your recipe post`,
       };
 
-      transporter.sendMail(mailOptions, (error, res) => {
-        if (error) {
-          console.log(error);
-        }
-        console.log('Email sent to: %s', res.envelope.to);
-        next();
-      });
+      transporter.sendMail(mailOptions);
+      next();
     });
 };
 
