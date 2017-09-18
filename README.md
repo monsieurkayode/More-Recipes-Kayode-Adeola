@@ -9,14 +9,18 @@
 ## Application Features
 * Users can create accounts on the application
 * Users can login to use the accessible features provided
+* Users can change their passwords for login credentials
 * Users can create and post recipes
 * Users can edit recipes they have posted
 * Users can delete recipes they have posted
 * Users can add recipes posted by other users to their favorite recipe list
 * Users can view recipes posted in the application
 * Users can comment on recipes posted in the application
+* Users will get email notfications when another user comments on their post
 * Users can show reaction to a posted recipe by upvoting or downvoting
 * Users can assign their favorite recipe to a category
+* Users can delete recipes thay have added to favorite
+* Users can see the number of times their posted recipes have been viewed
 
 ## Technology Stack
 * NodeJS
@@ -36,22 +40,24 @@
 > $ `npm install`
 * After successful installation, create a `.env` file which will be used to load environment variables **see sample below**
 * Create a databse to be used with application
-``` 
+```
 DB_USERNAME = your database username
 DB_PASSWORD = your database password
 DB_DATABASE = your database name
 DB_HOST = "127.0.0.1"
 DB_PORT = "5432"
 DB_DIALECT = "postgres"
+USER = your gmail address
+PASS = your gmail password
 secretKey = your secret key
 issuer = your issuer
 jwtid = your jwt id
-expiresIn = set expiration e.g **"24h"**
+expiresIn = set expiration e.g "24h"
 ```
 * Migrate your database schema using 
 > $ `npm run migrate`
 * To start the application
-``` 
+```sh
 > $ npm start
 > babel-node ./bin/www
 > Server listening on port 5000
@@ -108,6 +114,8 @@ Required: `recipeId`[integer], the `id` of the recipe to be modified
 
 * PUT `api/v1/users/<recipeId>/favorites` for adding a recipe on a user's favorite list to a category. Required `recipeId`[integer], `id` of the recipe
 
+* DELETE `api/v1/users/<recipeId>/favorites` for removing a recipe on a user's favorite list. Required `recipeId`[integer], `id` of the recipe
+
 * GET `api/v1/users/recipes/favorites` for viewing all the recipes in a user's favorite list.
 
 ## Testing
@@ -119,3 +127,9 @@ Required: `recipeId`[integer], the `id` of the recipe to be modified
 * Users can login and obtain a token which is verified on every request
 * Users will have to obtain a fresh token after 24 hours when their session has expired
 * Users will only be able to access the full application functionalities only if they are logged in
+
+## How To Contribute
+* Fork the repository
+* Create a feature branch with a feature.md file
+* Write tests and make them pass
+* Open a pull request
