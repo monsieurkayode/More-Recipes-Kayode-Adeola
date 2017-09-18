@@ -32,12 +32,18 @@
 ## Getting Started
 * Install **NodeJs** and **Postgresql** (PGAdmin 4 preferably) locally on your machine or signup to an online hosted database e.g ElephantSql
 * Clone the repository from bash or windows command
+```sh
 > $ `git clone https://github.com/monsieurkayode/More-Recipes-Kayode-Adeola.git`
+```
 
 * Change into the directory
+```sh
 > $ `cd /More-Recipes-Kayode-Adeola`
-* Install all required dependencies with 
+```
+* Install all required dependencies with
+```sh
 > $ `npm install`
+```
 * After successful installation, create a `.env` file which will be used to load environment variables **see sample below**
 * Create a databse to be used with application
 ```
@@ -54,8 +60,10 @@ issuer = your issuer
 jwtid = your jwt id
 expiresIn = set expiration e.g "24h"
 ```
-* Migrate your database schema using 
+* Migrate your database schema using
+```sh
 > $ `npm run migrate`
+```
 * To start the application
 ```sh
 > $ npm start
