@@ -1,6 +1,7 @@
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import router from './server/routes/index';
 
@@ -30,7 +31,14 @@ app.use(express.static('template'));
 app.use(
   '/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options)
 );
-
+app.use(cors());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST');
+  next();
+});
 app.use(userRoute);
 app.use(recipeRoute);
 app.use(reviewRoute);
