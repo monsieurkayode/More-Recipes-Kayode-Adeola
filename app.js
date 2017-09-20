@@ -1,7 +1,10 @@
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
+import swaggerUi from 'swagger-ui-express';
 import router from './server/routes/index';
+
+const swaggerDocument = require('./swagger.json');
 
 const userRoute = router.user,
   recipeRoute = router.recipe,
