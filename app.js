@@ -20,7 +20,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.disable('x-powered-by');
-app.use(express.static('template'));
+app.use(express.static('apidoc'));
 
 app.use(userRoute);
 app.use(recipeRoute);
