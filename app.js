@@ -4,7 +4,10 @@ import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
 import router from './server/routes/index';
 
-const swaggerDocument = require('./swagger.json');
+const swaggerDocument = require('./swagger.json'),
+  options = {
+    validatorUrl: 'https://online.swagger.io/validator'
+  };
 
 const userRoute = router.user,
   recipeRoute = router.recipe,
@@ -24,6 +27,9 @@ app.use(bodyParser.json({ type: 'application/json' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.disable('x-powered-by');
 app.use(express.static('template'));
+app.use(
+  '/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options)
+);
 
 app.use(userRoute);
 app.use(recipeRoute);
