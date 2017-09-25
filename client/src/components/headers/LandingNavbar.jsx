@@ -17,7 +17,7 @@ const LandingNavBar = (props => {
               <a><i className="fa fa-heart"></i> Top Recipes</a>
             </li>
             <li>
-              <a id="new-post" className="modal-trigger"><i className="fa fa-pencil-square-o"></i> New Post</a>
+              <a href="#modal-newpost" id="new-post" className="modal-trigger"><i className="fa fa-pencil-square-o"></i> New Post</a>
             </li>
             <li>
               <a className="waves-effect waves-light btn navbtn modal-trigger" href="#modal-login">Login</a>

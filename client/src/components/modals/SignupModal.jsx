@@ -3,7 +3,7 @@ import React from 'react';
 const SignupModal = (props => {
   return(
     <div id="modal-register" className="modal">
-      <div classNameName="modal-content">
+      <div className="modal-content">
         <div className="row center-align">
           <div className="col s12 l12 m12">
             <div className="card z-depth-0 white darken-4">
