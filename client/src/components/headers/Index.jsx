@@ -1,4 +1,3 @@
-import React from 'react';
 import Banner from './Banner';
 import DashboardNavbar from './DashboardNavbar';
 import HomeNavbar from './HomeNavbar';
