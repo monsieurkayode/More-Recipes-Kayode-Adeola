@@ -12,9 +12,9 @@ class RecipeItem extends Component {
           </div>
           <div className="card-content small-cards">
             <span className="card-title"><strong>Frosty Chocolat</strong></span>
-            <span className="right"><i class="material-icons tiny reaction">thumb_down</i>2</span>
-            <span className="right"><i class="material-icons tiny reaction">thumb_up</i>10</span>
-            <a className="chip teal white-text" href="#">Pastry</a>
+            <span className="right"><i className="material-icons tiny reaction">thumb_down</i>2</span>
+            <span className="right"><i className="material-icons tiny reaction">thumb_up</i>10</span>
+            <a className="chip teal white-text" href="/">Pastry</a>
           </div>
         </div>
       </div>

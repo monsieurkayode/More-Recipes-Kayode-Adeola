@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import RecipeItem from './RecipeItem';
 
-class Recipe extends Component {
+class Recipes extends Component {
   render() {
     return (
-      <div class="col l5 m6 s12">
+      <div className="col l5 m6 s12">
         <span>You are viewing page 1</span>
-        <p class="divider"></p>
-        <div class="row">
+        <p className="divider"></p>
+        <div className="row">
+          <RecipeItem />
+          <RecipeItem />
           <RecipeItem />
           <RecipeItem />
           <RecipeItem />
@@ -18,4 +20,4 @@ class Recipe extends Component {
   }
 }
 
-export default Recipe;
+export default Recipes;

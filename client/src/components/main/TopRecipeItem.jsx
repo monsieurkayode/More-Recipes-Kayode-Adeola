@@ -6,7 +6,7 @@ class TopRecipeItem extends Component {
     return (
       <a href="recipe-view.html"><li className="collection-item avatar">
         <img src={recipeImg} alt="" className="z-depth-1 square" />
-        <span class="title red-text">Frosty Chocolat</span>
+        <span className="title red-text">Frosty Chocolat</span>
       </li></a>
     );
   }
