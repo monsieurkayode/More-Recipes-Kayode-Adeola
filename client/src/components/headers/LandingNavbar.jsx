@@ -1,4 +1,5 @@
 import React from 'react';
+import SearchBar from './SearchBar';
 
 const LandingNavBar = (props => {
    return(
@@ -9,9 +10,7 @@ const LandingNavBar = (props => {
           <a href="/" data-activates="navlink" className="button-collapse"><i className="material-icons">menu</i></a>         
           <ul className="right hide-on-med-and-down">
             <li>
-              <form id="nav-search">
-                <i><input className="teal-text white input-fa" type="search" placeholder="&#xf002; Search" /></i>
-              </form>
+              <SearchBar />
             </li>
             <li>
               <a><i className="fa fa-heart"></i> Top Recipes</a>

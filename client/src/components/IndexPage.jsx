@@ -4,8 +4,6 @@ import { SigninModal, SignupModal, NewPostModal } from './modals/Index';
 import WelcomeMessage from './mainpage/WelcomeMessage';
 import Footer from './footer/Footer';
 
-// import HomeNavbar from './headers/HomeNavbar';
-
 class IndexPage extends Component {
   render() {
     return (
