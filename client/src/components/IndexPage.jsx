@@ -12,9 +12,7 @@ class IndexPage extends Component {
         <LandingNavbar />
         <Banner />
         <WelcomeMessage />
-        <Contents>
-          {this.props.children}
-        </Contents>
+        <Contents />
         <Footer />
         <SigninModal />
         <SignupModal />

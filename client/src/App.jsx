@@ -5,9 +5,7 @@ import IndexPage from './components/IndexPage';
 class App extends Component {
   render() {
     return (
-      <IndexPage>
-        {this.props.children}
-      </IndexPage>
+      <IndexPage />
     );
   }
 }

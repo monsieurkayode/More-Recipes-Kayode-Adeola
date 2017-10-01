@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Ingredient extends Component {
   render() {
     return (
-      <li>{this.props.children}</li>
+      <div>{this.props.children}</div>
     );
   }
 }
