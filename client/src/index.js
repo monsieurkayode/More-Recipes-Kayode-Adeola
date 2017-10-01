@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Match, Miss } from 'react-router';
+import { BrowserRouter, Match } from 'react-router';
 
 import App from './App.jsx';
 
@@ -13,7 +13,9 @@ import registerServiceWorker from './registerServiceWorker';
 const Root = () => {
   return(
     <BrowserRouter>
-      <Match exactly pattern="/" coponent={App} />
+      <div>
+        <Match exactly pattern="/" component={App} />
+      </div>
     </BrowserRouter>
   )
 }
