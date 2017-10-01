@@ -6,6 +6,7 @@ class RecipeCardSmall extends Component {
     return (
       <div className="col l3 m8 s12 offset-m2">
         <div className="card views-small">
+          <RecipeCard />
         </div>
       </div>
     );

@@ -9,7 +9,7 @@ class RecipeCard extends Component {
           <a href="recipe-view.html"><img src={recipeImg} alt="" /></a>
           <span className="card-title">24 Views</span>
         </div>
-        <div className="card-content small-cards">
+        <div className="card-content">
           <span className="card-title"><strong>Frosty Chocolat</strong></span>
           <div className="divider"></div>
           <a className="edit chip modal-trigger" href="#modal-edit"><i className="fa fa-pencil"></i> Edit</a><span>
