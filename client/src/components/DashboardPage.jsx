@@ -17,6 +17,7 @@ class DashboardPage extends Component {
         </div>
         <DeleteModal />
         <NewPostModal />
+        <SideNavDashboard />
       </div>
     );
   }

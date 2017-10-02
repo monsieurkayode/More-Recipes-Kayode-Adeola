@@ -20,7 +20,7 @@ const Root = () => {
       <div>
         <Match exactly pattern="/" component={IndexPage} />
         <Match pattern="/dashboard" component={DashboardPage} />
-        <Match pattern="/recipeView" component={RecipeViewPage} />
+        <Match pattern="/recipeview" component={RecipeViewPage} />
         <Miss component={NotFoundPage} />
       </div>
     </BrowserRouter>
