@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import userImg from '../../build/static/css/img/user.jpg';
+import { WelcomeDisplay } from './Index';
 
 class UserProfile extends Component {
   render() {
     return (
-      <div id="user-profile" class="col l9 m12 s12 offset-l3">
+      <div id="user-profile" className="col l9 m12 s12 offset-l3">
         <WelcomeDisplay />
         <div id="my-profile" className="row"> 
           <div className="col l12 m12 s12">

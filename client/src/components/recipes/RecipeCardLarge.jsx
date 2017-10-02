@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import recipeImg from '../../build/static/css/img/cake2.jpg';
+import { RecipeCard } from './Index';
 
 class RecipeCardLarge extends Component {
   render() {

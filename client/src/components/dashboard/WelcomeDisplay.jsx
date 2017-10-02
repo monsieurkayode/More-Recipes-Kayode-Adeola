@@ -6,7 +6,7 @@ class WelcomeDisplay extends Component {
       <div className="card-panel grey lighten-4">
         <span className="card-content">
           <h5>Welcome Kayode!</h5>
-          <span>Dashboard/My Recipes</span>
+          <span>Dashboard / My Recipes</span>
         </span>
       </div>
     );

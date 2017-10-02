@@ -3,6 +3,7 @@ import DashboardNavbar from './DashboardNavbar';
 import HomeNavbar from './HomeNavbar';
 import LandingNavbar from './LandingNavbar';
 import UserMenu from './UserMenu';
+import SearchBar from './SearchBar';
 
 
 export {
@@ -10,5 +11,6 @@ export {
   DashboardNavbar,
   HomeNavbar,
   LandingNavbar,
-  UserMenu
+  UserMenu,
+  SearchBar
 }

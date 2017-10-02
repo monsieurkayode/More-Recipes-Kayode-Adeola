@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import { RecipeCardSmall, RecipeCardLarge } from '../recipes/Index';
+import { WelcomeDisplay } from './Index';
+
 class UserRecipe extends Component {
   render() {
     return (
@@ -7,9 +10,12 @@ class UserRecipe extends Component {
         <WelcomeDisplay />
         <div id="my-recipes" className="row">
           <RecipeCardLarge />
-        </div>
-        <div className="row">
-          <RecipeCardSmall />
+          <div className="row">
+            <RecipeCardSmall />
+            <RecipeCardSmall />
+            <RecipeCardSmall />
+            <RecipeCardSmall />
+          </div>
         </div>
       </div>
     );

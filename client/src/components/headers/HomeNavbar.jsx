@@ -1,6 +1,5 @@
 import React from 'react';
-import SearchBar from './SearchBar';
-import { UserMenu } from './Index';
+import { UserMenu, SearchBar } from './Index';
 
 const HomeNavbar = (props => {
   return(
