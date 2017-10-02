@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Match, Miss } from 'react-router';
 
-import App from './App.jsx';
+// import App from './App.jsx';
 import NotFoundPage from './components/NotFoundPage';
 import IndexPage from './components/IndexPage';
 import DashboardPage from './components/DashboardPage';

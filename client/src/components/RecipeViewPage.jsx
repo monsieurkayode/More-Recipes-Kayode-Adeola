@@ -4,6 +4,7 @@ import recipeImg from '../build/static/css/img/cake.jpg';
 import boxImg from '../build/static/css/img/cake2.jpg';
 import Footer from './footer/Footer';
 import { Ingredients, Instructions, Comments, CommentBox } from './recipeview/Index';
+import { NewPostModal } from './modals/Index';
 
 class RecipeViewPage extends Component {
   render() {
@@ -41,6 +42,7 @@ class RecipeViewPage extends Component {
         <CommentBox />
         <Comments />
         <Footer />
+        <NewPostModal />
       </div>
     );
   }
