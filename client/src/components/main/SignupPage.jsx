@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 class SignupPage extends Component {
   render() {
@@ -7,11 +8,11 @@ class SignupPage extends Component {
         <div className="navbar-fixed">
           <nav className="header">
             <div className="nav-wrapper">
-              <a className="brand-logo return" href="index.html"><span className="fa fa-angle-left"></span> Back to More-Recipies</a>
-              <a href="#" data-activates="navlink" className="button-collapse"><i className="material-icons">menu</i></a>         
+              <Link to="/" className="brand-logo return"><span className="fa fa-angle-left"></span> Back to More-Recipies</Link>
+              <a data-activates="navlink" className="button-collapse"><i className="material-icons">menu</i></a>         
               <ul className="right hide-on-med-and-down return">
                 <li>
-                  <a className="" href="login.html">Log In</a>
+                  <Link to="/signin" >Log In</Link>
                 </li>
               </ul>
             </div>
@@ -21,7 +22,7 @@ class SignupPage extends Component {
           <div className="col s12 l6 m8 offset-l3 offset-m2">
             <div className="card blue-grey darken-1">
               <div className="card-content white-text">
-                <h5>Lorep ipsum dotae amet.....</h5>
+                <h5>Create New Account</h5>
               </div>
             </div>
           </div>
@@ -33,28 +34,28 @@ class SignupPage extends Component {
                 <div className="input-field col s12">
                   <i className="material-icons prefix">email</i>
                   <input id="email" type="email" className="validate" required />
-                  <label for="email">Email</label>
+                  <label htmlFor="email">Email</label>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field col s12">
                   <i className="material-icons prefix">account_circle</i>
                   <input id="username" type="text" className="validate" required />
-                  <label for="username" data-error="Username is invalid">Username</label>
+                  <label htmlFor="username" data-error="Username is invalid">Username</label>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field col s12">
                   <i className="material-icons prefix">lock_outline</i>
                   <input id="password" type="password" className="validate" required />
-                  <label for="password" data-error="Invalid password" data-success="Strong password">Password</label>
+                  <label htmlFor="password" data-error="Invalid password" data-success="Strong password">Password</label>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field col s12">
                   <i className="material-icons prefix">lock</i>
                   <input id="confirm-password" type="password" className="validate" required />
-                  <label for="confirm-password">Confirm Password</label>
+                  <label htmlFor="confirm-password">Confirm Password</label>
                 </div>
               </div>
               <div className="col s12 l12 m12 center-align">
@@ -67,7 +68,7 @@ class SignupPage extends Component {
         </div>
         <ul className="side-nav" id="navlink">
           <li>
-            <a href="login.html">Log In</a>
+            <Link to="/signin">Log In</Link>
           </li>
         </ul>
       </div>
