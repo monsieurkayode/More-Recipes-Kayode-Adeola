@@ -6,6 +6,8 @@ import Recipes from './Recipes';
 import RecipeItem from './RecipeItem';
 import TopRecipeItem from './TopRecipeItem';
 import TopRecipes from './TopRecipes';
+import SignupPage from './SignupPage';
+import SigninPage from './SigninPage';
 
 export {
   CategorizedRecipe,
@@ -15,5 +17,7 @@ export {
   Recipes,
   RecipeItem,
   TopRecipeItem,
-  TopRecipes
+  TopRecipes,
+  SigninPage,
+  SignupPage
 };

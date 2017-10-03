@@ -10,7 +10,7 @@ class DashboardPanel extends Component {
           <div className="card-image">
             <img className="responsive-img" id="dash-img" src={dashImg} alt="user-background" />
             <figure className="card-profile-image">
-              <img src={userImg} alt="profile image" className="z-depth-2 responsive-img" />
+              <img src={userImg} alt="" className="z-depth-2 responsive-img" />
             </figure>
           </div>
           <div id="dash-links" >

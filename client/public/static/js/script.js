@@ -1,4 +1,4 @@
-(function($){
+(($) => {
   $(document).ready(function(){
     $('.button-collapse').sideNav();
     $(".dropdown-button").dropdown();
@@ -45,4 +45,4 @@
     // var hash = window.location.hash;
     // $('#myTab a[href="' + hash + '"]').tabs('select_tab', 'tab_id');
   });
-})(jQuery);
+})($);

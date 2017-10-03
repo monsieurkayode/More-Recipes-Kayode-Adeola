@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { DashboardNavbar } from './headers/Index';
 import { DashboardPanel, SideNavDashboard, UserRecipe, UserFavoriteRecipe, UserProfile } from './dashboard/Index';
-import { DeleteModal, NewPostModal } from './modals/Index';
+import { DeleteModal, NewPostModal, EditPostModal } from './modals/Index';
 
 class DashboardPage extends Component {
   render() {
@@ -17,6 +17,7 @@ class DashboardPage extends Component {
         </div>
         <DeleteModal />
         <NewPostModal />
+        <EditPostModal />
         <SideNavDashboard />
       </div>
     );

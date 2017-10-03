@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { SearchBar } from './Index';
 
 const LandingNavBar = (props => {
@@ -19,10 +20,10 @@ const LandingNavBar = (props => {
               <a href="#modal-newpost" id="new-post" className="modal-trigger"><i className="fa fa-pencil-square-o"></i> New Post</a>
             </li>
             <li>
-              <a className="waves-effect waves-light btn navbtn modal-trigger" href="#modal-login">Login</a>
+              <Link to="/signin" className="waves-effect waves-light btn navbtn modal-trigger">Login</Link>
             </li>
             <li>
-              <a className="waves-effect waves-light btn navbtn modal-trigger" href="#modal-register">Sign Up</a>
+              <Link to="/signup" className="waves-effect waves-light btn navbtn modal-trigger">Sign Up</Link>
             </li>
           </ul>
         </div>
