@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import dashImg from '../../build/static/css/img/dash.jpg';
-import userImg from '../../build/static/css/img/user.jpg';
+import dashImg from '../../css/img/dash.jpg';
+import userImg from '../../css/img/user.jpg';
 
 class DashboardPanel extends Component {
   render() {

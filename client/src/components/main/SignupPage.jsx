@@ -9,7 +9,7 @@ class SignupPage extends Component {
           <nav className="header">
             <div className="nav-wrapper">
               <Link to="/" className="brand-logo return"><span className="fa fa-angle-left"></span> Back to More-Recipies</Link>
-              <a data-activates="navlink" className="button-collapse"><i className="material-icons">menu</i></a>         
+              <a href="" data-activates="navlink" className="button-collapse"><i className="material-icons">menu</i></a>         
               <ul className="right hide-on-med-and-down return">
                 <li>
                   <Link to="/signin" >Log In</Link>

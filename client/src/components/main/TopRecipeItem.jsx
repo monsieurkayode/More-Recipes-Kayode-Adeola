@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import recipeImg from '../../build/static/css/img/cake2.jpg';
+import recipeImg from '../../css/img/cake2.jpg';
 
 class TopRecipeItem extends Component {
   render() {

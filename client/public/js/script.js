@@ -4,8 +4,8 @@
     $(".dropdown-button").dropdown();
     $("#modal-delete").modal();
     $("#modal-edit").modal();
-    $("#modal-register").modal();
-    $("#modal-login").modal();
+    // $("#modal-register").modal();
+    // $("#modal-login").modal();
     $("#modal-newpost").modal();
     // $("#edit").on("click", function() {
     //   $("#modal-edit").modal();

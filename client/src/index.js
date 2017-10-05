@@ -9,9 +9,9 @@ import { SigninPage, SignupPage } from './components/main/Index';
 import DashboardPage from './components/DashboardPage';
 import RecipeViewPage from './components/RecipeViewPage';
 
-import './build/static/css/font-awesome.css';
-import './build/static/css/materialize.css';
-import './build/static/css/style.css';
+import './css/font-awesome.css';
+import './css/materialize.css';
+import './css/style.css';
 
 import registerServiceWorker from './registerServiceWorker';
 
