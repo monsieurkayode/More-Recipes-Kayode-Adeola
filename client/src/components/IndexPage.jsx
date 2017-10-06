@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { LandingNavbar, Banner } from './headers/Index';
 import { SigninModal, SignupModal, NewPostModal } from './modals/Index';
-import { Contents } from './main/Index';
-import WelcomeMessage from './main/WelcomeMessage';
+import { Contents, WelcomeMessage } from './main/Index';
 import Footer from './footer/Footer';
 
 class IndexPage extends Component {

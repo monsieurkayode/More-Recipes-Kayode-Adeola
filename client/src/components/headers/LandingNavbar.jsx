@@ -8,7 +8,7 @@ const LandingNavBar = (props => {
       <nav className="header">
         <div className="nav-wrapper">
           <a className="brand-logo font-effect-3d-float logo hide-on-small-only" href="index.html">More-Recipes</a>
-          <a href="/" data-activates="navlink" className="button-collapse"><i className="material-icons">menu</i></a>         
+          <a href="" data-activates="navlink" className="button-collapse"><i className="material-icons">menu</i></a>         
           <ul className="right hide-on-med-and-down">
             <li>
               <SearchBar />
@@ -20,10 +20,10 @@ const LandingNavBar = (props => {
               <a href="#modal-newpost" id="new-post" className="modal-trigger"><i className="fa fa-pencil-square-o"></i> New Post</a>
             </li>
             <li>
-              <Link to="/signin" className="waves-effect waves-light btn navbtn modal-trigger">Login</Link>
+              <Link to="/signin" className="waves-effect waves-light btn navbtn">Login</Link>
             </li>
             <li>
-              <Link to="/signup" className="waves-effect waves-light btn navbtn modal-trigger">Sign Up</Link>
+              <Link to="/signup" className="waves-effect waves-light btn navbtn">Sign Up</Link>
             </li>
           </ul>
         </div>

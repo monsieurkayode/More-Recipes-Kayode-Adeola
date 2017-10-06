@@ -15,9 +15,9 @@ class SideNavDashboard extends Component {
                   <img src={userImg} alt="" className="z-depth-2 responsive-img" />
                 </figure>
               </div>
-              <div id="dash-links" >
+              <div id="dash-links">
                 <div className="collection">
-                  <a id="dashboard-parent" href="" className="collection-item"><strong>Dashboard</strong> <span className="right fa fa-user-circle"></span></a>
+                  <a id="dashboard-parent" className="collection-item"><strong>Dashboard</strong> <span className="right fa fa-user-circle"></span></a>
                   <br />
                   <div id="myTab" className="tabs-vertical">
                     <ul className="tabs">

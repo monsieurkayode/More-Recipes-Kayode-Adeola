@@ -8,6 +8,7 @@ import TopRecipeItem from './TopRecipeItem';
 import TopRecipes from './TopRecipes';
 import SignupPage from './SignupPage';
 import SigninPage from './SigninPage';
+import WelcomeMessage from './WelcomeMessage';
 
 export {
   CategorizedRecipe,
@@ -19,5 +20,6 @@ export {
   TopRecipeItem,
   TopRecipes,
   SigninPage,
-  SignupPage
+  SignupPage,
+  WelcomeMessage
 };
