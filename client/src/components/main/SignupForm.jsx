@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class SignupForm extends Component {
   constructor() {
@@ -18,8 +19,9 @@ class SignupForm extends Component {
   }
 
   handleSubmit = (event) => {
-    const userData = {...this.state}
-    console.log(userData);
+    const user = {...this.state}
+    console.log(user);
+    axios.post('/api/v1/users/signup', user)
     event.preventDefault();
   }
 
@@ -81,7 +83,7 @@ class SignupForm extends Component {
               </div>
             </div>
             <div className="center-align">
-              <button className="btn waves-effect waves-light white-text">Submit
+              <button id="submit-btn" className="btn waves-effect waves-light">Submit
                 <i className="material-icons right">send</i>
               </button>
             </div>
