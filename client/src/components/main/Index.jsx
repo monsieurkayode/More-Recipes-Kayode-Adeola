@@ -8,6 +8,7 @@ import TopRecipeItem from './TopRecipeItem';
 import TopRecipes from './TopRecipes';
 import SignupPage from './SignupPage';
 import SigninPage from './SigninPage';
+import SignupForm from './SignupForm';
 import WelcomeMessage from './WelcomeMessage';
 
 export {
@@ -21,5 +22,6 @@ export {
   TopRecipes,
   SigninPage,
   SignupPage,
+  SignupForm,
   WelcomeMessage
 };
