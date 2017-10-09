@@ -20,7 +20,6 @@ class SignupForm extends Component {
 
   handleSubmit = (event) => {
     const user = {...this.state}
-    console.log(user);
     axios.post('/api/v1/users/signup', user)
     event.preventDefault();
   }
