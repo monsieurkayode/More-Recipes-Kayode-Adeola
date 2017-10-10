@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { TextField } from './Index';
 
 class SignupForm extends Component {
   constructor() {
@@ -48,26 +49,24 @@ class SignupForm extends Component {
             <div className="row">
               <div className="input-field col s12">
                 <i className="material-icons prefix">account_circle</i>
-                <input
+                <TextField 
                   onChange={this.handleInputChange}
                   value={this.state.username}
-                  name="username"
-                  type="text"
-                  className="validate"
-                  required />
+                  field="username"
+                  type="text" 
+                  />
                 <label htmlFor="username" data-error="">Username</label>
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
                 <i className="material-icons prefix">email</i>
-                <input
+                <TextField 
                   onChange={this.handleInputChange}
                   value={this.state.email}
-                  name="email"
-                  type="email"
-                  className="validate"
-                  required />
+                  field="email"
+                  type="email" 
+                />
                 <label htmlFor="email">Email</label>
               </div>
             </div>
@@ -75,26 +74,24 @@ class SignupForm extends Component {
             <div className="row">
               <div className="input-field col s12">
                 <i className="material-icons prefix">lock_outline</i>
-                <input
+                <TextField 
                   onChange={this.handleInputChange}
                   value={this.state.password}
-                  name="password"
-                  type="password"
-                  className="validate" 
-                  required />
+                  field="password"
+                  type="password" 
+                />
                 <label htmlFor="password" data-error="" data-success="">Password</label>
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
                 <i className="material-icons prefix">lock</i>
-                <input
+                <TextField 
                   onChange={this.handleInputChange}
                   value={this.state.confirmPassword}
-                  name="confirmPassword"
-                  type="password"
-                  className="validate"
-                  required />
+                  field="confirmPassword"
+                  type="password" 
+                />
                 <label htmlFor="confirmPassword">Confirm Password</label>
               </div>
             </div>
