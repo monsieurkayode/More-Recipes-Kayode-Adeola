@@ -8,8 +8,13 @@ class SignupForm extends Component {
       username: '',
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      error: '',
     }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    localStorage.setItem(`token`, nextState.token)
   }
 
   handleInputChange = (event) => {
@@ -21,6 +26,17 @@ class SignupForm extends Component {
   handleSubmit = (event) => {
     const user = {...this.state}
     axios.post('/api/v1/users/signup', user)
+      .then((response) => {
+        const { token } = response.data
+        this.setState({ token })
+      })
+      .catch((error) => {
+        if (error.response) {
+          const { message } = error.response.data;
+          this.setState({ error: message })
+          alert(message);
+        }
+      })
     event.preventDefault();
   }
 
@@ -29,19 +45,6 @@ class SignupForm extends Component {
       <div id="form" className="container">
         <div className="row">
           <form onSubmit={this.handleSubmit} className="col l6 m8 s12 offset-l3 offset-m2">
-            <div className="row">
-              <div className="input-field col s12">
-                <i className="material-icons prefix">email</i>
-                <input
-                  onChange={this.handleInputChange}
-                  value={this.state.email}
-                  name="email"
-                  type="email"
-                  className="validate"
-                  required />
-                <label htmlFor="email">Email</label>
-              </div>
-            </div>
             <div className="row">
               <div className="input-field col s12">
                 <i className="material-icons prefix">account_circle</i>
@@ -55,6 +58,20 @@ class SignupForm extends Component {
                 <label htmlFor="username" data-error="">Username</label>
               </div>
             </div>
+            <div className="row">
+              <div className="input-field col s12">
+                <i className="material-icons prefix">email</i>
+                <input
+                  onChange={this.handleInputChange}
+                  value={this.state.email}
+                  name="email"
+                  type="email"
+                  className="validate"
+                  required />
+                <label htmlFor="email">Email</label>
+              </div>
+            </div>
+            
             <div className="row">
               <div className="input-field col s12">
                 <i className="material-icons prefix">lock_outline</i>
