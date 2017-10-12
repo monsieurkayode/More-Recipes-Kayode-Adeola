@@ -9,6 +9,7 @@ import TopRecipes from './TopRecipes';
 import SignupPage from './SignupPage';
 import SigninPage from './SigninPage';
 import SignupForm from './SignupForm';
+import SigninForm from './SigninForm';
 import TextField from './TextField';
 import WelcomeMessage from './WelcomeMessage';
 
@@ -24,6 +25,7 @@ export {
   SigninPage,
   SignupPage,
   SignupForm,
+  SigninForm,
   TextField,
   WelcomeMessage
 };
