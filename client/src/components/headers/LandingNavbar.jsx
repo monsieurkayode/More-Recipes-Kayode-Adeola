@@ -7,7 +7,7 @@ const LandingNavBar = (props => {
     <div className="navbar-fixed">
       <nav className="header">
         <div className="nav-wrapper">
-          <a className="brand-logo font-effect-3d-float logo hide-on-small-only" href="index.html">More-Recipes</a>
+          <Link to="/" className="brand-logo font-effect-3d-float logo hide-on-small-only">More-Recipes</Link>
           <a href="" data-activates="navlink" className="button-collapse"><i className="material-icons">menu</i></a>         
           <ul className="right hide-on-med-and-down">
             <li>

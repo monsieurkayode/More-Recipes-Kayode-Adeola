@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { SignupForm } from './Index';
 
 class SignupPage extends Component {
   render() {
@@ -27,45 +28,7 @@ class SignupPage extends Component {
             </div>
           </div>
         </div>
-        <div id="form" className="container">
-          <div className="row">
-            <form className="col l6 m8 s12 offset-l3 offset-m2">
-              <div className="row">
-                <div className="input-field col s12">
-                  <i className="material-icons prefix">email</i>
-                  <input id="email" type="email" className="validate" required />
-                  <label htmlFor="email">Email</label>
-                </div>
-              </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <i className="material-icons prefix">account_circle</i>
-                  <input id="username" type="text" className="validate" required />
-                  <label htmlFor="username" data-error="Username is invalid">Username</label>
-                </div>
-              </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <i className="material-icons prefix">lock_outline</i>
-                  <input id="password" type="password" className="validate" required />
-                  <label htmlFor="password" data-error="Invalid password" data-success="Strong password">Password</label>
-                </div>
-              </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <i className="material-icons prefix">lock</i>
-                  <input id="confirm-password" type="password" className="validate" required />
-                  <label htmlFor="confirm-password">Confirm Password</label>
-                </div>
-              </div>
-              <div className="col s12 l12 m12 center-align">
-                <button className="btn waves-effect waves-light white-text" type="submit" name="action">Submit
-                  <i className="material-icons right">send</i>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+        <SignupForm />
         <ul className="side-nav" id="navlink">
           <li>
             <Link to="/signin">Log In</Link>
