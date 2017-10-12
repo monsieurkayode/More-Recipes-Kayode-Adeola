@@ -50,35 +50,31 @@ class SignupForm extends Component {
               field="username"
               type="text"
               icon="account_circle"
-              label="Username"
-              />
+              label="Username" />
 
-              <TextField 
-                onChange={this.handleInputChange}
-                value={this.state.email}
-                field="email"
-                type="email"
-                icon="email"
-                label="Email"
-              />
-            
-              <TextField 
-                onChange={this.handleInputChange}
-                value={this.state.password}
-                field="password"
-                type="password"
-                icon="lock_outline"
-                label="Password"
-              />
+            <TextField 
+              onChange={this.handleInputChange}
+              value={this.state.email}
+              field="email"
+              type="email"
+              icon="email"
+              label="Email" />
+          
+            <TextField 
+              onChange={this.handleInputChange}
+              value={this.state.password}
+              field="password"
+              type="password"
+              icon="lock_outline"
+              label="Password" />
 
-              <TextField 
-                onChange={this.handleInputChange}
-                value={this.state.confirmPassword}
-                field="confirmPassword"
-                type="password"
-                icon="lock"
-                label="Confirm Password"
-              />
+            <TextField 
+              onChange={this.handleInputChange}
+              value={this.state.confirmPassword}
+              field="confirmPassword"
+              type="password"
+              icon="lock"
+              label="Confirm Password" />
 
             <div className="center-align">
               <button id="submit-btn" className="btn waves-effect waves-light">Submit
