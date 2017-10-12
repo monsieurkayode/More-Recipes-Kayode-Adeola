@@ -10,7 +10,6 @@ class SignupForm extends Component {
       email: '',
       password: '',
       confirmPassword: '',
-      error: '',
     }
   }
 
@@ -34,7 +33,6 @@ class SignupForm extends Component {
       .catch((error) => {
         if (error.response) {
           const { message } = error.response.data;
-          this.setState({ error: message })
           alert(message);
         }
       })
@@ -46,55 +44,42 @@ class SignupForm extends Component {
       <div id="form" className="container">
         <div className="row">
           <form onSubmit={this.handleSubmit} className="col l6 m8 s12 offset-l3 offset-m2">
-            <div className="row">
-              <div className="input-field col s12">
-                <i className="material-icons prefix">account_circle</i>
-                <TextField 
-                  onChange={this.handleInputChange}
-                  value={this.state.username}
-                  field="username"
-                  type="text" 
-                  />
-                <label htmlFor="username" data-error="">Username</label>
-              </div>
-            </div>
-            <div className="row">
-              <div className="input-field col s12">
-                <i className="material-icons prefix">email</i>
-                <TextField 
-                  onChange={this.handleInputChange}
-                  value={this.state.email}
-                  field="email"
-                  type="email" 
-                />
-                <label htmlFor="email">Email</label>
-              </div>
-            </div>
+            <TextField 
+              onChange={this.handleInputChange}
+              value={this.state.username}
+              field="username"
+              type="text"
+              icon="account_circle"
+              label="Username"
+              />
+
+              <TextField 
+                onChange={this.handleInputChange}
+                value={this.state.email}
+                field="email"
+                type="email"
+                icon="email"
+                label="Email"
+              />
             
-            <div className="row">
-              <div className="input-field col s12">
-                <i className="material-icons prefix">lock_outline</i>
-                <TextField 
-                  onChange={this.handleInputChange}
-                  value={this.state.password}
-                  field="password"
-                  type="password" 
-                />
-                <label htmlFor="password" data-error="" data-success="">Password</label>
-              </div>
-            </div>
-            <div className="row">
-              <div className="input-field col s12">
-                <i className="material-icons prefix">lock</i>
-                <TextField 
-                  onChange={this.handleInputChange}
-                  value={this.state.confirmPassword}
-                  field="confirmPassword"
-                  type="password" 
-                />
-                <label htmlFor="confirmPassword">Confirm Password</label>
-              </div>
-            </div>
+              <TextField 
+                onChange={this.handleInputChange}
+                value={this.state.password}
+                field="password"
+                type="password"
+                icon="lock_outline"
+                label="Password"
+              />
+
+              <TextField 
+                onChange={this.handleInputChange}
+                value={this.state.confirmPassword}
+                field="confirmPassword"
+                type="password"
+                icon="lock"
+                label="Confirm Password"
+              />
+
             <div className="center-align">
               <button id="submit-btn" className="btn waves-effect waves-light">Submit
                 <i className="material-icons right">send</i>
