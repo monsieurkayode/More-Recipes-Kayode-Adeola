@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { SigninForm } from './Index';
 
 class SigninPage extends Component {
   render() {
@@ -30,31 +31,7 @@ class SigninPage extends Component {
               </div>
             </div>
           </div>
-          <div id="form" className="container">
-            <div className="row">
-              <form className="col l6 m8 s12 offset-l3 offset-m2">
-              <div className="row">
-                <div className="input-field col s12">
-                  <i className="material-icons prefix">account_circle</i>
-                  <input id="username" type="text" className="validate" required />
-                  <label htmlFor="username">Username</label>
-                </div>
-              </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <i className="material-icons prefix">lock_outline</i>
-                  <input id="password" type="password" className="validate" required />
-                  <label htmlFor="password">Password</label>
-                </div>
-              </div>
-              <div className="col s12 m12 l12 center-align">
-                <button className="btn waves-effect waves-light" type="submit" name="action">Login
-                  <i className="material-icons right">send</i>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+          <SigninForm />
       </div>
     );
   }
