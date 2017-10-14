@@ -24,7 +24,7 @@ class SignupForm extends Component {
   }
 
   handleSubmit = (event) => {
-    const user = {...this.state}
+    const user = {...this.state};
     axios.post('/api/v1/users/signup', user)
       .then((response) => {
         const { token } = response.data
