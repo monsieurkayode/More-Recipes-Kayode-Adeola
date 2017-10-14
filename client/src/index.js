@@ -1,9 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Match, Miss } from 'react-router';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import promise from 'redux-promise';
+import { createStore, applyMiddleware } from 'redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // import App from './App.jsx';
-import NotFoundPage from './components/NotFoundPage';
+// import NotFoundPage from './components/NotFoundPage';
 import IndexPage from './components/IndexPage';
 import { SigninPage, SignupPage } from './components/main/Index';
 import DashboardPage from './components/DashboardPage';
@@ -13,22 +16,26 @@ import './css/font-awesome.css';
 import './css/materialize.css';
 import './css/style.css';
 
+import reducers from './reducers';
+
 import registerServiceWorker from './registerServiceWorker';
 
-const Root = () => {
-  return(
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+
+render(
+  <Provider store={createStoreWithMiddleware(reducers, composeEnhancers)}>
     <BrowserRouter>
       <div>
-        <Match exactly pattern="/" component={IndexPage} />
-        <Match pattern="/signin" component={SigninPage} />
-        <Match pattern="/signup" component={SignupPage} />
-        <Match pattern="/dashboard" component={DashboardPage} />
-        <Match pattern="/recipeview" component={RecipeViewPage} />
-        <Miss component={NotFoundPage} />
+        <Switch>
+          <Route path="/signin" component={SigninPage} />
+          <Route path="/signup" component={SignupPage} />
+          <Route path="/dashboard" component={DashboardPage} />
+          <Route path="/recipeview" component={RecipeViewPage} />
+          <Route path="/" component={IndexPage} />
+        </Switch>
       </div>
     </BrowserRouter>
-  )
-}
-
-ReactDOM.render(<Root />, document.getElementById('root'));
+  </Provider>
+, document.getElementById('root'));
 registerServiceWorker();
