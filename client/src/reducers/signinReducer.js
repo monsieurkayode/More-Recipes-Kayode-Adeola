@@ -9,7 +9,7 @@ const initialState = {
 const signinReducer = (state = initialState, action) => {
   switch (action.type) {
   case SIGNIN_SUCCESSFUL:
-    return {...state, success: true, message: action.payload };
+    return {...state, success: true };
   case SIGNIN_UNSUCCESSFUL:
     return {...state, success: false, message: action.payload };
   default:
