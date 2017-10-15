@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { signinAction } from '../../actions';
 import { TextField } from './Index';
 
 class SigninForm extends Component {
@@ -20,18 +21,8 @@ class SigninForm extends Component {
 
   handleSubmit = (event) => {
     const user = {...this.state}
-    axios.post('/api/v1/users/signin', user)
-      .then((response) => {
-        const { Token } = response.data
-        localStorage.setItem('token', Token)
-      })
-      .catch((error) => {
-        if (error.response) {
-          const { message } = error.response.data;
-          alert(message);
-        }
-      })
     event.preventDefault();
+    this.props.signinAction(user);
   }
 
   render() {
@@ -67,4 +58,4 @@ class SigninForm extends Component {
   }
 }
 
-export default SigninForm;
+export default connect(null, { signinAction })(SigninForm);
