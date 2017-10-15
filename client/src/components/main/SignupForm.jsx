@@ -40,6 +40,7 @@ class SignupForm extends Component {
   }
 
   render() {
+    const { username, email, password, confirmPassword } = this.state.errors;
     return (
       <div id="form" className="container">
         <div className="row">
@@ -47,6 +48,7 @@ class SignupForm extends Component {
             <TextField 
               onChange={this.handleInputChange}
               value={this.state.username}
+              error={username}
               field="username"
               type="text"
               icon="account_circle"
@@ -55,6 +57,7 @@ class SignupForm extends Component {
             <TextField 
               onChange={this.handleInputChange}
               value={this.state.email}
+              error={email}
               field="email"
               type="email"
               icon="email"
@@ -63,6 +66,7 @@ class SignupForm extends Component {
             <TextField 
               onChange={this.handleInputChange}
               value={this.state.password}
+              error={password}
               field="password"
               type="password"
               icon="lock_outline"
@@ -71,6 +75,7 @@ class SignupForm extends Component {
             <TextField 
               onChange={this.handleInputChange}
               value={this.state.confirmPassword}
+              error={confirmPassword}
               field="confirmPassword"
               type="password"
               icon="lock"

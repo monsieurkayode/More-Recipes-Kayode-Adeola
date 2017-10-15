@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TextField = ({ field, value, type, onChange, className, icon, label }) => {
+const TextField = ({ field, value, type, onChange, className, icon, label, error }) => {
   return (
     <div className="row">
       <div className="input-field col s12">
@@ -12,7 +12,8 @@ const TextField = ({ field, value, type, onChange, className, icon, label }) => 
           type={type}
           className="validate"
           required />
-        <label htmlFor={field} data-error="">{label}</label>
+        <label htmlFor={field}>{label}</label>
+        {error ? <span className="red-text right">{error}</span> : null}
       </div>
     </div>
   )
