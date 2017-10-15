@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { signupAction } from '../../actions';
 import { TextField } from './Index';
 
 class SignupForm extends Component {
@@ -13,10 +14,6 @@ class SignupForm extends Component {
     }
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    localStorage.setItem(`token`, nextState.token)
-  }
-
   handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -25,18 +22,8 @@ class SignupForm extends Component {
 
   handleSubmit = (event) => {
     const user = {...this.state};
-    axios.post('/api/v1/users/signup', user)
-      .then((response) => {
-        const { token } = response.data
-        this.setState({ token })
-      })
-      .catch((error) => {
-        if (error.response) {
-          const { message } = error.response.data;
-          alert(message);
-        }
-      })
     event.preventDefault();
+    this.props.signupAction(user);
   }
 
   render() {
@@ -88,4 +75,4 @@ class SignupForm extends Component {
   }
 }
 
-export default SignupForm;
+export default connect(null, { signupAction })(SignupForm);
