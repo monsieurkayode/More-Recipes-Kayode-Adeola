@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { signupAction } from '../../actions';
+import validateInput from '../../utils/helper';
 import { TextField } from './Index';
 
 class SignupForm extends Component {
@@ -11,6 +12,7 @@ class SignupForm extends Component {
       email: '',
       password: '',
       confirmPassword: '',
+      errors: {}
     }
   }
 
@@ -20,10 +22,21 @@ class SignupForm extends Component {
     });
   }
 
+  isValid() {
+    const { errors, isValid } = validateInput(this.state);
+    if (!isValid) {
+      this.setState({ errors })
+    }
+    return isValid;
+  }
+
   handleSubmit = (event) => {
-    const user = {...this.state};
     event.preventDefault();
-    this.props.signupAction(user);
+    const user = {...this.state};
+    if (this.isValid()) {
+      this.setState({ errors: {} });
+      this.props.signupAction(user);
+    }
   }
 
   render() {
@@ -75,4 +88,12 @@ class SignupForm extends Component {
   }
 }
 
-export default connect(null, { signupAction })(SignupForm);
+const mapStateToProps = ({ signupReducer }) => {
+  const { success, message } = signupReducer;
+  return {
+    success,
+    message
+  };
+}
+
+export default connect(mapStateToProps, { signupAction })(SignupForm);
