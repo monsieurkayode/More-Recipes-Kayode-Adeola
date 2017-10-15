@@ -7,7 +7,8 @@ const initialState = {
   success: false,
   message: null
 }
-export function signupReducer(state = initialState, action) {
+
+const signupReducer = (state = initialState, action) => {
   switch (action.type) {
   case SIGNUP_SUCCESSFUL:
     return {...state, success: true,  message: action.payload };
@@ -19,3 +20,5 @@ export function signupReducer(state = initialState, action) {
     return state;
   }
 }
+
+export default signupReducer;
