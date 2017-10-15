@@ -1,7 +1,7 @@
 import {
   SIGNUP_SUCCESSFUL,
   SIGNUP_UNSUCCESSFUL,
-  SIGNUP_VALIDATION_ERROR } from '../actions';
+  SIGNUP_VALIDATION_ERROR } from '../actions/signupAction';
 
 const initialState = {
   success: false,
