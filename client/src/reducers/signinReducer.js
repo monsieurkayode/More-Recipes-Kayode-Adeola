@@ -4,12 +4,13 @@ import {
 
 const initialState = {
   success: false,
+  message: null
 }
 
 const signinReducer = (state = initialState, action) => {
   switch (action.type) {
   case SIGNIN_SUCCESSFUL:
-    return {...state, success: true };
+    return {...state, success: true, message: null };
   case SIGNIN_UNSUCCESSFUL:
     return {...state, success: false, message: action.payload };
   default:

@@ -58,4 +58,9 @@ class SigninForm extends Component {
   }
 }
 
-export default connect(null, { signinAction })(SigninForm);
+const mapStateToProps = ({ signinReducer }) => {
+  const { success, message } = signinReducer;
+  return { success, message };
+}
+
+export default connect(mapStateToProps, { signinAction })(SigninForm);
