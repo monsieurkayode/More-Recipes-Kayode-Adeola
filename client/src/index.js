@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // import App from './App.jsx';
-// import NotFoundPage from './components/NotFoundPage';
+import NotFoundPage from './components/NotFoundPage';
 import IndexPage from './components/IndexPage';
 import { SigninPage, SignupPage } from './components/main/Index';
 import DashboardPage from './components/DashboardPage';
@@ -34,6 +34,7 @@ render(
           <Route path="/dashboard" component={DashboardPage} />
           <Route path="/recipeview" component={RecipeViewPage} />
           <Route path="/" component={IndexPage} />
+          <Route path="*" component={NotFoundPage} />
         </Switch>
       </div>
     </BrowserRouter>

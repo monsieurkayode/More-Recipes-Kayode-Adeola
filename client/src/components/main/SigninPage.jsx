@@ -31,7 +31,7 @@ class SigninPage extends Component {
               </div>
             </div>
           </div>
-          <SigninForm />
+          <SigninForm history={this.props.history} />
       </div>
     );
   }

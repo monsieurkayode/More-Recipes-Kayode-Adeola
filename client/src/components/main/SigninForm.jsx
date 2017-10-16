@@ -22,7 +22,9 @@ class SigninForm extends Component {
   handleSubmit = (event) => {
     const user = {...this.state}
     event.preventDefault();
-    this.props.signinAction(user);
+    this.props.signinAction(user, () => {
+      this.props.history.push('/dashboard');
+    });
   }
 
   render() {

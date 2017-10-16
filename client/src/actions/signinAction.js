@@ -3,13 +3,14 @@ import axios from 'axios';
 export const SIGNIN_SUCCESSFUL = 'SIGNIN_SUCCESSFUL';
 export const SIGNIN_UNSUCCESSFUL = 'SIGNIN_UNSUCCESSFUL';
 
-const signinAction = (user) => dispatch => {
+const signinAction = (user, callback) => dispatch => {
   axios.post('/api/v1/users/signin', user)
     .then((response) => {
     if (response.status === 200) {
       const { Token } = response.data;
       localStorage.setItem('token', Token);
       dispatch({ type:SIGNIN_SUCCESSFUL });
+      callback();
     }
   })
   .catch((error) => {

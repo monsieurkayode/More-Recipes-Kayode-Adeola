@@ -35,7 +35,9 @@ class SignupForm extends Component {
     const user = {...this.state};
     if (this.isValid()) {
       this.setState({ errors: {} });
-      this.props.signupAction(user);
+      this.props.signupAction(user, () => {
+        this.props.history.push('/dashboard');
+      });
     }
   }
 
