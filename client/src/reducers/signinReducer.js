@@ -1,16 +1,15 @@
-import {
-  SIGNIN_SUCCESSFUL,
-  SIGNIN_UNSUCCESSFUL } from '../actions/signinAction';
+import actionTypes from '../actions/actionTypes';
 
 const initialState = {
   success: false,
+  message: null
 }
 
 const signinReducer = (state = initialState, action) => {
   switch (action.type) {
-  case SIGNIN_SUCCESSFUL:
-    return {...state, success: true };
-  case SIGNIN_UNSUCCESSFUL:
+  case actionTypes.SIGNIN_SUCCESSFUL:
+    return {...state, success: true, message: null };
+  case actionTypes.SIGNIN_UNSUCCESSFUL:
     return {...state, success: false, message: action.payload };
   default:
     return state;

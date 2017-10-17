@@ -1,7 +1,4 @@
-import {
-  SIGNUP_SUCCESSFUL,
-  SIGNUP_UNSUCCESSFUL,
-  SIGNUP_VALIDATION_ERROR } from '../actions/signupAction';
+import actionTypes from '../actions/actionTypes';
 
 const initialState = {
   success: false,
@@ -10,11 +7,13 @@ const initialState = {
 
 const signupReducer = (state = initialState, action) => {
   switch (action.type) {
-  case SIGNUP_SUCCESSFUL:
+  case actionTypes.SIGNUP_SUCCESSFUL:
     return {...state, success: true,  message: action.payload };
-  case SIGNUP_UNSUCCESSFUL:
+  case actionTypes.SIGNUP_UNSUCCESSFUL:
     return {...state, success: false, message: action.payload };
-  case SIGNUP_VALIDATION_ERROR:
+  case actionTypes.SIGNUP_VALIDATION_USER_ERROR:
+    return {...state, success: false, message: action.payload };
+  case actionTypes.SIGNUP_VALIDATION_EMAIL_ERROR:
     return {...state, success: false, message: action.payload };
   default:
     return state;

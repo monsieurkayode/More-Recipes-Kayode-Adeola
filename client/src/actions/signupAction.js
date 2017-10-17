@@ -1,26 +1,32 @@
 import axios from 'axios';
+import actionTypes from './actionTypes';
 
-export const SIGNUP_SUCCESSFUL = 'SIGNUP_SUCCESSFUL';
-export const SIGNUP_UNSUCCESSFUL = 'SIGNUP_UNSUCCESSFUL';
-export const SIGNUP_VALIDATION_ERROR = 'SIGNUP_VALIDATION_ERROR';
-
-const signupAction = (user) => dispatch => {
+const signupAction = (user, callback) => dispatch => {
   axios.post('/api/v1/users/signup', user)
     .then((response) => {
     if (response.status === 201) {
       const { token, message } = response.data;
       localStorage.setItem('token', token);
-      dispatch({ type:SIGNUP_SUCCESSFUL, payload: message });
+      dispatch({ type:actionTypes.SIGNUP_SUCCESSFUL, payload: message });
+      callback();
     }
   })
   .catch((error) => {
     if (error.response && error.response.status >= 400 ) {
-      const { message } = error.response.data
-      dispatch({ type:SIGNUP_VALIDATION_ERROR, payload: message });
+      const { message } = error.response.data;
+      const userExists = 'Username already exists';
+      const emailExists = 'Email already exists';
+      if (message === userExists) {
+        dispatch({ type:actionTypes.SIGNUP_VALIDATION_USER_ERROR, payload: message });
+      }
+      if (message === emailExists) {
+        dispatch({ type:actionTypes.SIGNUP_VALIDATION_EMAIL_ERROR, payload: message });
+      }
     }
+
     if (error.response && error.response.status >= 500 ) {
       const payload = 'An error occured'
-      dispatch({ type:SIGNUP_UNSUCCESSFUL, payload});
+      dispatch({ type:actionTypes.SIGNUP_UNSUCCESSFUL, payload});
     }
   })
 }
