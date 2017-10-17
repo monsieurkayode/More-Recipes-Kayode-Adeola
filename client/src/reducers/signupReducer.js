@@ -1,7 +1,8 @@
 import {
   SIGNUP_SUCCESSFUL,
   SIGNUP_UNSUCCESSFUL,
-  SIGNUP_VALIDATION_ERROR } from '../actions/signupAction';
+  SIGNUP_VALIDATION_USER_ERROR,
+  SIGNUP_VALIDATION_EMAIL_ERROR } from '../actions/signupAction';
 
 const initialState = {
   success: false,
@@ -14,7 +15,9 @@ const signupReducer = (state = initialState, action) => {
     return {...state, success: true,  message: action.payload };
   case SIGNUP_UNSUCCESSFUL:
     return {...state, success: false, message: action.payload };
-  case SIGNUP_VALIDATION_ERROR:
+  case SIGNUP_VALIDATION_USER_ERROR:
+    return {...state, success: false, message: action.payload };
+  case SIGNUP_VALIDATION_EMAIL_ERROR:
     return {...state, success: false, message: action.payload };
   default:
     return state;
