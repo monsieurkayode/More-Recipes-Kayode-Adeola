@@ -1,7 +1,5 @@
 import axios from 'axios';
-
-export const SIGNIN_SUCCESSFUL = 'SIGNIN_SUCCESSFUL';
-export const SIGNIN_UNSUCCESSFUL = 'SIGNIN_UNSUCCESSFUL';
+import actionTypes from './actionTypes';
 
 const signinAction = (user, callback) => dispatch => {
   axios.post('/api/v1/users/signin', user)
@@ -9,14 +7,14 @@ const signinAction = (user, callback) => dispatch => {
     if (response.status === 200) {
       const { Token } = response.data;
       localStorage.setItem('token', Token);
-      dispatch({ type:SIGNIN_SUCCESSFUL });
+      dispatch({ type:actionTypes.SIGNIN_SUCCESSFUL });
       callback();
     }
   })
   .catch((error) => {
     if (error.response && error.response.status >= 400 ) {
       const { message } = error.response.data
-      dispatch({ type:SIGNIN_UNSUCCESSFUL, payload: message });
+      dispatch({ type:actionTypes.SIGNIN_UNSUCCESSFUL, payload: message });
     }
   })
 }

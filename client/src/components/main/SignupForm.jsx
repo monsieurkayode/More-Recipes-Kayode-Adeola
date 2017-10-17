@@ -47,6 +47,7 @@ class SignupForm extends Component {
       <div id="form" className="container">
         <div className="row">
           <form onSubmit={this.handleSubmit} className="col l6 m8 s12 offset-l3 offset-m2">
+            {!this.props.success ? <span className="red-text">{this.props.message}</span> : ''}
             <TextField 
               onChange={this.handleInputChange}
               value={this.state.username}
