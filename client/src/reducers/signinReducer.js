@@ -24,6 +24,13 @@ const signinReducer = (state = initialState, action) => {
       message: action.payload,
       isAuthenticated: !isEmpty(action.payload),
       user: {} };
+  case actionTypes.LOGOUT_USER:
+    return {
+      ...state,
+      success: isEmpty(action.payload),
+      message: 'User logged out successfully',
+      isAuthenticated: !isEmpty(action.payload),
+      user: action.payload };
   default:
     return state;
   }
