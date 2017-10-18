@@ -20,6 +20,7 @@ import './css/style.css';
 
 import reducers from './reducers';
 import actionTypes from './actions/actionTypes';
+import Authenticate  from './utils/Authenticate';
 import setAuthorizationToken from './utils/setAuthorizationToken';
 
 import registerServiceWorker from './registerServiceWorker';
@@ -41,8 +42,8 @@ render(
         <Switch>
           <Route path="/signin" component={SigninPage} />
           <Route path="/signup" component={SignupPage} />
-          <Route path="/dashboard" component={DashboardPage} />
-          <Route path="/recipeview" component={RecipeViewPage} />
+          <Route path="/dashboard" component={Authenticate(DashboardPage)} />
+          <Route path="/recipeview" component={Authenticate(RecipeViewPage)} />
           <Route path="/" component={IndexPage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
