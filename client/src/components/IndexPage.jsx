@@ -5,6 +5,12 @@ import { Contents, WelcomeMessage } from './main/Index';
 import Footer from './footer/Footer';
 
 class IndexPage extends Component {
+  componentWillMount() {
+    if (localStorage.token) {
+      this.props.history.push('/dashboard');
+    }
+  }
+  
   render() {
     return (
       <div>
