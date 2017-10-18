@@ -28,7 +28,7 @@ class SignupPage extends Component {
             </div>
           </div>
         </div>
-        <SignupForm />
+        <SignupForm history={this.props.history} />
         <ul className="side-nav" id="navlink">
           <li>
             <Link to="/signin">Log In</Link>

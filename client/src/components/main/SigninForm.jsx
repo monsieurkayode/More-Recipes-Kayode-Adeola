@@ -22,7 +22,9 @@ class SigninForm extends Component {
   handleSubmit = (event) => {
     const user = {...this.state}
     event.preventDefault();
-    this.props.signinAction(user);
+    this.props.signinAction(user, () => {
+      this.props.history.push('/dashboard');
+    });
   }
 
   render() {
@@ -58,4 +60,9 @@ class SigninForm extends Component {
   }
 }
 
-export default connect(null, { signinAction })(SigninForm);
+const mapStateToProps = ({ signinState }) => {
+  const { success, message } = signinState;
+  return { success, message };
+}
+
+export default connect(mapStateToProps, { signinAction })(SigninForm);

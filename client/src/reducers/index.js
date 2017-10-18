@@ -3,8 +3,8 @@ import signupReducer from './signupReducer';
 import signinReducer from './signinReducer';
 
 const rootReducer = combineReducers({
-  signupReducer,
-  signinReducer
+  signupState: signupReducer,
+  signinState: signinReducer,
 });
 
 export default rootReducer;

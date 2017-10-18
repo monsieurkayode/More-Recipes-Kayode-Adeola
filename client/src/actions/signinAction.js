@@ -1,23 +1,25 @@
 import axios from 'axios';
+import actionTypes from './actionTypes';
+import decode from 'jwt-decode';
+import setAuthorizationToken from '../utils/setAuthorizationToken';
 
-export const SIGNIN_SUCCESSFUL = 'SIGNIN_SUCCESSFUL';
-export const SIGNIN_UNSUCCESSFUL = 'SIGNIN_UNSUCCESSFUL';
-
-const signinAction = (user) => dispatch => {
+const signinAction = (user, callback) => dispatch =>
   axios.post('/api/v1/users/signin', user)
     .then((response) => {
     if (response.status === 200) {
       const { Token } = response.data;
       localStorage.setItem('token', Token);
-      dispatch({ type:SIGNIN_SUCCESSFUL });
+      setAuthorizationToken(Token);
+      const user = decode(Token).user;
+      dispatch({ type:actionTypes.SIGNIN_SUCCESSFUL, payload: user });
     }
+    callback();
   })
   .catch((error) => {
     if (error.response && error.response.status >= 400 ) {
       const { message } = error.response.data
-      dispatch({ type:SIGNIN_UNSUCCESSFUL, payload: message });
+      dispatch({ type:actionTypes.SIGNIN_UNSUCCESSFUL, payload: message });
     }
   })
-}
 
 export default signinAction;

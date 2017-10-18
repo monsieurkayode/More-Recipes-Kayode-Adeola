@@ -18,7 +18,7 @@ class DashboardNavbar extends Component {
             </ul>
           </div>
         </nav>
-        <UserMenu />
+        <UserMenu onClick={this.props.onClick}/>
       </div>
     );
   }
