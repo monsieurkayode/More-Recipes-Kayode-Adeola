@@ -60,8 +60,8 @@ class SigninForm extends Component {
   }
 }
 
-const mapStateToProps = ({ signinReducer }) => {
-  const { success, message } = signinReducer;
+const mapStateToProps = ({ signinState }) => {
+  const { success, message } = signinState;
   return { success, message };
 }
 

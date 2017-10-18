@@ -96,8 +96,8 @@ class SignupForm extends Component {
   }
 }
 
-const mapStateToProps = ({ signupReducer }) => {
-  const { success, message } = signupReducer;
+const mapStateToProps = ({ signupState }) => {
+  const { success, message } = signupState;
   return {
     success,
     message
