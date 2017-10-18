@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { logoutAction } from '../actions';
 
 import { DashboardNavbar } from './headers/Index';
 import {
@@ -13,7 +15,7 @@ class DashboardPage extends Component {
   render() {
     return (
       <div>
-        <DashboardNavbar />
+        <DashboardNavbar onClick={this.props.logoutAction}/>
         <div className="row">
           <DashboardPanel />
           <UserProfile />
@@ -29,4 +31,8 @@ class DashboardPage extends Component {
   }
 }
 
-export default DashboardPage;
+const mapStateToProps = ({ signinState }) => {
+  return { user: signinState.user }
+}
+
+export default connect(mapStateToProps, { logoutAction })(DashboardPage);

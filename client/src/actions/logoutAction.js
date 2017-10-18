@@ -5,7 +5,7 @@ const logoutAction = () => dispatch => {
   localStorage.removeItem('token');
   setAuthorizationToken(false);
   const user = {};
-  dispatch({type: actionTypes.SIGNIN_SUCCESSFUL, payload: user })
+  dispatch({type: actionTypes.LOGOUT_USER, payload: user })
 }
 
 export default logoutAction;

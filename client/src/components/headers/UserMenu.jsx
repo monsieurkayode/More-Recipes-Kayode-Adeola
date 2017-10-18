@@ -7,7 +7,7 @@ const UserMenu = (props => {
       <li><a className="modal-trigger" href="#modal-newpost"><span className="fa fa-lg fa-pencil-square-o"></span> New Post</a></li>
       <li><Link to="/dashboard"><span className="fa fa-lg fa-wrench"></span> Dashboard</Link></li>
       <li className="divider"></li>
-      <li><Link to="/"><span className="fa fa-lg fa-lock"></span> Logout</Link></li>
+      <li onClick={props.onClick}><Link to="/"><span className="fa fa-lg fa-lock"></span> Logout</Link></li>
     </ul>
   )
 });
