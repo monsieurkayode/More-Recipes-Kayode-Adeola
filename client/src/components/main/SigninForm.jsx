@@ -13,6 +13,12 @@ class SigninForm extends Component {
     }
   }
 
+  componentWillUpdate(nextProps) {
+    if (nextProps.isAuthenticated) {
+      this.props.history.push('/');
+    }
+  }
+
   handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -22,9 +28,7 @@ class SigninForm extends Component {
   handleSubmit = (event) => {
     const user = {...this.state}
     event.preventDefault();
-    this.props.signinAction(user, () => {
-      this.props.history.push('/dashboard');
-    });
+    this.props.signinAction(user);
   }
 
   render() {
@@ -61,8 +65,8 @@ class SigninForm extends Component {
 }
 
 const mapStateToProps = ({ signinState }) => {
-  const { success, message } = signinState;
-  return { success, message };
+  const { success, message, isAuthenticated } = signinState;
+  return { success, message, isAuthenticated };
 }
 
 export default connect(mapStateToProps, { signinAction })(SigninForm);
