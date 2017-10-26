@@ -1,25 +1,19 @@
-import React, { Component } from 'react';
-import recipeImg from '../../css/img/cake2.jpg';
+import React from 'react';
 
-class RecipeItem extends Component {
-  render() {
-    return (
-      <div className="col l6">
-        <div className="card views-small">
-          <div className="card-image">
-            <a href="recipe-view.html"><img src={recipeImg} alt="" /></a>
-            <span className="card-title">24 Views</span>
-          </div>
-          <div className="card-content small-cards">
-            <span className="card-title"><strong>Frosty Chocolat</strong></span>
-            <span className="right"><i className="material-icons tiny reaction">thumb_down</i>2</span>
-            <span className="right"><i className="material-icons tiny reaction">thumb_up</i>10</span>
-            <a className="chip teal white-text" href="/">Pastry</a>
-          </div>
-        </div>
+const RecipeItem = ({ recipe }) =>
+  <div className="col l6">
+    <div className="card views-small">
+      <div className="card-image">
+        <a href="recipe-view.html"><img src={recipe.imageUrl} alt="" /></a>
+        <span className="card-title">{recipe.views} Views</span>
       </div>
-    );
-  }
-}
+      <div className="card-content small-cards">
+        <span className="card-title"><strong>{recipe.recipeName}</strong></span>
+        <span className="right"><i className="material-icons tiny reaction">thumb_down</i>{recipe.downvotes}</span>
+        <span className="right"><i className="material-icons tiny reaction">thumb_up</i>{recipe.upvotes}</span>
+        <a className="chip teal white-text" href="/">{recipe.category}</a>
+      </div>
+    </div>
+  </div>
 
 export default RecipeItem;

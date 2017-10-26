@@ -1,23 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { CategorizedRecipe } from './Index';
 
-class CategoryCollection extends Component {
-  render() {
-    return (
-      <li>
-        <div className="collapsible-header">Pastry <i className="fa fa-angle-down right"></i></div>
-        <div className="collapsible-body">
-          <span>
-            <ul>
-              <CategorizedRecipe />
-              <CategorizedRecipe />
-              <CategorizedRecipe />
-            </ul>
-          </span>
-        </div>
-      </li>
-    );
-  }
-}
+const CategoryCollection = ({ recipe }) =>
+  <li>
+    <div className="collapsible-header">{recipe.category}<i className="fa fa-angle-down right"></i></div>
+    <div className="collapsible-body">
+      <span>
+        <ul>
+          <CategorizedRecipe recipe={recipe} />
+        </ul>
+      </span>
+    </div>
+  </li>
 
 export default CategoryCollection;

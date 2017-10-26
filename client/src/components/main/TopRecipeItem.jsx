@@ -1,15 +1,10 @@
-import React, { Component } from 'react';
-import recipeImg from '../../css/img/cake2.jpg';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-class TopRecipeItem extends Component {
-  render() {
-    return (
-      <a href="recipe-view.html"><li className="collection-item avatar">
-        <img src={recipeImg} alt="" className="z-depth-1 square" />
-        <span className="title red-text">Frosty Chocolat</span>
-      </li></a>
-    );
-  }
-}
+const TopRecipeItem = props => 
+  <Link to=''><li className="collection-item avatar">
+    <img src={props.recipe.imageUrl} alt="" className="z-depth-1 square" />
+    <span className="title red-text">{props.recipe.recipeName}</span>
+  </li></Link>
 
 export default TopRecipeItem;
