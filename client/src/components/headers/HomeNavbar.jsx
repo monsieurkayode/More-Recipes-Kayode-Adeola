@@ -26,7 +26,7 @@ const HomeNavbar = (props => {
           </ul>
         </div>
       </nav>
-      <UserMenu />
+      <UserMenu onClick={props.onClick} />
     </div>
   )
 })
