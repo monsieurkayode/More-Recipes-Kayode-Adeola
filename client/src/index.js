@@ -21,6 +21,7 @@ import './css/style.css';
 import reducers from './reducers';
 import actionTypes from './actions/actionTypes';
 import Authenticate  from './utils/Authenticate';
+import sampleRecipes  from './utils/sampleRecipes';
 import setAuthorizationToken from './utils/setAuthorizationToken';
 
 import registerServiceWorker from './registerServiceWorker';
@@ -35,6 +36,8 @@ if(localStorage.token) {
   store.dispatch({type: actionTypes.SIGNIN_SUCCESSFUL, payload: user })
 }
 
+store.dispatch({type: actionTypes.FETCH_SAMPLE_RECIPES, payload: sampleRecipes })
+
 render(
   <Provider store={store}>
     <BrowserRouter>
@@ -43,7 +46,7 @@ render(
           <Route path="/signin" component={SigninPage} />
           <Route path="/signup" component={SignupPage} />
           <Route path="/dashboard" component={Authenticate(DashboardPage)} />
-          <Route path="/recipeview" component={Authenticate(RecipeViewPage)} />
+          <Route path="/recipes/:recipeId" component={Authenticate(RecipeViewPage)} />
           <Route path="/" component={IndexPage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
