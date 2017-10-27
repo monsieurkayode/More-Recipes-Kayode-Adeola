@@ -1,6 +1,6 @@
-export default {
-  recipe1: {
-    id: 1,
+export default [
+  {
+    id: 'sample1',
     views: 16,
     upvotes: 3,
     downvotes: 0,
@@ -11,8 +11,8 @@ export default {
     imageUrl: '../css/img/spice.jpg'
   },
 
-  recipe2: {
-    id: 2,
+  {
+    id: 'sample2',
     views: 14,
     upvotes: 3,
     downvotes: 9,
@@ -23,8 +23,8 @@ export default {
     imageUrl: '../css/img/burger.jpg'
   },
 
-  recipe3: {
-    id: 3,
+  {
+    id: 'sample3',
     views: 32,
     upvotes: 20,
     downvotes: 11,
@@ -35,8 +35,8 @@ export default {
     imageUrl: '../css/img/fishmeal.jpg'
   },
 
-  recipe4 : {
-    id: 4,
+  {
+    id: 'sample4',
     views: 23,
     upvotes: 12,
     downvotes: 7,
@@ -46,4 +46,4 @@ export default {
     instructions: '',
     imageUrl: '../css/img/cake2.jpg'
   },
-};
+];
