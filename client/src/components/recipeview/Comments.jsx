@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import userImg from '../../css/img/user.jpg';
+import userImg from '../../assets/css/img/user.jpg';
 
 class Comments extends Component {
   render() {

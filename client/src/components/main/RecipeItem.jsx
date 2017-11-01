@@ -9,8 +9,8 @@ const RecipeItem = ({ recipe }) =>
       </div>
       <div className="card-content small-cards">
         <span className="card-title"><strong>{recipe.recipeName}</strong></span>
-        <span className="right"><i className="material-icons tiny reaction">thumb_down</i>{recipe.downvotes}</span>
-        <span className="right"><i className="material-icons tiny reaction">thumb_up</i>{recipe.upvotes}</span>
+        <span className="right"><i className="material-icons tiny reaction">thumb_down</i>{recipe.downvote}</span>
+        <span className="right"><i className="material-icons tiny reaction">thumb_up</i>{recipe.upvote}</span>
         <a className="chip teal white-text" href="/">{recipe.category}</a>
       </div>
     </div>
