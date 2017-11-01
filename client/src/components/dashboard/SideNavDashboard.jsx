@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import dashImg from '../../css/img/dash.jpg';
-import userImg from '../../css/img/user.jpg';
+import dashImg from '../../assets/css/img/dash.jpg';
+import userImg from '../../assets/css/img/user.jpg';
 
 class SideNavDashboard extends Component {
   render() {

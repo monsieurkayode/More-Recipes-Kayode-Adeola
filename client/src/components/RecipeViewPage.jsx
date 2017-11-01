@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import HomeNavbar from './headers/HomeNavbar';
-import recipeImg from '../css/img/cake.jpg';
-import boxImg from '../css/img/cake2.jpg';
+import recipeImg from '../assets/css/img/cake.jpg';
+import boxImg from '../assets/css/img/cake2.jpg';
 import Footer from './footer/Footer';
 import { Ingredients, Instructions, Comments, CommentBox } from './recipeview/Index';
 import { NewPostModal } from './modals/Index';
