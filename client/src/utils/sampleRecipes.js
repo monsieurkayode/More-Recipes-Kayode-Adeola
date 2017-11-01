@@ -2,8 +2,8 @@ export default [
   {
     id: 'sample1',
     views: 16,
-    upvotes: 3,
-    downvotes: 0,
+    upvote: 3,
+    downvote: 0,
     recipeName: 'Spice',
     category: 'Spice',
     ingredients: '',
@@ -14,8 +14,8 @@ export default [
   {
     id: 'sample2',
     views: 14,
-    upvotes: 3,
-    downvotes: 9,
+    upvote: 3,
+    downvote: 9,
     recipeName: 'Hamburger',
     category: 'Fast Food',
     ingredients: '',
@@ -26,8 +26,8 @@ export default [
   {
     id: 'sample3',
     views: 32,
-    upvotes: 20,
-    downvotes: 11,
+    upvote: 20,
+    downvote: 11,
     recipeName: 'Tuna Fish',
     category: 'SeaFood',
     ingredients: '',
@@ -38,8 +38,8 @@ export default [
   {
     id: 'sample4',
     views: 23,
-    upvotes: 12,
-    downvotes: 7,
+    upvote: 12,
+    downvote: 7,
     recipeName: 'Frosty Chocolat',
     category: 'Pastry',
     ingredients: '',
