@@ -8,7 +8,7 @@ export default [
     category: 'Spice',
     ingredients: '',
     instructions: '',
-    imageUrl: '../css/img/spice.jpg'
+    image: 'spice.jpg'
   },
 
   {
@@ -20,7 +20,7 @@ export default [
     category: 'Fast Food',
     ingredients: '',
     instructions: '',
-    imageUrl: '../css/img/burger.jpg'
+    image: 'burger.jpg'
   },
 
   {
@@ -32,7 +32,7 @@ export default [
     category: 'SeaFood',
     ingredients: '',
     instructions: '',
-    imageUrl: '../css/img/fishmeal.jpg'
+    image: 'fishmeal.jpg'
   },
 
   {
@@ -44,6 +44,6 @@ export default [
     category: 'Pastry',
     ingredients: '',
     instructions: '',
-    imageUrl: '../css/img/cake2.jpg'
+    image: 'cake2.jpg'
   },
 ];

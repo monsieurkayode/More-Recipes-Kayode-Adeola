@@ -4,7 +4,7 @@ const RecipeItem = ({ recipe }) =>
   <div className="col l6">
     <div className="card views-small">
       <div className="card-image">
-        <a href="recipe-view.html"><img src={recipe.imageUrl} alt="" /></a>
+        <a href="recipe-view.html"><img src={recipe.image ? `../uploads/${recipe.image}`: `../css/img/holder-profile.png`} alt={recipe.recipeName} /></a>
         <span className="card-title">{recipe.views} Views</span>
       </div>
       <div className="card-content small-cards">

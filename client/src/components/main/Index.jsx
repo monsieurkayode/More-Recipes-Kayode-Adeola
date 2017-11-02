@@ -11,6 +11,8 @@ import SigninPage from './SigninPage';
 import SignupForm from './SignupForm';
 import SigninForm from './SigninForm';
 import TextField from './TextField';
+import PostRecipe from './PostRecipe';
+import PostRecipePage from './PostRecipePage';
 import WelcomeMessage from './WelcomeMessage';
 
 export {
@@ -24,6 +26,8 @@ export {
   TopRecipes,
   SigninPage,
   SignupPage,
+  PostRecipe,
+  PostRecipePage,
   SignupForm,
   SigninForm,
   TextField,
