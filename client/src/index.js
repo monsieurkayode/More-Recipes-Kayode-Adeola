@@ -10,17 +10,18 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // import App from './App.jsx';
 import NotFoundPage from './components/NotFoundPage';
 import IndexPage from './components/IndexPage';
-import { SigninPage, SignupPage } from './components/main/Index';
+import { SigninPage, SignupPage, PostRecipePage } from './components/main/Index';
 import DashboardPage from './components/DashboardPage';
 import RecipeViewPage from './components/RecipeViewPage';
 
-import './css/font-awesome.css';
-import './css/materialize.css';
-import './css/style.css';
+import './assets/css/font-awesome.css';
+import './assets/css/materialize.css';
+import './assets/css/style.css';
 
 import reducers from './reducers';
 import actionTypes from './actions/actionTypes';
 import Authenticate  from './utils/Authenticate';
+import sampleRecipes  from './utils/sampleRecipes';
 import setAuthorizationToken from './utils/setAuthorizationToken';
 
 import registerServiceWorker from './registerServiceWorker';
@@ -35,6 +36,8 @@ if(localStorage.token) {
   store.dispatch({type: actionTypes.SIGNIN_SUCCESSFUL, payload: user })
 }
 
+store.dispatch({type: actionTypes.FETCH_SAMPLE_RECIPES, payload: sampleRecipes })
+
 render(
   <Provider store={store}>
     <BrowserRouter>
@@ -43,7 +46,8 @@ render(
           <Route path="/signin" component={SigninPage} />
           <Route path="/signup" component={SignupPage} />
           <Route path="/dashboard" component={Authenticate(DashboardPage)} />
-          <Route path="/recipeview" component={Authenticate(RecipeViewPage)} />
+          <Route path="/recipes/new" component={Authenticate(PostRecipePage)} />
+          <Route path="/recipes/:recipeId" component={Authenticate(RecipeViewPage)} />
           <Route path="/" component={IndexPage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>

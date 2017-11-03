@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class CategorizedRecipe extends Component {
-  render() {
-    return (
-      <li>Frosty Chocolat</li>
-    );
-  }
+const CategorizedRecipe = ({ recipe }) => {
+  return (
+    <li>{recipe.recipeName}</li>
+  )
 }
+  
 
 export default CategorizedRecipe;

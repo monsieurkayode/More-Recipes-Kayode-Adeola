@@ -28,7 +28,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.disable('x-powered-by');
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   '/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options)
 );

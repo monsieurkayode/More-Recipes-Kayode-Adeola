@@ -10,7 +10,7 @@ const Recipe = db.Recipe,
   // This holds the attributes keys for returned model instances
   keys = [
     'id', 'views', 'upvote', 'downvote',
-    'recipeName', 'category', 'ingredients', 'instructions'
+    'recipeName', 'category', 'ingredients', 'instructions', 'image'
   ];
 
 /**
@@ -27,11 +27,12 @@ const create = (req, res) => Recipe
     category: req.body.category,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
-    userId: req.decoded.user.id
+    userId: req.decoded.user.id,
+    image: req.body.image
   }, {
     // Make sure that only fields specified below can be accessed
     fields: [
-      'recipeName', 'ingredients', 'instructions', 'userId', 'category'
+      'recipeName', 'ingredients', 'instructions', 'userId', 'category', 'image'
     ]
   })
   // Lets give the recipe created a view of 1 just to be generous
@@ -64,7 +65,8 @@ const update = (req, res) => Recipe
       recipeName: req.body.recipeName || recipe.recipeName,
       category: req.body.category || recipe.category,
       ingredients: req.body.ingredients || recipe.ingredients,
-      instructions: req.body.instructions || recipe.instructions
+      instructions: req.body.instructions || recipe.instructions,
+      image: req.body.image || recipe.image
     })
     .then(() => {
       // Return recipe to user with showing new modifications

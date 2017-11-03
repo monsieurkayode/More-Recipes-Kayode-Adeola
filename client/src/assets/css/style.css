@@ -324,6 +324,11 @@ a#post-btn:hover {
   padding-bottom: 0;
 }
 
+.views-small a img {
+  max-width: 300px;
+  max-height: 150px;
+}
+
 .views-small .card-content .divider {
   position: relative;
   top: -1rem;

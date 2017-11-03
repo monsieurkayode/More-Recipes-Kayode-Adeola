@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import recipeImg from '../../css/img/cake2.jpg';
+import recipeImg from '../../assets/css/img/cake2.jpg';
 
 class RecipeCard extends Component {
   render() {
     return (
       <div>
         <div className="card-image">
-          <a href="recipe-view.html"><img src={recipeImg} alt="" /></a>
+          <a href="recipe-view.html"><img className="responsive-img" src={recipeImg} alt="" /></a>
           <span className="card-title">24 Views</span>
         </div>
-        <div className="card-content small-cards">
+        <div className={`card-content ${this.props.size}`}>
           <span className="card-title"><strong>Frosty Chocolat</strong></span>
           <div className="divider"></div>
           <a className="edit chip modal-trigger" href="#modal-edit"><i className="fa fa-pencil"></i> Edit</a><span>

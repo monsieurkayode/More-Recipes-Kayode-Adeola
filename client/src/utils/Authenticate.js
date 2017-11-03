@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { fetchRecipesAction } from '../actions';
 
 export default function (ComposedComponent) {
   class Authenticate extends Component {
     componentWillMount() {
       if (!this.props.isAuthenticated) {
         this.props.history.push('/signin');
+      }
+      if (this.props.isAuthenticated) {
+        this.props.fetchRecipesAction();
       }
     }
 
@@ -15,6 +18,7 @@ export default function (ComposedComponent) {
         this.props.history.push('/')
       }
     }
+
     render() {
       return (
         <ComposedComponent {...this.props} />
@@ -28,5 +32,5 @@ export default function (ComposedComponent) {
       isAuthenticated: signinState.isAuthenticated
     }
   }
-  return connect(mapStateToProps)(Authenticate);
+  return connect(mapStateToProps, { fetchRecipesAction })(Authenticate);
 }
