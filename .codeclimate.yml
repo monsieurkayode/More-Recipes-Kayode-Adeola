@@ -26,3 +26,4 @@ exclude_paths:
   - "server/routes/"
   - "server/test"
   - "client/public/*"
+  - "client/src/assets/*"
