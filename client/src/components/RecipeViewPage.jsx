@@ -10,7 +10,7 @@ class RecipeViewPage extends Component {
   render() {
     return (
       <div>
-        <HomeNavbar />
+        <HomeNavbar user={this.props.user}/>
         <div id="recipe-img" className="hide-on-small-only">
           <div className="card z-depth-0">
             <div className="card-image">

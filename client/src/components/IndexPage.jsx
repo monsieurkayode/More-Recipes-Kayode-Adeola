@@ -17,7 +17,8 @@ class IndexPage extends Component {
     return (
       <div>
         { this.props.isAuthenticated ?
-          <HomeNavbar 
+          <HomeNavbar
+            user = { this.props.user }
             onClick={this.props.logoutAction} /> : <LandingNavbar /> }
         <Banner />
         <WelcomeMessage />
@@ -31,11 +32,11 @@ class IndexPage extends Component {
   }
 }
 
-const mapStateToProps = ({ recipes, recipesState, signinState }) => {
+const mapStateToProps = ({ recipes,  signinState }) => {
   return { 
     recipes,
+    user: signinState.user,
     isAuthenticated: signinState.isAuthenticated,
-    recipesState
   }
 };
 
