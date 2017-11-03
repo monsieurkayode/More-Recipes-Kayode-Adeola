@@ -65,7 +65,8 @@ const update = (req, res) => Recipe
       recipeName: req.body.recipeName || recipe.recipeName,
       category: req.body.category || recipe.category,
       ingredients: req.body.ingredients || recipe.ingredients,
-      instructions: req.body.instructions || recipe.instructions
+      instructions: req.body.instructions || recipe.instructions,
+      image: req.body.image || recipe.image
     })
     .then(() => {
       // Return recipe to user with showing new modifications

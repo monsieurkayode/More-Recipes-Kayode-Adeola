@@ -52,6 +52,7 @@ const recipeHandler = (code, body, res) => {
         category: body.category,
         ingredients: body.ingredients,
         instructions: body.instructions,
+        image: body.image
       });
     default:
       return res.status(200).json({
@@ -65,6 +66,7 @@ const recipeHandler = (code, body, res) => {
         category: body.category,
         ingredients: body.ingredients,
         instructions: body.instructions,
+        image: body.image
       });
   }
 };
