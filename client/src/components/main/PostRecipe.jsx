@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
+import FileUpload from './FileUpload';
 import { createPost } from '../../actions';
 
 class PostRecipe extends Component {
@@ -14,6 +15,11 @@ class PostRecipe extends Component {
             type={type}
             { ...input }
           />
+          {label === 'Ingredients' ? 
+          <div>
+            <button 
+              className="btn blue right"
+              >Add More</button></div> : ''}
           <label className='active'>{label}</label>
         </div>
         <div className="red-text">
@@ -25,12 +31,13 @@ class PostRecipe extends Component {
 
   onSubmit(values) {
     this.props.createPost(values, () => {
-      this.props.history.push('/')
+      this.props.history.push('/');
+      window.location.reload();
     });
   }
 
   render() {
-    const { handleSubmit } = this.props
+    const { handleSubmit, submitting } = this.props;
     return (
       <div className="container">
         <div className="row">
@@ -68,16 +75,20 @@ class PostRecipe extends Component {
               name='instructions'
               component={this.renderInput}
             />
-
-            <Field
-              type='file'
-              name='imageUrl'
-              component={this.renderInput}
-            />
-            <Link to='/'>
+            <div>
+              <Field
+                name='image'
+                component={FileUpload}
+              />
+            </div>
+            
+            <span className="right"> 
+              <button disabled={submitting} type='submit' className="btn">Post</button>
+            </span>
+            <Link to='/' className="right">
               <button className="btn red">Cancel</button>
             </Link>
-            <button type='submit' className="btn">Post</button>
+            
           </form>
         </div>
       </div>
