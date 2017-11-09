@@ -17,9 +17,7 @@ class IndexPage extends Component {
     return (
       <div>
         { this.props.isAuthenticated ?
-          <HomeNavbar
-            user = { this.props.user }
-            onClick={this.props.logoutAction} /> : <LandingNavbar /> }
+          <HomeNavbar { ...this.props } /> : <LandingNavbar /> }
         <Banner />
         <WelcomeMessage />
         <Contents />

@@ -117,6 +117,10 @@ input[type=email]:not(.browser-default) {
   font-family: Roboto;
 }
 
+.dropdown-content {
+  margin-top: 64px;
+}
+
 .no-margin {
   margin: 0;
 }
