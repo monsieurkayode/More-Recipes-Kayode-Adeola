@@ -30,8 +30,6 @@ class HomeNavbar extends Component {
                 <span className="fa fa-lg fa-user-circle"></span> {this.props.user.username} <span className="fa fa-lg fa-caret-down"></span></a>}>
                 <UserMenu { ...this.props } />
               </Dropdown>
-              
-              {/* <a className="dropdown-button" data-activates="user-dropdown"><span className="fa fa-lg fa-user-circle"></span> {this.props.user.username} <span className="fa fa-lg fa-caret-down"></span></a> */}
             </li>
           </ul>
         </div>
