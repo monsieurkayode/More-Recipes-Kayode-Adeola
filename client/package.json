@@ -37,7 +37,6 @@
     "react": "^15.6.1",
     "react-dev-utils": "^4.0.1",
     "react-dom": "^15.6.1",
-    "react-materialize": "^1.0.17",
     "react-proptypes": "^1.0.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
