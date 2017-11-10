@@ -66,8 +66,8 @@ class SigninForm extends Component {
 }
 
 const mapStateToProps = ({ signinState }) => {
-  const { success, message, isAuthenticated } = signinState;
-  return { success, message, isAuthenticated };
+  const { message, isAuthenticated } = signinState;
+  return { message, isAuthenticated };
 }
 
 export default connect(mapStateToProps, { signinAction })(SigninForm);

@@ -15,9 +15,7 @@ class DashboardPage extends Component {
   render() {
     return (
       <div>
-        <DashboardNavbar
-          user={this.props.user}
-          onClick={this.props.logoutAction}/>
+        <DashboardNavbar { ...this.props }/>
         <div className="row">
           <DashboardPanel />
           <UserProfile />

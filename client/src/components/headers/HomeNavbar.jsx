@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Dropdown } from 'react-materialize';
+import { logoutAction } from '../../actions';
 
 import { UserMenu, SearchBar } from './Index';
 
@@ -23,19 +25,22 @@ class HomeNavbar extends Component {
               <Link to="/recipes/new" id="new-post"><i className="fa fa-pencil-square-o"></i> New Post</Link>
             </li>
             <li className="right hide-on-med-and-down return">
-              <a className="dropdown-button" data-activates="user-dropdown"><span className="fa fa-lg fa-user-circle"></span> {this.props.user.username} <span className="fa fa-lg fa-caret-down"></span></a>
+              <Dropdown
+                trigger={<a>
+                <span className="fa fa-lg fa-user-circle"></span> {this.props.user.username} <span className="fa fa-lg fa-caret-down"></span></a>}>
+                <UserMenu { ...this.props } />
+              </Dropdown>
             </li>
           </ul>
         </div>
       </nav>
-      <UserMenu onClick={this.props.onClick} />
     </div>
   )
   }
 }
 
-const mapDispatchToProps = ({ signinState }) => {
+const mapStateToProps = ({ signinState }) => {
   return { user: signinState.user }
 }
 
-export default connect(mapDispatchToProps)(HomeNavbar);
+export default connect(mapStateToProps, { logoutAction })(HomeNavbar);

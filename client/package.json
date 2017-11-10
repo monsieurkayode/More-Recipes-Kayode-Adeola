@@ -5,8 +5,10 @@
   "dependencies": {
     "axios": "^0.16.2",
     "jwt-decode": "^2.2.0",
+    "material-ui": "^0.19.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-materialize": "^1.0.17",
     "react-proptypes": "^1.0.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",

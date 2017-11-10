@@ -6,7 +6,7 @@ class PostRecipePage extends Component {
   render() {
     return (
       <div>
-        <HomeNavbar onClick={this.props.logoutAction} />
+        <HomeNavbar />
         <div className="row center-align">
           <div className="col s12 l6 m8 offset-l3 offset-m2">
             <div className="card blue-grey darken-1">
