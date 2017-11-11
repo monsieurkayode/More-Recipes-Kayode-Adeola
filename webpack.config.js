@@ -1,43 +1,38 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-const extractSass = new ExtractTextPlugin({
-  filename: '[name].[contenthash].css',
-  disable: process.env.NODE_ENV === 'development'
-});
-const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './client/public/index.html',
-  filename: 'index.html',
-  inject: 'body'
-});
 
 module.exports = {
   devtool: 'source-map',
   entry: [
+    'babel-polyfill',
     'webpack-hot-middleware/client',
-    './client/src/index'
+    './client/src/index.js'
   ],
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'client/src'),
     filename: 'bundle.js',
     publicPath: '/'
   },
   module: {
     loaders: [
-      {
-        test: /\.(js|jsx)$/,
+      { test: /\.(js|jsx)$/,
         loader: 'babel-loader',
-        exclude: /(node_modules|server|.vscode|template|coverage)/,
-        options: {
-          cacheDirectory: true,
+        exclude: /node_modules/,
+        query: {
+          presets: ['es2015', 'react', 'stage-2']
         }
       },
       {
         test: /\.css$/,
-        include: path.join(__dirname, 'client'),
-        loader: 'style-loader!css-loader!'
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader'],
+        }),
       },
       {
         test: /\.(ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -56,11 +51,10 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    HtmlWebpackPluginConfig, extractSass
   ],
   devServer: {
-    historyApiFallback: true,
-    contentBase: './build'
+    hot: true,
+    historyApiFallback: true
   },
   node: {
     net: 'empty',
