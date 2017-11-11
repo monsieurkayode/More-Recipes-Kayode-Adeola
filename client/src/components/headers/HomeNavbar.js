@@ -26,7 +26,7 @@ class HomeNavbar extends Component {
             </li>
             <li className="right hide-on-med-and-down return">
               <a className="dropdown-button" data-activates="user-dropdown">
-                <span className="fa fa-lg fa-user-circle"></span> {this.props.user.username} <span className="fa fa-lg fa-caret-down"></span></a>}>
+                <span className="fa fa-lg fa-user-circle"></span> {this.props.user.username} <span className="fa fa-lg fa-caret-down"></span></a>
                 <UserMenu { ...this.props } />
             </li>
           </ul>
