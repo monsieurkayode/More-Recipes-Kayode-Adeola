@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import $ from 'jquery';
 import { fetchRecipesAction, logoutAction } from '../actions'
 import { LandingNavbar, HomeNavbar, Banner } from './headers/Index';
 import { SigninModal, SignupModal, NewPostModal } from './modals/Index';
@@ -11,6 +12,10 @@ class IndexPage extends Component {
     if (localStorage.token && this.props.isAuthenticated) {
       this.props.fetchRecipesAction();
     }
+  }
+
+  componentDidMount() {
+    $('.dropdown-button').dropdown();
   }
   
   render() {

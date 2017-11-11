@@ -7,6 +7,10 @@ import { Ingredients, Instructions, Comments, CommentBox } from './recipeview/In
 import { NewPostModal } from './modals/Index';
 
 class RecipeViewPage extends Component {
+  componentDidMount() {
+    $('.dropdown-button').dropdown();
+  }
+  
   render() {
     return (
       <div>

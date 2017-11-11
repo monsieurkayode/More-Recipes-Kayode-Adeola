@@ -12,6 +12,10 @@ import {
 import { DeleteModal, NewPostModal, EditPostModal } from './modals/Index';
 
 class DashboardPage extends Component {
+  componentDidMount() {
+    $('.dropdown-button').dropdown();
+  }
+  
   render() {
     return (
       <div>

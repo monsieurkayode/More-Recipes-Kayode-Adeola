@@ -3,6 +3,10 @@ import { PostRecipe } from './Index';
 import { HomeNavbar } from '../headers/Index';
 
 class PostRecipePage extends Component {
+  componentDidMount() {
+    $('.dropdown-button').dropdown();
+  }
+  
   render() {
     return (
       <div>
