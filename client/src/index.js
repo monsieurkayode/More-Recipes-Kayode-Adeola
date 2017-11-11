@@ -7,7 +7,7 @@ import decode from 'jwt-decode';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-// import App from './App.jsx';
+// import App from './App';
 import NotFoundPage from './components/NotFoundPage';
 import IndexPage from './components/IndexPage';
 import { SigninPage, SignupPage, PostRecipePage } from './components/main/Index';
@@ -55,4 +55,4 @@ render(
     </BrowserRouter>
   </Provider>
 , document.getElementById('root'));
-// registerServiceWorker();
+registerServiceWorker();
