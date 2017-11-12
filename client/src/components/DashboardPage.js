@@ -15,6 +15,8 @@ class DashboardPage extends Component {
   componentDidMount() {
     $('.dropdown-button').dropdown();
     $('.button-collapse').sideNav();
+    $("#modal-delete").modal();
+    $("#modal-edit").modal();
   }
   
   render() {
