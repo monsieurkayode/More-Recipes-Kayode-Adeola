@@ -5,7 +5,7 @@ import boxImg from '../assets/css/img/cake2.jpg';
 import Footer from './footer/Footer';
 import { Ingredients, Instructions, Comments, CommentBox } from './recipeview/Index';
 import { NewPostModal } from './modals/Index';
-import { SideNav } from './main';
+import { SideNav } from './main/Index';
 
 class RecipeViewPage extends Component {
   componentDidMount() {
