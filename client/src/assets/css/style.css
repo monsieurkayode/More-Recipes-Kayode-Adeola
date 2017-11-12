@@ -328,9 +328,39 @@ a#post-btn:hover {
   padding-bottom: 0;
 }
 
-.views-small a img {
-  max-width: 300px;
-  max-height: 150px;
+@media only screen and (min-width: 768px) {
+  .views-small a img {
+    width: 200px;
+    height: 250px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .views-small a img {
+    width: 200px;
+    height: 400px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .views-small a img {
+    width: 200px;
+    height: 250px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .views-small a img {
+    width: 200px;
+    height: 250px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .views-small a img {
+    width: 200px;
+    height: 200px;
+  }
 }
 
 .views-small .card-content .divider {
