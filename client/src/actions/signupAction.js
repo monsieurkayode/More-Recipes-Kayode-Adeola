@@ -17,15 +17,18 @@ const signupAction = (user, callback) => dispatch =>
       const userExists = 'Username already exists';
       const emailExists = 'Email already exists';
       if (message === userExists) {
+        Materialize.toast(userExists, 4000, 'red')
         dispatch({ type:actionTypes.SIGNUP_VALIDATION_USER_ERROR, payload: message });
       }
       if (message === emailExists) {
+        Materialize.toast(emailExists, 4000, 'red')
         dispatch({ type:actionTypes.SIGNUP_VALIDATION_EMAIL_ERROR, payload: message });
       }
     }
 
-    if (error.response && error.response.status >= 500 ) {
-      const payload = 'An error occured'
+    else {
+      const payload = 'An error occured! Please try again';
+      Materialize.toast(payload, 4000, 'red')
       dispatch({ type:actionTypes.SIGNUP_UNSUCCESSFUL, payload});
     }
   })
