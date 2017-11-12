@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { PostRecipe } from './Index';
 import { HomeNavbar } from '../headers/Index';
+import { SideNav } from './';
 
 class PostRecipePage extends Component {
+  componentDidMount() {
+    $('.dropdown-button').dropdown();
+    $('.button-collapse').sideNav();
+  }
+
   render() {
     return (
       <div>
@@ -17,6 +23,7 @@ class PostRecipePage extends Component {
           </div>
         </div>
         <PostRecipe history={this.props.history} />
+        <SideNav />
     </div>
     );
   }

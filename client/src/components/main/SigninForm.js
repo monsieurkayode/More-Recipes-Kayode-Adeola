@@ -16,7 +16,6 @@ class SigninForm extends Component {
   componentWillUpdate(nextProps) {
     if (nextProps.isAuthenticated) {
       this.props.history.push('/');
-      window.location.reload();
     }
   }
 

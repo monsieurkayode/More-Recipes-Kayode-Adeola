@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { SignupForm } from './Index';
 
 class SignupPage extends Component {
+  componentDidMount() {
+    $('.button-collapse').sideNav();
+  }
   render() {
     return (
       <div>
@@ -29,9 +32,9 @@ class SignupPage extends Component {
           </div>
         </div>
         <SignupForm history={this.props.history} />
-        <ul className="side-nav" id="navlink">
+        <ul className="side-nav teal" id="navlink">
           <li>
-            <Link to="/signin">Log In</Link>
+            <Link to="/signin" className="white-text">Log In</Link>
           </li>
         </ul>
       </div>

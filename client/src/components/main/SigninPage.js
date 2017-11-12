@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { SigninForm } from './Index';
 
 class SigninPage extends Component {
+  componentDidMount() {
+    $('.button-collapse').sideNav();
+  }
   render() {
     return (
       <div>
@@ -15,9 +18,9 @@ class SigninPage extends Component {
                     <Link to="/signup">Sign Up</Link>
                   </li>
                 </ul>
-                <ul className="side-nav" id="navlink">
-                  <li className="">
-                    <Link to="/signup">Sign Up</Link>
+                <ul className="side-nav teal" id="navlink">
+                  <li>
+                    <Link to="/signup" className="white-text">Sign Up</Link>
                   </li>
                 </ul>
             </div>

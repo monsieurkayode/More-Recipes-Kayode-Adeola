@@ -15,8 +15,14 @@ const signinAction = (user) => dispatch =>
     }
   })
   .catch((error) => {
-    if (error.response && error.response.status >= 400 ) {
+    if (error.response && error.response.status >= 401 ) {
       const { message } = error.response.data
+      Materialize.toast(message, 4000, 'red')
+      dispatch({ type:actionTypes.SIGNIN_UNSUCCESSFUL, payload: message });
+    }
+    else {
+      const message = 'An error occured!';
+      Materialize.toast(message, 4000, 'red');
       dispatch({ type:actionTypes.SIGNIN_UNSUCCESSFUL, payload: message });
     }
   })

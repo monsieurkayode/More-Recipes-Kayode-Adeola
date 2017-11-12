@@ -9,9 +9,7 @@ const TextField = ({ field, value, type, onChange, className, icon, label, error
           onChange={onChange}
           value={value}
           name={field}
-          type={type}
-          className="validate"
-          required />
+          type={type} />
         <label htmlFor={field}>{label}</label>
         {error ? <span className="red-text right">{error}</span> : null}
       </div>

@@ -12,6 +12,7 @@ import SignupForm from './SignupForm';
 import SigninForm from './SigninForm';
 import TextField from './TextField';
 import PostRecipe from './PostRecipe';
+import SideNav from './SideNav';
 import PostRecipePage from './PostRecipePage';
 import WelcomeMessage from './WelcomeMessage';
 
@@ -31,5 +32,6 @@ export {
   SignupForm,
   SigninForm,
   TextField,
+  SideNav,
   WelcomeMessage
 };
