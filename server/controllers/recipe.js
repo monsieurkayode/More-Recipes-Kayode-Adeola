@@ -1,5 +1,6 @@
 // Import module dependencies
 import db from '../models/index';
+import paginate from '../helpers/paginate';
 import { recipeHandler } from '../helpers/responseHandler';
 
 // Assign variables to the database models
@@ -8,7 +9,7 @@ const Recipe = db.Recipe,
   User = db.User,
   Favorite = db.Favorite,
   // This holds the attributes keys for returned model instances
-  keys = [
+  include = [
     'id', 'views', 'upvote', 'downvote',
     'recipeName', 'category', 'ingredients', 'instructions', 'image'
   ];
@@ -113,10 +114,12 @@ const getRecipes = (req, res, next) => {
       req.query.sort ||
       req.query.category) return next();
 
-  // Find all recipes and do an eagerload to include the reviews associated
-  // with each recipe and also to include the user whomposted the review
+  const page = parseInt(req.query.page, 10) ? req.query.page : 1;
+  const limit = parseInt(req.query.page, 10) ? req.query.limit : 5;
+  const offset = (page - 1) * limit;
+
   return Recipe
-    .all({
+    .findAndCountAll({
       include: [{
         model: Review,
         as: 'reviews',
@@ -127,9 +130,14 @@ const getRecipes = (req, res, next) => {
         }]
       }],
       // Return only attributes defined in the global scope
-      attributes: keys
+      attributes: include,
+      limit,
+      offset,
+      order: [['id', 'DESC']]
     })
-    .then(recipes => res.status(200).send(recipes))
+    .then(result =>
+      res.status(200)
+        .json(paginate(page, limit, result)))
     .catch(error => res.status(400).send(error));
 };
 
@@ -142,7 +150,7 @@ const getRecipes = (req, res, next) => {
  */
 const getUserRecipes = (req, res) => Recipe
   .findAll({ where: { userId: req.decoded.user.id },
-    attributes: keys
+    attributes: include
   })
   .then((recipes) => {
     if (recipes.length === 0) {
@@ -193,7 +201,7 @@ const getTopRecipes = (req, res, next) => {
     order = (req.query.order).slice(0, 4);
   return Recipe
     .findAll({
-      attributes: keys,
+      attributes: include,
       order: [[sort, order]],
       limit: 5
     })
@@ -229,7 +237,7 @@ const searchRecipesByIngredients = (req, res, next) => {
     .all({
       where: { $or: query },
       limit: 10,
-      attributes: keys
+      attributes: include
     })
     .then((recipes) => {
       if (!recipes.length) {
@@ -265,7 +273,7 @@ const searchRecipesByCategory = (req, res) => {
     .all({
       where: { $or: query },
       limit: 10,
-      attributes: keys
+      attributes: include
     })
     .then((recipes) => {
       if (!recipes.length) {
@@ -302,7 +310,7 @@ const searchUserFavsByCategory = (req, res) => {
       where: { $or: query },
       include: {
         model: Recipe,
-        attributes: keys
+        attributes: include
       },
       attributes: ['category']
     })
