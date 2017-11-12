@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { SigninForm } from './Index';
 
 class SigninPage extends Component {
+  componentDidMount() {
+    $('.button-collapse').sideNav();
+  }
   render() {
     return (
       <div>

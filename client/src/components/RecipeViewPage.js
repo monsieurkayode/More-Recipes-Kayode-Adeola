@@ -9,8 +9,9 @@ import { NewPostModal } from './modals/Index';
 class RecipeViewPage extends Component {
   componentDidMount() {
     $('.dropdown-button').dropdown();
+    $('.button-collapse').sideNav();
   }
-  
+
   render() {
     return (
       <div>

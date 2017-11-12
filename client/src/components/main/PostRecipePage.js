@@ -5,8 +5,9 @@ import { HomeNavbar } from '../headers/Index';
 class PostRecipePage extends Component {
   componentDidMount() {
     $('.dropdown-button').dropdown();
+    $('.button-collapse').sideNav();
   }
-  
+
   render() {
     return (
       <div>

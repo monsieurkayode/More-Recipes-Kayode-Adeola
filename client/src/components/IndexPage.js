@@ -16,6 +16,7 @@ class IndexPage extends Component {
 
   componentDidMount() {
     $('.dropdown-button').dropdown();
+    $('.button-collapse').sideNav();
   }
   
   render() {
