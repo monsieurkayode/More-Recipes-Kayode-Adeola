@@ -1,8 +1,14 @@
 // Import module dependency
 import db from '../models/index';
+import { paginate, validatePaginate } from '../helpers/paginate';
 
 // Assign a variable to the database table we will be perssisting data
-const Favorite = db.Favorite;
+const Favorite = db.Favorite,
+  Recipe = db.Recipe,
+  include = [
+    'id', 'views', 'upvote', 'downvote',
+    'recipeName', 'category', 'ingredients', 'instructions', 'image'
+  ];
 
 /**
  * @description controller function for adding favorite recipes
@@ -35,18 +41,28 @@ const addFavorite = (req, res) => Favorite
 const getUserFavorites = (req, res) => {
   // Use token generated to validate user identity
   const userId = req.decoded.user.id;
+  const { page, limit, offset } = validatePaginate(req);
   return Favorite
   // Query the database to fetch all favorites unique to user's id
   // If none found tell user his favorite recipe list is empty
   // Otherwise return all user's favorite recipe
-    .findAll({ where: { userId } })
+    .findAndCountAll({ where: { userId },
+      include: [{
+        model: Recipe,
+        attributes: include
+      }],
+      limit,
+      offset,
+      order: [['id', 'DESC']],
+      attributes: ['id']
+    })
     .then((favorites) => {
-      if (!favorites.length) {
+      if (favorites.count === 0) {
         return res.status(200).send({
           message: 'Your favorite recipe list is empty'
         });
       }
-      return res.status(200).send(favorites);
+      return res.status(200).send(paginate(page, limit, favorites));
     })
   // Catch error if any occurs
     .catch(error => res.status(400).send(error));
