@@ -71,5 +71,25 @@ const recipeHandler = (code, body, res) => {
   }
 };
 
-export { errorHandler, recipeHandler };
+const responseHandler = (
+  dbReview, dbUser, dbFavorite) => {
+  const response = {
+    include: [{
+      model: dbReview,
+      as: 'reviews',
+      attributes: ['comment'],
+      include: [{
+        model: dbUser,
+        attributes: ['username', 'createdAt']
+      }]
+    },
+    {
+      model: dbFavorite,
+      attributes: ['userId']
+    }]
+  };
+  return response.include;
+};
+
+export { errorHandler, recipeHandler, responseHandler };
 
