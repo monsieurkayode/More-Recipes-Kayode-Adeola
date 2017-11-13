@@ -219,7 +219,7 @@ describe('Search recipes', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body[0].recipeName).to.equal('Coleslaw Salad');
+        expect(res.body[1][0].recipeName).to.equal('Coleslaw Salad');
         if (err) return done(err);
         done();
       });
