@@ -36,16 +36,8 @@ const create = (req, res) => Recipe
       'recipeName', 'ingredients', 'instructions', 'userId', 'category', 'image'
     ]
   })
-  // Lets give the recipe created a view of 1 just to be generous
   // and return the created recipe post to user
-  .then((recipe) => {
-    recipe.increment('views').then(() => {
-      recipe.reload()
-        .then(() => {
-          recipeHandler(201, recipe, res);
-        });
-    });
-  })
+  .then(recipe => recipeHandler(201, recipe, res))
   .catch(error => res.status(400).json(error));
 
 /**
@@ -61,7 +53,7 @@ const update = (req, res) => Recipe
     userId: req.decoded.user.id, id: req.params.recipeId }
   })
   .then(recipe => recipe
-    // If found modify fields provided or return initial data
+    // Modify fields provided or retain data from db
     .update({
       recipeName: req.body.recipeName || recipe.recipeName,
       category: req.body.category || recipe.category,
@@ -114,8 +106,10 @@ const getRecipes = (req, res, next) => {
       req.query.sort ||
       req.query.category) return next();
 
-  const page = parseInt(req.query.page, 10) ? req.query.page : 1;
-  const limit = parseInt(req.query.page, 10) ? req.query.limit : 5;
+  const page = Number.isInteger(parseInt(req.query.page, 10))
+                && req.query.page > 0 ? req.query.page : 1;
+  const limit = Number.isInteger(parseInt(req.query.limit, 10))
+                && req.query.limit > 0 ? req.query.limit : 5;
   const offset = (page - 1) * limit;
 
   return Recipe
