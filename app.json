@@ -1,0 +1,39 @@
+{
+  "name": "More-Recipes-Kayode-Adeola",
+  "scripts": {
+    "postdeploy": "npm run migrate"
+  },
+  "env": {
+    "expiresIn": {
+      "required": true
+    },
+    "issuer": {
+      "required": true
+    },
+    "jwtid": {
+      "required": true
+    },
+    "NPM_CONFIG_PRODUCTION": {
+      "required": true
+    },
+    "PASS": {
+      "required": true
+    },
+    "secretKey": {
+      "required": true
+    },
+    "USER": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
