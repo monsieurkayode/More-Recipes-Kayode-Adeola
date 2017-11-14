@@ -218,7 +218,7 @@ describe('Search for Recipes', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body[0].recipeName).to.equal('Kiwi Smoothie on the Rocks');
+        expect(res.body[1][0].recipeName).to.equal('Kiwi Smoothie on the Rocks');
         if (err) return done(err);
         done();
       });
@@ -233,7 +233,7 @@ describe('Search for Recipes', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body[0].recipeName).to.equal('Coleslaw Salad');
+        expect(res.body[1][0].recipeName).to.equal('Coleslaw Salad');
         if (err) return done(err);
         done();
       });
@@ -268,7 +268,7 @@ describe('Keep records of recipe views', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.views).to.equal(2);
+        expect(res.body.views).to.equal(1);
         if (err) return done(err);
         done();
       });
@@ -286,7 +286,7 @@ describe('View top recipes', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body[0].recipeName).to.equal('Coleslaw Salad');
+        expect(res.body[1].recipeName).to.equal('Coleslaw Salad');
         if (err) return done(err);
         done();
       });

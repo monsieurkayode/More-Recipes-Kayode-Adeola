@@ -1,6 +1,7 @@
 // Import module dependencies
 import db from '../models/index';
-import { recipeHandler } from '../helpers/responseHandler';
+import { paginate, validatePaginate } from '../helpers/paginate';
+import { recipeHandler, responseHandler } from '../helpers/responseHandler';
 
 // Assign variables to the database models
 const Recipe = db.Recipe,
@@ -8,7 +9,7 @@ const Recipe = db.Recipe,
   User = db.User,
   Favorite = db.Favorite,
   // This holds the attributes keys for returned model instances
-  keys = [
+  include = [
     'id', 'views', 'upvote', 'downvote',
     'recipeName', 'category', 'ingredients', 'instructions', 'image'
   ];
@@ -35,16 +36,8 @@ const create = (req, res) => Recipe
       'recipeName', 'ingredients', 'instructions', 'userId', 'category', 'image'
     ]
   })
-  // Lets give the recipe created a view of 1 just to be generous
   // and return the created recipe post to user
-  .then((recipe) => {
-    recipe.increment('views').then(() => {
-      recipe.reload()
-        .then(() => {
-          recipeHandler(201, recipe, res);
-        });
-    });
-  })
+  .then(recipe => recipeHandler(201, recipe, res))
   .catch(error => res.status(400).json(error));
 
 /**
@@ -60,7 +53,7 @@ const update = (req, res) => Recipe
     userId: req.decoded.user.id, id: req.params.recipeId }
   })
   .then(recipe => recipe
-    // If found modify fields provided or return initial data
+    // Modify fields provided or retain data from db
     .update({
       recipeName: req.body.recipeName || recipe.recipeName,
       category: req.body.category || recipe.category,
@@ -85,7 +78,7 @@ const deleteRecipe = (req, res) => Recipe
   // user using verification of identity from token provided
   .findOne({
     where:
-        { userId: req.decoded.user.id, id: req.params.recipeId }
+      { userId: req.decoded.user.id, id: req.params.recipeId }
   })
   .then(recipe => recipe
     // If found remove entry from database table
@@ -113,23 +106,19 @@ const getRecipes = (req, res, next) => {
       req.query.sort ||
       req.query.category) return next();
 
-  // Find all recipes and do an eagerload to include the reviews associated
-  // with each recipe and also to include the user whomposted the review
+  const { page, limit, offset } = validatePaginate(req);
+
   return Recipe
-    .all({
-      include: [{
-        model: Review,
-        as: 'reviews',
-        attributes: ['comment'],
-        include: [{
-          model: User,
-          attributes: ['username', 'createdAt']
-        }]
-      }],
-      // Return only attributes defined in the global scope
-      attributes: keys
+    .findAndCountAll({
+      include: responseHandler(Review, User, Favorite),
+      attributes: include,
+      limit,
+      offset,
+      order: [['id', 'DESC']]
     })
-    .then(recipes => res.status(200).send(recipes))
+    .then(result =>
+      res.status(200)
+        .json(paginate(page, limit, result)))
     .catch(error => res.status(400).send(error));
 };
 
@@ -140,20 +129,27 @@ const getRecipes = (req, res, next) => {
  * @param {object} res http response object from server
  * @returns {object} status message recipe
  */
-const getUserRecipes = (req, res) => Recipe
-  .findAll({ where: { userId: req.decoded.user.id },
-    attributes: keys
-  })
-  .then((recipes) => {
-    if (recipes.length === 0) {
+const getUserRecipes = (req, res) => {
+  const { page, limit, offset } = validatePaginate(req);
+  return Recipe
+    .findAndCountAll({ where: { userId: req.decoded.user.id },
+      include: responseHandler(Review, User, Favorite),
+      attributes: include,
+      limit,
+      offset,
+      order: [['id', 'DESC']]
+    })
+    .then((recipes) => {
+      if (recipes.count === 0) {
       // Notify user he/she has no posted recipes to display if none found
-      return res.status(200).send({
-        message: 'User has not posted any recipe'
-      });
-    }
-    return res.status(200).send(recipes);
-  })
-  .catch(error => res.status(400).json(error));
+        return res.status(200).send({
+          message: 'User has not posted any recipe'
+        });
+      }
+      return res.status(200).send(paginate(page, limit, recipes));
+    })
+    .catch(error => res.status(400).json(error));
+};
 
 /**
  * @description controller function that handles detailed recipe view
@@ -164,13 +160,16 @@ const getUserRecipes = (req, res) => Recipe
  */
 const viewRecipe = (req, res) => Recipe
   // Query database for recipe matching id in params
-  .findOne({ where: { id: req.params.recipeId } })
+  .findOne({ where: { id: req.params.recipeId }
+  })
   .then((recipe) => {
     // If found, increment the view count and return new data
-    recipe.increment('views').then(() => {
-      recipe.reload()
-        .then(() => res.status(200).send(recipe));
-    });
+    recipe.increment('views').then(() => Recipe
+      .findOne({ where: { id: req.params.recipeId },
+        include: responseHandler(Review, User, Favorite),
+        attributes: include,
+      }, responseHandler(Review, User, Favorite))
+      .then(result => res.status(200).send(result)));
   })
   .catch(error => res.status(400).send(error));
 
@@ -193,9 +192,9 @@ const getTopRecipes = (req, res, next) => {
     order = (req.query.order).slice(0, 4);
   return Recipe
     .findAll({
-      attributes: keys,
+      attributes: include,
       order: [[sort, order]],
-      limit: 5
+      limit: 5,
     })
     .then(recipes => res.status(200).send(recipes))
     .catch(error => res.status(400).json(error));
@@ -216,6 +215,7 @@ const searchRecipesByIngredients = (req, res, next) => {
   // Make provision for multiple ingredients query by delimiting
   // query string using ' ' which is used to replace '+'
   const ingredients = req.query.ingredients.split(' ');
+  const { page, limit, offset } = validatePaginate(req);
 
   // If multiple ingredients, map each keyword to an object and use
   // the $or and $iLike for case insensitivity sequelize
@@ -226,18 +226,21 @@ const searchRecipesByIngredients = (req, res, next) => {
     }
   }));
   return Recipe
-    .all({
+    .findAndCountAll({
       where: { $or: query },
-      limit: 10,
-      attributes: keys
+      include: responseHandler(Review, User, Favorite),
+      limit,
+      offset,
+      order: [['id', 'DESC']],
+      attributes: include
     })
     .then((recipes) => {
-      if (!recipes.length) {
+      if (recipes.count === 0) {
         return res.status(200).send({
           message: 'No recipe matches your search'
         });
       }
-      return res.status(200).send(recipes);
+      return res.status(200).json(paginate(page, limit, recipes));
     })
     .catch(error => res.status(400).send(error));
 };
@@ -253,6 +256,7 @@ const searchRecipesByCategory = (req, res) => {
   // Make provision for multiple ingredients query by delimiting
   // query string using ' ' which is used to replace '+'
   const category = req.query.category.split(' ');
+  const { page, limit, offset } = validatePaginate(req);
 
   // If multiple category, map each keyword to an object and use
   // the $or sequelize complex query to perform search
@@ -262,18 +266,21 @@ const searchRecipesByCategory = (req, res) => {
     }
   }));
   return Recipe
-    .all({
+    .findAndCountAll({
       where: { $or: query },
-      limit: 10,
-      attributes: keys
+      include: responseHandler(Review, User, Favorite),
+      limit,
+      offset,
+      order: [['id', 'DESC']],
+      attributes: include
     })
     .then((recipes) => {
-      if (!recipes.length) {
+      if (recipes.count === 0) {
         return res.status(200).send({
           message: 'No recipe matches your search'
         });
       }
-      return res.status(200).send(recipes);
+      return res.status(200).send(paginate(page, limit, recipes));
     })
     .catch(error => res.status(400).send(error));
 };
@@ -289,6 +296,7 @@ const searchUserFavsByCategory = (req, res) => {
   // Make provision for multiple category query by delimiting
   // query string using ' ' which is used to replace '+'
   const category = req.query.category.split(' ');
+  const { page, limit, offset } = validatePaginate(req);
 
   // If multiple category, map each keyword to an object and use
   // the $or sequelize complex query to perform search
@@ -298,21 +306,24 @@ const searchUserFavsByCategory = (req, res) => {
     }
   }));
   return Favorite
-    .all({
+    .findAndCountAll({
       where: { $or: query },
-      include: {
+      include: [{
         model: Recipe,
-        attributes: keys
-      },
-      attributes: ['category']
+        attributes: include
+      }],
+      limit,
+      offset,
+      order: [['id', 'DESC']],
+      attributes: ['id']
     })
     .then((recipes) => {
-      if (!recipes) {
+      if (recipes.count === 0) {
         return res.status(200).send({
           message: 'No favorite recipe matches your search'
         });
       }
-      res.status(200).send(recipes);
+      res.status(200).json(paginate(page, limit, recipes));
     })
     .catch(error => res.status(400).send(error));
 };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PostRecipe } from './Index';
 import { HomeNavbar } from '../headers/Index';
-import { SideNav } from './';
+import { SideNav } from './Index';
 
 class PostRecipePage extends Component {
   componentDidMount() {
