@@ -11,6 +11,7 @@ const signinAction = (user) => dispatch =>
       localStorage.setItem('token', Token);
       setAuthorizationToken(Token);
       const user = decode(Token).user;
+      Materialize.toast(`Welcome to More-Recipes ${user.username}`, 4000, 'green')
       dispatch({ type:actionTypes.SIGNIN_SUCCESSFUL, payload: user });
     }
   })

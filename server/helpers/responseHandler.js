@@ -77,10 +77,10 @@ const responseHandler = (
     include: [{
       model: dbReview,
       as: 'reviews',
-      attributes: ['comment'],
+      attributes: ['comment', 'createdAt'],
       include: [{
         model: dbUser,
-        attributes: ['username', 'createdAt']
+        attributes: ['username']
       }]
     },
     {
