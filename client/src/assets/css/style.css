@@ -137,7 +137,8 @@ input[type=email]:not(.browser-default) {
 
 
 #recipe-img .card-image img{
-  height: 360px;
+  height: 280px;
+  object-fit: cover;
   opacity: 0.7;
 }
 
@@ -154,6 +155,13 @@ input[type=email]:not(.browser-default) {
 #comment-box .input-field textarea[type=text]:focus {
   border-bottom: 0px solid #ddd;
   box-shadow: 0 2px 0 0 #ccc;
+}
+
+#comment-posts div, ul, li, p {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 #post-btn {

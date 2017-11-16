@@ -15,7 +15,7 @@ class DashboardNavbar extends Component {
             <ul className="right hide-on-med-and-down return">
               <li>
                 <a className="dropdown-button" data-activates="user-dropdown">
-                <span className="fa fa-lg fa-user-circle"></span> {this.props.user.username} <span className="fa fa-lg fa-caret-down"></span></a>}>
+                <span className="fa fa-lg fa-user-circle"></span> {this.props.user.username} <span className="fa fa-lg fa-caret-down"></span></a>
                 <UserMenu logoutAction={this.props.logoutAction} />
               </li>
             </ul>

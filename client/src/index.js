@@ -48,7 +48,7 @@ render(
           <Route path="/dashboard" component={Authenticate(DashboardPage)} />
           <Route path="/recipes/new" component={Authenticate(PostRecipePage)} />
           <Route path="/recipes/:recipeId" component={Authenticate(RecipeViewPage)} />
-          <Route path="/" component={IndexPage} />
+          <Route exact path="/" component={IndexPage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </div>

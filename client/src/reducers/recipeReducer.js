@@ -7,7 +7,8 @@ const recipeReducer = (state = {}, action) => {
     return _.mapKeys(action.payload, 'id');
   case actionTypes.FETCH_RECIPES:
     const newState = action.payload[1];
-    return _.mapKeys({ ...state, ...newState }, 'id');
+    _.omitBy(state, 'sample');
+  return _.mapKeys([ ...newState, ...state ], 'id');
   case actionTypes.CREATE_POST:
     return { ...state, [action.payload.id]: action.payload }
   default:

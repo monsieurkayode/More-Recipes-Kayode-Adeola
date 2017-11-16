@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
+import { fetchSingleRecipe } from '../actions/index';
 import HomeNavbar from './headers/HomeNavbar';
 import recipeImg from '../assets/css/img/cake.jpg';
+import banner from '../assets/css/img/banner2.jpg';
 import boxImg from '../assets/css/img/cake2.jpg';
 import Footer from './footer/Footer';
 import { Ingredients, Instructions, Comments, CommentBox } from './recipeview/Index';
@@ -8,33 +12,49 @@ import { NewPostModal } from './modals/Index';
 import { SideNav } from './main/Index';
 
 class RecipeViewPage extends Component {
+  componentWillMount() {
+    const { recipeId } = this.props.match.params;
+    this.props.fetchSingleRecipe(recipeId);
+  }
+
   componentDidMount() {
     $('.dropdown-button').dropdown();
     $('.button-collapse').sideNav();
+    document.body.scrollTop = 0;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    $('.dropdown-button').dropdown();
+    $('.button-collapse').sideNav();
+    document.body.scrollTop = 0;
   }
 
   render() {
+    const { currentRecipe } = this.props;
+    if(isEmpty(currentRecipe)) {
+      return <div>Loading....</div>
+    }
     return (
       <div>
         <HomeNavbar user={this.props.user}/>
         <div id="recipe-img" className="hide-on-small-only">
           <div className="card z-depth-0">
             <div className="card-image">
-              <img className="responsive-img" src={recipeImg} alt="" />
-              <span className="card-title">Frosty Chocolat</span>
+              <img className="responsive-img" src={`/uploads/${currentRecipe.image}`} alt={currentRecipe.recipeName}/>
+              <span className="card-title">{currentRecipe.recipeName}</span>
             </div>
           </div>
         </div>
         <div className="row">
-          <Ingredients />
+          <Ingredients ingredients={currentRecipe.ingredients}/>
           <div className="col l7 m8 s12">
             <div className="row">
-              <Instructions />
+              <Instructions instructions={currentRecipe.instructions}/>
             </div>
             <div className="col l12 m12 s12">
               <div className="card recipe-view">
                 <div className="card-image">
-                  <img className="materialboxed" src={boxImg} alt="" />
+                  <img className="materialboxed" src={`/uploads/${currentRecipe.image}`} alt="" />
                   <span className="card-title right">
                     <a className="chip active" href=""><i className="fa fa-thumbs-up"></i></a>
                     <a className="chip" href=""><i className="fa fa-thumbs-down "></i></a>
@@ -47,7 +67,7 @@ class RecipeViewPage extends Component {
         </div>
         <SideNav />
         <CommentBox />
-        <Comments />
+        {currentRecipe.reviews.map(review => <Comments key={review.createdAt} review = { review }/>)}
         <Footer />
         <NewPostModal />
       </div>
@@ -55,4 +75,8 @@ class RecipeViewPage extends Component {
   }
 }
 
-export default RecipeViewPage;
+const mapStateToProps = ({ currentRecipe }) => {
+  return { currentRecipe }
+}
+
+export default connect(mapStateToProps, { fetchSingleRecipe })(RecipeViewPage);
