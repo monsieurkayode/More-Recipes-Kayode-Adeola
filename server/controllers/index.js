@@ -1,6 +1,3 @@
-/**
- * import all module dependencies
- */
 import { user } from './user';
 import { vote } from './vote';
 import { login } from './login';

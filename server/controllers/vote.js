@@ -8,15 +8,15 @@ const Vote = db.Vote;
 /**
  *
  * @description controller function that handles upvoting a posted recipe
- * A user that has upvoted on same recipe before will have his vote removed
- * if he/she tries to perform same upvote request
+ * A user that has upvoted on same recipe before will have vote removed
+ * if user tries to perform same upvote request
+ *
  * @param {object} req http request object to server
  * @param {object} res http response object from server
+ *
  * @returns {object} status message upvote downvote
  */
 const upvote = (req, res) => Vote
-  // Create model instance and persist data to database
-  // if not found indicating user has not voted on recipe
   .findOrCreate({
     where: {
       userId: req.decoded.user.id,
@@ -24,9 +24,6 @@ const upvote = (req, res) => Vote
     defaults: { option: true }
   })
   .spread((voter, created) => {
-    // If created perform upvote action
-    // If not created and user has information resolving
-    // to a downvote, allow user to upvote and remove user downvote
     if (created) {
       return Recipe
         .findOne({ where: { id: req.params.recipeId } })
@@ -77,15 +74,15 @@ const upvote = (req, res) => Vote
 /**
  *
  * @description controller function that handles downvoting a posted recipe
- * A user that has upvoted on same recipe before will have his vote removed
+ * A user that has upvoted on same recipe before will have vote removed
  * if he/she tries to perform same downvote request
+ *
  * @param {object} req http request object to server
  * @param {object} res http response object from server
+ *
  * @returns {object} status message upvote downvote
  */
 const downvote = (req, res) => Vote
-  // Create model instance and persist data to database
-  // if not found indicating user has not voted on recipe
   .findOrCreate({
     where: {
       userId: req.decoded.user.id,
@@ -93,9 +90,6 @@ const downvote = (req, res) => Vote
     defaults: { option: false }
   })
   .spread((voter, created) => {
-    // If created perform downvote action
-    // If not created and user has information resolving
-    // to an upvote, allow user to downvote and remove user's upvote
     if (created) {
       return Recipe
         .findOne({ where: { id: req.params.recipeId } })

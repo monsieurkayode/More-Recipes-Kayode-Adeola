@@ -59,7 +59,6 @@ const userModel = (sequelize, DataTypes) => {
     },
     classMethods: {
       associate(models) {
-        // associations can be defined 
         User.hasMany(models.Recipe, {
           foreignKey: 'userId',
           as: 'recipes'

@@ -15,7 +15,6 @@ const reviewModel = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        // associations can be defined here
         Review.belongsTo(models.Recipe, {
           foreignKey: 'recipeId',
           onDelete: 'CASCADE'

@@ -1,5 +1,19 @@
+/**
+ * @description Helper function for handling error response
+ *
+ * @param {number} code
+ * @param {object} err
+ * @param {object} res
+ *
+ * @returns {object} status message
+ */
 const errorHandler = (code, err, res) => {
   switch (code) {
+    case 400:
+      return res.status(400).json({
+        status: 'fail',
+        message: err
+      });
     case 401:
       return res.status(401).json({
         status: 'fail',
@@ -31,13 +45,23 @@ const errorHandler = (code, err, res) => {
         message: err
       });
     default:
-      return res.status(400).json({
+      return res.status(500).json({
         status: 'fail',
         message: err
       });
   }
 };
 
+/**
+ * @description Helper function for handling recipe response
+ *
+ * @param {number} code
+ * @param {object} body
+ * @param {object} res
+ *
+ * @returns {object} status, message, id, views, upvote, downvote,
+ * recipeName, category, ingredients, instructions, image
+ */
 const recipeHandler = (code, body, res) => {
   switch (code) {
     case 201:
@@ -71,6 +95,16 @@ const recipeHandler = (code, body, res) => {
   }
 };
 
+/**
+ * @description Helper function for handling querying
+ * with join tables
+ *
+ * @param {object} dbReview
+ * @param {object} dbUser
+ * @param {object} dbFavorite
+ *
+ * @returns {object} response
+ */
 const responseHandler = (
   dbReview, dbUser, dbFavorite) => {
   const response = {

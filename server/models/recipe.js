@@ -47,7 +47,6 @@ const recipeModel = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        // associations can be defined here
         Recipe.belongsTo(models.User, {
           foreignKey: 'userId'
         });

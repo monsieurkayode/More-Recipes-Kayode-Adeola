@@ -1,16 +1,16 @@
-// Import module dependencies
 import db from '../models/index';
 import { errorHandler } from '../helpers/responseHandler';
 
-// Reference database models
 const Favorite = db.Favorite;
 const Recipe = db.Recipe;
 
 /**
  * @description Middleware function for validating if a recipe exists
+ *
  * @param {object} req http request object to server
  * @param {object} res http response object from server
  * @param {function} next
+ *
  * @returns {object} status message
  */
 const validRecipe = (req, res, next) => {
@@ -27,9 +27,11 @@ const validRecipe = (req, res, next) => {
 
 /**
  * @description Middleware function for validating if a favorite recipe exists
+ *
  * @param {object} req http request object to server
  * @param {object} res http response object from server
  * @param {function} next
+ *
  * @returns {object} status message
  */
 const favoriteExists = (req, res, next) => {
