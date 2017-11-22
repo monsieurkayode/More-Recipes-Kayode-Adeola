@@ -12,6 +12,10 @@ import { errorHandler } from '../helpers/responseHandler';
  * @returns {object} status message
  */
 const validate = (req, res, next) => {
+  if (req.params.recipeId && req.params.id) {
+    if (isNumber(req.params.recipeId) && isNumber(req.params.id)) return next();
+    return errorHandler(422, 'You have entered an invalid parameter', res);
+  }
   if (isNumber(req.params.recipeId)) return next();
   return errorHandler(422, 'You have entered an invalid parameter', res);
 };

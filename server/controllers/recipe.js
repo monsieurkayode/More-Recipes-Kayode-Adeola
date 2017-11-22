@@ -1,6 +1,10 @@
 import db from '../models/index';
 import { paginate, validatePaginate } from '../helpers/paginate';
-import { recipeHandler, responseHandler } from '../helpers/responseHandler';
+import {
+  recipeHandler,
+  responseHandler,
+  errorHandler,
+  handleResponse } from '../helpers/responseHandler';
 
 const Recipe = db.Recipe,
   Review = db.Review,
@@ -19,7 +23,7 @@ const Recipe = db.Recipe,
  *
  * @returns {object} status message recipe
  */
-const create = (req, res) => Recipe
+const createRecipe = (req, res) => Recipe
   .create({
     recipeName: req.body.recipeName,
     category: req.body.category,
@@ -43,7 +47,7 @@ const create = (req, res) => Recipe
  *
  * @returns {object} status message recipe
  */
-const update = (req, res) => Recipe
+const updateRecipe = (req, res) => Recipe
   .findOne({ where: {
     userId: req.decoded.user.id, id: req.params.recipeId }
   })
@@ -108,9 +112,16 @@ const getRecipes = (req, res, next) => {
       offset,
       order: [['id', 'DESC']]
     })
-    .then(result =>
-      res.status(200)
-        .json(paginate(page, limit, result)))
+    .then((recipes) => {
+      if (recipes.count === 0) {
+        return errorHandler(404, 'No recipe found', res);
+      }
+      let status;
+      let message;
+      return handleResponse(
+        200, res, paginate, page, limit, status, message, recipes
+      );
+    })
     .catch(error => res.status(400).send(error));
 };
 
@@ -135,11 +146,13 @@ const getUserRecipes = (req, res) => {
     })
     .then((recipes) => {
       if (recipes.count === 0) {
-        return res.status(200).send({
-          message: 'User has not posted any recipe'
-        });
+        return errorHandler(404, 'You have no recipe post', res);
       }
-      return res.status(200).send(paginate(page, limit, recipes));
+      let status;
+      let message;
+      return handleResponse(
+        200, res, paginate, page, limit, status, message, recipes
+      );
     })
     .catch(error => res.status(400).json(error));
 };
@@ -162,7 +175,11 @@ const viewRecipe = (req, res) => Recipe
         include: responseHandler(Review, User, Favorite),
         attributes: include,
       }, responseHandler(Review, User, Favorite))
-      .then(result => res.status(200).send(result)));
+      .then(result => res.status(200).send({
+        status: 'success',
+        message: `Viewing post with id of ${recipe.id}`,
+        recipe: result
+      })));
   })
   .catch(error => res.status(400).send(error));
 
@@ -188,7 +205,16 @@ const getTopRecipes = (req, res, next) => {
       order: [[sort, order]],
       limit: 5,
     })
-    .then(recipes => res.status(200).send(recipes))
+    .then((recipes) => {
+      if (recipes.count === 0) {
+        return errorHandler(404, 'No recipe found', res);
+      }
+      return res.status(200).send({
+        status: 'success',
+        message: 'Top recipes found',
+        recipes
+      });
+    })
     .catch(error => res.status(400).json(error));
 };
 
@@ -226,11 +252,13 @@ const searchRecipesByIngredients = (req, res, next) => {
     })
     .then((recipes) => {
       if (recipes.count === 0) {
-        return res.status(200).send({
-          message: 'No recipe matches your search'
-        });
+        return errorHandler(404, 'No recipe matches your search', res);
       }
-      return res.status(200).json(paginate(page, limit, recipes));
+      let status;
+      let message;
+      return handleResponse(
+        200, res, paginate, page, limit, status, message, recipes
+      );
     })
     .catch(error => res.status(400).send(error));
 };
@@ -264,11 +292,13 @@ const searchRecipesByCategory = (req, res) => {
     })
     .then((recipes) => {
       if (recipes.count === 0) {
-        return res.status(200).send({
-          message: 'No recipe matches your search'
-        });
+        return errorHandler(404, 'No recipe matches your search', res);
       }
-      return res.status(200).send(paginate(page, limit, recipes));
+      let status;
+      let message;
+      return handleResponse(
+        200, res, paginate, page, limit, status, message, recipes
+      );
     })
     .catch(error => res.status(400).send(error));
 };
@@ -301,19 +331,32 @@ const searchUserFavsByCategory = (req, res) => {
       limit,
       offset,
       order: [['id', 'DESC']],
-      attributes: ['id']
+      attributes: ['id', 'category']
     })
     .then((recipes) => {
       if (recipes.count === 0) {
-        return res.status(200).send({
+        return res.status(404).send({
           message: 'No favorite recipe matches your search'
         });
       }
-      res.status(200).json(paginate(page, limit, recipes));
+      let status;
+      let message;
+      return handleResponse(
+        200, res, paginate, page, limit, status, message, recipes
+      );
     })
     .catch(error => res.status(400).send(error));
 };
 
-export { create, update, deleteRecipe, getRecipes,
-  searchRecipesByIngredients, getUserRecipes, viewRecipe,
-  getTopRecipes, searchRecipesByCategory, searchUserFavsByCategory };
+export {
+  createRecipe,
+  updateRecipe,
+  deleteRecipe,
+  getRecipes,
+  searchRecipesByIngredients,
+  getUserRecipes,
+  viewRecipe,
+  getTopRecipes,
+  searchRecipesByCategory,
+  searchUserFavsByCategory
+};

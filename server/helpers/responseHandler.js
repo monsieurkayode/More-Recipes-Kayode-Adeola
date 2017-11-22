@@ -125,5 +125,16 @@ const responseHandler = (
   return response.include;
 };
 
-export { errorHandler, recipeHandler, responseHandler };
+const handleResponse = (
+  code, res, func, page, limit, status, message, response) => {
+  const { rows: { length }, count } = response;
+  status = 'success';
+  message = `Showing ${length} of ${count} recipes found`;
+  return res.status(code)
+    .json(
+      func(page, limit, status, message, response)
+    );
+};
+
+export { errorHandler, recipeHandler, responseHandler, handleResponse };
 

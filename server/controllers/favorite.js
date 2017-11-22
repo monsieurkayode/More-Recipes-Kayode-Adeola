@@ -1,4 +1,5 @@
 import db from '../models/index';
+import { errorHandler } from '../helpers/responseHandler';
 import { paginate, validatePaginate } from '../helpers/paginate';
 
 const Favorite = db.Favorite,
@@ -33,10 +34,12 @@ const addFavorite = (req, res) => Favorite
  *
  * @param {object} req http request object to server
  * @param {object} res http response object from server
+ * @param {method} next
  *
  * @returns {object} status message
  */
-const getUserFavorites = (req, res) => {
+const getUserFavorites = (req, res, next) => {
+  if (req.query.category) return next();
   const userId = req.decoded.user.id;
   const { page, limit, offset } = validatePaginate(req);
   return Favorite
@@ -52,14 +55,38 @@ const getUserFavorites = (req, res) => {
     })
     .then((favorites) => {
       if (favorites.count === 0) {
-        return res.status(200).send({
-          message: 'Your favorite recipe list is empty'
-        });
+        return errorHandler(404, 'Your favorite recipe list is empty', res);
       }
-      return res.status(200).send(paginate(page, limit, favorites));
+      return res.status(200).send(paginate(
+        page,
+        limit,
+        'success',
+        `Showing ${favorites.rows.length} of ${favorites.count} recipes found`,
+        favorites
+      ));
     })
     .catch(error => res.status(400).send(error));
 };
+
+const getOneUserFavorite = (req, res) => Favorite
+  .findOne({
+    where:
+    {
+      userId: req.decoded.user.id,
+      recipeId: req.params.recipeId
+    }
+  })
+  .then((favorite) => {
+    if (!favorite) {
+      return errorHandler(404, 'Not on favorite list', res);
+    }
+    return res.status(200).json({
+      status: 'success',
+      message: 'Recipe on favorite list',
+      favorite
+    });
+  })
+  .catch(error => res.status(400).json(error));
 
 /**
  * @description controller function to delete a user favorite recipe
@@ -119,5 +146,6 @@ export {
   addFavorite,
   getUserFavorites,
   addRecipeCategory,
-  deleteFavorite
+  deleteFavorite,
+  getOneUserFavorite
 };

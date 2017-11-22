@@ -9,7 +9,7 @@ const reviewModel = (sequelize, DataTypes) => {
       allowNull: false
     },
     comment: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     }
   }, {

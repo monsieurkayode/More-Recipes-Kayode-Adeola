@@ -61,7 +61,7 @@ describe('Review a recipe', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
         expect(res.body.status).to.equal('success');
-        expect(res.body.comment).to.be.equal('This is an awesome recipe');
+        expect(res.body.review.comment).to.be.equal('This is an awesome recipe');
         if (err) return done(err);
         done();
       });
@@ -78,7 +78,7 @@ describe('Review a recipe', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
         expect(res.body.status).to.equal('success');
-        expect(res.body.comment).to.be.equal('It would be nice if you could throw in some ginger');
+        expect(res.body.review.comment).to.be.equal('It would be nice if you could throw in some ginger');
         if (err) return done(err);
         done();
       });
@@ -96,7 +96,7 @@ describe('Review a recipe', () => {
         expect(res.statusCode).to.equal(201);
         expect(res.body.status).to.equal('success');
         expect(res.body.message).to.equal('Review successfully posted');
-        expect(res.body.comment).to.be.equal('Pretty please can I have some?');
+        expect(res.body.review.comment).to.be.equal('Pretty please can I have some?');
         if (err) return done(err);
         done();
       });

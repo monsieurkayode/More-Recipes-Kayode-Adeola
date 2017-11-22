@@ -93,7 +93,7 @@ describe('Create recipe post', () => {
       .set('x-access-token', userData[0])
       .set('Content-Type', 'application/json')
       .type('form')
-      .send(recipePosts[1])
+      .send(recipePosts[2])
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
         expect(res.body.status).to.equal('success');
@@ -110,11 +110,11 @@ describe('Create recipe post', () => {
       .set('x-access-token', userData[0])
       .set('Content-Type', 'application/json')
       .type('form')
-      .send(recipePosts[2])
+      .send(recipePosts[3])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(406);
+        expect(res.statusCode).to.equal(400);
         expect(res.body.status).to.equal('fail');
-        expect(res.body.message).to.equal('Please enter a recipe name');
+        expect(res.body.message.recipeName).to.equal('Please enter a recipe name');
         if (err) return done(err);
         done();
       });
@@ -127,11 +127,11 @@ describe('Create recipe post', () => {
       .set('x-access-token', userData[0])
       .set('Content-Type', 'application/json')
       .type('form')
-      .send(recipePosts[3])
+      .send(recipePosts[4])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(406);
+        expect(res.statusCode).to.equal(400);
         expect(res.body.status).to.equal('fail');
-        expect(res.body.message).to.equal('Ingredients field cannot be empty');
+        expect(res.body.message.ingredients).to.equal('Ingredients field cannot be empty');
         if (err) return done(err);
         done();
       });
@@ -144,11 +144,11 @@ describe('Create recipe post', () => {
       .set('x-access-token', userData[0])
       .set('Content-Type', 'application/json')
       .type('form')
-      .send(recipePosts[4])
+      .send(recipePosts[5])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(406);
+        expect(res.statusCode).to.equal(400);
         expect(res.body.status).to.equal('fail');
-        expect(res.body.message).to.equal('Instructions field cannot be empty');
+        expect(res.body.message.instructions).to.equal('Instructions field cannot be empty');
         if (err) return done(err);
         done();
       });
@@ -202,7 +202,7 @@ describe('Search for Recipes', () => {
       .set('x-access-token', userData[0])
       .set('Content-Type', 'application/json')
       .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
+        expect(res.statusCode).to.equal(404);
         expect(res.body.message).to.equal('No recipe matches your search');
         if (err) return done(err);
         done();
@@ -218,7 +218,7 @@ describe('Search for Recipes', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body[1][0].recipeName).to.equal('Kiwi Smoothie on the Rocks');
+        expect(res.body.recipes[0].recipeName).to.equal('Kiwi Smoothie on the Rocks');
         if (err) return done(err);
         done();
       });
@@ -233,7 +233,7 @@ describe('Search for Recipes', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body[1][0].recipeName).to.equal('Coleslaw Salad');
+        expect(res.body.recipes[0].recipeName).to.equal('Coleslaw');
         if (err) return done(err);
         done();
       });
@@ -268,7 +268,7 @@ describe('Keep records of recipe views', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.views).to.equal(1);
+        expect(res.body.recipe.views).to.equal(1);
         if (err) return done(err);
         done();
       });
@@ -286,7 +286,7 @@ describe('View top recipes', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body[1].recipeName).to.equal('Coleslaw Salad');
+        expect(res.body.recipes[0].recipeName).to.equal('Coleslaw');
         if (err) return done(err);
         done();
       });

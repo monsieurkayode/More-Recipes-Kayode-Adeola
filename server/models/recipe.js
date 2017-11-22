@@ -1,3 +1,5 @@
+import categories from '../helpers/categories';
+
 const recipeModel = (sequelize, DataTypes) => {
   const Recipe = sequelize.define('Recipe', {
     recipeName: {
@@ -16,14 +18,18 @@ const recipeModel = (sequelize, DataTypes) => {
     },
     category: {
       type: DataTypes.STRING,
-      defaultValue: ''
+      defaultValue: 'others',
+      isIn: {
+        args: [categories],
+        msg: 'Invalid category type!'
+      }
     },
     ingredients: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     instructions: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     upvote: {

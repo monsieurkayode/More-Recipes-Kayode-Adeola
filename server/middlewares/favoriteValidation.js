@@ -60,7 +60,7 @@ const isValidFavorite = (req, res, next) => {
     .then((favorite) => {
       if (!favorite) {
         return errorHandler(
-          409, 'Recipe has not been added to favorite', res
+          404, 'Recipe has not been added to favorite', res
         );
       }
       next();

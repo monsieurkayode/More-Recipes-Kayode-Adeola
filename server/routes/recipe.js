@@ -5,8 +5,17 @@ import uuid from 'uuid';
 import isEmpty from 'lodash/isEmpty';
 import auth from '../middlewares/auth';
 import validate from '../middlewares/validateParams';
-import { create, update, deleteRecipe, getRecipes, searchRecipesByIngredients, getUserRecipes, viewRecipe, getTopRecipes, searchRecipesByCategory, searchUserFavsByCategory } from '../controllers/recipe';
-import { recipeBasicValidation, recipeExists } from '../middlewares/recipeValidation';
+import {
+  createRecipe,
+  updateRecipe,
+  deleteRecipe,
+  getRecipes,
+  searchRecipesByIngredients,
+  getUserRecipes,
+  viewRecipe,
+  getTopRecipes,
+  searchRecipesByCategory } from '../controllers/recipe';
+import { recipeBasicValidation, recipeExists, checkMultiplePost, checkPermission } from '../middlewares/recipeValidation';
 import { validUser } from '../middlewares/userValidation';
 
 const router = express.Router();
@@ -39,12 +48,11 @@ const resize = (req, res, next) => {
 
 const upload = multer(multerOptions).single('image');
 
-router.post('/api/v1/recipes', auth, upload, validUser, recipeBasicValidation, resize, create);
+router.post('/api/v1/recipes', auth, upload, validUser, recipeBasicValidation, checkMultiplePost, resize, createRecipe);
 router.get('/api/v1/recipes', auth, validUser, getRecipes, getTopRecipes, searchRecipesByIngredients, searchRecipesByCategory);
-router.get('/api/v1/users/recipes', auth, validUser, searchUserFavsByCategory);
 router.get('/api/v1/recipes/user', auth, validUser, getUserRecipes);
-router.put('/api/v1/recipes/:recipeId', auth, validate, validUser, recipeExists, update);
+router.put('/api/v1/recipes/:recipeId', auth, validate, validUser, recipeExists, checkPermission, updateRecipe);
 router.get('/api/v1/recipes/:recipeId', auth, validate, validUser, recipeExists, viewRecipe);
-router.delete('/api/v1/recipes/:recipeId', auth, validate, validUser, recipeExists, deleteRecipe);
+router.delete('/api/v1/recipes/:recipeId', auth, validate, validUser, recipeExists, checkPermission, deleteRecipe);
 
 export default router;

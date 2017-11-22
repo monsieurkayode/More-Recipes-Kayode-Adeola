@@ -69,6 +69,7 @@ const emptyUsername = [
   {
     username: '',
     password: 'password',
+    confirmPassword: 'password',
     email: 'sam@gmail.com'
   }
 ];
@@ -77,6 +78,7 @@ const emptyPassword = [
   {
     username: 'samtarly',
     password: '',
+    confirmPassword: 'password',
     email: 'sam@gmail.com'
   }
 ];
@@ -85,6 +87,7 @@ const emptyEmail = [
   {
     username: 'samtarly',
     password: 'password',
+    confirmPassword: 'password',
     email: '',
   }
 ];
