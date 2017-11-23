@@ -134,7 +134,7 @@ describe('Favorite a recipe', () => {
   });
   it('does not allow user edit category of valid recipe not favorited', (done) => {
     server
-      .put('/api/v1/users/3/favorites')
+      .patch('/api/v1/users/3/favorites')
       .set('Connection', 'keep alive')
       .set('Accept', 'application/json')
       .set('x-access-token', userData[1])
@@ -142,7 +142,7 @@ describe('Favorite a recipe', () => {
       .type('form')
       .send(favorite[1])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(409);
+        expect(res.statusCode).to.equal(404);
         expect(res.body.message).to.be.equal('Recipe has not been added to favorite');
         if (err) return done(err);
         done();
@@ -150,7 +150,7 @@ describe('Favorite a recipe', () => {
   });
   it('allows logged in user edit favorite recipe category', (done) => {
     server
-      .put('/api/v1/users/2/favorites')
+      .patch('/api/v1/users/2/favorites')
       .set('Connection', 'keep alive')
       .set('Accept', 'application/json')
       .set('x-access-token', userData[1])
@@ -167,7 +167,7 @@ describe('Favorite a recipe', () => {
   });
   it('returns existing favorite category if form is empty', (done) => {
     server
-      .put('/api/v1/users/2/favorites')
+      .patch('/api/v1/users/2/favorites')
       .set('Connection', 'keep alive')
       .set('Accept', 'application/json')
       .set('x-access-token', userData[1])
@@ -201,7 +201,7 @@ describe('Favorite a recipe', () => {
       .set('x-access-token', userData[0])
       .set('Content-Type', 'application/json')
       .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
+        expect(res.statusCode).to.equal(404);
         expect(res.body.message).to.equal('Your favorite recipe list is empty');
         if (err) return done(err);
         done();
@@ -219,7 +219,7 @@ describe('Search recipes', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body[1][0].recipeName).to.equal('Coleslaw Salad');
+        expect(res.body.recipes[1].recipeName).to.equal('Coleslaw Salad');
         if (err) return done(err);
         done();
       });
@@ -233,7 +233,7 @@ describe('Search recipes', () => {
       .set('x-access-token', userData[1])
       .set('Content-Type', 'application/json')
       .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
+        expect(res.statusCode).to.equal(404);
         expect(res.body.message).to.equal('No recipe matches your search');
         if (err) return done(err);
         done();

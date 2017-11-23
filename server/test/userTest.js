@@ -18,7 +18,8 @@ const testValidUsers = users.testValidUsers,
 
 const clearDb = dbSync.clearDb,
   server = supertest.agent(app),
-  expect = require('chai').expect;
+  expect = require('chai').expect,
+  assert = require('chai').assert;
 
 clearDb();
 
@@ -112,7 +113,7 @@ describe('User Registration', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body.status).to.equal('fail');
-        expect(res.body.message).to.equal('Username must contain alphabets and numbers only');
+        expect(res.body.message.username).to.equal('Username must contain alphabets and numbers only');
         if (err) return done(err);
         done();
       });
@@ -128,7 +129,7 @@ describe('User Registration', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body.status).to.equal('fail');
-        expect(res.body.message).to.equal('Username should be at least three characters');
+        expect(res.body.message.username).to.equal('Username should be at least three characters');
         if (err) return done(err);
         done();
       });
@@ -144,7 +145,7 @@ describe('User Registration', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body.status).to.equal('fail');
-        expect(res.body.message).to.equal('Password should be at least six characters long');
+        expect(res.body.message.password).to.equal('Password should be at least six characters long');
         if (err) return done(err);
         done();
       });
@@ -158,9 +159,9 @@ describe('User Registration', () => {
       .type('form')
       .send(testValidUsers[5])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(409);
+        expect(res.statusCode).to.equal(400);
         expect(res.body.status).to.equal('fail');
-        expect(res.body.message).to.equal('Password does not match');
+        expect(res.body.message.confirmPassword).to.equal('Password does not match');
         if (err) return done(err);
         done();
       });
@@ -176,7 +177,13 @@ describe('User Registration', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body.status).to.equal('fail');
-        expect(res.body.message).to.equal('Please enter a username');
+        assert.deepEqual((res.body.message),
+          {
+            username: 'Username should be at least three characters',
+            email: 'Invalid Email, please enter a valid email',
+            password: 'Password should be at least six characters long',
+            confirmPassword: 'Re-enter password for confirmation'
+          });
         if (err) return done(err);
         done();
       });
@@ -231,7 +238,10 @@ describe('Disallow empty signup form fields', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body.status).to.equal('fail');
-        expect(res.body.message).to.equal('Please enter a username');
+        assert.deepEqual((res.body.message),
+          {
+            username: 'Username should be at least three characters',
+          });
         if (err) return done(err);
         done();
       });
@@ -247,7 +257,11 @@ describe('Disallow empty signup form fields', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body.status).to.equal('fail');
-        expect(res.body.message).to.equal('Please enter a password');
+        assert.deepEqual((res.body.message),
+          {
+            password: 'Password should be at least six characters long',
+            confirmPassword: null
+          });
         if (err) return done(err);
         done();
       });
@@ -263,9 +277,10 @@ describe('Disallow empty signup form fields', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body.status).to.equal('fail');
-        expect(res.body.message).to.equal(
-          'Invalid Email, please enter a valid email'
-        );
+        assert.deepEqual((res.body.message),
+          {
+            email: 'Invalid Email, please enter a valid email',
+          });
         if (err) return done(err);
         done();
       });
@@ -349,7 +364,7 @@ describe('Registered User Authentication', () => {
 describe('Token Authentication', () => {
   it('return No Token Provided', (done) => {
     server
-      .get('/api/v1/users/recipes')
+      .get('/api/v1/recipes')
       .set('Connection', 'keep alive')
       .set('Content-Type', 'application/json')
       .end((err, res) => {
@@ -361,7 +376,7 @@ describe('Token Authentication', () => {
   });
   it('return Bad Token', (done) => {
     server
-      .get('/api/v1/users/recipes')
+      .get('/api/v1/recipes')
       .set('Connection', 'keep alive')
       .set('Content-Type', 'application/json')
       .set('x-access-token', 'yturuueiiwiwjh')

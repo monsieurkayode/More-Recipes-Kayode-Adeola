@@ -9,13 +9,12 @@ const reviewModel = (sequelize, DataTypes) => {
       allowNull: false
     },
     comment: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     }
   }, {
     classMethods: {
       associate: (models) => {
-        // associations can be defined here
         Review.belongsTo(models.Recipe, {
           foreignKey: 'recipeId',
           onDelete: 'CASCADE'

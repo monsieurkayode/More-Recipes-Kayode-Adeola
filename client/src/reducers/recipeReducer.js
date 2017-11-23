@@ -4,13 +4,13 @@ import actionTypes from '../actions/actionTypes';
 const recipeReducer = (state = {}, action) => {
   switch (action.type) {
   case actionTypes.FETCH_SAMPLE_RECIPES:
-    return _.mapKeys(action.payload, 'id');
+    return _.mapKeys(action.payload.recipes, 'id');
   case actionTypes.FETCH_RECIPES:
-    const newState = action.payload[1];
+    const newState = action.payload.recipes;
     _.omitBy(state, 'sample');
-  return _.mapKeys([ ...newState, ...state ], 'id');
+  return _.orderBy(_.mapKeys([ ...newState, ...state ], 'id'), 'id', 'desc');
   case actionTypes.CREATE_POST:
-    return { ...state, [action.payload.id]: action.payload }
+    return _.orderBy({ ...state, [action.payload.id]: action.payload }, 'id', 'desc')
   default:
     return state;
   }
