@@ -41,7 +41,7 @@
       "js": "never"
     }],
     "jsx-a11y/label-has-for": [2, {
-      "required": {"every": ["nesting"]},
+      "required": {"some": ["nesting", "id"]},
       "allowChildren": true
     }],
     "valid-jsdoc": ["error", {
@@ -52,14 +52,17 @@
     }],
     "require-jsdoc": ["error", {
         "require": {
-            "FunctionDeclaration": true,
-            "MethodDefinition": true,
-            "ClassDeclaration": true
+            "FunctionDeclaration": false,
+            "MethodDefinition": false,
+            "ClassDeclaration": false
         }
     }]
   },
   "globals": {
     "window": false,
-    "document": false
+    "localStorage": false,
+    "document": false,
+    "$": false,
+    "Materialize": false
   }
 }

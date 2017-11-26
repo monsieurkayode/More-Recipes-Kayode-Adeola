@@ -5,4 +5,7 @@ coverage/*
 .nyc_output/*
 .vscode/*
 template/*
-client/*
+client/public
+client/**/registerServiceWorker.js
+client/**/**/modals
+client/**/assets
