@@ -1,6 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
 
 const isEmail = (str) => {
+  // eslint-disable-next-line
   const exp = /([a-zA-Z0-9_\-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})/;
   if (str.match(exp) || !str.length) {
     return true;
@@ -17,7 +18,7 @@ const isAlphaNumeneric = (str) => {
 };
 
 const validateInput = (data) => {
-  let errors = {};
+  const errors = {};
 
   if (!data.username || isEmpty(data.username)) {
     errors.username = 'Username is required';
@@ -50,7 +51,7 @@ const validateInput = (data) => {
   return {
     errors,
     isValid: isEmpty(errors)
-  }
-}
+  };
+};
 
 export default validateInput;

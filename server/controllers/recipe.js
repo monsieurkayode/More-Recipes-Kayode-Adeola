@@ -106,7 +106,6 @@ const getRecipes = (req, res, next) => {
 
   return Recipe
     .findAndCountAll({
-      include: responseHandler(Review, User, Favorite),
       attributes: include,
       limit,
       offset,
@@ -138,7 +137,6 @@ const getUserRecipes = (req, res) => {
   const { page, limit, offset } = validatePaginate(req);
   return Recipe
     .findAndCountAll({ where: { userId: req.decoded.user.id },
-      include: responseHandler(Review, User, Favorite),
       attributes: include,
       limit,
       offset,
@@ -172,7 +170,6 @@ const viewRecipe = (req, res) => Recipe
   .then((recipe) => {
     recipe.increment('views').then(() => Recipe
       .findOne({ where: { id: req.params.recipeId },
-        include: responseHandler(Review, User, Favorite),
         attributes: include,
       }, responseHandler(Review, User, Favorite))
       .then(result => res.status(200).send({
@@ -244,7 +241,6 @@ const searchRecipesByIngredients = (req, res, next) => {
   return Recipe
     .findAndCountAll({
       where: { $or: query },
-      include: responseHandler(Review, User, Favorite),
       limit,
       offset,
       order: [['id', 'DESC']],
@@ -284,7 +280,6 @@ const searchRecipesByCategory = (req, res) => {
   return Recipe
     .findAndCountAll({
       where: { $or: query },
-      include: responseHandler(Review, User, Favorite),
       limit,
       offset,
       order: [['id', 'DESC']],
