@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 
 import { CategoryCollection } from './Index.jsx';
 import Categories from '../../../../server/helpers/categories';
+import pascalCase from '../../utils/pascalCase';
 
 class Category extends Component {
   renderCategory = (key) => {
     const category = Categories[key];
     return (
-      <CategoryCollection key={key} category={category} />
+      <CategoryCollection key={key} category={pascalCase(category)} />
     );
   }
 

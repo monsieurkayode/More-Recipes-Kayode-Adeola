@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'proptypes';
+
+import routeAction from '../../actions/routeAction';
 import dashImg from '../../assets/css/img/dash.jpg';
 import userImg from '../../assets/css/img/user.jpg';
 
@@ -25,7 +29,6 @@ class DashboardPanel extends Component {
             <div className="collection">
               <a
                 id="dashboard-parent"
-                href="#!"
                 className="collection-item"
               >
                 <strong>
@@ -36,22 +39,33 @@ class DashboardPanel extends Component {
               <div id="myTab" className="tabs-vertical">
                 <ul className="tabs">
                   <li className="tab">
-                    <a className="white-text" href="#user-profile">
+                    <a
+                      className="white-text"
+                      onClick={() => { this.props.routeAction('profile'); }}
+                    >
                       <i className="fa fa-vcard-o" /> My Profile
                     </a>
                   </li>
                   <li className="tab">
-                    <a className="white-text" href="#user-recipes">
+                    <a
+                      className="white-text"
+                      onClick={() => { this.props.routeAction('recipes'); }}
+                    >
                       <i className="fa fa-briefcase" /> My Recipes
                     </a>
                   </li>
                   <li className="tab">
-                    <a className="white-text" href="#favorite-recipes">
+                    <a
+                      className="white-text"
+                      onClick={() => { this.props.routeAction('favorites'); }}
+                    >
                       <i className="fa fa-heart" /> Favorite Recipes
                     </a>
                   </li>
                   <li className="tab">
-                    <a className="white-text" href="#notifications">
+                    <a
+                      className="white-text"
+                    >
                       <i className="fa fa-comments-o" /> Notifications
                       <span id="not-badge" className="red new badge">10</span>
                     </a>
@@ -66,4 +80,8 @@ class DashboardPanel extends Component {
   }
 }
 
-export default DashboardPanel;
+DashboardPanel.propTypes = {
+  routeAction: PropTypes.func.isRequired,
+};
+
+export default connect(null, { routeAction })(DashboardPanel);

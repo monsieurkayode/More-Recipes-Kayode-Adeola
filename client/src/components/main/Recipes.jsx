@@ -29,7 +29,7 @@ class Recipes extends Component {
 const mapStateToProps = ({ recipes }) => ({ recipes });
 
 Recipes.propTypes = {
-  recipes: PropTypes.arrayOf(PropTypes.object).isRequired
+  recipes: PropTypes.shape({}).isRequired
 };
 
 export default connect(mapStateToProps)(Recipes);

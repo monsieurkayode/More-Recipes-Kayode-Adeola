@@ -16,11 +16,7 @@ class PostRecipePage extends Component {
         <HomeNavbar />
         <div className="row center-align">
           <div className="col s12 l6 m8 offset-l3 offset-m2">
-            <div className="card blue-grey darken-1">
-              <div className="card-content white-text">
-                <h5>Create Recipe Post</h5>
-              </div>
-            </div>
+            <h5 className="teal-text">Create Recipe</h5>
           </div>
         </div>
         <PostRecipe history={this.props.history} />

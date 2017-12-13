@@ -257,6 +257,7 @@ a#post-btn:hover {
 
 .tabs-vertical .tab a:hover {
   background: #4f90ff;
+  cursor: pointer;
 }
 .tabs-vertical .tab.disabled a {
   color: #8591d5;
@@ -451,4 +452,20 @@ a#post-btn:hover {
 
 .recipe-view .card-image a.active {
   color: coral;
+}
+
+#user-profile {
+  display: block !important; 
+}
+
+#markdown {
+  display: block;
+  min-height: 20px;
+  overflow: scroll;
+  background: #eee;
+  border-radius: 12px;
+}
+
+#markdown ul li {
+  list-style-type: disc;
 }
