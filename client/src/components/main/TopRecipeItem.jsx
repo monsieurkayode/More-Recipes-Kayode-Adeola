@@ -16,11 +16,7 @@ const TopRecipeItem = ({ recipe }) =>
   </Link>);
 
 TopRecipeItem.propTypes = {
-  recipe: PropTypes.shape({
-    id: PropTypes.number,
-    image: PropTypes.string,
-    recipeName: PropTypes.recipeName
-  }).isRequired
+  recipe: PropTypes.shape({}).isRequired
 };
 
 export default TopRecipeItem;

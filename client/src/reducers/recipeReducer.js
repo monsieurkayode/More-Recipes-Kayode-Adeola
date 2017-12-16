@@ -1,3 +1,5 @@
+/* eslint-disable */
+/* jshint esversion: 6 */
 import _ from 'lodash';
 
 import actionTypes from '../actions/actionTypes';
@@ -9,7 +11,10 @@ const recipeReducer = (state = {}, action) => {
     case actionTypes.FETCH_RECIPES:
       const { recipes } = action.payload;
       _.omitBy(state, 'sample');
-      return _.orderBy(_.mapKeys([...recipes, ...state], 'id'), 'id', 'desc');
+      return Object.assign(
+        {}, _.orderBy(
+          _.mapKeys([...recipes, ...state], 'id'), 'id', 'desc')
+      );
     case actionTypes.CREATE_POST:
       return _.orderBy(
         { ...state, [action.payload.id]: action.payload }, 'id', 'desc'

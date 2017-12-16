@@ -1,19 +1,18 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-// import promise from 'redux-promise';
 import thunk from 'redux-thunk';
 import decode from 'jwt-decode';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-// import App from './App';
 import NotFoundPage from './components/NotFoundPage.jsx';
 import IndexPage from './components/IndexPage.jsx';
 import {
   SigninPage,
   SignupPage,
-  PostRecipePage } from './components/main/Index.jsx';
+  PostRecipePage
+} from './components/main/Index.jsx';
 import DashboardPage from './components/DashboardPage.jsx';
 import RecipeViewPage from './components/RecipeViewPage.jsx';
 

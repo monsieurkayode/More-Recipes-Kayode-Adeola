@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'proptypes';
+import pascalCase from '../../utils/pascalCase';
 
 const RecipeItem = ({ recipe }) =>
   (<div className="col l6">
@@ -32,7 +33,7 @@ const RecipeItem = ({ recipe }) =>
         <Link
           to={`/recipes/${recipe.id}`}
           className="chip teal white-text"
-        >{recipe.category}
+        >{pascalCase(recipe.category)}
         </Link>
       </div>
     </div>
@@ -40,7 +41,7 @@ const RecipeItem = ({ recipe }) =>
 
 RecipeItem.propTypes = {
   recipe: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.any,
     views: PropTypes.number,
     upvote: PropTypes.number,
     downvote: PropTypes.number,
