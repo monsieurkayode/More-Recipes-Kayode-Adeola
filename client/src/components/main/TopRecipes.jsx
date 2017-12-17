@@ -5,8 +5,8 @@ import PropTypes from 'proptypes';
 import TopRecipeItem from './TopRecipeItem.jsx';
 
 class TopRecipes extends Component {
-  renderTopRecipes = (key) => {
-    const recipe = this.props.recipes[key];
+  renderTopRecipes = (index) => {
+    const recipe = this.props.recipes[index];
     return (
       <TopRecipeItem key={recipe.id} recipe={recipe} />
     );
@@ -19,8 +19,8 @@ class TopRecipes extends Component {
         <p className="divider" />
         <div id="trending">
           <ul className="collection">
-            {Object.keys(this.props.recipes).map(key =>
-              this.renderTopRecipes(key))}
+            {Object.keys(this.props.recipes).map(index =>
+              this.renderTopRecipes(index))}
           </ul>
         </div>
       </div>
@@ -28,7 +28,13 @@ class TopRecipes extends Component {
   }
 }
 
-const mapStateToProps = ({ recipes }) => ({ recipes });
+const mapStateToProps = ({ recipes }) => ({
+  recipes: recipes.recipes
+});
+
+TopRecipes.defaultProps = {
+  recipes: {},
+};
 
 TopRecipes.propTypes = {
   recipes: PropTypes.shape({}).isRequired

@@ -7,18 +7,46 @@ import actionTypes from '../actions/actionTypes';
 const recipeReducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.FETCH_SAMPLE_RECIPES:
-      return _.mapKeys(action.payload, 'id');
+      return {
+        recipes: _.mapKeys(action.payload, 'id'),
+        pagination: {}
+      };
     case actionTypes.FETCH_RECIPES:
-      const { recipes } = action.payload;
-      _.omitBy(state, 'sample');
-      return Object.assign(
-        {}, _.orderBy(
-          _.mapKeys([...recipes, ...state], 'id'), 'id', 'desc')
-      );
+      const { pagination } = action.payload;
+      const recipes = _.mapKeys(action.payload.recipes, 'id');
+      return {recipes, pagination};
     case actionTypes.CREATE_POST:
-      return _.orderBy(
-        { ...state, [action.payload.id]: action.payload }, 'id', 'desc'
-      );
+      return {
+        ...state,
+        recipes: {
+          ...state.recipes,
+          [action.payload.id]: action.payload,
+        }
+      };
+    case actionTypes.UPVOTE_POST:
+      return {
+        ...state,
+        recipes: {
+          ...state.recipes,
+          [action.payload.recipeId]: {
+            ...state.recipes[action.payload.recipeId],
+            upvote: action.payload.upvote,
+            downvote: action.payload.downvote,
+          }
+        }
+      };
+    case actionTypes.DOWNVOTE_POST:
+    return {
+      ...state,
+      recipes: {
+        ...state.recipes,
+        [action.payload.recipeId]: {
+          ...state.recipes[action.payload.recipeId],
+          upvote: action.payload.upvote,
+          downvote: action.payload.downvote,
+        }
+      }
+    };
     default:
       return state;
   }

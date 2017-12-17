@@ -37,15 +37,16 @@ if (localStorage.token) {
   setAuthorizationToken(localStorage.token);
   const user = decode(localStorage.token).user;
   store.dispatch({ type: actionTypes.SIGNIN_SUCCESSFUL, payload: user });
+} else {
+  store
+    .dispatch(
+      {
+        type: actionTypes.FETCH_SAMPLE_RECIPES,
+        payload: sampleRecipes
+      }
+    );
 }
 
-store
-  .dispatch(
-    {
-      type: actionTypes.FETCH_SAMPLE_RECIPES,
-      payload: sampleRecipes
-    }
-  );
 
 render(
   <Provider store={store}>

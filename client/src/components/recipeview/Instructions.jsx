@@ -18,6 +18,10 @@ class Instructions extends Component {
   }
 }
 
+Instructions.defaultProps = {
+  instructions: ''
+};
+
 Instructions.propTypes = {
   instructions: PropTypes.string.isRequired
 };
