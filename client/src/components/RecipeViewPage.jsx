@@ -6,7 +6,9 @@ import PropTypes from 'proptypes';
 import {
   fetchSingleRecipe,
   upvoteAction,
-  downvoteAction
+  downvoteAction,
+  addFavoriteAction,
+  fetchSingleFavorite
 } from '../actions';
 import Footer from './footer/Footer.jsx';
 import { Ingredients, Instructions, CommentBox } from './recipeview/Index.jsx';
@@ -18,6 +20,7 @@ class RecipeViewPage extends Component {
   componentWillMount() {
     const { recipeId } = this.props.match.params;
     this.props.fetchSingleRecipe(recipeId);
+    this.props.fetchSingleFavorite(recipeId);
   }
 
   componentDidMount() {
@@ -33,6 +36,7 @@ class RecipeViewPage extends Component {
 
   render() {
     const { currentRecipe } = this.props;
+    const favorited = this.props.isFavorite ? 'orange-text' : '';
     if (isEmpty(currentRecipe)) {
       return <div>Loading....</div>;
     }
@@ -86,8 +90,13 @@ class RecipeViewPage extends Component {
                         currentRecipe.downvote
                       }
                     </div>
-                    <div className="chip boxReaction">
-                      <i className="fa fa-heart" />
+                    <div
+                      onClick={() => this.props.addFavoriteAction(
+                        currentRecipe.id
+                      )}
+                      className="chip boxReaction"
+                    >
+                      <i className={`fa fa-heart ${favorited}`} />
                     </div>
                   </span>
                 </div>
@@ -125,11 +134,25 @@ RecipeViewPage.propTypes = {
     ingredients: PropTypes.string,
     instructions: PropTypes.string,
     image: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  upvoteAction: PropTypes.func.isRequired,
+  downvoteAction: PropTypes.func.isRequired,
+  addFavoriteAction: PropTypes.func.isRequired,
+  fetchSingleFavorite: PropTypes.func.isRequired,
+  isFavorite: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = ({ currentRecipe }) => ({ currentRecipe });
+const mapStateToProps = ({ currentRecipe, isFavorite }) => ({
+  currentRecipe,
+  isFavorite
+});
 
 export default connect(mapStateToProps,
-  { fetchSingleRecipe, upvoteAction, downvoteAction }
+  {
+    fetchSingleRecipe,
+    upvoteAction,
+    downvoteAction,
+    addFavoriteAction,
+    fetchSingleFavorite
+  }
 )(RecipeViewPage);
