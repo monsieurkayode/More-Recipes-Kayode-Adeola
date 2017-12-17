@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 import axios from 'axios';
 import decode from 'jwt-decode';
 
@@ -13,7 +14,7 @@ const signinAction = user => dispatch =>
         setAuthorizationToken(Token);
         user = decode(Token).user;
         Materialize
-          .toast(`Welcome to More-Recipes ${user.username}`, 4000, 'green');
+          .toast(`Welcome ${user.username}`, 4000, 'teal');
         dispatch({ type: actionTypes.SIGNIN_SUCCESSFUL, payload: user });
       }
     })

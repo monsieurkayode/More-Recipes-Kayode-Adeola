@@ -14,6 +14,11 @@ const createPost = (category, values, callback) => (dispatch) => {
     .then(({ data }) => {
       dispatch({ type: actionTypes.CREATE_POST, payload: data });
       callback();
+    })
+    .catch((error) => {
+      const { message } = error.response.data;
+      Materialize.toast(message, 4000, 'red');
+      dispatch({ type: actionTypes.CREATE_POST_ERROR });
     });
 };
 export default createPost;

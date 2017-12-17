@@ -7,6 +7,8 @@ import fetchRecipesAction from './fetchRecipesAction';
 import fetchSingleRecipe from './fetchSingleRecipe';
 import upvoteAction from './upvoteAction';
 import downvoteAction from './downvoteAction';
+import addFavoriteAction from './addFavoriteAction';
+import fetchSingleFavorite from './fetchSingleFavorite';
 
 export {
   signupAction,
@@ -16,5 +18,7 @@ export {
   fetchRecipesAction,
   fetchSingleRecipe,
   upvoteAction,
-  downvoteAction
+  downvoteAction,
+  addFavoriteAction,
+  fetchSingleFavorite,
 };
