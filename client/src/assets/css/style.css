@@ -308,6 +308,21 @@ a#post-btn:hover {
 .reaction {
   padding: 2px;
   margin-left: 10px;
+  
+}
+.unlike, .like {
+  cursor: pointer;
+  background: #009688;
+  color: white;
+  margin-left: 5px;
+  padding-right: 8px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 12px;
+}
+
+.unlike:hover, .like:hover {
+  background: #009699;
 }
 
 .small-cards .reaction {
@@ -468,4 +483,14 @@ a#post-btn:hover {
 
 #markdown ul li {
   list-style-type: disc;
+}
+
+.boxReaction {
+  cursor: pointer;
+  background: #00796b;
+  color: white
+}
+
+.boxReaction:hover {
+  background: #009e8c;
 }

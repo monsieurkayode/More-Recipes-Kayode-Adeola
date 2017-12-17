@@ -1,9 +1,12 @@
+/* jshint esversion: 6 */
 import signupAction from './signupAction';
 import signinAction from './signinAction';
 import logoutAction from './logoutAction';
 import createPost from './createPost';
 import fetchRecipesAction from './fetchRecipesAction';
 import fetchSingleRecipe from './fetchSingleRecipe';
+import upvoteAction from './upvoteAction';
+import downvoteAction from './downvoteAction';
 
 export {
   signupAction,
@@ -11,5 +14,7 @@ export {
   logoutAction,
   createPost,
   fetchRecipesAction,
-  fetchSingleRecipe
+  fetchSingleRecipe,
+  upvoteAction,
+  downvoteAction
 };

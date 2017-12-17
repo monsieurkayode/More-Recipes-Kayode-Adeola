@@ -19,6 +19,10 @@ class Ingredients extends Component {
   }
 }
 
+Ingredients.defaultProps = {
+  ingredients: ''
+};
+
 Ingredients.propTypes = {
   ingredients: PropTypes.string.isRequired
 };

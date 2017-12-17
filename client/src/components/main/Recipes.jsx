@@ -2,13 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'proptypes';
 
+import { upvoteAction, downvoteAction } from '../../actions';
 import { RecipeItem } from './Index.jsx';
 
 class Recipes extends Component {
-  renderSampleRecipes = (key) => {
-    const recipe = this.props.recipes[key];
+  renderRecipes = (index) => {
+    const recipe = this.props.recipes[index];
     return (
-      <RecipeItem key={key} recipe={recipe} />
+      <RecipeItem
+        key={recipe.id}
+        index={recipe.id}
+        recipe={recipe}
+        upvote={this.props.upvoteAction}
+        downvote={this.props.downvoteAction}
+      />
     );
   }
 
@@ -18,18 +25,29 @@ class Recipes extends Component {
         <span>You are viewing page 1</span>
         <p className="divider" />
         <div className="row">
-          {Object.keys(this.props.recipes).map(key =>
-            this.renderSampleRecipes(key))}
+          {Object.keys(this.props.recipes).sort((a, b) => b - a).map(index =>
+            this.renderRecipes(index))}
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ recipes }) => ({ recipes });
+const mapStateToProps = ({ recipes }) => ({
+  recipes: recipes.recipes,
+  pagination: recipes.pagination
+});
 
-Recipes.propTypes = {
-  recipes: PropTypes.shape({}).isRequired
+Recipes.defaultProps = {
+  recipes: {},
 };
 
-export default connect(mapStateToProps)(Recipes);
+Recipes.propTypes = {
+  recipes: PropTypes.shape({}).isRequired,
+  upvoteAction: PropTypes.func.isRequired,
+  downvoteAction: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps,
+  { upvoteAction, downvoteAction }
+)(Recipes);

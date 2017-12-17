@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'proptypes';
 import pascalCase from '../../utils/pascalCase';
 
-const RecipeItem = ({ recipe }) =>
+const RecipeItem = ({ recipe, upvote, downvote }) =>
   (<div className="col l6">
     <div className="card views-small">
       <div className="card-image">
@@ -20,12 +20,18 @@ const RecipeItem = ({ recipe }) =>
         <span className="card-title">
           <strong>{recipe.recipeName}</strong>
         </span>
-        <span className="right">
+        <span
+          onClick={() => downvote(recipe.id)}
+          className="unlike right"
+        >
           <i
             className="material-icons tiny reaction"
           >thumb_down</i>{recipe.downvote}
         </span>
-        <span className="right">
+        <span
+          onClick={() => upvote(recipe.id)}
+          className="like right"
+        >
           <i
             className="material-icons tiny reaction"
           >thumb_up</i>{recipe.upvote}
@@ -50,7 +56,9 @@ RecipeItem.propTypes = {
     ingredients: PropTypes.string,
     instructions: PropTypes.string,
     image: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  upvote: PropTypes.func.isRequired,
+  downvote: PropTypes.func.isRequired,
 };
 
 export default RecipeItem;

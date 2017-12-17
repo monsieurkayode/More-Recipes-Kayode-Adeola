@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'proptypes';
 
-import { fetchSingleRecipe } from '../actions/index';
+import {
+  fetchSingleRecipe,
+  upvoteAction,
+  downvoteAction
+} from '../actions';
 import Footer from './footer/Footer.jsx';
 import { Ingredients, Instructions, CommentBox } from './recipeview/Index.jsx';
 import { NewPostModal } from './modals/Index.jsx';
@@ -25,7 +29,6 @@ class RecipeViewPage extends Component {
   componentDidUpdate() {
     $('.dropdown-button').dropdown();
     $('.button-collapse').sideNav();
-    document.body.scrollTop = 0;
   }
 
   render() {
@@ -63,15 +66,29 @@ class RecipeViewPage extends Component {
                     alt=""
                   />
                   <span className="card-title right">
-                    <a className="chip" href="">
-                      <i className="fa fa-thumbs-up" />
-                    </a>
-                    <a className="chip" href="">
-                      <i className="fa fa-thumbs-down " />
-                    </a>
-                    <a className="chip" href="">
+                    <div
+                      onClick={() => this.props.upvoteAction(
+                        currentRecipe.id
+                      )}
+                      className="chip boxReaction"
+                    >
+                      <i className="fa fa-thumbs-up" /> {
+                        currentRecipe.upvote
+                      }
+                    </div>
+                    <div
+                      onClick={() => this.props.downvoteAction(
+                        currentRecipe.id
+                      )}
+                      className="chip boxReaction"
+                    >
+                      <i className="fa fa-thumbs-down " /> {
+                        currentRecipe.downvote
+                      }
+                    </div>
+                    <div className="chip boxReaction">
                       <i className="fa fa-heart" />
-                    </a>
+                    </div>
                   </span>
                 </div>
               </div>
@@ -113,4 +130,6 @@ RecipeViewPage.propTypes = {
 
 const mapStateToProps = ({ currentRecipe }) => ({ currentRecipe });
 
-export default connect(mapStateToProps, { fetchSingleRecipe })(RecipeViewPage);
+export default connect(mapStateToProps,
+  { fetchSingleRecipe, upvoteAction, downvoteAction }
+)(RecipeViewPage);

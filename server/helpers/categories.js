@@ -1,16 +1,16 @@
 export default [
   'roasts',
-  'appetizers',
-  'breakfast & brunch',
-  'desserts',
-  'salads',
-  'side dishes',
-  'fruits',
-  'vegatables',
-  'seafoods',
-  'pasta & noodles',
   'drinks',
+  'salads',
+  'fruits',
+  'pastas',
+  'brunch',
+  'desserts',
+  'seafoods',
   'specials',
+  'breakfast',
   'smoothies',
-  'others'
+  'vegatables',
+  'appetizers',
+  'side dishes'
 ];
