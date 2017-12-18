@@ -9,6 +9,8 @@ import upvoteAction from './upvoteAction';
 import downvoteAction from './downvoteAction';
 import addFavoriteAction from './addFavoriteAction';
 import fetchSingleFavorite from './fetchSingleFavorite';
+import postReview from './postReview';
+import fetchReviews from './fetchReviews';
 
 export {
   signupAction,
@@ -21,4 +23,6 @@ export {
   downvoteAction,
   addFavoriteAction,
   fetchSingleFavorite,
+  postReview,
+  fetchReviews,
 };

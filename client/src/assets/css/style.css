@@ -1,5 +1,4 @@
 html, body, .block {
-  height: 100%;
   overflow-x: hidden;
   box-sizing: border-box !important;
 }
@@ -149,11 +148,13 @@ input[type=email]:not(.browser-default) {
 }
 
 #comment-box textarea {
-  border: 2px ridge #ddd;
+  border: 2px solid #ddd;
+  border-radius: 8px;
 }
 
 #comment-box .input-field textarea[type=text]:focus {
-  border-bottom: 0px solid #ddd;
+  border: 2px solid rgb(67, 206, 206) ;
+  border-bottom: 2px solid rgb(67, 206, 206);
   box-shadow: 0 2px 0 0 #ccc;
 }
 
@@ -168,7 +169,7 @@ input[type=email]:not(.browser-default) {
   border: 2px double grey;
 }
 
-a#post-btn:hover {
+#post-btn:hover {
   background: grey;
   color: white;
 }

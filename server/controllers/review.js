@@ -18,12 +18,21 @@ const postReview = (req, res) => Review
     userId: req.decoded.user.id,
     comment: req.body.comment
   })
-  .then((review) => {
-    res.status(201).send({
-      status: 'success',
-      message: 'Review successfully posted',
-      review
-    });
+  .then((comment) => {
+    Review
+      .findOne({ where: { id: comment.id },
+        include: [{
+          model: User,
+          attributes: ['username']
+        }]
+      })
+      .then((review) => {
+        res.status(201).send({
+          status: 'success',
+          message: 'Review successfully posted',
+          review
+        });
+      });
   })
   .catch(error => res.status(400).send(error));
 

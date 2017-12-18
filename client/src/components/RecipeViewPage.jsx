@@ -8,11 +8,16 @@ import {
   upvoteAction,
   downvoteAction,
   addFavoriteAction,
-  fetchSingleFavorite
+  fetchSingleFavorite,
+  fetchReviews
 } from '../actions';
 import Footer from './footer/Footer.jsx';
-import { Ingredients, Instructions, CommentBox } from './recipeview/Index.jsx';
-import { NewPostModal } from './modals/Index.jsx';
+import {
+  Ingredients,
+  Instructions,
+  CommentBox,
+  Comments
+} from './recipeview/Index.jsx';
 import { SideNav } from './main/Index.jsx';
 import { HomeNavbar } from './headers/Index.jsx';
 
@@ -21,12 +26,12 @@ class RecipeViewPage extends Component {
     const { recipeId } = this.props.match.params;
     this.props.fetchSingleRecipe(recipeId);
     this.props.fetchSingleFavorite(recipeId);
+    this.props.fetchReviews(recipeId);
   }
 
   componentDidMount() {
     $('.dropdown-button').dropdown();
     $('.button-collapse').sideNav();
-    document.body.scrollTop = 0;
   }
 
   componentDidUpdate() {
@@ -34,8 +39,17 @@ class RecipeViewPage extends Component {
     $('.button-collapse').sideNav();
   }
 
+  renderReviews = (index) => {
+    const review = this.props.reviews[index];
+    return (<Comments
+      key={review.id}
+      index={review.id}
+      review={review}
+    />);
+  }
+
   render() {
-    const { currentRecipe } = this.props;
+    const { currentRecipe, reviews } = this.props;
     const favorited = this.props.isFavorite ? 'orange-text' : '';
     if (isEmpty(currentRecipe)) {
       return <div>Loading....</div>;
@@ -104,14 +118,23 @@ class RecipeViewPage extends Component {
             </div>
           </div>
         </div>
-        <SideNav />
         <CommentBox />
+        <div id="comment-posts" className="row">
+          <div className="col l7 m8 s12 offset-l4 offset-m4">
+            {Object.keys(reviews).sort((a, b) => b - a).map(index =>
+              this.renderReviews(index))}
+          </div>
+        </div>
+        <SideNav />
         <Footer />
-        <NewPostModal />
       </div>
     );
   }
 }
+
+RecipeViewPage.defaultProps = {
+  reviews: {}
+};
 
 RecipeViewPage.propTypes = {
   user: PropTypes.shape({
@@ -139,12 +162,16 @@ RecipeViewPage.propTypes = {
   downvoteAction: PropTypes.func.isRequired,
   addFavoriteAction: PropTypes.func.isRequired,
   fetchSingleFavorite: PropTypes.func.isRequired,
-  isFavorite: PropTypes.bool.isRequired
+  isFavorite: PropTypes.bool.isRequired,
+  fetchReviews: PropTypes.func.isRequired,
+  reviews: PropTypes.shape({}).isRequired
 };
 
-const mapStateToProps = ({ currentRecipe, isFavorite }) => ({
+const mapStateToProps = ({ currentRecipe, isFavorite, reviews }) => ({
   currentRecipe,
-  isFavorite
+  isFavorite,
+  reviews: reviews.comments,
+  pagination: reviews.pagination
 });
 
 export default connect(mapStateToProps,
@@ -153,6 +180,7 @@ export default connect(mapStateToProps,
     upvoteAction,
     downvoteAction,
     addFavoriteAction,
-    fetchSingleFavorite
+    fetchSingleFavorite,
+    fetchReviews,
   }
 )(RecipeViewPage);
