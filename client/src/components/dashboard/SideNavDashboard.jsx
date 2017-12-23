@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'proptypes';
+
+import { routeAction } from '../../actions';
+
 import dashImg from '../../assets/css/img/dash.jpg';
 import userImg from '../../assets/css/img/user.jpg';
 
@@ -43,7 +48,9 @@ class SideNavDashboard extends Component {
                       <li className="tab">
                         <a
                           className="white-text"
-                          href="#user-profile"
+                          onClick={() => {
+                            this.props.routeAction('profile');
+                          }}
                         >
                           <i
                             className="fa fa-vcard-o white-text"
@@ -53,7 +60,9 @@ class SideNavDashboard extends Component {
                       <li className="tab">
                         <a
                           className="white-text"
-                          href="#user-recipes"
+                          onClick={() => {
+                            this.props.routeAction('recipes');
+                          }}
                         >
                           <i
                             className="fa fa-briefcase white-text"
@@ -63,7 +72,9 @@ class SideNavDashboard extends Component {
                       <li className="tab">
                         <a
                           className="white-text"
-                          href="#favorite-recipes"
+                          onClick={() => {
+                            this.props.routeAction('favorites');
+                          }}
                         >
                           <i
                             className="fa fa-heart white-text"
@@ -96,4 +107,8 @@ class SideNavDashboard extends Component {
   }
 }
 
-export default SideNavDashboard;
+SideNavDashboard.propTypes = {
+  routeAction: PropTypes.func.isRequired,
+};
+
+export default connect(null, { routeAction })(SideNavDashboard);

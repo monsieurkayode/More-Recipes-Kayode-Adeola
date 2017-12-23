@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'proptypes';
 
-import routeAction from '../../actions/routeAction';
+import { routeAction } from '../../actions';
 import dashImg from '../../assets/css/img/dash.jpg';
 import userImg from '../../assets/css/img/user.jpg';
 
@@ -11,9 +11,9 @@ class DashboardPanel extends Component {
     return (
       <div
         id="dash-panel"
-        className="col l3 teal darken-2 hide-on-med-and-down"
+        className="col l3 teal hide-on-med-and-down"
       >
-        <div id="profile-page-header" className="card teal darken-2 z-depth-0">
+        <div id="profile-page-header" className="card teal z-depth-0">
           <div className="card-image">
             <img
               className="responsive-img"
@@ -29,7 +29,7 @@ class DashboardPanel extends Component {
             <div className="collection">
               <a
                 id="dashboard-parent"
-                className="collection-item"
+                className="collection-item teal"
               >
                 <strong>
                   <span className="fa fa-dashboard" /> Dashboard
@@ -37,7 +37,7 @@ class DashboardPanel extends Component {
               </a>
               <br />
               <div id="myTab" className="tabs-vertical">
-                <ul className="tabs">
+                <ul className="tabs teal">
                   <li className="tab">
                     <a
                       className="white-text"

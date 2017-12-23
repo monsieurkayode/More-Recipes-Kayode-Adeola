@@ -4,6 +4,7 @@ import { WelcomeDisplay } from './Index.jsx';
 
 class UserProfile extends Component {
   render() {
+    const { username } = this.props.user;
     return (
       <div id="user-profile" className="col l9 m12 s12 offset-l3">
         <WelcomeDisplay />
@@ -29,7 +30,12 @@ class UserProfile extends Component {
                   </div>
                   <div className="browser-default">
                     <label htmlFor="handle">Public Display Name</label>
-                    <input type="text" id="handle" />
+                    <input
+                      type="text"
+                      id="handle"
+                      defaultValue={`@${username}`}
+                      disabled
+                    />
                   </div>
                   <div className="browser-default">
                     <label htmlFor="about-me">About Me</label>

@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* jshint esversion: 6 */
 import _ from 'lodash';
 
@@ -12,9 +11,10 @@ const recipeReducer = (state = {}, action) => {
         pagination: {}
       };
     case actionTypes.FETCH_RECIPES:
-      const { pagination } = action.payload;
-      const recipes = _.mapKeys(action.payload.recipes, 'id');
-      return {recipes, pagination};
+      return {
+        recipes: _.mapKeys(action.payload.recipes, 'id'),
+        pagination: action.payload.pagination
+      };
     case actionTypes.CREATE_POST:
       return {
         ...state,
@@ -36,17 +36,17 @@ const recipeReducer = (state = {}, action) => {
         }
       };
     case actionTypes.DOWNVOTE_POST:
-    return {
-      ...state,
-      recipes: {
-        ...state.recipes,
-        [action.payload.recipeId]: {
-          ...state.recipes[action.payload.recipeId],
-          upvote: action.payload.upvote,
-          downvote: action.payload.downvote,
+      return {
+        ...state,
+        recipes: {
+          ...state.recipes,
+          [action.payload.recipeId]: {
+            ...state.recipes[action.payload.recipeId],
+            upvote: action.payload.upvote,
+            downvote: action.payload.downvote,
+          }
         }
-      }
-    };
+      };
     default:
       return state;
   }

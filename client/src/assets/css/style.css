@@ -50,6 +50,7 @@ input[type=email]:not(.browser-default) {
   height: 100vh;
   padding: 0;
   position: fixed;
+  background: teal
 }
 
 #dash-img {
@@ -62,7 +63,7 @@ input[type=email]:not(.browser-default) {
 }
 
 #dash-links .collection a.collection-item {
-  background-color: #00796b;
+  background-color: teal;
   color: #eee;
   line-height: 1.5rem;
   padding: 10px 20px;
@@ -76,7 +77,7 @@ input[type=email]:not(.browser-default) {
 }
 
 #dash-links .collection a.collection-item:not(.active):hover:first-child {
-  background-color: #00796b;
+  background-color: teal;
 }
 
 #category .collapsible,
@@ -97,6 +98,9 @@ input[type=email]:not(.browser-default) {
   padding-left: 0.5em;
   padding-top: 0;
   padding-bottom: 0.5em;
+}
+#profile-page-header {
+  background: teal;
 }
 
 #profile-page-header .card-profile-image img {
@@ -218,7 +222,7 @@ input[type=email]:not(.browser-default) {
 
 
 .tabs-vertical .tabs {
-  background-color: #00796b;
+  background-color: teal;
   height: auto;
   flex-direction: column;
 }
@@ -294,14 +298,9 @@ input[type=email]:not(.browser-default) {
   transition-timing-function: ease-in
 }
 
-.edit:hover {
-  background: cornflowerblue;
+.edit:hover, .delete:hover {
+  background: grey;
   color: white;
-  padding: 0 10px 0 10px;
-}
-
-.delete:hover {
-  background: tomato;
   color: white;
   padding: 0 10px 0 10px;
 }
@@ -350,7 +349,7 @@ input[type=email]:not(.browser-default) {
 }
 
 .views-small .card-content {
-  padding-bottom: 0;
+  padding-bottom: .5rem;
 }
 
 @media only screen and (min-width: 768px) {
@@ -482,7 +481,12 @@ input[type=email]:not(.browser-default) {
   border-radius: 12px;
 }
 
-#markdown ul li {
+#markdown ul {
+  list-style-type: disc;
+  margin-left: 2rem;
+}
+
+#markdown ul > li {
   list-style-type: disc;
 }
 
@@ -494,4 +498,34 @@ input[type=email]:not(.browser-default) {
 
 .boxReaction:hover {
   background: #009e8c;
+}
+
+#welcome-panel {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#ingredients {
+  margin-top: 1rem;
+}
+
+#instructions {
+  margin-top: -.2rem;
+}
+
+#ingredients ul > li {
+  list-style-type: disc;
+  margin-left: 2rem;
+}
+
+#instructions ul > li  {
+  list-style-type: decimal;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+#instructions ul > li:first-child  {
+  list-style-type: decimal;
+  margin-left: 1rem;
+  margin-top: 0;
 }

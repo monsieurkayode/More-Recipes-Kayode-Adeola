@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'proptypes';
-
-import recipeImg from '../../assets/css/img/cake2.jpg';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 class RecipeCard extends Component {
   render() {
+    const { recipe } = this.props;
+    let time = recipe.createdAt;
+    time = moment.utc(recipe.createdAt).format('MMMM DD h:mm a');
     return (
       <div>
         <div className="card-image">
-          <a href="recipe-view.html">
-            <img className="responsive-img" src={recipeImg} alt="" />
-          </a>
-          <span className="card-title">24 Views</span>
+          <Link to={`/recipes/${recipe.id}`}>
+            <img
+              className="responsive-img"
+              src={`../uploads/${recipe.image}`}
+              alt=""
+            />
+          </Link>
+          <span className="card-title">{recipe.views} views</span>
         </div>
         <div className={`card-content ${this.props.size}`}>
-          <span className="card-title"><strong>Frosty Chocolat</strong></span>
+          <span className="card-title">
+            <strong>{recipe.recipeName}</strong>
+          </span>
           <div className="divider" />
           <a className="edit chip modal-trigger" href="#modal-edit">
             <i className="fa fa-pencil" /> Edit
@@ -23,14 +32,14 @@ class RecipeCard extends Component {
               <i className="fa fa-trash-o" /> Delete
             </a><br />
             <span className="right">
-              <i className="material-icons tiny reaction">thumb_down</i>2
+              <i className="material-icons tiny reaction">
+              thumb_down</i>{recipe.downvote}
             </span>
             <span className="right">
-              <i className="material-icons tiny reaction">thumb_up</i>10
+              <i className="material-icons tiny reaction">
+              thumb_up</i>{recipe.upvote}
             </span>
-            <span className="right">12</span>
-            <i className="material-icons comment right">comment</i>
-            <span><p className="created-at">2 Aug 17, 10:55am</p></span>
+            <span><p className="created-at">{time}</p></span>
           </span>
         </div>
       </div>
@@ -39,7 +48,10 @@ class RecipeCard extends Component {
 }
 
 RecipeCard.propTypes = {
-  size: PropTypes.string.isRequired
+  size: PropTypes.string.isRequired,
+  recipe: PropTypes.shape({
+
+  }).isRequired
 };
 
 export default RecipeCard;

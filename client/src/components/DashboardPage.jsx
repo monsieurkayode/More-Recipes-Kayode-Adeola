@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'proptypes';
 
-import { logoutAction } from '../actions';
+import {
+  logoutAction,
+  routeAction,
+  fetchUserRecipes,
+  fetchUserFavorites,
+} from '../actions';
 import { DashboardNavbar } from './headers/Index.jsx';
 import {
   DashboardPanel,
@@ -12,11 +17,12 @@ import {
   UserProfile,
 } from './dashboard/Index.jsx';
 import { DeleteModal, NewPostModal, EditPostModal } from './modals/Index.jsx';
-import routeAction from '../actions/routeAction';
 
 class DashboardPage extends Component {
   componentWillMount() {
     this.props.routeAction(this.props.selected);
+    this.props.fetchUserRecipes();
+    this.props.fetchUserFavorites();
   }
 
   componentDidMount() {
@@ -33,13 +39,16 @@ class DashboardPage extends Component {
         <div className="row">
           <DashboardPanel />
           {
-            this.props.selected === 'profile' && <UserProfile />
+            this.props.selected === 'profile' &&
+            <UserProfile {...this.props} />
           }
           {
-            this.props.selected === 'recipes' && <UserRecipe />
+            this.props.selected === 'recipes' &&
+            <UserRecipe {...this.props} />
           }
           {
-            this.props.selected === 'favorites' && <UserFavoriteRecipe />
+            this.props.selected === 'favorites' &&
+            <UserFavoriteRecipe {...this.props} />
           }
         </div>
         <DeleteModal />
@@ -51,17 +60,28 @@ class DashboardPage extends Component {
   }
 }
 
-const mapStateToProps = ({ signinState, routing }) => ({
+const mapStateToProps = ({
+  signinState,
+  routing,
+  userRecipes,
+  userFavorites
+}) => ({
   user: signinState.user,
   isAuthenticated: signinState.isAuthenticated,
   selected: routing.selected,
+  userRecipes,
+  userFavorites
 });
 
 DashboardPage.propTypes = {
   routeAction: PropTypes.func.isRequired,
   selected: PropTypes.string.isRequired,
+  fetchUserRecipes: PropTypes.func.isRequired,
+  userRecipes: PropTypes.shape({}).isRequired,
+  userFavorites: PropTypes.shape({}).isRequired,
+  fetchUserFavorites: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps,
-  { logoutAction, routeAction }
+  { logoutAction, routeAction, fetchUserRecipes, fetchUserFavorites }
 )(DashboardPage);

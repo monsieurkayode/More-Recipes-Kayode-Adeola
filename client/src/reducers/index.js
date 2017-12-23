@@ -8,6 +8,8 @@ import singleRecipeReducer from './singleRecipeReducer';
 import routeReducer from './routeReducer';
 import fetchSingleFavorite from './fetchSingleFavorite';
 import reviewReducer from './reviewReducer';
+import fetchUserRecipes from './fetchUserRecipes';
+import fetchUserFavorites from './fetchUserFavorites';
 
 const rootReducer = combineReducers({
   signupState: signupReducer,
@@ -17,7 +19,9 @@ const rootReducer = combineReducers({
   currentRecipe: singleRecipeReducer,
   routing: routeReducer,
   isFavorite: fetchSingleFavorite,
-  reviews: reviewReducer
+  reviews: reviewReducer,
+  userRecipes: fetchUserRecipes,
+  userFavorites: fetchUserFavorites
 });
 
 export default rootReducer;
