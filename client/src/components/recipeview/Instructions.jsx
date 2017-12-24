@@ -11,7 +11,10 @@ class Instructions extends Component {
       <div className="col l12 m12 s12">
         <h4>Instructions</h4>
         <div
-          dangerouslySetInnerHTML={{ __html: converter.makeHtml(this.props.instructions) }}
+          id="instructions"
+          dangerouslySetInnerHTML={
+            { __html: converter.makeHtml(this.props.instructions) }
+          }
         />
       </div>
     );

@@ -12,7 +12,8 @@ const Recipe = db.Recipe,
   Favorite = db.Favorite,
   include = [
     'id', 'views', 'upvote', 'downvote',
-    'recipeName', 'category', 'ingredients', 'instructions', 'image'
+    'recipeName', 'category', 'ingredients',
+    'instructions', 'image', 'createdAt'
   ];
 
 /**

@@ -11,6 +11,9 @@ const fetchReviews = recipeId => dispatch =>
         type: actionTypes.FETCH_REVIEWS,
         payload
       });
+    })
+    .catch(() => {
+      dispatch({ type: actionTypes.FETCH_REVIEWS_ERROR });
     });
 
 export default fetchReviews;

@@ -12,7 +12,10 @@ class Ingredients extends Component {
         <span className=""><h5>Ingredients</h5></span>
         <p className="divider" />
         <div
-          dangerouslySetInnerHTML={{ __html: converter.makeHtml(this.props.ingredients) }}
+          id="ingredients"
+          dangerouslySetInnerHTML={
+            { __html: converter.makeHtml(this.props.ingredients) }
+          }
         />
       </div>
     );
