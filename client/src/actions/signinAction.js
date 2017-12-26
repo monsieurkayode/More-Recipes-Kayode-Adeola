@@ -14,7 +14,7 @@ const signinAction = user => dispatch =>
         setAuthorizationToken(Token);
         user = decode(Token).user;
         Materialize
-          .toast(`Welcome ${user.username}`, 4000, 'teal');
+          .toast(`Welcome ${user.username}`, 4000, 'grey darken-2');
         dispatch({ type: actionTypes.SIGNIN_SUCCESSFUL, payload: user });
       }
     })

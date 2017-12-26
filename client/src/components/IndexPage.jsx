@@ -4,7 +4,6 @@ import PropTypes from 'proptypes';
 
 import { fetchRecipesAction, logoutAction } from '../actions';
 import { LandingNavbar, HomeNavbar, Banner } from './headers/Index.jsx';
-import { SigninModal, SignupModal, NewPostModal } from './modals/Index.jsx';
 import { Contents, WelcomeMessage, SideNav } from './main/Index.jsx';
 import Footer from './footer/Footer.jsx';
 
@@ -30,9 +29,6 @@ class IndexPage extends Component {
         <Contents />
         <Footer />
         <SideNav />
-        <SigninModal />
-        <SignupModal />
-        <NewPostModal />
       </div>
     );
   }

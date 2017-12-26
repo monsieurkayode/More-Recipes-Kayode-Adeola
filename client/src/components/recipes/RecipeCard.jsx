@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 class RecipeCard extends Component {
   render() {
-    const { recipe } = this.props;
+    const { recipe, deletePost } = this.props;
     let time = recipe.createdAt;
     time = moment.utc(recipe.createdAt).format('MMMM DD h:mm a');
     return (
@@ -25,10 +25,13 @@ class RecipeCard extends Component {
             <strong>{recipe.recipeName}</strong>
           </span>
           <div className="divider" />
-          <a className="edit chip modal-trigger" href="#modal-edit">
+          <a className="edit chip">
             <i className="fa fa-pencil" /> Edit
           </a><span>
-            <a className="delete chip modal-trigger" href="#modal-delete">
+            <a
+              onClick={() => deletePost(recipe.id)}
+              className="delete chip"
+            >
               <i className="fa fa-trash-o" /> Delete
             </a><br />
             <span className="right">
@@ -47,11 +50,15 @@ class RecipeCard extends Component {
   }
 }
 
+RecipeCard.defaultProps = {
+  deletePost: null
+};
+
 RecipeCard.propTypes = {
   size: PropTypes.string.isRequired,
   recipe: PropTypes.shape({
-
-  }).isRequired
+  }).isRequired,
+  deletePost: PropTypes.func
 };
 
 export default RecipeCard;

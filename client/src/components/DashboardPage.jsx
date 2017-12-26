@@ -7,6 +7,7 @@ import {
   routeAction,
   fetchUserRecipes,
   fetchUserFavorites,
+  deletePost,
 } from '../actions';
 import { DashboardNavbar } from './headers/Index.jsx';
 import {
@@ -16,7 +17,11 @@ import {
   UserFavoriteRecipe,
   UserProfile,
 } from './dashboard/Index.jsx';
-import { DeleteModal, NewPostModal, EditPostModal } from './modals/Index.jsx';
+import {
+  DeleteModal,
+  NewPostModal,
+  EditPostModal,
+} from './modals/Index.jsx';
 
 class DashboardPage extends Component {
   componentWillMount() {
@@ -64,13 +69,13 @@ const mapStateToProps = ({
   signinState,
   routing,
   userRecipes,
-  userFavorites
+  userFavorites,
 }) => ({
   user: signinState.user,
   isAuthenticated: signinState.isAuthenticated,
   selected: routing.selected,
   userRecipes,
-  userFavorites
+  userFavorites,
 });
 
 DashboardPage.propTypes = {
@@ -83,5 +88,11 @@ DashboardPage.propTypes = {
 };
 
 export default connect(mapStateToProps,
-  { logoutAction, routeAction, fetchUserRecipes, fetchUserFavorites }
+  {
+    logoutAction,
+    routeAction,
+    fetchUserRecipes,
+    fetchUserFavorites,
+    deletePost,
+  }
 )(DashboardPage);

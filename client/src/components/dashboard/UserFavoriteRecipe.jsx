@@ -1,3 +1,4 @@
+import isEmpty from 'lodash/isEmpty';
 import React, { Component } from 'react';
 import PropTypes from 'proptypes';
 
@@ -5,6 +6,8 @@ import { WelcomeDisplay } from './Index.jsx';
 import { RecipeCardSmall } from '../recipes/Index.jsx';
 
 class UserFavoriteRecipe extends Component {
+  hasFavorites = () => !isEmpty(this.props.userFavorites.recipes)
+
   renderUserFavorites = (index) => {
     const recipe = this.props.userFavorites.recipes[index];
     return (
@@ -22,16 +25,24 @@ class UserFavoriteRecipe extends Component {
         <WelcomeDisplay />
         <div id="user-favorites" className="row">
           <div className="row">
-            {Object
-              .keys(recipes)
-              .sort((a, b) => b - a)
-              .map(index => this.renderUserFavorites(index))}
+            {this.hasFavorites() ?
+              Object
+                .keys(recipes)
+                .sort((a, b) => b - a)
+                .map(index => this.renderUserFavorites(index)) :
+              <h5 style={{ textAlign: 'center' }}>
+                You have not added any favorite recipe
+              </h5>}
           </div>
         </div>
       </div>
     );
   }
 }
+
+UserFavoriteRecipe.defaultProps = {
+  userFavorites: {}
+};
 
 UserFavoriteRecipe.propTypes = {
   userFavorites: PropTypes.shape({
@@ -45,8 +56,8 @@ UserFavoriteRecipe.propTypes = {
       ingredients: PropTypes.string,
       instructions: PropTypes.string,
       image: PropTypes.string
-    }).isRequired
-  }).isRequired
+    })
+  })
 };
 
 export default UserFavoriteRecipe;

@@ -12,10 +12,15 @@ const fetchUserRecipes = () => dispatch =>
         payload: { pagination, recipes }
       });
     })
-    .catch(() => {
-      const errorMessage = 'An error occured!';
-      Materialize.toast(errorMessage, 4000, 'red');
-      dispatch({ type: actionTypes.FETCH_USER_RECIPES_ERROR });
+    .catch((error) => {
+      if (error.response.status === 404) {
+        dispatch({ type: actionTypes.FETCH_USER_RECIPES_ERROR });
+      }
+      if (error.response.status > 404) {
+        const errorMessage = 'An error occured!';
+        Materialize.toast(errorMessage, 4000, 'red');
+        dispatch({ type: actionTypes.FETCH_USER_RECIPES_ERROR });
+      }
     });
 
 export default fetchUserRecipes;

@@ -25,14 +25,14 @@ const LandingNavBar = () => (
             <SearchBar />
           </li>
           <li>
-            <a>
+            <Link to="/">
               <i className="fa fa-heart" /> Top Recipes
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#modal-newpost" id="new-post" className="modal-trigger">
+            <Link to="/recipes/new" id="new-post">
               <i className="fa fa-pencil-square-o" /> New Post
-            </a>
+            </Link>
           </li>
           <li>
             <Link

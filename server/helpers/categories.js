@@ -12,5 +12,6 @@ export default [
   'smoothies',
   'vegatables',
   'appetizers',
-  'side dishes'
+  'side dishes',
+  'others'
 ];

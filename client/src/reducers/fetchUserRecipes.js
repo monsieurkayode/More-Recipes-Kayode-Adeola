@@ -9,6 +9,11 @@ export default (state = {}, action) => {
         recipes: _.mapKeys(action.payload.recipes, 'id'),
         pagination: action.payload.pagination
       };
+    case actionTypes.DELETE_RECIPE_POST:
+      return {
+        ...state,
+        recipes: _.omit(state.recipes, action.payload),
+      };
     default:
       return state;
   }
