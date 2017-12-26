@@ -15,6 +15,7 @@ import fetchReviews from './fetchReviews';
 import fetchUserRecipes from './fetchUserRecipes';
 import fetchUserFavorites from './fetchUserFavorites';
 import deletePost from './deletePost';
+import fetchTopRecipes from './fetchTopRecipes';
 
 export {
   signupAction,
@@ -33,4 +34,5 @@ export {
   fetchUserRecipes,
   fetchUserFavorites,
   deletePost,
+  fetchTopRecipes,
 };
