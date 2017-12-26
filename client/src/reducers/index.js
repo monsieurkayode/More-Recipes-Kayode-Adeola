@@ -10,6 +10,7 @@ import fetchSingleFavorite from './fetchSingleFavorite';
 import reviewReducer from './reviewReducer';
 import fetchUserRecipes from './fetchUserRecipes';
 import fetchUserFavorites from './fetchUserFavorites';
+import fetchTopRecipes from './fetchTopRecipes';
 
 const rootReducer = combineReducers({
   signupState: signupReducer,
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   isFavorite: fetchSingleFavorite,
   reviews: reviewReducer,
   userRecipes: fetchUserRecipes,
-  userFavorites: fetchUserFavorites
+  userFavorites: fetchUserFavorites,
+  topRecipes: fetchTopRecipes,
 });
 
 export default rootReducer;

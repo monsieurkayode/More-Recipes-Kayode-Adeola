@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'proptypes';
 
-import { fetchRecipesAction, logoutAction } from '../actions';
+import {
+  fetchRecipesAction,
+  logoutAction,
+  fetchTopRecipes
+} from '../actions';
 import { LandingNavbar, HomeNavbar, Banner } from './headers/Index.jsx';
 import { Contents, WelcomeMessage, SideNav } from './main/Index.jsx';
 import Footer from './footer/Footer.jsx';
@@ -11,6 +15,7 @@ class IndexPage extends Component {
   componentWillMount() {
     if (localStorage.token && this.props.isAuthenticated) {
       this.props.fetchRecipesAction();
+      this.props.fetchTopRecipes();
     }
   }
 
@@ -34,7 +39,10 @@ class IndexPage extends Component {
   }
 }
 
-const mapStateToProps = ({ recipes, signinState }) => ({
+const mapStateToProps = ({
+  recipes,
+  signinState
+}) => ({
   recipes,
   user: signinState.user,
   isAuthenticated: signinState.isAuthenticated,
@@ -43,8 +51,13 @@ const mapStateToProps = ({ recipes, signinState }) => ({
 IndexPage.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   fetchRecipesAction: PropTypes.func.isRequired,
+  fetchTopRecipes: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps,
-  { fetchRecipesAction, logoutAction }
+  {
+    fetchRecipesAction,
+    logoutAction,
+    fetchTopRecipes
+  }
 )(IndexPage);
