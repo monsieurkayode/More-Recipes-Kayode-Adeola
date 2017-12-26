@@ -295,7 +295,8 @@ input[type=email]:not(.browser-default) {
   border: 1px solid grey;
   transition-property: background, color;
   transition-duration: 0.3s;
-  transition-timing-function: ease-in
+  transition-timing-function: ease-in;
+  cursor: pointer;
 }
 
 .edit:hover, .delete:hover {

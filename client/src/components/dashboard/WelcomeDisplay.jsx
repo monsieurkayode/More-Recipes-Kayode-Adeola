@@ -17,10 +17,14 @@ class WelcomeDisplay extends Component {
   }
 }
 
+WelcomeDisplay.defaultProps = {
+  user: {}
+};
+
 WelcomeDisplay.propTypes = {
   user: PropTypes.shape({
-    username: PropTypes.string.isRequired
-  }).isRequired,
+    username: PropTypes.string
+  }),
   selected: PropTypes.string.isRequired
 };
 

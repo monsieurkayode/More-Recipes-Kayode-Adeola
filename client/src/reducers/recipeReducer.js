@@ -10,6 +10,11 @@ const recipeReducer = (state = {}, action) => {
         recipes: _.mapKeys(action.payload, 'id'),
         pagination: {}
       };
+    case actionTypes.DELETE_RECIPE_POST:
+      return {
+        ...state,
+        recipes: _.omit(state.recipes, action.payload)
+      };
     case actionTypes.FETCH_RECIPES:
       return {
         recipes: _.mapKeys(action.payload.recipes, 'id'),

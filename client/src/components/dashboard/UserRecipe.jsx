@@ -1,3 +1,4 @@
+import isEmpty from 'lodash/isEmpty';
 import React, { Component } from 'react';
 import PropTypes from 'proptypes';
 
@@ -5,6 +6,7 @@ import { RecipeCardSmall } from '../recipes/Index.jsx';
 import { WelcomeDisplay } from './Index.jsx';
 
 class UserRecipe extends Component {
+  hasRecipes = () => !isEmpty(this.props.userRecipes.recipes)
   renderUserRecipes = (index) => {
     const recipe = this.props.userRecipes.recipes[index];
     return (
@@ -12,6 +14,7 @@ class UserRecipe extends Component {
         key={recipe.id}
         index={recipe.id}
         recipe={recipe}
+        deletePost={this.props.deletePost}
       />
     );
   }
@@ -21,15 +24,24 @@ class UserRecipe extends Component {
       <div id="user-recipes" className="col l9 m12 s12 offset-l3">
         <WelcomeDisplay />
         <div id="my-recipes" className="row">
-          {Object
-            .keys(recipes)
-            .sort((a, b) => b - a)
-            .map(index => this.renderUserRecipes(index))}
+          {this.hasRecipes() ?
+            Object
+              .keys(recipes)
+              .sort((a, b) => b - a)
+              .map(index => this.renderUserRecipes(index)) :
+            <h5 style={{ textAlign: 'center' }}>
+              You have not created any recipe!
+            </h5>}
         </div>
       </div>
     );
   }
 }
+
+UserRecipe.defaultProps = {
+  userRecipes: {},
+  deletePost: null
+};
 
 UserRecipe.propTypes = {
   userRecipes: PropTypes.shape({
@@ -43,8 +55,9 @@ UserRecipe.propTypes = {
       ingredients: PropTypes.string,
       instructions: PropTypes.string,
       image: PropTypes.string
-    }).isRequired
-  }).isRequired
+    })
+  }),
+  deletePost: PropTypes.func,
 };
 
 export default UserRecipe;

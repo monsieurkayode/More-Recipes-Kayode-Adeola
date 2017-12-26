@@ -26,9 +26,8 @@ class PostRecipe extends Component {
   }
 
   componentDidMount() {
-    // $('select').material_select();
-    // $('select').material_select('onChange', this.handleCategory.bind(this));
-    $(findDOMNode(this.refs.category)).on('change', this.handleCategory);
+    $(findDOMNode(this.refs.category))
+      .on('change', this.handleCategory);
   }
 
   componentWillReceiveProps() {
@@ -66,7 +65,9 @@ class PostRecipe extends Component {
     if (!_.has(this.props.errors, 'ingredients')) {
       return (
         <div
-          dangerouslySetInnerHTML={{ __html: converter.makeHtml(this.props.values.ingredients) }}
+          dangerouslySetInnerHTML={
+            { __html: converter.makeHtml(this.props.values.ingredients) }
+          }
         />
       );
     }
@@ -77,7 +78,9 @@ class PostRecipe extends Component {
     if (!_.has(this.props.errors, 'instructions')) {
       return (
         <div
-          dangerouslySetInnerHTML={{ __html: converter.makeHtml(this.props.values.instructions) }}
+          dangerouslySetInnerHTML={
+            { __html: converter.makeHtml(this.props.values.instructions) }
+          }
         />
       );
     }
@@ -217,13 +220,27 @@ class PostRecipe extends Component {
   }
 }
 
+PostRecipe.defaultProps = {
+  values: {},
+  errors: {}
+};
+
 PostRecipe.propTypes = {
   createPost: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  invalid: PropTypes.bool.isRequired
+  invalid: PropTypes.bool.isRequired,
+  errors: PropTypes.shape({
+    recipeName: PropTypes.string,
+    ingredients: PropTypes.string,
+    instructions: PropTypes.string
+  }),
+  values: PropTypes.shape({
+    ingredients: PropTypes.string,
+    instructions: PropTypes.string
+  }),
 };
 
 const mapStateToProps = ({ form }) => ({
