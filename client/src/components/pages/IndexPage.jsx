@@ -6,10 +6,10 @@ import {
   fetchRecipesAction,
   logoutAction,
   fetchTopRecipes
-} from '../actions';
-import { LandingNavbar, HomeNavbar, Banner } from './headers/Index.jsx';
-import { Contents, WelcomeMessage, SideNav } from './main/Index.jsx';
-import Footer from './footer/Footer.jsx';
+} from '../../actions';
+import { LandingNavbar, HomeNavbar, Banner } from '../headers/Index.jsx';
+import { Contents, WelcomeMessage, SideNav } from '../main/Index.jsx';
+import Footer from '../footer/Index.jsx';
 
 class IndexPage extends Component {
   componentWillMount() {

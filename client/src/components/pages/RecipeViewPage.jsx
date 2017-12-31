@@ -9,17 +9,18 @@ import {
   downvoteAction,
   addFavoriteAction,
   fetchSingleFavorite,
-  fetchReviews
-} from '../actions';
-import Footer from './footer/Footer.jsx';
+  fetchReviews,
+  removeFavorite,
+} from '../../actions';
+import Footer from '../footer/Index.jsx';
 import {
   Ingredients,
   Instructions,
   CommentBox,
   Comments
-} from './recipeview/Index.jsx';
-import { SideNav } from './main/Index.jsx';
-import { HomeNavbar } from './headers/Index.jsx';
+} from '../recipeview/Index.jsx';
+import { SideNav } from '../main/Index.jsx';
+import { HomeNavbar } from '../headers/Index.jsx';
 
 class RecipeViewPage extends Component {
   componentWillMount() {
@@ -49,8 +50,10 @@ class RecipeViewPage extends Component {
   }
 
   render() {
-    const { currentRecipe, reviews } = this.props;
-    const favorited = this.props.isFavorite ? 'orange-text' : '';
+    const { currentRecipe, reviews, isFavorite } = this.props;
+    const favorited = isFavorite ? 'orange-text' : '';
+    const handleAction = isFavorite ? this.props.removeFavorite :
+      this.props.addFavoriteAction;
     if (isEmpty(currentRecipe)) {
       return <div>Loading....</div>;
     }
@@ -105,7 +108,7 @@ class RecipeViewPage extends Component {
                       }
                     </div>
                     <div
-                      onClick={() => this.props.addFavoriteAction(
+                      onClick={() => handleAction(
                         currentRecipe.id
                       )}
                       className="chip boxReaction"
@@ -161,6 +164,7 @@ RecipeViewPage.propTypes = {
   upvoteAction: PropTypes.func.isRequired,
   downvoteAction: PropTypes.func.isRequired,
   addFavoriteAction: PropTypes.func.isRequired,
+  removeFavorite: PropTypes.func.isRequired,
   fetchSingleFavorite: PropTypes.func.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   fetchReviews: PropTypes.func.isRequired,
@@ -182,5 +186,6 @@ export default connect(mapStateToProps,
     addFavoriteAction,
     fetchSingleFavorite,
     fetchReviews,
+    removeFavorite,
   }
 )(RecipeViewPage);

@@ -6,15 +6,15 @@ import decode from 'jwt-decode';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import NotFoundPage from './components/NotFoundPage.jsx';
-import IndexPage from './components/IndexPage.jsx';
+import NotFoundPage from './components/pages/NotFoundPage.jsx';
+import IndexPage from './components/pages/IndexPage.jsx';
 import {
   SigninPage,
   SignupPage,
   PostRecipePage
 } from './components/main/Index.jsx';
-import DashboardPage from './components/DashboardPage.jsx';
-import RecipeViewPage from './components/RecipeViewPage.jsx';
+import DashboardPage from './components/pages/DashboardPage.jsx';
+import RecipeViewPage from './components/pages/RecipeViewPage.jsx';
 
 import './assets/css/font-awesome.css';
 import './assets/css/materialize.css';
