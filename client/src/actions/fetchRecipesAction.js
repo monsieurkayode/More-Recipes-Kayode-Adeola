@@ -1,6 +1,8 @@
+/* jshint esversion: 6 */
 import axios from 'axios';
 import actionTypes from '../actions/actionTypes';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
+import sampleRecipes from '../utils/sampleRecipes';
 
 const fetchRecipesAction = () => dispatch =>
   axios.get('/api/v1/recipes')
@@ -20,6 +22,10 @@ const fetchRecipesAction = () => dispatch =>
         const user = {};
         dispatch({ type: actionTypes.SESSION_EXPIRED });
         dispatch({ type: actionTypes.LOGOUT_USER, payload: user });
+        dispatch({
+          type: actionTypes.FETCH_SAMPLE_RECIPES,
+          payload: sampleRecipes
+        });
       }
     });
 

@@ -7,6 +7,8 @@ export default (state = false, action) => {
       return action.payload;
     case actionTypes.ADD_FAVORITE_POST:
       return true;
+    case actionTypes.REMOVE_FAVORITE:
+      return false;
     default:
       return state;
   }

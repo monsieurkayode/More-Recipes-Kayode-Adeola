@@ -9,12 +9,13 @@ class UserRecipe extends Component {
   hasRecipes = () => !isEmpty(this.props.userRecipes.recipes)
   renderUserRecipes = (index) => {
     const recipe = this.props.userRecipes.recipes[index];
+    const { deletePost } = this.props;
     return (
       <RecipeCardSmall
         key={recipe.id}
         index={recipe.id}
         recipe={recipe}
-        deletePost={this.props.deletePost}
+        handleAction={deletePost}
       />
     );
   }

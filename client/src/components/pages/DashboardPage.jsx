@@ -8,20 +8,21 @@ import {
   fetchUserRecipes,
   fetchUserFavorites,
   deletePost,
-} from '../actions';
-import { DashboardNavbar } from './headers/Index.jsx';
+  removeFavorite,
+} from '../../actions';
+import { DashboardNavbar } from '../headers/Index.jsx';
 import {
   DashboardPanel,
   SideNavDashboard,
   UserRecipe,
   UserFavoriteRecipe,
   UserProfile,
-} from './dashboard/Index.jsx';
+} from '../dashboard/Index.jsx';
 import {
   DeleteModal,
   NewPostModal,
   EditPostModal,
-} from './modals/Index.jsx';
+} from '../modals/Index.jsx';
 
 class DashboardPage extends Component {
   componentWillMount() {
@@ -94,5 +95,6 @@ export default connect(mapStateToProps,
     fetchUserRecipes,
     fetchUserFavorites,
     deletePost,
+    removeFavorite,
   }
 )(DashboardPage);
