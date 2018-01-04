@@ -33,11 +33,14 @@ class RecipeViewPage extends Component {
   componentDidMount() {
     $('.dropdown-button').dropdown();
     $('.button-collapse').sideNav();
+    $('.materialboxed').materialbox();
+    window.scroll(0, 0);
   }
 
   componentDidUpdate() {
     $('.dropdown-button').dropdown();
     $('.button-collapse').sideNav();
+    $('.materialboxed').materialbox();
   }
 
   renderReviews = (index) => {

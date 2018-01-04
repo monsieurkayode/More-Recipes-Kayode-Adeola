@@ -6,7 +6,7 @@
   "scripts": {
     "migrate": "sequelize db:migrate",
     "unmigrate": "sequelize db:migrate:undo:all",
-    "start:dev": "nodemon --watch server --exec babel-node ./bin/www",
+    "start:dev": "nodemon --watch server --watch client --exec babel-node ./bin/www",
     "watch": "webpack --config webpack.config.js --watch",
     "heroku-postbuild": "npm run migrate",
     "start": "babel-node ./bin/www",

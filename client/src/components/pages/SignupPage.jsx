@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'proptypes';
 
-import { SignupForm } from './Index.jsx';
+import { SignupForm } from '../main/Index.jsx';
 
 class SignupPage extends Component {
   componentDidMount() {

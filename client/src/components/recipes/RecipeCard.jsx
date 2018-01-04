@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 class RecipeCard extends Component {
   render() {
-    const { recipe, handleAction } = this.props;
+    const { recipe, handleAction, selected } = this.props;
     let time = recipe.createdAt;
     time = moment.utc(recipe.createdAt).format('MMMM DD h:mm a');
     return (
@@ -25,9 +25,13 @@ class RecipeCard extends Component {
             <strong>{recipe.recipeName}</strong>
           </span>
           <div className="divider" />
-          <a className="edit chip">
+          <Link
+            to={selected === 'recipes' ? `/recipes/${recipe.id}/edit` :
+              `/favorites/${recipe.id}/edit`}
+            className="edit chip"
+          >
             <i className="fa fa-pencil" /> Edit
-          </a><span>
+          </Link><span>
             <a
               onClick={() => handleAction(recipe.id)}
               className="delete chip"
@@ -51,14 +55,16 @@ class RecipeCard extends Component {
 }
 
 RecipeCard.defaultProps = {
-  handleAction: null
+  handleAction: null,
+  selected: ''
 };
 
 RecipeCard.propTypes = {
   size: PropTypes.string.isRequired,
   recipe: PropTypes.shape({
   }).isRequired,
-  handleAction: PropTypes.func
+  handleAction: PropTypes.func,
+  selected: PropTypes.string
 };
 
 export default RecipeCard;

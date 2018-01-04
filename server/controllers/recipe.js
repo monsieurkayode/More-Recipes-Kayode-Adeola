@@ -1,14 +1,12 @@
+/* jshint esversion: 6 */
 import db from '../models/index';
 import { paginate, validatePaginate } from '../helpers/paginate';
 import {
   recipeHandler,
-  responseHandler,
   errorHandler,
   handleResponse } from '../helpers/responseHandler';
 
 const Recipe = db.Recipe,
-  Review = db.Review,
-  User = db.User,
   Favorite = db.Favorite,
   include = [
     'id', 'views', 'upvote', 'downvote',
@@ -169,15 +167,27 @@ const viewRecipe = (req, res) => Recipe
   .findOne({ where: { id: req.params.recipeId }
   })
   .then((recipe) => {
-    recipe.increment('views').then(() => Recipe
-      .findOne({ where: { id: req.params.recipeId },
-        attributes: include,
-      }, responseHandler(Review, User, Favorite))
-      .then(result => res.status(200).send({
-        status: 'success',
-        message: `Viewing post with id of ${recipe.id}`,
-        recipe: result
-      })));
+    if (req.decoded.user.id !== recipe.userId) {
+      recipe.increment('views').then(() => Recipe
+        .findOne({ where: { id: req.params.recipeId },
+          attributes: include,
+        })
+        .then(result => res.status(200).send({
+          status: 'success',
+          message: `Viewing post with id of ${recipe.id}`,
+          recipe: result
+        })));
+    } else {
+      Recipe
+        .findOne({ where: { id: req.params.recipeId },
+          attributes: include,
+        })
+        .then(result => res.status(200).send({
+          status: 'success',
+          message: `Viewing post with id of ${recipe.id}`,
+          recipe: result
+        }));
+    }
   })
   .catch(error => res.status(400).send(error));
 

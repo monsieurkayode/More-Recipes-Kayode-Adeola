@@ -9,13 +9,14 @@ class UserRecipe extends Component {
   hasRecipes = () => !isEmpty(this.props.userRecipes.recipes)
   renderUserRecipes = (index) => {
     const recipe = this.props.userRecipes.recipes[index];
-    const { deletePost } = this.props;
+    const { deletePost, selected } = this.props;
     return (
       <RecipeCardSmall
         key={recipe.id}
         index={recipe.id}
         recipe={recipe}
         handleAction={deletePost}
+        selected={selected}
       />
     );
   }
@@ -59,6 +60,7 @@ UserRecipe.propTypes = {
     })
   }),
   deletePost: PropTypes.func,
+  selected: PropTypes.string.isRequired
 };
 
 export default UserRecipe;
