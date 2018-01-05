@@ -6,15 +6,16 @@ import decode from 'jwt-decode';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import NotFoundPage from './components/pages/NotFoundPage.jsx';
-import IndexPage from './components/pages/IndexPage.jsx';
 import {
+  IndexPage,
   SigninPage,
   SignupPage,
-  PostRecipePage
-} from './components/main/Index.jsx';
-import DashboardPage from './components/pages/DashboardPage.jsx';
-import RecipeViewPage from './components/pages/RecipeViewPage.jsx';
+  PostRecipePage,
+  EditRecipePage,
+  NotFoundPage,
+  DashboardPage,
+  RecipeViewPage,
+} from './components/pages/Index.jsx';
 
 import './assets/css/font-awesome.css';
 import './assets/css/materialize.css';
@@ -57,7 +58,8 @@ render(
           <Route path="/signup" component={SignupPage} />
           <Route path="/dashboard" component={Authenticate(DashboardPage)} />
           <Route path="/recipes/new" component={Authenticate(PostRecipePage)} />
-          <Route path="/recipes/:recipeId" component={Authenticate(RecipeViewPage)} />
+          <Route exact path="/recipes/:recipeId" component={Authenticate(RecipeViewPage)} />
+          <Route path="/recipes/:recipeId/edit" component={Authenticate(EditRecipePage)} />
           <Route exact path="/" component={IndexPage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>

@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'proptypes';
 import showdown from 'showdown';
 
 import FileUpload from './FileUpload.jsx';
-import { createPost } from '../../actions';
+import { editPost, fetchSingleRecipe } from '../../actions';
 import validate from '../../utils/validate';
 import categories from '../../../../server/helpers/categories';
 import pascalCase from '../../utils/pascalCase';
 
 showdown.setFlavor('github');
-class PostRecipe extends Component {
+
+class EditRecipe extends Component {
   constructor() {
     super();
     this.state = {
@@ -22,20 +23,35 @@ class PostRecipe extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentWillMount() {
+    const { recipeId } = this.props.match.params;
+    this.props.fetchSingleRecipe(recipeId);
+  }
+
   componentDidMount() {
     // eslint-disable-next-line
     $(findDOMNode(this.refs.category))
       .on('change', this.handleCategory);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.initialValues.category) {
+      this.setState({
+        selectedCategory: nextProps.initialValues.category
+      });
+    }
+  }
+
   componentWillUpdate() {
     $('select').material_select();
   }
 
-  onSubmit(values) {
-    const category = this.state.selectedCategory;
-    this.props.createPost(category, values, () => {
-      this.props.history.push('/');
+  onSubmit(values, category) {
+    const { recipeId } = this.props.match.params;
+    category = this.state.selectedCategory;
+    this.props.editPost(recipeId, category, values, (message) => {
+      Materialize.toast(message, 4000, 'grey darken-2');
+      this.props.history.goBack();
     });
   }
 
@@ -94,7 +110,7 @@ class PostRecipe extends Component {
             ref={ref}
             value={value}
           >
-            <option value="others">Select Category</option>
+            <option value={this.state.selectedCategory}>Select Category</option>
             {categories
               .map(
                 category => (<option value={category} key={category}>
@@ -164,12 +180,12 @@ class PostRecipe extends Component {
                 type="submit"
                 className="btn"
               >
-                Post
+                Update
               </button>
             </span>
-            <Link to="/" className="right">
+            <a onClick={() => this.props.history.goBack} className="right">
               <button className="btn red">Cancel</button>
-            </Link>
+            </a>
           </form>
         </div>
       </div>
@@ -178,35 +194,51 @@ class PostRecipe extends Component {
   }
 }
 
-PostRecipe.defaultProps = {
-  values: {},
-  errors: {}
-};
-
-PostRecipe.propTypes = {
-  createPost: PropTypes.func.isRequired,
+EditRecipe.propTypes = {
+  editPost: PropTypes.func.isRequired,
+  fetchSingleRecipe: PropTypes.func.isRequired,
+  initialValues: PropTypes.shape({
+    id: PropTypes.number,
+    views: PropTypes.number,
+    upvote: PropTypes.number,
+    downvote: PropTypes.number,
+    recipeName: PropTypes.string,
+    category: PropTypes.string,
+    ingredients: PropTypes.string,
+    instructions: PropTypes.string,
+    image: PropTypes.shape({})
+  }).isRequired,
   history: PropTypes.shape({
-    push: PropTypes.func.isRequired
+    push: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
   }).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   invalid: PropTypes.bool.isRequired,
-  errors: PropTypes.shape({
-    recipeName: PropTypes.string,
-    ingredients: PropTypes.string,
-    instructions: PropTypes.string
-  }),
-  values: PropTypes.shape({
-    ingredients: PropTypes.string,
-    instructions: PropTypes.string
-  }),
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      recipeId: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
 };
 
-const mapStateToProps = ({ form }) => ({
-  values: form.PostRecipeForm.values,
-  errors: form.PostRecipeForm.syncErrors
+const mapStateToProps = ({ currentRecipe }) => ({
+  initialValues: {
+    recipeName: currentRecipe.recipeName,
+    category: currentRecipe.category,
+    ingredients: currentRecipe.ingredients,
+    instructions: currentRecipe.instructions,
+    image: {
+      file: 'empty',
+      name: currentRecipe.image
+    }
+  }
 });
 
-export default reduxForm({
-  validate,
-  form: 'PostRecipeForm'
-})(connect(mapStateToProps, { createPost })(PostRecipe));
+export default compose(
+  connect(mapStateToProps, { editPost, fetchSingleRecipe }),
+  reduxForm({
+    validate,
+    form: 'EditRecipeForm',
+    enableReinitialize: true,
+  }),
+)(EditRecipe);

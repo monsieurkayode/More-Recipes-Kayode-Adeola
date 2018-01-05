@@ -30,11 +30,11 @@ class HomeNavbar extends Component {
                 <SearchBar />
               </li>
               <li>
-                <Link to="/"><i className="fa fa-heart" /> Top Recipes</Link>
+                <Link to="/"><i className="fa fa-home" /> Home</Link>
               </li>
               <li>
                 <Link to="/recipes/new" id="new-post">
-                  <i className="fa fa-pencil-square-o" /> New Post
+                  <i className="fa fa-pencil-square-o" /> Add Recipe
                 </Link>
               </li>
               <li className="right hide-on-med-and-down return">

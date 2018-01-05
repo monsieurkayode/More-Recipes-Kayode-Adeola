@@ -14,7 +14,7 @@ class DashboardNavbar extends Component {
               to="/"
               className="brand-logo font-effect-3d-float logo hide-on-small-only"
             >
-              More-Recipies
+              More-Recipes
             </Link>
             <a
               href=""

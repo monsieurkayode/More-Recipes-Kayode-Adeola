@@ -264,7 +264,7 @@ describe('Keep records of recipe views', () => {
       .get('/api/v1/recipes/2')
       .set('Connection', 'keep alive')
       .set('Accept', 'application/json')
-      .set('x-access-token', userData[0])
+      .set('x-access-token', userData[1])
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
