@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 import _ from 'lodash';
 
 import actionTypes from '../actions/actionTypes';
@@ -14,6 +15,8 @@ export default (state = {}, action) => {
         ...state,
         recipes: _.omit(state.recipes, action.payload),
       };
+    case actionTypes.LOGOUT_USER:
+      return action.payload;
     default:
       return state;
   }

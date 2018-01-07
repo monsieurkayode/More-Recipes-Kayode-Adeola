@@ -1,4 +1,4 @@
-import categories from '../helpers/categories';
+import categories from '../../shared/categories';
 
 const recipeModel = (sequelize, DataTypes) => {
   const Recipe = sequelize.define('Recipe', {

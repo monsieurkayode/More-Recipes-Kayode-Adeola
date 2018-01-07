@@ -1,8 +1,9 @@
+/* jshint esversion: 6 */
 import validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 
 import db from '../models/index';
-import cleanString from '../helpers/cleanString';
+import cleanString from '../../shared/cleanString';
 import { errorHandler } from '../helpers/responseHandler';
 
 const User = db.User;

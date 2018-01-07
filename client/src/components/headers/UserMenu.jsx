@@ -8,17 +8,17 @@ const UserMenu = (props => (
       <Link
         to="/recipes/new"
       >
-        <span className="fa fa-lg fa-pencil-square-o" /> New Post
+        <span className="fa fa-lg fa-plus-circle" /> Recipe
       </Link>
     </li>
     <li>
-      <Link to="/dashboard"><span className="fa fa-lg fa-wrench" /> Dashboard
+      <Link to="/dashboard"><span className="fa fa-lg fa-dashboard" /> Dashboard
       </Link>
     </li>
     <li className="divider" />
-    <li onClick={props.logoutAction}>
-      <a>
-        <span className="fa fa-lg fa-lock" /> Logout
+    <li>
+      <a onClick={props.logoutAction}>
+        <span className="fa fa-lg fa-sign-out" /> Logout
       </a>
     </li>
   </ul>

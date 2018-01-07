@@ -9,7 +9,7 @@ import showdown from 'showdown';
 import FileUpload from './FileUpload.jsx';
 import { editPost, fetchSingleRecipe } from '../../actions';
 import validate from '../../utils/validate';
-import categories from '../../../../server/helpers/categories';
+import categories from '../../../../shared/categories';
 import pascalCase from '../../utils/pascalCase';
 
 showdown.setFlavor('github');
@@ -18,7 +18,7 @@ class EditRecipe extends Component {
   constructor() {
     super();
     this.state = {
-      selectedCategory: 'others',
+      selectedCategory: '',
     };
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -30,7 +30,7 @@ class EditRecipe extends Component {
 
   componentDidMount() {
     // eslint-disable-next-line
-    $(findDOMNode(this.refs.category))
+    $(findDOMNode(this.category))
       .on('change', this.handleCategory);
   }
 
@@ -50,8 +50,8 @@ class EditRecipe extends Component {
     const { recipeId } = this.props.match.params;
     category = this.state.selectedCategory;
     this.props.editPost(recipeId, category, values, (message) => {
-      Materialize.toast(message, 4000, 'grey darken-2');
       this.props.history.goBack();
+      Materialize.toast(message, 4000, 'grey darken-2');
     });
   }
 
@@ -144,7 +144,7 @@ class EditRecipe extends Component {
 
             <Field
               name="category"
-              ref="category"
+              ref={(ref) => { this.category = ref; }}
               value={this.state.selectedCategory}
               component={this.renderCategory}
             />
@@ -183,9 +183,12 @@ class EditRecipe extends Component {
                 Update
               </button>
             </span>
-            <a onClick={() => this.props.history.goBack} className="right">
-              <button className="btn red">Cancel</button>
-            </a>
+            <button
+              onClick={() => this.props.history.push('/dashboard')}
+              className="btn red right"
+            >
+              Cancel
+            </button>
           </form>
         </div>
       </div>

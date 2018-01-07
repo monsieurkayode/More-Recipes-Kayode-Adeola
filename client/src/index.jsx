@@ -35,9 +35,13 @@ const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(reducers, composeEnhancers);
 
 if (localStorage.token) {
-  setAuthorizationToken(localStorage.token);
-  const user = decode(localStorage.token).user;
-  store.dispatch({ type: actionTypes.SIGNIN_SUCCESSFUL, payload: user });
+  const tokenExpiration = decode(localStorage.token).exp * 1000;
+  const currentTime = Date.now();
+  if (!(currentTime > tokenExpiration)) {
+    setAuthorizationToken(localStorage.token);
+    const user = decode(localStorage.token).user;
+    store.dispatch({ type: actionTypes.SET_CURRENT_USER, payload: user });
+  }
 } else {
   store
     .dispatch(
@@ -46,6 +50,10 @@ if (localStorage.token) {
         payload: sampleRecipes
       }
     );
+  store.dispatch({
+    type: actionTypes.LOGOUT_USER,
+    payload: {}
+  });
 }
 
 

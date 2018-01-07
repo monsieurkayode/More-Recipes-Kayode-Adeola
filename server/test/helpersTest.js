@@ -1,9 +1,9 @@
 import { expect } from 'chai';
-import cleanString from '../helpers/cleanString';
-import isEmail from '../helpers/isEmail';
+import cleanString from '../../shared/cleanString';
+import isEmail from '../../shared/isEmail';
 import isEmpty from '../helpers/isEmpty';
 import isNumber from '../helpers/isNumber';
-import isAlphaNum from '../helpers/isAlphaNum';
+import isAlphaNum from '../../shared/isAlphaNum';
 
 describe('Test helpers', () => {
   it('cleanString(ab d) should equal abd', () => {

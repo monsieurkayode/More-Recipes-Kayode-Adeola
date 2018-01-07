@@ -10,7 +10,7 @@ export default [
   'specials',
   'breakfast',
   'smoothies',
-  'vegatables',
+  'vegetables',
   'appetizers',
   'side dishes',
   'others'

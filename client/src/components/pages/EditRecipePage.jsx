@@ -16,7 +16,7 @@ class EditRecipePage extends Component {
         <HomeNavbar />
         <div className="row center-align">
           <div className="col s12 l6 m8 offset-l3 offset-m2">
-            <h5 className="teal-text">Edit Recipe</h5>
+            <h5 >Edit Recipe</h5>
           </div>
         </div>
         <EditRecipe history={this.props.history} match={this.props.match} />

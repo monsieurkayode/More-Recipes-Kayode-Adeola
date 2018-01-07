@@ -1,9 +1,20 @@
+/* jshint esversion: 6 */
 import express from 'express';
 import auth from '../middlewares/auth';
 import validate from '../middlewares/validateParams';
 import { validUser } from '../middlewares/userValidation';
-import { validRecipe, favoriteExists, isValidFavorite } from '../middlewares/favoriteValidation';
-import { addFavorite, getUserFavorites, getOneUserFavorite, deleteFavorite, addRecipeCategory } from '../controllers/favorite';
+import {
+  validRecipe,
+  favoriteExists,
+  isValidFavorite
+} from '../middlewares/favoriteValidation';
+import {
+  addFavorite,
+  getUserFavorites,
+  getOneUserFavorite,
+  deleteFavorite,
+  addRecipeCategory
+} from '../controllers/favorite';
 import { searchUserFavsByCategory } from '../controllers/recipe';
 
 const router = express.Router();

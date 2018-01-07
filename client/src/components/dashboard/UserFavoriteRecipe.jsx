@@ -10,13 +10,14 @@ class UserFavoriteRecipe extends Component {
 
   renderUserFavorites = (index) => {
     const recipe = this.props.userFavorites.recipes[index];
-    const { removeFavorite } = this.props;
+    const { removeFavorite, selectRecipe } = this.props;
     return (
       <RecipeCardSmall
         key={recipe.id}
         index={recipe.id}
         recipe={recipe.Recipe}
         handleAction={removeFavorite}
+        selectRecipe={selectRecipe}
       />
     );
   }
@@ -62,6 +63,7 @@ UserFavoriteRecipe.propTypes = {
     })
   }),
   removeFavorite: PropTypes.func,
+  selectRecipe: PropTypes.func.isRequired
 };
 
 export default UserFavoriteRecipe;

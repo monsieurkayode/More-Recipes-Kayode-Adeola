@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 import SigninPage from './SigninPage.jsx';
 import SignupPage from './SignupPage.jsx';
 import DashboardPage from './DashboardPage.jsx';

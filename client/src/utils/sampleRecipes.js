@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 export default [
   {
     id: 'sample1',
@@ -5,7 +6,7 @@ export default [
     upvote: 3,
     downvote: 0,
     recipeName: 'Spice',
-    category: 'Spice',
+    category: 'Specials',
     ingredients: '',
     instructions: '',
     image: 'spice.jpg'
@@ -17,7 +18,7 @@ export default [
     upvote: 3,
     downvote: 9,
     recipeName: 'Hamburger',
-    category: 'Fast Food',
+    category: 'Appetizers',
     ingredients: '',
     instructions: '',
     image: 'burger.jpg'
@@ -29,7 +30,7 @@ export default [
     upvote: 20,
     downvote: 11,
     recipeName: 'Tuna Fish',
-    category: 'SeaFood',
+    category: 'SeaFoods',
     ingredients: '',
     instructions: '',
     image: 'fishmeal.jpg'
@@ -41,7 +42,7 @@ export default [
     upvote: 12,
     downvote: 7,
     recipeName: 'Frosty Chocolat',
-    category: 'Pastry',
+    category: 'Desserts',
     ingredients: '',
     instructions: '',
     image: 'cake2.jpg'

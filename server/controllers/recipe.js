@@ -99,7 +99,8 @@ const deleteRecipe = (req, res) => Recipe
 const getRecipes = (req, res, next) => {
   if (req.query.ingredients ||
       req.query.sort ||
-      req.query.category) return next();
+      req.query.category ||
+      req.query.name) return next();
 
   const { page, limit, offset } = validatePaginate(req);
 
@@ -276,15 +277,55 @@ const searchRecipesByIngredients = (req, res, next) => {
  *
  * @param {object} req http request object to server
  * @param {object} res http response object from server
- *
+ * @param {function} next
  * @returns {object} status message recipe
  */
-const searchRecipesByCategory = (req, res) => {
+const searchRecipesByCategory = (req, res, next) => {
+  if (!req.query.category) return next();
   const category = req.query.category.split(' ');
   const { page, limit, offset } = validatePaginate(req);
 
   const query = category.map(keyword => ({
     category: {
+      $iLike: `%${keyword}%`
+    }
+  }));
+  return Recipe
+    .findAndCountAll({
+      where: { $or: query },
+      limit,
+      offset,
+      order: [['id', 'DESC']],
+      attributes: include
+    })
+    .then((recipes) => {
+      if (recipes.count === 0) {
+        return errorHandler(404, 'No recipe matches your search', res);
+      }
+      let status;
+      let message;
+      return handleResponse(
+        200, res, paginate, page, limit, status, message, recipes
+      );
+    })
+    .catch(error => res.status(400).send(error));
+};
+
+/**
+ * @description controller function that handles recipes
+ * search by name
+ *
+ * @param {object} req http request object to server
+ * @param {object} res http response object from server
+ * @param {function} next
+ * @returns {object} status message recipe
+ */
+const searchRecipesByName = (req, res) => {
+  const name = req.query.name.split(' ');
+  const { page, limit, offset } = validatePaginate(req);
+
+  const query = name.map(keyword => ({
+    recipeName: {
       $iLike: `%${keyword}%`
     }
   }));
@@ -364,5 +405,6 @@ export {
   viewRecipe,
   getTopRecipes,
   searchRecipesByCategory,
-  searchUserFavsByCategory
+  searchUserFavsByCategory,
+  searchRecipesByName
 };

@@ -9,7 +9,7 @@ class UserRecipe extends Component {
   hasRecipes = () => !isEmpty(this.props.userRecipes.recipes)
   renderUserRecipes = (index) => {
     const recipe = this.props.userRecipes.recipes[index];
-    const { deletePost, selected } = this.props;
+    const { deletePost, selected, selectRecipe } = this.props;
     return (
       <RecipeCardSmall
         key={recipe.id}
@@ -17,6 +17,7 @@ class UserRecipe extends Component {
         recipe={recipe}
         handleAction={deletePost}
         selected={selected}
+        selectRecipe={selectRecipe}
       />
     );
   }
@@ -60,7 +61,8 @@ UserRecipe.propTypes = {
     })
   }),
   deletePost: PropTypes.func,
-  selected: PropTypes.string.isRequired
+  selected: PropTypes.string.isRequired,
+  selectRecipe: PropTypes.func.isRequired,
 };
 
 export default UserRecipe;
