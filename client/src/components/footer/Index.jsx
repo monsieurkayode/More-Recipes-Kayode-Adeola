@@ -2,47 +2,55 @@ import React from 'react';
 
 const Footer = () => (
   <footer className="page-footer blue-grey darken-2">
-    <div className="container">
-      <div className="row">
-        <div className="col l6 s12">
-          <h5 className="white-text">Stay Connected</h5>
-          <p className="grey-text text-lighten-4">
-            Sign up for our newsletter for new articles
-          </p>
-          <p className="grey-text text-lighten-4">
-            Connect with us on social media
-          </p>
-          <i className="fa fa-3x fa-facebook-square" />
-          <i className="fa fa-3x fa-twitter-square" />
-          <i className="fa fa-3x fa-pinterest-square" />
-          <i className="fa fa-3x fa-github-square" />
-        </div>
-        <div className="col l4 offset-l2 s12">
-          <h5 className="white-text">Navigation</h5>
-          <ul>
-            <li>
-              <a className="grey-text text-lighten-3" href="/">Home</a>
-            </li>
-            <li>
-              <a className="grey-text text-lighten-3" href="/">New Articles</a>
-            </li>
-            <li>
-              <a className="grey-text text-lighten-3" href="/">
-              Top of the Week
-              </a>
-            \</li>
-          </ul>
-        </div>
+    <div className="row">
+      <div
+        style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+        className="col l3"
+      >
+        <ul
+          style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignSelf: 'center' }}
+        >
+          <li style={{ padding: 10 }}>
+            <div
+              style={{ display: 'flex', background: 'white', width: '60px', height: '60px', borderRadius: 50, border: '3px solid teal' }}
+            >
+              <span style={{ margin: 'auto' }}>
+                <i className="fa fa-2x fa-github teal-text" />
+              </span>
+            </div>
+          </li>
+          <li style={{ padding: 10 }}>
+            <div style={{ display: 'flex', background: 'white', width: '60px', height: '60px', borderRadius: 50, border: '3px solid teal' }}>
+              <span style={{ margin: 'auto' }}>
+                <i className="fa fa-2x fa-facebook teal-text" />
+              </span>
+            </div>
+          </li>
+          <li style={{ padding: 10 }}>
+            <div style={{ display: 'flex', background: 'white', width: '60px', height: '60px', borderRadius: 50, border: '3px solid teal' }}>
+              <span style={{ margin: 'auto' }}>
+                <i className="fa fa-2x fa-twitter teal-text" />
+              </span>
+            </div>
+          </li>
+          <li style={{ padding: 10 }}>
+            <div style={{ display: 'flex', background: 'white', width: '60px', height: '60px', borderRadius: 50, border: '3px solid teal' }}>
+              <span style={{ margin: 'auto' }}>
+                <i className="fa fa-2x fa-google teal-text" />
+              </span>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
     <div className="footer-copyright">
       <div className="container">
-        © 2017 Copyright Text
+        © Andela 2018
         <a
           className="grey-text text-lighten-4 right"
           href="/"
         >
-        Check out our blog
+        Created by Kayode Adeola
         </a>
       </div>
     </div>

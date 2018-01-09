@@ -20,6 +20,13 @@ const recipeReducer = (state = {}, action) => {
         recipes: _.mapKeys(action.payload.recipes, 'id'),
         pagination: action.payload.pagination
       };
+    case actionTypes.SEARCH_RECIPE_POST_ERROR:
+      return action.payload;
+    case actionTypes.SEARCH_RECIPE_POST:
+      return {
+        recipes: _.mapKeys(action.payload.recipes, 'id'),
+        pagination: action.payload.pagination
+      };
     case actionTypes.CREATE_POST:
       return {
         ...state,

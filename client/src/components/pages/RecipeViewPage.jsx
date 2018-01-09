@@ -19,13 +19,22 @@ import {
   CommentBox,
   Comments
 } from '../recipeview/Index.jsx';
-import { SideNav } from '../main/Index.jsx';
+import { SideNav, Loader } from '../main/Index.jsx';
 import { HomeNavbar } from '../headers/Index.jsx';
 
 class RecipeViewPage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isLoading: true
+    };
+  }
   componentWillMount() {
     const { recipeId } = this.props.match.params;
-    this.props.fetchSingleRecipe(recipeId);
+    this.props.fetchSingleRecipe(recipeId)
+      .then(() => this.setState({
+        isLoading: false
+      }));
     this.props.fetchSingleFavorite(recipeId);
     this.props.fetchReviews(recipeId);
   }
@@ -55,84 +64,86 @@ class RecipeViewPage extends Component {
   render() {
     const { currentRecipe, reviews, isFavorite } = this.props;
     const favorited = isFavorite ? 'orange-text' : '';
+    const { isLoading } = this.state;
     const handleAction = isFavorite ? this.props.removeFavorite :
       this.props.addFavoriteAction;
-    if (isEmpty(currentRecipe)) {
-      return <div>Loading....</div>;
-    }
     return (
       <div>
-        <HomeNavbar user={this.props.user} />
-        <div id="recipe-img" className="hide-on-small-only">
-          <div className="card z-depth-0">
-            <div className="card-image">
-              <img
-                className="responsive-img"
-                src={`/uploads/${currentRecipe.image}`}
-                alt={currentRecipe.recipeName}
-              />
-              <span className="card-title">{currentRecipe.recipeName}</span>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <Ingredients ingredients={currentRecipe.ingredients} />
-          <div className="col l7 m8 s12">
-            <div className="row">
-              <Instructions instructions={currentRecipe.instructions} />
-            </div>
-            <div className="col l12 m12 s12">
-              <div className="card recipe-view">
+        { isLoading ?
+          <Loader /> :
+          <div>
+            <HomeNavbar user={this.props.user} />
+            <div id="recipe-img" className="hide-on-small-only">
+              <div className="card z-depth-0">
                 <div className="card-image">
                   <img
-                    className="materialboxed"
+                    className="responsive-img"
                     src={`/uploads/${currentRecipe.image}`}
-                    alt=""
+                    alt={currentRecipe.recipeName}
                   />
-                  <span className="card-title right">
-                    <div
-                      onClick={() => this.props.upvoteAction(
-                        currentRecipe.id
-                      )}
-                      className="chip boxReaction"
-                    >
-                      <i className="fa fa-thumbs-up" /> {
-                        currentRecipe.upvote
-                      }
-                    </div>
-                    <div
-                      onClick={() => this.props.downvoteAction(
-                        currentRecipe.id
-                      )}
-                      className="chip boxReaction"
-                    >
-                      <i className="fa fa-thumbs-down " /> {
-                        currentRecipe.downvote
-                      }
-                    </div>
-                    <div
-                      onClick={() => handleAction(
-                        currentRecipe.id
-                      )}
-                      className="chip boxReaction"
-                    >
-                      <i className={`fa fa-heart ${favorited}`} />
-                    </div>
-                  </span>
+                  <span className="card-title">{currentRecipe.recipeName}</span>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <CommentBox />
-        <div id="comment-posts" className="row">
-          <div className="col l7 m8 s12 offset-l4 offset-m4">
-            {Object.keys(reviews).sort((a, b) => b - a).map(index =>
-              this.renderReviews(index))}
-          </div>
-        </div>
-        <SideNav />
-        <Footer />
+            <div className="row">
+              <Ingredients ingredients={currentRecipe.ingredients} />
+              <div className="col l7 m8 s12">
+                <div className="row">
+                  <Instructions instructions={currentRecipe.instructions} />
+                </div>
+                <div className="col l12 m12 s12">
+                  <div className="card recipe-view">
+                    <div className="card-image">
+                      <img
+                        className="materialboxed"
+                        src={`/uploads/${currentRecipe.image}`}
+                        alt=""
+                      />
+                      <span className="card-title right">
+                        <div
+                          onClick={() => this.props.upvoteAction(
+                            currentRecipe.id
+                          )}
+                          className="chip boxReaction"
+                        >
+                          <i className="fa fa-thumbs-up" /> {
+                            currentRecipe.upvote
+                          }
+                        </div>
+                        <div
+                          onClick={() => this.props.downvoteAction(
+                            currentRecipe.id
+                          )}
+                          className="chip boxReaction"
+                        >
+                          <i className="fa fa-thumbs-down " /> {
+                            currentRecipe.downvote
+                          }
+                        </div>
+                        <div
+                          onClick={() => handleAction(
+                            currentRecipe.id
+                          )}
+                          className="chip boxReaction"
+                        >
+                          <i className={`fa fa-heart ${favorited}`} />
+                        </div>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <CommentBox />
+            <div id="comment-posts" className="row">
+              <div className="col l7 m8 s12 offset-l4 offset-m4">
+                {Object.keys(reviews).sort((a, b) => b - a).map(index =>
+                  this.renderReviews(index))}
+              </div>
+            </div>
+            <SideNav />
+            <Footer />
+          </div>}
       </div>
     );
   }

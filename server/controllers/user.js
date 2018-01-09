@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 
 import db from '../models/index';
-import cleanString from '../helpers/cleanString';
+import cleanString from '../../shared/cleanString';
 import { errorHandler } from '../helpers/responseHandler';
 
 dotenv.load();

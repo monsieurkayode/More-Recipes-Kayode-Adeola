@@ -1,5 +1,5 @@
 /* jshint esversion: 6 */
-import cleanString from '../../../server/helpers/cleanString';
+import cleanString from '../../../shared/cleanString';
 
 const validateInput = (values) => {
   const errors = {};

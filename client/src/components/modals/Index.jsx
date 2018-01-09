@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 import DeleteModal from './DeleteModal.jsx';
 import NewPostModal from './NewPostModal.jsx';
 import SigninModal from './SigninModal.jsx';

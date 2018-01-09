@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'proptypes';
+
 import userImg from '../../assets/css/img/user.jpg';
 import { WelcomeDisplay } from './Index.jsx';
 
@@ -53,5 +55,11 @@ class UserProfile extends Component {
     );
   }
 }
+
+UserProfile.propTypes = {
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+  }).isRequired
+};
 
 export default UserProfile;

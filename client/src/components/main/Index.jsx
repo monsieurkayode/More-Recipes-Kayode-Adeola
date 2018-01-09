@@ -14,6 +14,7 @@ import PostRecipe from './PostRecipe.jsx';
 import EditRecipe from './EditRecipe.jsx';
 import SideNav from './SideNav.jsx';
 import WelcomeMessage from './WelcomeMessage.jsx';
+import Loader from './Loader.jsx';
 
 export {
   CategorizedRecipe,
@@ -30,5 +31,6 @@ export {
   SigninForm,
   TextField,
   SideNav,
-  WelcomeMessage
+  WelcomeMessage,
+  Loader
 };

@@ -1,9 +1,10 @@
+/* jshint esversion: 6 */
 import isNull from 'lodash/isEmpty';
 
 import db from '../models/index';
 import isEmpty from '../helpers/isEmpty';
-import categories from '../helpers/categories';
-import cleanString from '../helpers/cleanString';
+import categories from '../../shared/categories';
+import cleanString from '../../shared/cleanString';
 import { errorHandler } from '../helpers/responseHandler';
 
 const Recipe = db.Recipe;

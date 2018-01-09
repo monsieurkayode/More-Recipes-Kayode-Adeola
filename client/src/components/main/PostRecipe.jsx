@@ -9,7 +9,7 @@ import showdown from 'showdown';
 import FileUpload from './FileUpload.jsx';
 import { createPost } from '../../actions';
 import validate from '../../utils/validate';
-import categories from '../../../../server/helpers/categories';
+import categories from '../../../../shared/categories';
 import pascalCase from '../../utils/pascalCase';
 
 showdown.setFlavor('github');
@@ -24,7 +24,7 @@ class PostRecipe extends Component {
 
   componentDidMount() {
     // eslint-disable-next-line
-    $(findDOMNode(this.refs.category))
+    $(findDOMNode(this.category))
       .on('change', this.handleCategory);
   }
 
@@ -128,7 +128,7 @@ class PostRecipe extends Component {
 
             <Field
               name="category"
-              ref="category"
+              ref={(ref) => { this.category = ref; }}
               value={this.state.selectedCategory}
               component={this.renderCategory}
             />

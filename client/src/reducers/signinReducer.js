@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 import isEmpty from 'lodash/isEmpty';
 
 import actionTypes from '../actions/actionTypes';
@@ -15,23 +16,32 @@ const signinReducer = (state = initialState, action) => {
       return {
         ...state,
         success: !isEmpty(action.payload),
-        message: null,
         isAuthenticated: !isEmpty(action.payload),
-        user: action.payload };
+        user: action.payload
+      };
+    case actionTypes.SET_CURRENT_USER:
+      return {
+        ...state,
+        success: !isEmpty(action.payload),
+        isAuthenticated: !isEmpty(action.payload),
+        user: action.payload
+      };
     case actionTypes.SIGNIN_UNSUCCESSFUL:
       return {
         ...state,
         success: false,
         message: action.payload,
         isAuthenticated: false,
-        user: {} };
+        user: {}
+      };
     case actionTypes.LOGOUT_USER:
       return {
         ...state,
         success: isEmpty(action.payload),
         message: 'User logged out successfully',
         isAuthenticated: !isEmpty(action.payload),
-        user: action.payload };
+        user: action.payload
+      };
     default:
       return state;
   }

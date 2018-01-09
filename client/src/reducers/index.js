@@ -1,29 +1,31 @@
 /* jshint esversion: 6 */
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
-import signupReducer from './signupReducer';
-import signinReducer from './signinReducer';
-import recipeReducer from './recipeReducer';
-import singleRecipeReducer from './singleRecipeReducer';
-import routeReducer from './routeReducer';
-import fetchSingleFavorite from './fetchSingleFavorite';
-import reviewReducer from './reviewReducer';
-import fetchUserRecipes from './fetchUserRecipes';
-import fetchUserFavorites from './fetchUserFavorites';
-import fetchTopRecipes from './fetchTopRecipes';
+import { reducer as form } from 'redux-form';
+import signupState from './signupReducer';
+import signinState from './signinReducer';
+import recipes from './recipesReducer';
+import currentRecipe from './singleRecipeReducer';
+import routing from './routeReducer';
+import isFavorite from './singleFavoriteReducer';
+import reviews from './reviewsReducer';
+import userRecipes from './userRecipesReducer';
+import userFavorites from './userFavoritesReducer';
+import topRecipes from './topRecipesReducer';
+import selectedRecipe from './selectedRecipeReducer';
 
 const rootReducer = combineReducers({
-  signupState: signupReducer,
-  signinState: signinReducer,
-  recipes: recipeReducer,
-  form: formReducer,
-  currentRecipe: singleRecipeReducer,
-  routing: routeReducer,
-  isFavorite: fetchSingleFavorite,
-  reviews: reviewReducer,
-  userRecipes: fetchUserRecipes,
-  userFavorites: fetchUserFavorites,
-  topRecipes: fetchTopRecipes,
+  signupState,
+  signinState,
+  recipes,
+  form,
+  currentRecipe,
+  routing,
+  isFavorite,
+  reviews,
+  userRecipes,
+  userFavorites,
+  topRecipes,
+  selectedRecipe
 });
 
 export default rootReducer;

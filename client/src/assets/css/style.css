@@ -530,3 +530,13 @@ input[type=email]:not(.browser-default) {
   margin-left: 1rem;
   margin-top: 0;
 }
+
+textarea {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+#modal-delete {
+  max-width: 40%;
+  margin: auto auto;
+}
