@@ -12,8 +12,10 @@ import userRecipes from './userRecipesReducer';
 import userFavorites from './userFavoritesReducer';
 import topRecipes from './topRecipesReducer';
 import selectedRecipe from './selectedRecipeReducer';
+import isLoading from './isFetchingReducer';
 
 const rootReducer = combineReducers({
+  isLoading,
   signupState,
   signinState,
   recipes,

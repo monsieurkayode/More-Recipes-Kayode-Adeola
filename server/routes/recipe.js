@@ -49,7 +49,7 @@ const resize = (req, res, next) => {
   req.body.image = `${uuid.v4()}.${extension}`;
   jimp.read(req.file.buffer)
     .then(photo => photo.resize(800, jimp.AUTO))
-    .then(photo => photo.write(`./client/public/uploads/${req.body.image}`));
+    .then(photo => photo.write(`./client/assets/uploads/${req.body.image}`));
   next();
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import bannerImage from '../../assets/css/img/banner2.jpg';
+import bannerImage from '../../../assets/css/img/banner2.jpg';
 
 const Banner = () => (
   <div id="banner" className="hide-on-small-only">

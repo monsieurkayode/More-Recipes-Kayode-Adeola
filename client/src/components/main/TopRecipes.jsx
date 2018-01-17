@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'proptypes';
 
-import { TopRecipeItem } from './Index.jsx';
+import { TopRecipeItem } from './';
 
 class TopRecipes extends Component {
   renderTopRecipes = (index) => {

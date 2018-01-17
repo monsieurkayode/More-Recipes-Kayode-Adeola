@@ -21,6 +21,7 @@ import removeFavorite from './removeFavorite';
 import editPost from './editPost';
 import searchPost from './searchPost';
 import selectRecipe from './selectRecipe';
+import isFetching from './isFetching';
 
 export {
   signupAction,
@@ -44,5 +45,6 @@ export {
   removeFavorite,
   editPost,
   searchPost,
-  selectRecipe
+  selectRecipe,
+  isFetching
 };

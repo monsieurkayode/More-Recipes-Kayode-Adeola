@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Category, Recipes, TopRecipes } from './Index.jsx';
+import { Category, Recipes, TopRecipes } from './';
 
 class Contents extends Component {
   render() {

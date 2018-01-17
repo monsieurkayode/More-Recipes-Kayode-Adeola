@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 import actionTypes from '../actions/actionTypes';
 
-export default (state = false, action) => {
+const singleFavoriteRreducer = (state = false, action) => {
   switch (action.type) {
     case actionTypes.CHECK_FAVORITED:
       return action.payload;
@@ -13,3 +13,5 @@ export default (state = false, action) => {
       return state;
   }
 };
+
+export default singleFavoriteRreducer;

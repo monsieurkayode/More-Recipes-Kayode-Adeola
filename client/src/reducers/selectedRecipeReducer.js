@@ -1,6 +1,7 @@
+/* jshint esversion: 6 */
 import actionTypes from '../actions/actionTypes';
 
-export default (state = 0, action) => {
+const selectedRecipeReducer = (state = 0, action) => {
   switch (action.type) {
     case actionTypes.SELECT_RECIPE:
       return action.payload;
@@ -8,3 +9,5 @@ export default (state = 0, action) => {
       return state;
   }
 };
+
+export default selectedRecipeReducer;

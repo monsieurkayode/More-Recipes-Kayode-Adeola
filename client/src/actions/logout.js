@@ -2,8 +2,10 @@
 import actionTypes from './actionTypes';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 import sampleRecipes from '../utils/sampleRecipes';
+import resetPage from '../utils/resetPage';
 
 const logoutAction = () => (dispatch) => {
+  resetPage();
   localStorage.removeItem('token');
   setAuthorizationToken(false);
   const user = {};

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { RecipePostModal } from './Index.jsx';
+import { RecipePostModal } from './';
 
 class EditPostModal extends Component {
   render() {

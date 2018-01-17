@@ -15,19 +15,20 @@ import {
   NotFoundPage,
   DashboardPage,
   RecipeViewPage,
-} from './components/pages/Index.jsx';
+} from './components/pages';
 
-import './assets/css/font-awesome.css';
-import './assets/css/materialize.css';
-import './assets/css/style.css';
+import '../assets/js/jquery-3.2.1';
+import '../assets/js/materialize';
+
+import '../assets/css/font-awesome.css';
+import '../assets/css/materialize.css';
+import '../assets/css/style.scss';
 
 import reducers from './reducers';
 import actionTypes from './actions/actionTypes';
-import Authenticate from './utils/Authenticate.jsx';
+import Authenticate from './utils/Authenticate';
 import sampleRecipes from './utils/sampleRecipes';
 import setAuthorizationToken from './utils/setAuthorizationToken';
-
-import registerServiceWorker from './registerServiceWorker';
 
 // eslint-disable-next-line
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
@@ -64,10 +65,23 @@ render(
         <Switch>
           <Route path="/signin" component={SigninPage} />
           <Route path="/signup" component={SignupPage} />
-          <Route path="/dashboard" component={Authenticate(DashboardPage)} />
-          <Route path="/recipes/new" component={Authenticate(PostRecipePage)} />
-          <Route exact path="/recipes/:recipeId" component={Authenticate(RecipeViewPage)} />
-          <Route path="/recipes/:recipeId/edit" component={Authenticate(EditRecipePage)} />
+          <Route
+            path="/dashboard"
+            component={Authenticate(DashboardPage)}
+          />
+          <Route
+            path="/recipes/new"
+            component={Authenticate(PostRecipePage)}
+          />
+          <Route
+            exact
+            path="/recipes/:recipeId"
+            component={Authenticate(RecipeViewPage)}
+          />
+          <Route
+            path="/recipes/:recipeId/edit"
+            component={Authenticate(EditRecipePage)}
+          />
           <Route exact path="/" component={IndexPage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
@@ -75,4 +89,3 @@ render(
     </BrowserRouter>
   </Provider>
   , document.getElementById('root'));
-registerServiceWorker();

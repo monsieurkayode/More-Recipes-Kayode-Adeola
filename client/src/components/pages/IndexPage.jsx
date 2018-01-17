@@ -8,9 +8,9 @@ import {
   fetchTopRecipes,
   fetchSampleRecipes,
 } from '../../actions';
-import { LandingNavbar, HomeNavbar, Banner } from '../headers/Index.jsx';
-import { Contents, WelcomeMessage, SideNav, Loader } from '../main/Index.jsx';
-import Footer from '../footer/Index.jsx';
+import { LandingNavbar, HomeNavbar, Banner } from '../headers';
+import { Contents, WelcomeMessage, SideNav, Loader } from '../main';
+import Footer from '../footer';
 
 class IndexPage extends Component {
   constructor() {
@@ -22,7 +22,8 @@ class IndexPage extends Component {
 
   componentWillMount() {
     if (localStorage.token && this.props.isAuthenticated) {
-      this.props.fetchRecipesAction()
+      const currentPage = localStorage.getItem('currentPage');
+      this.props.fetchRecipesAction(currentPage)
         .then(() => this.setState({
           isLoading: false
         }));
@@ -34,12 +35,6 @@ class IndexPage extends Component {
         });
       }, 2000));
     }
-  }
-
-  componentDidMount() {
-    $('.dropdown-button').dropdown();
-    $('.button-collapse').sideNav();
-    $('.collapsible').collapsible();
   }
 
   componentDidUpdate() {

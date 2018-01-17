@@ -3,13 +3,21 @@ import axios from 'axios';
 
 import actionTypes from './actionTypes';
 
-const fetchUserRecipes = () => dispatch =>
-  axios.get('/api/v1/recipes/user')
+const fetchUserRecipes = page => dispatch =>
+  axios.get(`/api/v1/recipes/user?page=${page}`)
     .then((response) => {
       const { pagination, recipes } = response.data;
       dispatch({
         type: actionTypes.FETCH_USER_RECIPES,
         payload: { pagination, recipes }
+      });
+      dispatch({
+        type: actionTypes.IS_FETCHING,
+        payload: { status: false, componentName: 'Dashboard' }
+      });
+      dispatch({
+        type: actionTypes.IS_FETCHING,
+        payload: { status: false, componentName: 'UserRecipes' }
       });
     })
     .catch((error) => {
@@ -21,6 +29,10 @@ const fetchUserRecipes = () => dispatch =>
         Materialize.toast(errorMessage, 4000, 'red');
         dispatch({ type: actionTypes.FETCH_USER_RECIPES_ERROR });
       }
+      dispatch({
+        type: actionTypes.IS_FETCHING,
+        payload: { status: false, componentName: 'Dashboard' }
+      });
     });
 
 export default fetchUserRecipes;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { RecipePostModal } from './Index.jsx';
+import { RecipePostModal } from './';
 
 const NewPostModal = (props => {
   return(

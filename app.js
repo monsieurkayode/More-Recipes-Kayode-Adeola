@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 import express from 'express';
 import logger from 'morgan';
 import path from 'path';
@@ -9,7 +10,7 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
-import webpackConfig from './webpack.config';
+import webpackConfig from './webpack.config.dev';
 import router from './server/routes/index';
 
 const swaggerDocument = require('./swagger.json'),
@@ -31,7 +32,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.disable('x-powered-by');
-app.use(favicon(path.join(__dirname, 'client/public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'client/assets', 'favicon.ico')));
 
 app.use(
   '/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options)
@@ -65,10 +66,10 @@ app.use(reviewRoute);
 app.use(favoriteRoute);
 app.use(voteRoute);
 
-app.use(express.static(path.join(__dirname, '/client/public')));
+app.use(express.static(path.join(__dirname, '/client/assets')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './client/src/index.html'));
+  res.sendFile(path.resolve(__dirname, './client/assets/index.html'));
 });
 
 app.all('*', (req, res) => res.status(404).send({

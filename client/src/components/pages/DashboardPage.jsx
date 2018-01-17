@@ -10,39 +10,34 @@ import {
   deletePost,
   removeFavorite,
   selectRecipe,
+  isFetching
 } from '../../actions';
-import { DashboardNavbar } from '../headers/Index.jsx';
+import { DashboardNavbar } from '../headers';
 import {
   DashboardPanel,
   SideNavDashboard,
   UserRecipe,
   UserFavoriteRecipe,
   UserProfile,
-} from '../dashboard/Index.jsx';
+} from '../dashboard';
 import {
   DeleteModal,
   NewPostModal,
   EditPostModal,
-} from '../modals/Index.jsx';
-import { Loader } from '../main/Index.jsx';
+} from '../modals';
+import { Loader } from '../main';
 
 class DashboardPage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isLoading: true
-    };
-  }
   componentWillMount() {
     this.props.routeAction(this.props.selected);
-    this.props.fetchUserRecipes()
-      .then(() => this.setState({
-        isLoading: false
-      }));
-    this.props.fetchUserFavorites();
+    const currentPage = localStorage.getItem('currentPageUserRecipes');
+    const currentPageFav = localStorage.getItem('currentPageUserFavorites');
+    this.props.isFetching(true, 'Dashboard');
+    this.props.fetchUserRecipes(currentPage);
+    this.props.fetchUserFavorites(currentPageFav);
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     $('.dropdown-button').dropdown();
     $('.button-collapse').sideNav();
     $('#modal-delete').modal();
@@ -50,8 +45,8 @@ class DashboardPage extends Component {
   }
 
   render() {
-    const { selected } = this.props;
-    const { isLoading } = this.state;
+    const { selected, isLoading } = this.props;
+    // const { isLoading } = this.state;
     const deletePostDialog = 'Delete recipe';
     const removeFavDialog = 'Remove from favorite';
     return (
@@ -100,13 +95,17 @@ const mapStateToProps = ({
   userRecipes,
   userFavorites,
   selectedRecipe,
+  isLoading
 }) => ({
   user: signinState.user,
   isAuthenticated: signinState.isAuthenticated,
   selected: routing.selected,
   userRecipes,
   userFavorites,
-  selectedRecipe
+  selectedRecipe,
+  isLoading: isLoading.dashBoardIsLoading,
+  isLoadingRecipes: isLoading.userRecipesIsLoading,
+  isLoadingFavorites: isLoading.userFavoritesIsLoading
 });
 
 DashboardPage.defaultProps = {
@@ -122,7 +121,9 @@ DashboardPage.propTypes = {
   fetchUserFavorites: PropTypes.func.isRequired,
   selectedRecipe: PropTypes.number,
   deletePost: PropTypes.func.isRequired,
-  removeFavorite: PropTypes.func.isRequired
+  removeFavorite: PropTypes.func.isRequired,
+  isFetching: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps,
@@ -133,6 +134,7 @@ export default connect(mapStateToProps,
     fetchUserFavorites,
     deletePost,
     removeFavorite,
-    selectRecipe
+    selectRecipe,
+    isFetching
   }
 )(DashboardPage);

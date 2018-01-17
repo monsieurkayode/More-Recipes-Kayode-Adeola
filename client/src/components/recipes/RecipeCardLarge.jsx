@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { RecipeCard } from './Index.jsx';
+import { RecipeCard } from './';
 
 class RecipeCardLarge extends Component {
   render() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'proptypes';
 
-import { CategorizedRecipe } from './Index.jsx';
+import { CategorizedRecipe } from './';
 
 const CategoryCollection = ({ category }) =>
   (<li>

@@ -12,7 +12,7 @@ const DeleteModal = props => {
           Cancel
         </button>
         <button
-          onClick={() => props.handleAction(props.id)}
+          onClick={props.handleAction.bind(null, props.id)}
           className="modal-action modal-close delete chip">
           <i className="fa fa-trash"></i> 
           { props.selected === 'favorites' ? ' Remove' : ' Delete'}

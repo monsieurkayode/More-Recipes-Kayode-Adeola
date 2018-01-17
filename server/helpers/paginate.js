@@ -52,7 +52,7 @@ const validatePaginate = (req) => {
   const page = Number.isInteger(parseInt(req.query.page, 10))
   && req.query.page > 0 ? req.query.page : 1;
   const limit = Number.isInteger(parseInt(req.query.limit, 10))
-  && req.query.limit > 0 ? req.query.limit : 10;
+  && req.query.limit > 0 ? req.query.limit : 8;
   const offset = (page - 1) * limit;
 
   return { page, limit, offset };

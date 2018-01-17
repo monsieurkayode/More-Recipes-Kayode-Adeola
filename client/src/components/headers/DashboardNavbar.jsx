@@ -2,17 +2,20 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'proptypes';
 
-import { UserMenu } from './Index.jsx';
+import { UserMenu } from './';
+import resetPage from '../../utils/resetPage';
 
 class DashboardNavbar extends Component {
   render() {
+    const brandClass = 'brand-logo font-effect-3d-float logo';
     return (
       <div className="navbar-fixed">
         <nav className="header">
           <div className="nav-wrapper">
             <Link
               to="/"
-              className="brand-logo font-effect-3d-float logo hide-on-small-only"
+              onClick={resetPage}
+              className={`${brandClass} hide-on-small-only`}
             >
               More-Recipes
             </Link>
@@ -42,10 +45,14 @@ class DashboardNavbar extends Component {
   }
 }
 
+DashboardNavbar.defaultProps = {
+  user: {}
+};
+
 DashboardNavbar.propTypes = {
   user: PropTypes.shape({
     username: PropTypes.string
-  }).isRequired,
+  }),
   logoutAction: PropTypes.func.isRequired
 };
 
