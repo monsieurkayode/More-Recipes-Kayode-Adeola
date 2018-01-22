@@ -4,8 +4,8 @@ import actionTypes from '../actions/actionTypes';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 import sampleRecipes from '../utils/sampleRecipes';
 
-const fetchRecipesAction = () => dispatch =>
-  axios.get('/api/v1/recipes')
+const fetchRecipesAction = page => dispatch =>
+  axios.get(`/api/v1/recipes?page=${page}`)
     .then((response) => {
       const payload = response.data;
       dispatch({ type: actionTypes.FETCH_RECIPES, payload });

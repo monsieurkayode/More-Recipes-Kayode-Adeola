@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import actionTypes from '../actions/actionTypes';
 
-export default (state = [], action) => {
+const topRecipesReducer = (state = [], action) => {
   switch (action.type) {
     case actionTypes.FETCH_TOP_RECIPES:
       return _.orderBy(action.payload, 'upvote', 'desc');
@@ -11,3 +11,5 @@ export default (state = [], action) => {
       return state;
   }
 };
+
+export default topRecipesReducer;

@@ -57,5 +57,5 @@ exclude_patterns:
   - "template/*"
   - "server/routes/"
   - "server/test"
-  - "client/public/*"
-  - "client/src/assets/*"
+  - "client/assets/*"
+  

@@ -1,12 +1,67 @@
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty, has } from 'lodash';
 import React, { Component } from 'react';
 import PropTypes from 'proptypes';
+import ReactPaginate from 'react-paginate';
 
-import { RecipeCardSmall } from '../recipes/Index.jsx';
-import { WelcomeDisplay } from './Index.jsx';
+import { RecipeCardSmall } from '../recipes';
+import { WelcomeDisplay } from './';
+import { Loader } from '../main';
 
 class UserRecipe extends Component {
-  hasRecipes = () => !isEmpty(this.props.userRecipes.recipes)
+  componentWillReceiveProps(nextProps) {
+    const { recipes } = this.props.userRecipes;
+    const currentPageSize = Object.keys(recipes || {}).length;
+    const nextPageSize = Object.keys(
+      nextProps.userRecipes.recipes || {}
+    ).length;
+    if (currentPageSize !== nextPageSize) {
+      const currentPage = localStorage.getItem('currentPageUserRecipes');
+      const nextRecipes = this.hasRecipes() && nextProps.userRecipes.recipes;
+      if (!Object.keys(nextRecipes || {}).length && currentPage > 1) {
+        localStorage.setItem('currentPageUserRecipes', currentPage - 1);
+        this.props.isFetching(true, 'UserRecipes');
+        return this.props.fetchUserRecipes(currentPage - 1);
+      }
+    }
+  }
+
+  setPagination = () => {
+    if (this.hasRecipes()) {
+      const { pagination: { page, pageCount } } = this.props.userRecipes;
+      return {
+        page,
+        pageCount
+      };
+    }
+    return {
+      page: 1,
+      pageCount: 1
+    };
+  }
+
+  hasRecipes = () => {
+    const { userRecipes } = this.props;
+    if (isEmpty(userRecipes)) {
+      return false;
+    }
+    if (!isEmpty(userRecipes) && has(userRecipes, 'recipes')) {
+      if (userRecipes.pagination.totalCount === 0) {
+        return false;
+      }
+      return true;
+    }
+    return true;
+  }
+
+
+  handlePageClick = ({ selected }) => {
+    const page = selected + 1;
+    localStorage.setItem('currentPageUserRecipes', page);
+    const currentPage = localStorage.getItem('currentPageUserRecipes');
+    this.props.isFetching(true, 'UserRecipes');
+    this.props.fetchUserRecipes(currentPage, this);
+  }
+
   renderUserRecipes = (index) => {
     const recipe = this.props.userRecipes.recipes[index];
     const { deletePost, selected, selectRecipe } = this.props;
@@ -21,6 +76,29 @@ class UserRecipe extends Component {
       />
     );
   }
+
+  renderPagination = () => {
+    const { page, pageCount } = this.setPagination();
+    return (
+      <div className="pagination-container">
+        <ReactPaginate
+          previousLabel={<i className="fa fa-chevron-left" />}
+          nextLabel={<i className="fa fa-chevron-right" />}
+          breakLabel={<a href="">...</a>}
+          breakClassName={'break-me'}
+          pageCount={pageCount}
+          initialPage={page - 1}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={this.handlePageClick}
+          disableInitialCallback
+          containerClassName={'pagination'}
+          subContainerClassName={'pages pagination'}
+          activeClassName={'active'}
+        />
+      </div>
+    );
+  }
   render() {
     const { recipes } = this.props.userRecipes;
     return (
@@ -28,14 +106,25 @@ class UserRecipe extends Component {
         <WelcomeDisplay />
         <div id="my-recipes" className="row">
           {this.hasRecipes() ?
-            Object
-              .keys(recipes)
-              .sort((a, b) => b - a)
-              .map(index => this.renderUserRecipes(index)) :
-            <h5 style={{ textAlign: 'center' }}>
-              You have not created any recipe!
-            </h5>}
+            <div>
+              { this.props.isLoadingRecipes ? <Loader /> :
+                Object
+                  .keys(recipes)
+                  .sort((a, b) => b - a)
+                  .map(index => this.renderUserRecipes(index))
+              }
+            </div> :
+            <div className="center-align not-found">
+              <img
+                src="/css/img/sad_smiley.png"
+                alt=""
+              />
+              <h5>
+                There is nothing here, create and share awesome recipes.
+              </h5>
+            </div>}
         </div>
+        {this.hasRecipes() && this.renderPagination()}
       </div>
     );
   }
@@ -58,11 +147,20 @@ UserRecipe.propTypes = {
       ingredients: PropTypes.string,
       instructions: PropTypes.string,
       image: PropTypes.string
+    }),
+    pagination: PropTypes.shape({
+      page: PropTypes.number,
+      pageCount: PropTypes.number,
+      pageSize: PropTypes.number,
+      totalCount: PropTypes.number
     })
   }),
   deletePost: PropTypes.func,
+  isFetching: PropTypes.func.isRequired,
   selected: PropTypes.string.isRequired,
   selectRecipe: PropTypes.func.isRequired,
+  fetchUserRecipes: PropTypes.func.isRequired,
+  isLoadingRecipes: PropTypes.bool.isRequired,
 };
 
 export default UserRecipe;

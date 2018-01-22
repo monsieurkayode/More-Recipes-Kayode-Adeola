@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import actionTypes from '../actions/actionTypes';
 
-export default (state = {}, action) => {
+const userRecipesReducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.FETCH_USER_RECIPES:
       return {
@@ -14,6 +14,11 @@ export default (state = {}, action) => {
       return {
         ...state,
         recipes: _.omit(state.recipes, action.payload),
+        pagination: {
+          ...state.pagination,
+          pageSize: state.pagination.pageSize - 1,
+          totalCount: state.pagination.totalCount - 1
+        }
       };
     case actionTypes.LOGOUT_USER:
       return action.payload;
@@ -21,3 +26,5 @@ export default (state = {}, action) => {
       return state;
   }
 };
+
+export default userRecipesReducer;

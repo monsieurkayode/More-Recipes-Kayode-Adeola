@@ -4,17 +4,20 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'proptypes';
 
 import { logoutAction } from '../../actions';
-import { UserMenu, SearchBar } from './Index.jsx';
+import { UserMenu, SearchBar } from './';
+import resetPage from '../../utils/resetPage';
 
 class HomeNavbar extends Component {
   render() {
+    const brandClass = 'brand-logo font-effect-3d-float logo';
     return (
       <div className="navbar-fixed">
         <nav className="header">
           <div className="nav-wrapper">
             <Link
               to="/"
-              className="brand-logo font-effect-3d-float logo hide-on-small-only"
+              onClick={resetPage}
+              className={`${brandClass} hide-on-small-only`}
             >
             More-Recipes
             </Link>
@@ -30,7 +33,9 @@ class HomeNavbar extends Component {
                 <SearchBar />
               </li>
               <li>
-                <Link to="/"><i className="fa fa-home" /> Home</Link>
+                <Link to="/" onClick={resetPage}>
+                  <i className="fa fa-home" /> Home
+                </Link>
               </li>
               <li>
                 <Link to="/recipes/new" id="new-post">

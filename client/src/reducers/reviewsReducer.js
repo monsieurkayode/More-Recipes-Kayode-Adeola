@@ -1,15 +1,15 @@
 /* jshint esversion: 6 */
-/* eslint-disable */
 import _ from 'lodash';
 
 import actionTypes from '../actions/actionTypes';
 
-export default (state = {}, action) => {
+const reviewsReducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.FETCH_REVIEWS:
-      const { pagination } = action.payload;
-      const comments = _.mapKeys(action.payload.comments, 'id');
-      return { comments, pagination };
+      return {
+        comments: _.mapKeys(action.payload.comments, 'id'),
+        pagination: action.payload.pagination
+      };
     case actionTypes.POST_REVIEW:
       return {
         ...state,
@@ -22,3 +22,5 @@ export default (state = {}, action) => {
       return state;
   }
 };
+
+export default reviewsReducer;

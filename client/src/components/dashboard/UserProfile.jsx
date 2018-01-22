@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'proptypes';
 
-import userImg from '../../assets/css/img/user.jpg';
-import { WelcomeDisplay } from './Index.jsx';
+import userImg from '../../../assets/css/img/user.jpg';
+import { WelcomeDisplay } from './';
 
 class UserProfile extends Component {
   render() {

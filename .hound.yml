@@ -3,8 +3,5 @@ eslint:
   config_file: .eslintrc
   ignore_file: .eslintignore
 
-jshint:
-  enable: false
-
 scss:
   enable: false

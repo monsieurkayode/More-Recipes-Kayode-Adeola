@@ -4,7 +4,7 @@ import PropTypes from 'proptypes';
 
 import { signupAction } from '../../actions';
 import validateInput from '../../utils/helper';
-import { TextField } from './Index.jsx';
+import { TextField } from './';
 
 class SignupForm extends Component {
   constructor() {

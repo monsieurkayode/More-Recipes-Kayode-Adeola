@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import isEmpty from 'lodash/isEmpty';
 import PropTypes from 'proptypes';
+import isEmpty from 'lodash/isEmpty';
 
 import {
   fetchSingleRecipe,
@@ -12,15 +12,15 @@ import {
   fetchReviews,
   removeFavorite,
 } from '../../actions';
-import Footer from '../footer/Index.jsx';
+import Footer from '../footer';
 import {
   Ingredients,
   Instructions,
   CommentBox,
   Comments
-} from '../recipeview/Index.jsx';
-import { SideNav, Loader } from '../main/Index.jsx';
-import { HomeNavbar } from '../headers/Index.jsx';
+} from '../recipeview';
+import { SideNav, Loader } from '../main';
+import { HomeNavbar } from '../headers';
 
 class RecipeViewPage extends Component {
   constructor() {
@@ -40,10 +40,11 @@ class RecipeViewPage extends Component {
   }
 
   componentDidMount() {
-    $('.dropdown-button').dropdown();
-    $('.button-collapse').sideNav();
-    $('.materialboxed').materialbox();
     window.scroll(0, 0);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return !isEmpty(nextProps.currentRecipe);
   }
 
   componentDidUpdate() {

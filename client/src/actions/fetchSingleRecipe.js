@@ -9,8 +9,10 @@ const fetchSingleRecipe = recipeId => dispatch =>
     })
     .catch((error) => {
       if (error.response.status === 403) {
-        Materialize.toast('You are not logged in', 4000, 'red');
+        return Materialize.toast('You are not logged in', 4000, 'red');
       }
+      window.location.replace('/error?no-resource');
+      dispatch({ type: actionTypes.FETCH_SINGLE_RECIPE_ERROR });
     });
 
 export default fetchSingleRecipe;

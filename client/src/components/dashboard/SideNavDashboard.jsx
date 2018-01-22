@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'proptypes';
 
 import { routeAction } from '../../actions';
-
-import dashImg from '../../assets/css/img/dash.jpg';
-import userImg from '../../assets/css/img/user.jpg';
+import dash from '../../../assets/css/img/dash.jpg';
+import user from '../../../assets/css/img/user.jpg';
 
 class SideNavDashboard extends Component {
   render() {
@@ -21,14 +20,14 @@ class SideNavDashboard extends Component {
                 <img
                   className="responsive-img"
                   id="dash-img"
-                  src={dashImg}
+                  src={dash}
                   alt="user-background"
                 />
                 <figure className="card-profile-image">
                   <img
-                    src={userImg}
-                    alt=""
+                    src={user}
                     className="z-depth-2 responsive-img"
+                    alt=""
                   />
                 </figure>
               </div>

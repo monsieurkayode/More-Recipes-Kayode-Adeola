@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'proptypes';
 
 import { signinAction } from '../../actions';
-import { TextField } from './Index.jsx';
+import { TextField } from './';
 
 class SigninForm extends Component {
   constructor(props) {

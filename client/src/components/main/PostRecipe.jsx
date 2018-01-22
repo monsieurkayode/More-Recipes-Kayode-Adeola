@@ -6,11 +6,13 @@ import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'proptypes';
 import showdown from 'showdown';
 
-import FileUpload from './FileUpload.jsx';
+import FileUpload from './FileUpload';
+import { Loader } from './';
 import { createPost } from '../../actions';
 import validate from '../../utils/validate';
 import categories from '../../../../shared/categories';
 import pascalCase from '../../utils/pascalCase';
+import resetPage from '../../utils/resetPage';
 
 showdown.setFlavor('github');
 class PostRecipe extends Component {
@@ -18,8 +20,8 @@ class PostRecipe extends Component {
     super();
     this.state = {
       selectedCategory: 'others',
+      isLoading: false
     };
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -32,9 +34,12 @@ class PostRecipe extends Component {
     $('select').material_select();
   }
 
-  onSubmit(values) {
+  onSubmit = (values) => {
     const category = this.state.selectedCategory;
+    this.setState({ isLoading: true });
     this.props.createPost(category, values, () => {
+      resetPage();
+      this.setState({ isLoading: false });
       this.props.history.push('/');
     });
   }
@@ -110,67 +115,70 @@ class PostRecipe extends Component {
 
   render() {
     const { handleSubmit, invalid } = this.props;
+    const { isLoading } = this.state;
     return (
       <div className="container">
         <div className="row">
-          <form
-            className="col l8 m8 s12 offset-m2 offset-l2"
-            onSubmit={handleSubmit(this.onSubmit)}
-          >
-            <Field
-              type="text"
-              className=""
-              placeholder="Enter recipe name"
-              label="Recipe Name"
-              name="recipeName"
-              component={this.renderInput}
-            />
-
-            <Field
-              name="category"
-              ref={(ref) => { this.category = ref; }}
-              value={this.state.selectedCategory}
-              component={this.renderCategory}
-            />
-
-            <Field
-              type="text"
-              placeholder="Markdown supported"
-              className="materialize-textarea"
-              label="Ingredients"
-              name="ingredients"
-              component={this.renderTextArea}
-            />
-
-            <Field
-              type="text"
-              placeholder="Markdown supported"
-              className="materialize-textarea"
-              label="Intsructions"
-              name="instructions"
-              component={this.renderTextArea}
-            />
-            <div>
+          { isLoading ?
+            <Loader /> :
+            <form
+              className="col l8 m8 s12 offset-m2 offset-l2"
+              onSubmit={handleSubmit(this.onSubmit)}
+            >
               <Field
-                name="image"
-                component={FileUpload}
+                type="text"
+                className=""
+                placeholder="Enter recipe name"
+                label="Recipe Name"
+                name="recipeName"
+                component={this.renderInput}
               />
-            </div>
 
-            <span className="right">
-              <button
-                style={{ marginLeft: 20 }}
-                disabled={invalid}
-                type="submit"
-                className="btn"
-              >
+              <Field
+                name="category"
+                ref={(ref) => { this.category = ref; }}
+                value={this.state.selectedCategory}
+                component={this.renderCategory}
+              />
+
+              <Field
+                type="text"
+                placeholder="Markdown supported"
+                className="materialize-textarea"
+                label="Ingredients"
+                name="ingredients"
+                component={this.renderTextArea}
+              />
+
+              <Field
+                type="text"
+                placeholder="Markdown supported"
+                className="materialize-textarea"
+                label="Intsructions"
+                name="instructions"
+                component={this.renderTextArea}
+              />
+              <div>
+                <Field
+                  name="image"
+                  component={FileUpload}
+                />
+              </div>
+
+              <span className="right">
+                <button
+                  style={{ marginLeft: 20 }}
+                  disabled={invalid}
+                  type="submit"
+                  className="btn"
+                >
                 Post
-              </button>
-            </span>
-            <Link to="/" className="right">
-              <button className="btn red">Cancel</button>
-            </Link>
-          </form>
+                </button>
+              </span>
+              <Link to="/" className="right">
+                <button className="btn red">Cancel</button>
+              </Link>
+            </form>}
         </div>
       </div>
 

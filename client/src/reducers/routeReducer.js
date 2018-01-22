@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 import actionTypes from '../actions/actionTypes';
 
-export default (state = { selected: 'profile' }, action) => {
+const routeReducer = (state = { selected: 'profile' }, action) => {
   switch (action.type) {
     case actionTypes.SELECTED_ROUTE:
       return {
@@ -12,3 +12,5 @@ export default (state = { selected: 'profile' }, action) => {
       return state;
   }
 };
+
+export default routeReducer;

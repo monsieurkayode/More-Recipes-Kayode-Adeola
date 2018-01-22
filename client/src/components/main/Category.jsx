@@ -5,7 +5,7 @@ import _ from 'lodash';
 import PropTypes from 'proptypes';
 
 import { searchPost } from '../../actions';
-import { CategoryCollection } from './Index.jsx';
+import { CategoryCollection } from './';
 import cleanString from '../../../../shared/cleanString';
 import Categories from '../../../../shared/categories';
 import pascalCase from '../../utils/pascalCase';
@@ -64,7 +64,7 @@ class Category extends Component {
         <p className="divider" />
         <div id="category">
           <div style={{ marginTop: 10 }}>
-            {isAuthenticated && <form onChange={() => handleSearch()}>
+            {isAuthenticated && <form onChange={handleSearch}>
               <input
                 onChange={this.handleChange}
                 value={this.state.searchTerm}

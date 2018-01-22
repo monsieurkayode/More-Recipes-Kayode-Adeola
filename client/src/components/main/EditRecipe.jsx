@@ -6,7 +6,7 @@ import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'proptypes';
 import showdown from 'showdown';
 
-import FileUpload from './FileUpload.jsx';
+import FileUpload from './FileUpload';
 import { editPost, fetchSingleRecipe } from '../../actions';
 import validate from '../../utils/validate';
 import categories from '../../../../shared/categories';

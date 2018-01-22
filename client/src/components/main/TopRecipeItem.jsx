@@ -6,8 +6,7 @@ const TopRecipeItem = ({ recipe }) =>
   (<Link to={`/recipes/${recipe.id}`}>
     <li className="collection-item avatar">
       <img
-        src={recipe.image ? `../uploads/${recipe.image}`
-          : '../css/img/spice.jpg'}
+        src={`../uploads/${recipe.image}`}
         alt=""
         className="z-depth-1 square"
       />

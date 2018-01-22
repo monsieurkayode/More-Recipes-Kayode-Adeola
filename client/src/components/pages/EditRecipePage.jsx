@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'proptypes';
 
-import { EditRecipe, SideNav } from '../main/Index.jsx';
-import { HomeNavbar } from '../headers/Index.jsx';
+import { EditRecipe, SideNav } from '../main';
+import { HomeNavbar } from '../headers';
 
 class EditRecipePage extends Component {
   componentDidMount() {

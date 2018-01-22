@@ -1,0 +1,558 @@
+html, body, .block {
+  overflow-x: hidden;
+  box-sizing: border-box !important;
+}
+
+.card {
+  background: #fff;
+}
+
+#nav-search input[type=search]:not(.browser-default) {
+  height: 30px;
+  margin-right: 2em;
+  border-radius: 20px;
+} 
+.header {
+  background: teal;
+}
+
+.logo {
+  font-family: Pacifico, cursive;
+  font-size: 1.5rem !important;
+  margin-left: 1em;
+}
+
+.navbtn {
+  background: coral;
+}
+
+.return {
+  font-family: Roboto;
+  font-size: 1rem !important;
+  margin-left: 1em;
+}
+
+.input-fa {
+  font-family: FontAwesome;
+}
+
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default),
+input[type=email]:not(.browser-default) {
+  margin-bottom: 0.2em; 
+}
+
+#dashboard-parent {
+  cursor: text;
+}
+
+#dash-panel {
+  height: 100vh;
+  padding: 0;
+  position: fixed;
+  background: teal
+}
+
+#dash-img {
+  margin-top: -7px;
+  max-width: 100%;
+}
+
+.collection {
+  border:  none;
+}
+
+#dash-links .collection a.collection-item {
+  background-color: teal;
+  color: #eee;
+  line-height: 1.5rem;
+  padding: 10px 20px;
+  margin: 0;
+  border-bottom: none;
+}
+
+#dash-links .collection a.collection-item:not(.active):hover,
+#dash-links .collection .collection-item.active {
+  background-color: cornflowerblue;
+}
+
+#dash-links .collection a.collection-item:not(.active):hover:first-child {
+  background-color: teal;
+}
+
+#category .collapsible,
+#category .collapsible .collapsible-header{
+  border: none;
+  padding-left: 0;
+  font-weight: bolder;
+}
+
+#category .collapsible .collapsible-body {
+  padding-left: 0.5em;
+  padding-top: 0;
+  padding-bottom: 0.5em;
+  font-weight: normal;
+}
+
+#category .collapsible .collapsible-body li {
+  padding-left: 0.5em;
+  padding-top: 0;
+  padding-bottom: 0.5em;
+}
+#profile-page-header {
+  background: teal;
+}
+
+#profile-page-header .card-profile-image img {
+  width: 80px;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 50%;
+}
+
+#user-dropdown {
+  margin-top: 60px;
+  font-family: Roboto;
+}
+
+.dropdown-content {
+  margin-top: 64px;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+#banner {
+  padding: 0;
+  margin: -7px;
+}
+
+#recipe-img {
+  padding: 0;
+  margin: -7px;
+}
+
+
+#recipe-img .card-image img{
+  height: 280px;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+#recipe-img .card-title {
+  font-size: 2rem;
+  font-weight: bolder;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8)
+}
+
+#comment-box textarea {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+}
+
+#comment-box .input-field textarea[type=text]:focus {
+  border: 2px solid rgb(67, 206, 206) ;
+  border-bottom: 2px solid rgb(67, 206, 206);
+  box-shadow: 0 2px 0 0 #ccc;
+}
+
+#comment-posts div, ul, li, p {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#post-btn {
+  border: 2px double grey;
+}
+
+#post-btn:hover {
+  background: grey;
+  color: white;
+}
+
+#trending .collection .collection-item {
+  border: none;
+}
+
+#trending .collection a {
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+}
+
+.square {
+  border-radius: 0;
+} 
+
+#trending .collection .collection-item.avatar img {
+  position: absolute;
+  width: 80px;
+  height: 60px;
+  overflow: hidden;
+  top: -10px;
+  left: 25px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#trending .title {
+  position: absolute;
+  left: 120px;
+}
+
+#profile-form textarea,
+#profile-form .browser-default input[type="text"] {
+  border: 1px outset #eee;
+  border-bottom: 1px solid #ddd;
+}
+
+#profile-form .browser-default label {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: black;
+  font-weight: bold;
+}
+
+
+.tabs-vertical .tabs {
+  background-color: teal;
+  height: auto;
+  flex-direction: column;
+}
+
+.tabs-vertical .tab {
+  width: 100%;
+  flex-grow: 1;
+  display: block;
+  float: left;
+  text-align: left;
+  line-height: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 0;
+  text-transform: none;
+  text-overflow: ellipsis; 
+}
+
+.tabs-vertical .tab .active {
+  transition: border-color .5s ease;
+  border-right: 3px solid coral;
+}
+
+.tabs-vertical .tab a {
+  color: #3f51b5;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: color 0.28s ease; 
+}
+
+.tabs-vertical .tab a.active {
+  background: #4f90ff;
+}
+
+.tabs-vertical .tab a:hover {
+  background: #4f90ff;
+  cursor: pointer;
+}
+.tabs-vertical .tab.disabled a {
+  color: #8591d5;
+  cursor: default; 
+}
+
+.tabs-vertical .indicator {
+  display: none; 
+}
+
+#not-badge {
+  margin-top: 14px;
+}
+
+#modal-register,
+#modal-login {
+  overflow-y: hidden;
+  max-height: 85%;
+  max-width: 35%
+}
+
+#modal-register .modal-content,
+#modal-login .modal-content{
+  padding: 0;
+}
+
+.edit, .delete {
+  background: none;
+  padding: 0 10px 0 10px;
+  border: 1px solid grey;
+  transition-property: background, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
+  cursor: pointer;
+}
+
+.edit:hover, .delete:hover {
+  background: grey;
+  color: white;
+  color: white;
+  padding: 0 10px 0 10px;
+}
+
+.reaction {
+  padding: 2px;
+  margin-left: 10px;
+  
+}
+.unlike, .like {
+  cursor: pointer;
+  background: #009688;
+  color: white;
+  margin-left: 5px;
+  padding-right: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 15px;
+}
+
+.unlike:hover, .like:hover {
+  background: #009699;
+}
+
+.small-cards .reaction {
+  padding: 2px;
+  margin-left: 10px;
+  font-size: 0.8rem
+}
+
+.small-cards .counts {
+  font-size: 0.9rem;
+}
+
+.small-cards .comment {
+  font-size: 1.2rem;
+}
+
+.created-at {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 0.8rem;
+}
+
+.card .card-reveal {
+  padding: 18px;
+}
+
+.views-small .card-content {
+  padding-bottom: .5rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .views-small a img {
+    width: 200px;
+    height: 250px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .views-small a img {
+    width: 200px;
+    height: 400px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .views-small a img {
+    width: 200px;
+    height: 250px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .views-small a img {
+    width: 200px;
+    height: 250px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .views-small a img {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.views-small .card-content .divider {
+  position: relative;
+  top: -1rem;
+  margin-bottom: 0.8rem;
+  margin-left: -1.75rem;
+  margin-right: -1.75rem;
+}
+
+.views-small .card-content a,
+.views-small .card-content p {
+  position: relative;
+  top: -1rem;
+  left: -1rem
+}
+
+.views .card-content .divider {
+  position: relative;
+  margin-bottom: 0.8rem;
+  margin-left: -1.75rem;
+  margin-right: -1.75rem;
+}
+
+.recipe-summary {
+  font-size: 0.9rem;
+}
+
+.small-cards-main .activator {
+  font-size: 1.4rem;
+  padding: 0;
+}
+
+.small-cards .card-title {
+  position: relative;
+  font-size: 1.3rem;
+  left: -1rem
+}
+
+.views .card-image .card-title {
+  right: 0;
+  right: -1.2rem;
+  bottom: -1.5rem;
+  left: unset;
+  font-weight: bold;
+  font-size: 1rem;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8)
+}
+
+.views-small .card-image .card-title {
+  right: -1.2rem;
+  bottom: -1.5rem;
+  left: unset;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8)
+}
+
+.views-small .card-content .card-title {
+  position: relative;
+  top: -1rem
+}
+
+.review {
+  position: relative;
+  left: 2rem; 
+}
+
+.recipe-view .card-image .card-title a {
+  position: relative;
+  color: white;
+  bottom: -1rem;
+  background: #999
+}
+
+.recipe-view .card-image a:hover {
+  background: #bbb;
+  color: coral;
+}
+
+.recipe-view .card-image a.active {
+  color: coral;
+}
+
+#user-profile {
+  display: block !important; 
+}
+
+#markdown {
+  display: block;
+  min-height: 20px;
+  overflow: scroll;
+  background: #eee;
+  border-radius: 12px;
+}
+
+#markdown ul {
+  list-style-type: disc;
+  margin-left: 2rem;
+}
+
+#markdown ul > li {
+  list-style-type: disc;
+}
+
+.boxReaction {
+  cursor: pointer;
+  background: #00796b;
+  color: white
+}
+
+.boxReaction:hover {
+  background: #009e8c;
+}
+
+#welcome-panel {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#ingredients {
+  margin-top: 1rem;
+}
+
+#instructions {
+  margin-top: -.2rem;
+}
+
+#ingredients ul > li {
+  list-style-type: disc;
+  margin-left: 2rem;
+}
+
+#instructions ul > li  {
+  list-style-type: decimal;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+#instructions ul > li:first-child  {
+  list-style-type: decimal;
+  margin-left: 1rem;
+  margin-top: 0;
+}
+
+textarea {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+#modal-delete {
+  max-width: 40%;
+  margin: auto auto;
+}
+
+.pagination {
+  margin: auto;
+  padding: 5px 0
+}
+
+.pagination li {
+  cursor: pointer;
+}
+
+.pagination li.active {
+  background: coral;
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
+}
