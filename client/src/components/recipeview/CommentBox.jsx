@@ -6,12 +6,31 @@ import PropTypes from 'proptypes';
 import { postReview } from '../../actions';
 import validate from '../../utils/validateInput';
 
+/**
+ * @summary - CommentBox class declaration
+ * @class CommentBox
+ * @extends {Component}
+ */
 class CommentBox extends Component {
-  constructor() {
-    super();
+  /**
+   * Component constructor
+   * @param {object} props
+   * @memberOf CommentBox
+   */
+  constructor(props) {
+    super(props);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  /**
+   * Handle submit
+   *
+   * @method onSubmit
+   *
+   * @param {string} comment
+   *
+   * @returns {void}
+   */
   onSubmit(comment) {
     const { id } = this.props.currentRecipe;
     const { reset } = this.props;
@@ -19,6 +38,15 @@ class CommentBox extends Component {
       .then(() => reset());
   }
 
+  /**
+   * Render comment section
+   *
+   * @method renderCommentBox
+   *
+   * @param {object} field
+   *
+   * @returns {JSX} JSX
+   */
   renderCommentBox = (field) => {
     const { input } = field;
     return (
@@ -34,6 +62,12 @@ class CommentBox extends Component {
     );
   }
 
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     const { handleSubmit } = this.props;
     return (

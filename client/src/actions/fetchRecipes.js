@@ -4,6 +4,18 @@ import actionTypes from '../actions/actionTypes';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 import sampleRecipes from '../utils/sampleRecipes';
 
+/**
+ * @summary Action creator for fetching maximum of 8 recipe posts
+ * if no limit argument is passed to the query params
+ * This operation attaches an authorization token in every request header
+ * and sets it to false if user is not authenticated or token validity expires
+ *
+ * @function fetchRecipesAction
+ *
+ * @param {number} page selected page number
+ *
+ * @returns {void}
+ */
 const fetchRecipesAction = page => dispatch =>
   axios.get(`/api/v1/recipes?page=${page}`)
     .then((response) => {

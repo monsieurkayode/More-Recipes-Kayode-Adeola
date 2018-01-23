@@ -3,6 +3,15 @@ import _ from 'lodash';
 
 import actionTypes from '../actions/actionTypes';
 
+/**
+ * Reducer function for review operations
+ * @function recipeReducer
+ *
+ * @param {object} state
+ * @param {object} action
+ *
+ * @returns {object} state - the new state
+ */
 const reviewsReducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.FETCH_REVIEWS:

@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const $ = require('jquery');
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'cheap-module-eval-source-map',
   entry: [
     'babel-polyfill',
     'webpack-hot-middleware/client?reload=true',

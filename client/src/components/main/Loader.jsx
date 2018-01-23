@@ -1,6 +1,14 @@
 import React from 'react';
 import PreloaderIcon, { ICON_TYPE } from 'react-preloader-icon';
 
+/**
+ * Loader
+ * @function Loader
+ *
+ * @param {void} void
+ *
+ * @return {JSX} JSX
+ */
 const Loader = () => (
   <div style={{ margin: '25% 45%' }}>
     <PreloaderIcon

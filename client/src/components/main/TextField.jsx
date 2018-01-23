@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'proptypes';
 
+/**
+ * TextField
+ * @function TextField
+ *
+ * @param {object} props
+ *
+ * @return {JSX} JSX
+ */
 const TextField = ({
   field, value, type, onChange, icon, label, error
 }) => (

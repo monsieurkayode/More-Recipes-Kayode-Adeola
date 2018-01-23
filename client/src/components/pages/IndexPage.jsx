@@ -12,7 +12,17 @@ import { LandingNavbar, HomeNavbar, Banner } from '../headers';
 import { Contents, WelcomeMessage, SideNav, Loader } from '../main';
 import Footer from '../footer';
 
+/**
+ * @summary - IndexPage class declaration
+ * @class IndexPage
+ * @extends {Component}
+ */
 class IndexPage extends Component {
+  /**
+   * Component constructor
+   * @param {object} props
+   * @memberOf IndexPage
+   */
   constructor() {
     super();
     this.state = {
@@ -20,6 +30,13 @@ class IndexPage extends Component {
     };
   }
 
+  /**
+   * @method componentWillMount
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentWillMount() {
     if (localStorage.token && this.props.isAuthenticated) {
       const currentPage = localStorage.getItem('currentPage');
@@ -37,6 +54,13 @@ class IndexPage extends Component {
     }
   }
 
+  /**
+   * @method componentDidUpdate
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentDidUpdate() {
     $('select').material_select();
     $('.dropdown-button').dropdown();
@@ -44,6 +68,12 @@ class IndexPage extends Component {
     $('.collapsible').collapsible();
   }
 
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     const { isLoading } = this.state;
     return (

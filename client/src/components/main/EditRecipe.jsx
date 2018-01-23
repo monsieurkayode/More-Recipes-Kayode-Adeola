@@ -14,26 +14,56 @@ import pascalCase from '../../utils/pascalCase';
 
 showdown.setFlavor('github');
 
+/**
+ * @summary - EditRecipe class declaration
+ * @class EditRecipe
+ * @extends {Component}
+ */
 class EditRecipe extends Component {
+  /**
+   * Component constructor
+   * @param {void} void
+   * @memberOf EditRecipe
+   */
   constructor() {
     super();
     this.state = {
       selectedCategory: '',
     };
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
+  /**
+   * @method componentWillMount
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentWillMount() {
     const { recipeId } = this.props.match.params;
     this.props.fetchSingleRecipe(recipeId);
   }
 
+  /**
+   * @method componentDidMount
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentDidMount() {
     // eslint-disable-next-line
     $(findDOMNode(this.category))
       .on('change', this.handleCategory);
   }
 
+  /**
+   * @method componentWillReceiveProps
+   *
+   * @param {object} nextProps
+   *
+   * @returns {void}
+   */
   componentWillReceiveProps(nextProps) {
     if (nextProps.initialValues.category) {
       this.setState({
@@ -42,11 +72,28 @@ class EditRecipe extends Component {
     }
   }
 
+  /**
+   * @method componentWillUpdate
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentWillUpdate() {
     $('select').material_select();
   }
 
-  onSubmit(values, category) {
+  /**
+   * Handle submit
+   *
+   * @method onSubmit
+   *
+   * @param {object} values
+   * @param {string} category
+   *
+   * @returns {void}
+   */
+  onSubmit = (values, category) => {
     const { recipeId } = this.props.match.params;
     category = this.state.selectedCategory;
     this.props.editPost(recipeId, category, values, (message) => {
@@ -55,12 +102,28 @@ class EditRecipe extends Component {
     });
   }
 
+  /**
+   * Handle category selection
+   *
+   * @method handleCategory
+   *
+   * @param {object} event
+   *
+   * @returns {void}
+   */
   handleCategory = (event) => {
     this.setState({
       selectedCategory: event.target.value
     });
   }
 
+  /**
+   * @method renderInput
+   *
+   * @param {object} field
+   *
+   * @returns {JSX} JSX
+   */
   renderInput = (field) => {
     const { label, input, meta, type, className, placeholder } = field;
     return (
@@ -81,6 +144,13 @@ class EditRecipe extends Component {
     );
   }
 
+  /**
+   * @method renderTextArea
+   *
+   * @param {object} field
+   *
+   * @returns {JSX} JSX
+   */
   renderTextArea = (field) => {
     const { label, input, meta, type, className, placeholder } = field;
     return (
@@ -101,6 +171,13 @@ class EditRecipe extends Component {
     );
   }
 
+  /**
+   * @method renderCategory
+   *
+   * @param {object} field
+   *
+   * @returns {JSX} JSX
+   */
   renderCategory = (field) => {
     const { value, ref } = field;
     return (
@@ -124,6 +201,12 @@ class EditRecipe extends Component {
     );
   }
 
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     const { handleSubmit, invalid } = this.props;
     return (

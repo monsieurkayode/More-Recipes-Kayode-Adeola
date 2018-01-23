@@ -3,6 +3,14 @@ import PropTypes from 'proptypes';
 
 import { CategorizedRecipe } from './';
 
+/**
+ * CategoryCollection
+ * @function CategoryCollection
+ *
+ * @param {string} category
+ *
+ * @returns {JSX} JSX
+ */
 const CategoryCollection = ({ category }) =>
   (<li>
     <div className="collapsible-header">{category}

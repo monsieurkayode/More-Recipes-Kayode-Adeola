@@ -1,5 +1,14 @@
 import actionTypes from '../actions/actionTypes';
 
+/**
+ * Reducer function for a recipe post related operations
+ * @function singleRecipeReducer
+ *
+ * @param {object} state
+ * @param {object} action
+ *
+ * @returns {object} state - the new state
+ */
 const singleRecipeReducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.FETCH_SINGLE_RECIPE:

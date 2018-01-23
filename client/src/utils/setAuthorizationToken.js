@@ -1,5 +1,14 @@
 import axios from 'axios';
 
+/**
+ *
+ * @description - Sets defaults header options for http requests
+ * @function setAuthorizationToken
+ *
+ * @param {string} token
+ *
+ * @returns {void}
+ */
 const setAuthorizationToken = (token) => {
   if (token) {
     axios.defaults.headers.common['x-access-token'] = `${token}`;

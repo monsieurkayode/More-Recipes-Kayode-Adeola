@@ -3,6 +3,15 @@ import axios from 'axios';
 
 import actionTypes from './actionTypes';
 
+/**
+ * @summary - Action creator for adding a recipe to a user's favorite
+ *
+ * @function addFavoriteAction
+ *
+ * @param {number} recipeId - Id of recipe being favorited
+ *
+ * @returns {void}
+ */
 const addFavoriteAction = recipeId => dispatch =>
   axios.post(`/api/v1/users/${recipeId}/favorites`)
     .then((response) => {

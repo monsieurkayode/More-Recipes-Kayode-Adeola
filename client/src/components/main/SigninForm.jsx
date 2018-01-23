@@ -5,7 +5,17 @@ import PropTypes from 'proptypes';
 import { signinAction } from '../../actions';
 import { TextField } from './';
 
+/**
+ * @summary - SigninForm class declaration
+ * @class SigninForm
+ * @extends {Component}
+ */
 class SigninForm extends Component {
+  /**
+   * Component constructor
+   * @param {object} props
+   * @memberOf SigninForm
+   */
   constructor(props) {
     super(props);
 
@@ -15,24 +25,53 @@ class SigninForm extends Component {
     };
   }
 
+  /**
+   * @method componentWillUpdate
+   *
+   * @param {object} nextProps
+   *
+   * @returns {void}
+   */
   componentWillUpdate(nextProps) {
     if (nextProps.isAuthenticated) {
       this.props.history.push('/');
     }
   }
 
+  /**
+   * Handle input change
+   * @method handleInputChange
+   *
+   * @param {object} event
+   *
+   * @returns {void}
+   */
   handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
     });
   }
 
+  /**
+   * Hanlde Submit
+   * @method handleSubmit
+   *
+   * @param {object} event
+   *
+   * @returns {void}
+   */
   handleSubmit = (event) => {
     const user = { ...this.state };
     event.preventDefault();
     this.props.signinAction(user);
   }
 
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     return (
       <div onSubmit={this.handleSubmit} className="container">

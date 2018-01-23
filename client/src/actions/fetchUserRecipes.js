@@ -3,6 +3,16 @@ import axios from 'axios';
 
 import actionTypes from './actionTypes';
 
+/**
+ * @summary - Action creator for fetching recipes belonging to
+ * or added by the current user
+ *
+ * @function fetchUserRecipes
+ *
+ * @param {number} page - selected page number
+ *
+ * @returns {void}
+ */
 const fetchUserRecipes = page => dispatch =>
   axios.get(`/api/v1/recipes/user?page=${page}`)
     .then((response) => {

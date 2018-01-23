@@ -3,6 +3,17 @@ import axios from 'axios';
 
 import actionTypes from './actionTypes';
 
+/**
+ * @summary - Action creator for creating a recipe post
+ *
+ * @function createPost
+ *
+ * @param {string} category - category recipe should be categorized under
+ * @param {object} values - an object with properties to create the recipe post
+ * @param {function} callback - callback function called after post is created
+ *
+ * @returns {void}
+ */
 const createPost = (category, values, callback) => (dispatch) => {
   const formData = new FormData(); // eslint-disable-line
   formData.append('recipeName', values.recipeName);
@@ -21,4 +32,5 @@ const createPost = (category, values, callback) => (dispatch) => {
       dispatch({ type: actionTypes.CREATE_POST_ERROR });
     });
 };
+
 export default createPost;

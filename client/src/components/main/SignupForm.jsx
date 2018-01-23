@@ -6,9 +6,19 @@ import { signupAction } from '../../actions';
 import validateInput from '../../utils/helper';
 import { TextField } from './';
 
+/**
+ * @summary - SignupForm class declaration
+ * @class SignupForm
+ * @extends {Component}
+ */
 class SignupForm extends Component {
-  constructor() {
-    super();
+  /**
+   * Component constructor
+   * @param {object} props
+   * @memberOf SignupForm
+   */
+  constructor(props) {
+    super(props);
     this.state = {
       username: '',
       email: '',
@@ -18,12 +28,28 @@ class SignupForm extends Component {
     };
   }
 
+  /**
+   * Handle input change
+   * @method handleInputChange
+   *
+   * @param {object} event
+   *
+   * @returns {void}
+   */
   handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
     });
   }
 
+  /**
+   * Handle client-side input validation
+   * @method isValid
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   isValid() {
     const { errors, isValid } = validateInput(this.state);
     if (!isValid) {
@@ -32,6 +58,14 @@ class SignupForm extends Component {
     return isValid;
   }
 
+  /**
+   * Hanlde Submit
+   * @method handleSubmit
+   *
+   * @param {object} event
+   *
+   * @returns {void}
+   */
   handleSubmit = (event) => {
     event.preventDefault();
     const user = { ...this.state };
@@ -43,6 +77,12 @@ class SignupForm extends Component {
     }
   }
 
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     const { username, email, password, confirmPassword } = this.state.errors;
     return (

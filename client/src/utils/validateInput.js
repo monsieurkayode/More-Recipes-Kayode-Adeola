@@ -1,6 +1,14 @@
 /* jshint esversion: 6 */
 import cleanString from '../../../shared/cleanString';
 
+/**
+ * Validation function for reviews
+ * @function validateInput
+ *
+ * @param {object} values
+ *
+ * @returns {objects} errors
+ */
 const validateInput = (values) => {
   const errors = {};
 

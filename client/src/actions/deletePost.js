@@ -3,6 +3,15 @@ import axios from 'axios';
 
 import actionTypes from './actionTypes';
 
+/**
+ * @summary - Action creator for deleting a recipe post
+ *
+ * @function deletePost
+ *
+ * @param {number} recipeId - Id of recipe post to be deleted
+ *
+ * @returns {void}
+ */
 const deletePost = recipeId => dispatch =>
   axios.delete(`/api/v1/recipes/${recipeId}`)
     .then((response) => {

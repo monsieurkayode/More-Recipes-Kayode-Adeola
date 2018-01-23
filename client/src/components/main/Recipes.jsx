@@ -11,13 +11,32 @@ import {
 } from '../../actions';
 import { RecipeItem, Loader } from './';
 
+/**
+ * @summary - Recipes class declaration
+ * @class Recipes
+ * @extends {Component}
+ */
 class Recipes extends Component {
+  /**
+   * Component constructor
+   * @param {void} void
+   * @memberOf Recipes
+   */
   constructor() {
     super();
     this.state = {
       isLoading: false
     };
   }
+
+  /**
+   * Handle page selection for pagination
+   * @method handlePageClick
+   *
+   * @param {object} data
+   *
+   * @returns {void}
+   */
   handlePageClick = ({ selected }) => {
     this.setState({ isLoading: true });
     const page = selected + 1;
@@ -27,8 +46,23 @@ class Recipes extends Component {
       .then(() => this.setState({ isLoading: false }));
   }
 
+  /**
+   * Check if there are recipes posts
+   * @method hasRecipes
+   *
+   * @param {void} void
+   *
+   * @returns {boolean} boolean
+   */
   hasRecipes = () => !isEmpty(this.props.recipes)
 
+  /**
+   * @method renderRecipes
+   *
+   * @param {number} index
+   *
+   * @returns {JSX} JSX
+   */
   renderRecipes = (index) => {
     const recipe = this.props.recipes[index];
     return (
@@ -42,6 +76,13 @@ class Recipes extends Component {
     );
   }
 
+  /**
+   * @method renderPagination
+   *
+   * @param {void} void
+   *
+   * @returns {JSX} JSX
+   */
   renderPagination = () => {
     const { pagination: { page, pageCount } } = this.props;
     return (
@@ -65,6 +106,12 @@ class Recipes extends Component {
     );
   }
 
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     const { pagination: { page, pageCount }, isAuthenticated } = this.props;
     const { isLoading } = this.state;

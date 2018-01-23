@@ -4,7 +4,19 @@ import PropTypes from 'proptypes';
 
 import { TopRecipeItem } from './';
 
+/**
+ * @summary - TopRecipes class declaration
+ * @class TopRecipes
+ * @extends {Component}
+ */
 class TopRecipes extends Component {
+  /**
+   * @method renderTopRecipes
+   *
+   * @param {number} index
+   *
+   * @returns {JSX} JSX
+   */
   renderTopRecipes = (index) => {
     const { isAuthenticated, recipes, topRecipes } = this.props;
     const recipe = isAuthenticated ? topRecipes[index] : recipes[index];
@@ -13,6 +25,12 @@ class TopRecipes extends Component {
     );
   }
 
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     const { isAuthenticated, topRecipes, recipes } = this.props;
     const validRecipes = isAuthenticated ? topRecipes : recipes;

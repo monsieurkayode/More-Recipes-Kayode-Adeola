@@ -15,25 +15,59 @@ import pascalCase from '../../utils/pascalCase';
 import resetPage from '../../utils/resetPage';
 
 showdown.setFlavor('github');
+
+/**
+ * @summary - PostRecipe class declaration
+ * @class PostRecipe
+ * @extends {Component}
+ */
 class PostRecipe extends Component {
-  constructor() {
-    super();
+  /**
+   * Component constructor
+   * @param {object} props
+   * @memberOf PostRecipe
+   */
+  constructor(props) {
+    super(props);
     this.state = {
       selectedCategory: 'others',
       isLoading: false
     };
   }
 
+  /**
+   * @method componentDidMount
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentDidMount() {
     // eslint-disable-next-line
     $(findDOMNode(this.category))
       .on('change', this.handleCategory);
   }
 
+  /**
+   * @method componentWillUpdate
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentWillUpdate() {
     $('select').material_select();
   }
 
+  /**
+   * Handle submit
+   *
+   * @method onSubmit
+   *
+   * @param {object} values
+   *
+   * @returns {void}
+   */
   onSubmit = (values) => {
     const category = this.state.selectedCategory;
     this.setState({ isLoading: true });
@@ -44,12 +78,28 @@ class PostRecipe extends Component {
     });
   }
 
+  /**
+   * Handle category selection
+   *
+   * @method handleCategory
+   *
+   * @param {object} event
+   *
+   * @returns {void}
+   */
   handleCategory = (event) => {
     this.setState({
       selectedCategory: event.target.value
     });
   }
 
+  /**
+   * @method renderInput
+   *
+   * @param {object} field
+   *
+   * @returns {JSX} JSX
+   */
   renderInput = (field) => {
     const { label, input, meta, type, className, placeholder } = field;
     return (
@@ -70,6 +120,13 @@ class PostRecipe extends Component {
     );
   }
 
+  /**
+   * @method renderTextArea
+   *
+   * @param {object} field
+   *
+   * @returns {JSX} JSX
+   */
   renderTextArea = (field) => {
     const { label, input, meta, type, className, placeholder } = field;
     return (
@@ -90,6 +147,13 @@ class PostRecipe extends Component {
     );
   }
 
+  /**
+   * @method renderCategory
+   *
+   * @param {object} field
+   *
+   * @returns {JSX} JSX
+   */
   renderCategory = (field) => {
     const { value, ref } = field;
     return (
@@ -113,6 +177,12 @@ class PostRecipe extends Component {
     );
   }
 
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     const { handleSubmit, invalid } = this.props;
     const { isLoading } = this.state;

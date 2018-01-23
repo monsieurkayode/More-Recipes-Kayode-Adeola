@@ -5,9 +5,23 @@ import PropTypes from 'proptypes';
 import { SignupForm } from '../main';
 
 class SignupPage extends Component {
+  /**
+   * @method componentDidMount
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentDidMount() {
     $('.button-collapse').sideNav();
   }
+
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     return (
       <div>

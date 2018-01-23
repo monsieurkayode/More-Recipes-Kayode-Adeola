@@ -10,7 +10,17 @@ import cleanString from '../../../../shared/cleanString';
 import Categories from '../../../../shared/categories';
 import pascalCase from '../../utils/pascalCase';
 
+/**
+ * @summary - Category class declaration
+ * @class Category
+ * @extends {Component}
+ */
 class Category extends Component {
+  /**
+   * Component constructor
+   * @param {void} void
+   * @memberOf Category
+   */
   constructor() {
     super();
     this.state = {
@@ -19,16 +29,38 @@ class Category extends Component {
     };
   }
 
+  /**
+   * @method componentDidMount
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentDidMount() {
     // eslint-disable-next-line
     $(findDOMNode(this.search))
       .on('change', this.handleSearchType);
   }
 
+  /**
+   * @method componentWillUpdate
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentWillUpdate() {
     $('select').material_select();
   }
 
+  /**
+   * Handle search
+   * @method handleSearch
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   handleSearch = () => {
     const { searchType, searchTerm } = this.state;
     if ((cleanString(searchTerm)).length % 3 === 0) {
@@ -36,25 +68,54 @@ class Category extends Component {
     }
   }
 
+  /**
+   * Handle change
+   * @method handleChange
+   *
+   * @param {object} event
+   *
+   * @returns {void}
+   */
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
     });
   }
 
+  /**
+   * Handle search criteria
+   * @method handleSearchType
+   *
+   * @param {object} event
+   *
+   * @returns {void}
+   */
   handleSearchType = (event) => {
     this.setState({
       searchType: event.target.value
     });
   }
 
-  renderCategory = (key) => {
-    const category = Categories[key];
+  /**
+   * @method renderCategory
+   *
+   * @param {number} index
+   *
+   * @returns {JSX} JSX
+   */
+  renderCategory = (index) => {
+    const category = Categories[index];
     return (
-      <CategoryCollection key={key} category={pascalCase(category)} />
+      <CategoryCollection key={index} category={pascalCase(category)} />
     );
   }
 
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     const handleSearch = _.debounce(() => { this.handleSearch(); }, 300);
     const { isAuthenticated } = this.props;
