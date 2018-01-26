@@ -4,6 +4,17 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
 import sampleRecipes from '../utils/sampleRecipes';
 import resetPage from '../utils/resetPage';
 
+/**
+ * @summary - Action creator for logging out a user
+ * This clears the user preferences removes authourization
+ * token from the header
+ *
+ * @function logoutAction
+ *
+ * @param {void} void
+ *
+ * @returns {void}
+ */
 const logoutAction = () => (dispatch) => {
   resetPage();
   localStorage.removeItem('token');

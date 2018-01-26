@@ -5,6 +5,15 @@ import decode from 'jwt-decode';
 import actionTypes from './actionTypes';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
+/**
+ * @summary - Action creator for sign in authentication
+ *
+ * @function signinAction
+ *
+ * @param {object} user
+ *
+ * @returns {void}
+ */
 const signinAction = user => dispatch =>
   axios.post('/api/v1/users/signin', user)
     .then((response) => {

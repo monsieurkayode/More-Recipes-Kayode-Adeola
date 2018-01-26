@@ -7,7 +7,19 @@ import { RecipeCardSmall } from '../recipes';
 import { WelcomeDisplay } from './';
 import { Loader } from '../main';
 
+/**
+ * @summary - UserRecipe class declaration
+ * @class UserRecipe
+ * @extends {Component}
+ */
 class UserRecipe extends Component {
+  /**
+   * @method componentWillReceiveProps
+   *
+   * @param {object} nextProps
+   *
+   * @returns {*} any
+   */
   componentWillReceiveProps(nextProps) {
     const { recipes } = this.props.userRecipes;
     const currentPageSize = Object.keys(recipes || {}).length;
@@ -22,9 +34,17 @@ class UserRecipe extends Component {
         this.props.isFetching(true, 'UserRecipes');
         return this.props.fetchUserRecipes(currentPage - 1);
       }
+      this.props.fetchUserRecipes(currentPage);
     }
   }
 
+  /**
+   * @method setPagination
+   *
+   * @param {void} void
+   *
+   * @returns {object} pagination props
+   */
   setPagination = () => {
     if (this.hasRecipes()) {
       const { pagination: { page, pageCount } } = this.props.userRecipes;
@@ -39,6 +59,14 @@ class UserRecipe extends Component {
     };
   }
 
+  /**
+   * Check if there is a recipe
+   * @method hasFavorites
+   *
+   * @param {void} void
+   *
+   * @returns {boolean} boolean
+   */
   hasRecipes = () => {
     const { userRecipes } = this.props;
     if (isEmpty(userRecipes)) {
@@ -54,6 +82,14 @@ class UserRecipe extends Component {
   }
 
 
+  /**
+   * Handle page selection for pagination
+   * @method handlePageClick
+   *
+   * @param {object} data
+   *
+   * @returns {void}
+   */
   handlePageClick = ({ selected }) => {
     const page = selected + 1;
     localStorage.setItem('currentPageUserRecipes', page);
@@ -62,6 +98,13 @@ class UserRecipe extends Component {
     this.props.fetchUserRecipes(currentPage, this);
   }
 
+  /**
+   * @method renderUserRecipes
+   *
+   * @param {number} index
+   *
+   * @returns {JSX} JSX
+   */
   renderUserRecipes = (index) => {
     const recipe = this.props.userRecipes.recipes[index];
     const { deletePost, selected, selectRecipe } = this.props;
@@ -77,6 +120,13 @@ class UserRecipe extends Component {
     );
   }
 
+  /**
+   * @method renderPagination
+   *
+   * @param {void} void
+   *
+   * @returns {JSX} JSX
+   */
   renderPagination = () => {
     const { page, pageCount } = this.setPagination();
     return (
@@ -99,6 +149,13 @@ class UserRecipe extends Component {
       </div>
     );
   }
+
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     const { recipes } = this.props.userRecipes;
     return (

@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'proptypes';
 import pascalCase from '../../utils/pascalCase';
 
+/**
+ * RecipeItem
+ * @function RecipeItem
+ *
+ * @param {void} void
+ *
+ * @return {JSX} JSX
+ */
 const RecipeItem = ({ recipe, upvote, downvote }) =>
   (<div className="col l6">
     <div className="card hoverable views-small">

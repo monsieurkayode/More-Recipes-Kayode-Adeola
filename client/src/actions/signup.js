@@ -1,6 +1,16 @@
 import axios from 'axios';
 import actionTypes from './actionTypes';
 
+/**
+ * @summary - Action creator for creating a new account
+ *
+ * @function signupAction
+ *
+ * @param {object} user
+ * @param {function} callback
+ *
+ * @returns {void}
+ */
 const signupAction = (user, callback) => dispatch =>
   axios.post('/api/v1/users/signup', user)
     .then((response) => {

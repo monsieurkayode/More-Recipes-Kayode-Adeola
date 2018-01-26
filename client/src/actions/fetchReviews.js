@@ -3,6 +3,15 @@ import axios from 'axios';
 
 import actionTypes from './actionTypes';
 
+/**
+ * @summary - Action creator for fetching reviews for a recipe post
+ *
+ * @function fetchReviews
+ *
+ * @param {number} recipeId - Id of recipe
+ *
+ * @returns {void}
+ */
 const fetchReviews = recipeId => dispatch =>
   axios.get(`/api/v1/recipes/${recipeId}/reviews`)
     .then((response) => {

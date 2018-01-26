@@ -2,6 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'proptypes';
 
+/**
+ * TopRecipeItem
+ * @function TopRecipeItem
+ *
+ * @param {object} props
+ *
+ * @return {JSX} JSX
+ */
 const TopRecipeItem = ({ recipe }) =>
   (<Link to={`/recipes/${recipe.id}`}>
     <li className="collection-item avatar">

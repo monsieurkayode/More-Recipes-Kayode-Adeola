@@ -1,21 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'proptypes';
 
-class WelcomeDisplay extends Component {
-  render() {
-    const { username } = this.props.user;
-    const { selected } = this.props;
-    return (
-      <div id="welcome-panel" className="card-panel grey lighten-4">
-        <span className="card-content">
-          <h5>Welcome {username}!</h5>
-          <span>Dashboard / My {selected}</span>
-        </span>
-      </div>
-    );
-  }
-}
+/**
+ * WelcomeDisplay
+ * @function WelcomeDisplay
+ *
+ * @param {object} props
+ *
+ * @return {JSX} JSX
+ */
+const WelcomeDisplay = (props) => {
+  const { user: { username }, selected } = props;
+  return (
+    <div id="welcome-panel" className="card-panel grey lighten-4">
+      <span className="card-content">
+        <h5>Welcome {username}!</h5>
+        <span>Dashboard / My {selected}</span>
+      </span>
+    </div>
+  );
+};
 
 WelcomeDisplay.defaultProps = {
   user: {}

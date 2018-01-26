@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * @summary - SideNav class declaration
+ * @class SideNav
+ * @extends {Component}
+ */
 class SideNav extends Component {
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     return (
       <ul className="side-nav teal" id="navlink">

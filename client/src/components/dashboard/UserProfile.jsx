@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'proptypes';
 
-import userImg from '../../../assets/css/img/user.jpg';
+import holderProfile from '../../../assets/css/img/holder-profile.png';
 import { WelcomeDisplay } from './';
 
+/**
+ * @summary - UserProfile class declaration
+ * @class UserProfile
+ * @extends {Component}
+ */
 class UserProfile extends Component {
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     const { username } = this.props.user;
     return (
@@ -16,7 +27,11 @@ class UserProfile extends Component {
               <div className="col l4 m4">
                 <div className="card z-depth-2">
                   <div className="card-image">
-                    <img className="responsive-img" src={userImg} alt="" />
+                    <img
+                      className="responsive-img"
+                      src={holderProfile}
+                      alt=""
+                    />
                   </div>
                 </div>
               </div>

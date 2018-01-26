@@ -7,6 +7,15 @@ const initialState = {
   userFavoritesIsLoading: false,
 };
 
+/**
+ * Reducer function for setting the status of a dispatched action
+ * @function isFetchingReducer
+ *
+ * @param {object} state
+ * @param {object} action
+ *
+ * @returns {object} state - the new state
+ */
 const isFetchingReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.IS_FETCHING:

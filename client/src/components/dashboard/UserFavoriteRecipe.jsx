@@ -7,7 +7,19 @@ import { Loader } from '../main';
 import { WelcomeDisplay } from './';
 import { RecipeCardSmall } from '../recipes';
 
+/**
+ * @summary - UserFavoriteRecipe class declaration
+ * @class UserFavoriteRecipe
+ * @extends {Component}
+ */
 class UserFavoriteRecipe extends Component {
+  /**
+   * @method componentWillReceiveProps
+   *
+   * @param {object} nextProps
+   *
+   * @returns {*} any
+   */
   componentWillReceiveProps(nextProps) {
     const { recipes } = this.props.userFavorites;
     const currentPageSize = Object.keys(recipes || {}).length;
@@ -22,9 +34,17 @@ class UserFavoriteRecipe extends Component {
         this.props.isFetching(true, 'UserFavorites');
         return this.props.fetchUserFavorites(currentPage - 1);
       }
+      this.props.fetchUserFavorites(currentPage);
     }
   }
 
+  /**
+   * @method setPagination
+   *
+   * @param {void} void
+   *
+   * @returns {object} pagination props
+   */
   setPagination = () => {
     if (this.hasFavorites()) {
       const { pagination: { page, pageCount } } = this.props.userFavorites;
@@ -39,6 +59,14 @@ class UserFavoriteRecipe extends Component {
     };
   }
 
+  /**
+   * Check if there is a favorite
+   * @method hasFavorites
+   *
+   * @param {void} void
+   *
+   * @returns {boolean} boolean
+   */
   hasFavorites = () => {
     const { userFavorites } = this.props;
     if (isEmpty(userFavorites)) {
@@ -53,6 +81,14 @@ class UserFavoriteRecipe extends Component {
     return true;
   }
 
+  /**
+   * Handle page selection for pagination
+   * @method handlePageClick
+   *
+   * @param {object} data
+   *
+   * @returns {void}
+   */
   handlePageClick = ({ selected }) => {
     const page = selected + 1;
     localStorage.setItem('currentPageUserFavorites', page);
@@ -61,6 +97,13 @@ class UserFavoriteRecipe extends Component {
     this.props.fetchUserFavorites(currentPage);
   }
 
+  /**
+   * @method renderUserFavorites
+   *
+   * @param {number} index
+   *
+   * @returns {JSX} JSX
+   */
   renderUserFavorites = (index) => {
     const recipe = this.props.userFavorites.recipes[index];
     const { removeFavorite, selectRecipe } = this.props;
@@ -75,6 +118,13 @@ class UserFavoriteRecipe extends Component {
     );
   }
 
+  /**
+   * @method renderPagination
+   *
+   * @param {void} void
+   *
+   * @returns {JSX} JSX
+   */
   renderPagination = () => {
     const { page, pageCount } = this.setPagination();
     return (
@@ -97,6 +147,12 @@ class UserFavoriteRecipe extends Component {
       </div>
     );
   }
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     const { recipes } = this.props.userFavorites;
     return (

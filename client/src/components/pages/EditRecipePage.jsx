@@ -4,12 +4,30 @@ import PropTypes from 'proptypes';
 import { EditRecipe, SideNav } from '../main';
 import { HomeNavbar } from '../headers';
 
+/**
+ * @summary - EditRecipePage class declaration
+ * @class EditRecipePage
+ * @extends {Component}
+ */
 class EditRecipePage extends Component {
+  /**
+   * @method componentDidMount
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentDidMount() {
     $('.dropdown-button').dropdown();
     $('.button-collapse').sideNav();
   }
 
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     return (
       <div>

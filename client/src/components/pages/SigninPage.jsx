@@ -4,10 +4,29 @@ import PropTypes from 'proptypes';
 
 import { SigninForm } from '../main';
 
+/**
+ * @summary - SigninPage class declaration
+ * @class SigninPage
+ * @extends {Component}
+ */
 class SigninPage extends Component {
+  /**
+   * @method componentDidMount
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentDidMount() {
     $('.button-collapse').sideNav();
   }
+
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     return (
       <div>

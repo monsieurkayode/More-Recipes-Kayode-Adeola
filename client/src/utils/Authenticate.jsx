@@ -2,7 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'proptypes';
 
+/**
+ * Authentication HOC
+ *
+ * @param {JSX} ComposedComponent
+ *
+ * @returns {JSX} JSX
+ */
 export default function (ComposedComponent) {
+  /**
+ * @summary - Authenticate class declaration
+ * @class Authenticate
+ * @extends {Component}
+ */
   class Authenticate extends Component {
     componentWillMount() {
       if (!this.props.isAuthenticated) {

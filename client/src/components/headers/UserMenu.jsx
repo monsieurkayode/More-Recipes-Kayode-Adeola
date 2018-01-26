@@ -2,7 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'proptypes';
 
-const UserMenu = (props => (
+/**
+ * UserMenu
+ * @function UserMenu
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} JSX
+ */
+const UserMenu = props => (
   <ul id="user-dropdown" className="dropdown-content">
     <li>
       <Link
@@ -22,7 +30,7 @@ const UserMenu = (props => (
       </a>
     </li>
   </ul>
-));
+);
 
 UserMenu.propTypes = {
   logoutAction: PropTypes.func.isRequired

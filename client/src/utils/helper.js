@@ -4,6 +4,14 @@ import isEmpty from 'lodash/isEmpty';
 import isEmail from '../../../shared/isEmail';
 import isAlphaNumeneric from '../../../shared/isAlphaNum';
 
+/**
+ * @description - Function for handling client-side validation
+ * @function validateInput
+ *
+ * @param {object} data
+ *
+ * @returns {object} error
+ */
 const validateInput = (data) => {
   const errors = {};
 

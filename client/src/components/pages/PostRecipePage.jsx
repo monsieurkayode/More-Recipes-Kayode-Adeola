@@ -4,12 +4,30 @@ import PropTypes from 'proptypes';
 import { PostRecipe, SideNav } from '../main';
 import { HomeNavbar } from '../headers';
 
+/**
+ * @summary - PostRecipePage class declaration
+ * @class PostRecipePage
+ * @extends {Component}
+ */
 class PostRecipePage extends Component {
+  /**
+   * @method componentDidMount
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentDidMount() {
     $('.dropdown-button').dropdown();
     $('.button-collapse').sideNav();
   }
 
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     return (
       <div>

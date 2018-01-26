@@ -3,6 +3,15 @@ import _ from 'lodash';
 
 import actionTypes from '../actions/actionTypes';
 
+/**
+ * Reducer function for recipe posts operations
+ * @function recipeReducer
+ *
+ * @param {object} state
+ * @param {object} action
+ *
+ * @returns {object} state - the new state
+ */
 const recipeReducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.FETCH_SAMPLE_RECIPES:

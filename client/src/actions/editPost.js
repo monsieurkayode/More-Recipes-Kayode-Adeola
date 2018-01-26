@@ -3,6 +3,19 @@ import axios from 'axios';
 
 import actionTypes from './actionTypes';
 
+/**
+ * @summary Action creator for updating a recipe post
+ * Ensures only owner is able to update
+ *
+ * @function editPost
+ *
+ * @param {number} recipeId - Id of recipe to be updated
+ * @param {string} category - updated category or previously defined at creation
+ * @param {object} values - object with properties to update the record
+ * @param {function} callback - functiom executed after update is successful
+ *
+ * @returns {void}
+ */
 const editPost = (recipeId, category, values, callback) => (dispatch) => {
   const formData = new FormData(); // eslint-disable-line
   formData.append('recipeName', values.recipeName);

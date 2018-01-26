@@ -1,5 +1,13 @@
 import React from 'react';
 
+/**
+ * Footer
+ * @function Footer
+ *
+ * @param {void} void
+ *
+ * @return {JSX} JSX
+ */
 const Footer = () => (
   <footer className="page-footer blue-grey darken-2">
     <div className="row">

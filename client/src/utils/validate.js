@@ -1,3 +1,11 @@
+/**
+ * Validation function for creating recipe posts
+ * @function validate
+ *
+ * @param {object} values
+ *
+ * @returns {objects} errors
+ */
 const validate = (values) => {
   const errors = {};
 

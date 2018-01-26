@@ -20,14 +20,22 @@ import {
   UserFavoriteRecipe,
   UserProfile,
 } from '../dashboard';
-import {
-  DeleteModal,
-  NewPostModal,
-  EditPostModal,
-} from '../modals';
+import DeleteModal from '../modals';
 import { Loader } from '../main';
 
+/**
+ * @summary - DashboardPage class declaration
+ * @class DashboardPage
+ * @extends {Component}
+ */
 class DashboardPage extends Component {
+  /**
+   * @method componentWillMount
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentWillMount() {
     this.props.routeAction(this.props.selected);
     const currentPage = localStorage.getItem('currentPageUserRecipes');
@@ -37,6 +45,13 @@ class DashboardPage extends Component {
     this.props.fetchUserFavorites(currentPageFav);
   }
 
+  /**
+   * @method componentDidUpdate
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentDidUpdate() {
     $('.dropdown-button').dropdown();
     $('.button-collapse').sideNav();
@@ -44,9 +59,14 @@ class DashboardPage extends Component {
     $('#modal-edit').modal();
   }
 
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     const { selected, isLoading } = this.props;
-    // const { isLoading } = this.state;
     const deletePostDialog = 'Delete recipe';
     const removeFavDialog = 'Remove from favorite';
     return (
@@ -80,8 +100,6 @@ class DashboardPage extends Component {
                 this.props.removeFavorite
               }
             />
-            <NewPostModal />
-            <EditPostModal />
             <SideNavDashboard />
           </div>}
       </div>

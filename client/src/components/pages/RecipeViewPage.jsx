@@ -22,13 +22,32 @@ import {
 import { SideNav, Loader } from '../main';
 import { HomeNavbar } from '../headers';
 
+/**
+ * @summary - RecipeViewPage class declaration
+ * @class RecipeViewPage
+ * @extends {Component}
+ */
 class RecipeViewPage extends Component {
-  constructor() {
-    super();
+  /**
+   * Component constructor
+   * @param {object} props
+   * @memberOf RecipeViewPage
+   */
+  constructor(props) {
+    super(props);
+
     this.state = {
       isLoading: true
     };
   }
+
+  /**
+   * @method componentWillMount
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentWillMount() {
     const { recipeId } = this.props.match.params;
     this.props.fetchSingleRecipe(recipeId)
@@ -39,20 +58,49 @@ class RecipeViewPage extends Component {
     this.props.fetchReviews(recipeId);
   }
 
+  /**
+   * @method componentDidMount
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentDidMount() {
     window.scroll(0, 0);
   }
 
+  /**
+   * @method shouldComponentUpdate
+   *
+   * @param {object} nextProps
+   *
+   * @returns {void}
+   */
   shouldComponentUpdate(nextProps) {
     return !isEmpty(nextProps.currentRecipe);
   }
 
+  /**
+   * @method componentDidUpdate
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentDidUpdate() {
     $('.dropdown-button').dropdown();
     $('.button-collapse').sideNav();
     $('.materialboxed').materialbox();
   }
 
+  /**
+   * Render reviews
+   * @method renderReviews
+   *
+   * @param {number} index
+   *
+   * @returns {void}
+   */
   renderReviews = (index) => {
     const review = this.props.reviews[index];
     return (<Comments
@@ -62,6 +110,12 @@ class RecipeViewPage extends Component {
     />);
   }
 
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     const { currentRecipe, reviews, isFavorite } = this.props;
     const favorited = isFavorite ? 'orange-text' : '';

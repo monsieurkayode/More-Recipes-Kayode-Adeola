@@ -1,5 +1,13 @@
 import React from 'react';
 
+/**
+ * WelcomeMessage
+ * @function WelcomeMessage
+ *
+ * @param {void} void
+ *
+ * @return {JSX} JSX
+ */
 const WelcomeMessage = () => (
   <div className="row center-align">
     <div className="col l10 offset-l1">

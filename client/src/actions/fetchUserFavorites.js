@@ -3,6 +3,16 @@ import axios from 'axios';
 
 import actionTypes from './actionTypes';
 
+/**
+ * @summary - Action creator for fetching favorite recipes belonging to
+ * or added by the current user
+ *
+ * @function fetchUserFavorites
+ *
+ * @param {number} page - selected page number
+ *
+ * @returns {void}
+ */
 const fetchUserFavorites = page => dispatch =>
   axios.get(`/api/v1/users/recipes/favorites?page=${page}`)
     .then((response) => {

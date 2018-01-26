@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom';
 
 import { SearchBar } from './';
 
+/**
+ * LandingNavBar
+ * @function LandingNavBar
+ *
+ * @param {void} void
+ *
+ * @return {JSX} JSX
+ */
 const LandingNavBar = () => (
   <div className="navbar-fixed">
     <nav className="header">

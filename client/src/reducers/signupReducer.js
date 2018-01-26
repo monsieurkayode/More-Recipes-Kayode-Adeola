@@ -6,6 +6,15 @@ const initialState = {
   message: ''
 };
 
+/**
+ * Reducer function for registration related operations
+ * @function signupReducer
+ *
+ * @param {object} state
+ * @param {object} action
+ *
+ * @returns {object} state - the new state
+ */
 const signupReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SIGNUP_SUCCESSFUL:
