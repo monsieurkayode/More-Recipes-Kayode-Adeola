@@ -7,4 +7,4 @@ const isEmail = (str) => {
   return false;
 };
 
-export default isEmail;
+module.exports = isEmail;

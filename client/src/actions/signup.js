@@ -1,5 +1,8 @@
 import axios from 'axios';
+import decode from 'jwt-decode';
+
 import actionTypes from './actionTypes';
+import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 /**
  * @summary - Action creator for creating a new account
@@ -15,9 +18,13 @@ const signupAction = (user, callback) => dispatch =>
   axios.post('/api/v1/users/signup', user)
     .then((response) => {
       if (response.status === 201) {
-        const { token, message } = response.data;
+        const { token } = response.data;
         localStorage.setItem('token', token);
-        dispatch({ type: actionTypes.SIGNUP_SUCCESSFUL, payload: message });
+        setAuthorizationToken(token);
+        user = decode(token).user;
+        Materialize
+          .toast(`Welcome ${user.username}`, 4000, 'grey darken-2');
+        dispatch({ type: actionTypes.SIGNUP_SUCCESSFUL, payload: user });
       }
       callback();
     })

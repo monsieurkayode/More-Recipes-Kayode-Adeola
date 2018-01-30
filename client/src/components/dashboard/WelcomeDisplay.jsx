@@ -33,9 +33,8 @@ WelcomeDisplay.propTypes = {
   selected: PropTypes.string.isRequired
 };
 
-const mapStateToProps = ({ signinState, routing }) => ({
+const mapStateToProps = ({ signinState }) => ({
   user: signinState.user,
-  selected: routing.selected
 });
 
 

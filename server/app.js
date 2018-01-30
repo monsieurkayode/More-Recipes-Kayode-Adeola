@@ -10,10 +10,10 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
-import webpackConfig from './webpack.config.dev';
-import router from './server/routes/index';
+import webpackConfig from '../webpack.config.dev';
+import router from './routes/index';
 
-const swaggerDocument = require('./swagger.json'),
+const swaggerDocument = require('../swagger.json'),
   options = {
     validatorUrl: 'https://online.swagger.io/validator'
   };
@@ -27,12 +27,11 @@ const userRoute = router.user,
 const app = express();
 
 app.use(logger('dev'));
-
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.disable('x-powered-by');
-app.use(favicon(path.join(__dirname, 'client/assets', 'favicon.ico')));
+
 
 app.use(
   '/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options)
@@ -47,11 +46,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(webpackMiddleware(webpack(webpackConfig), {
-  noInfo: true,
-  publicPath: webpackConfig.output.publicPath
-}));
-app.use(webpackHotMiddleware(webpack(webpackConfig)));
+
+app.use('/', express.static(path.resolve(__dirname, '../build')));
+app.use(
+  '/favicon.ico',
+  favicon(path.resolve(__dirname, '../client/assets/favicon.ico'))
+);
 
 app.get('/api', (req, res) => {
   res.status(200).send({
@@ -66,14 +66,15 @@ app.use(reviewRoute);
 app.use(favoriteRoute);
 app.use(voteRoute);
 
-app.use(express.static(path.join(__dirname, '/client/assets')));
+app.use(webpackMiddleware(webpack(webpackConfig), {
+  noInfo: true,
+  publicPath: webpackConfig.output.publicPath
+}));
+
+app.use(webpackHotMiddleware(webpack(webpackConfig)));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './client/assets/index.html'));
+  res.sendFile(path.resolve(__dirname, '../build/index.html'));
 });
-
-app.all('*', (req, res) => res.status(404).send({
-  message: 'Oops! 404. Page not Found',
-}));
 
 export default app;

@@ -46,7 +46,7 @@ class SignupPage extends Component {
           <div className="col s12 l6 m8 offset-l3 offset-m2">
             <div className="card blue-grey darken-1">
               <div className="card-content white-text">
-                <h5>Create New Account</h5>
+                <h5>Create an account</h5>
               </div>
             </div>
           </div>

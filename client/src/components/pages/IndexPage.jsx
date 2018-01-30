@@ -6,11 +6,11 @@ import {
   fetchRecipesAction,
   logoutAction,
   fetchTopRecipes,
-  fetchSampleRecipes,
 } from '../../actions';
 import { LandingNavbar, HomeNavbar, Banner } from '../headers';
 import { Contents, WelcomeMessage, SideNav, Loader } from '../main';
 import Footer from '../footer';
+import Homepage from './Homepage';
 
 /**
  * @summary - IndexPage class declaration
@@ -45,12 +45,6 @@ class IndexPage extends Component {
           isLoading: false
         }));
       this.props.fetchTopRecipes();
-    } else {
-      this.props.fetchSampleRecipes(() => setTimeout(() => {
-        this.setState({
-          isLoading: false
-        });
-      }, 2000));
     }
   }
 
@@ -76,19 +70,26 @@ class IndexPage extends Component {
    */
   render() {
     const { isLoading } = this.state;
+    const { isAuthenticated } = this.props;
     return (
       <div>
-        { isLoading ?
-          <Loader /> :
+        { isAuthenticated ?
           <div>
-            { this.props.isAuthenticated ?
-              <HomeNavbar {...this.props} /> : <LandingNavbar /> }
-            <Banner />
-            <WelcomeMessage />
-            <Contents />
-            <Footer />
-            <SideNav />
-          </div>}
+            { isLoading ?
+              <Loader /> :
+              <div>
+                { this.props.isAuthenticated ?
+                  <HomeNavbar {...this.props} /> : <LandingNavbar /> }
+                <Banner />
+                <WelcomeMessage />
+                <Contents />
+                <Footer />
+                <SideNav />
+              </div>}
+          </div>
+          :
+          <Homepage />
+        }
       </div>
     );
   }
@@ -107,7 +108,7 @@ IndexPage.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   fetchRecipesAction: PropTypes.func.isRequired,
   fetchTopRecipes: PropTypes.func.isRequired,
-  fetchSampleRecipes: PropTypes.func.isRequired
+  logoutAction: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps,
@@ -115,6 +116,5 @@ export default connect(mapStateToProps,
     fetchRecipesAction,
     logoutAction,
     fetchTopRecipes,
-    fetchSampleRecipes
   }
 )(IndexPage);

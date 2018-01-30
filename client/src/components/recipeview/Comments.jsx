@@ -1,34 +1,39 @@
 import React from 'react';
 import PropTypes from 'proptypes';
 import moment from 'moment';
+import Avatar from 'react-avatar';
 
-import userImg from '../../../assets/css/img/user.jpg';
+import pascalCase from '../../utils/pascalCase';
 
-const Comments = (props) => {
-  let time = props.review.createdAt;
+const Comments = ({ review }) => {
+  let time = review.createdAt;
   time = moment.utc(new Date(time)).fromNow();
   return (
-    <ul>
-      <li>
-        <img
-          className="secondary-content circle left"
-          src={userImg}
-          height="40px"
-          alt=""
-        />
-        <span className="">
-          <strong className="teal-text">
-            {props.review.User.username}
-          </strong>
-          <span className="grey-text created-at"><br /> {time}</span>
-        </span>
-      </li>
-      <li>
-        <p className="review">
-          {props.review.comment}
-        </p>
-      </li>
-    </ul>
+    <div className="review-container z-depth-2">
+      <div className="review-body">
+        <div className="user-avatar">
+          <Avatar
+            className="responsive-img"
+            name={review.User.username}
+            size={60}
+            round
+          />
+        </div>
+        <div className="review-content-block">
+          <div>
+            <p className="username">{pascalCase(review.User.username)}</p>
+            <p className="review-time">{time}</p>
+          </div>
+          <div className="review-text">
+            <p>{review.comment}</p>
+          </div>
+          <div className="review-controls">
+            <i className="fa fa-pencil"> <span>Edit</span> </i>
+            <i className="fa fa-trash"> <span>Delete</span></i>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

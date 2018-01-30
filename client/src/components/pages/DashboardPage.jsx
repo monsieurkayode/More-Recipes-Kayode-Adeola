@@ -4,7 +4,6 @@ import PropTypes from 'proptypes';
 
 import {
   logoutAction,
-  routeAction,
   fetchUserRecipes,
   fetchUserFavorites,
   deletePost,
@@ -19,6 +18,7 @@ import {
   UserRecipe,
   UserFavoriteRecipe,
   UserProfile,
+  UserNotification
 } from '../dashboard';
 import DeleteModal from '../modals';
 import { Loader } from '../main';
@@ -37,7 +37,6 @@ class DashboardPage extends Component {
    * @returns {void}
    */
   componentWillMount() {
-    this.props.routeAction(this.props.selected);
     const currentPage = localStorage.getItem('currentPageUserRecipes');
     const currentPageFav = localStorage.getItem('currentPageUserFavorites');
     this.props.isFetching(true, 'Dashboard');
@@ -66,9 +65,10 @@ class DashboardPage extends Component {
    * @returns {JSX} JSX
    */
   render() {
-    const { selected, isLoading } = this.props;
+    const { isLoading } = this.props;
     const deletePostDialog = 'Delete recipe';
     const removeFavDialog = 'Remove from favorite';
+    const { route } = this.props.match.params;
     return (
       <div>
         {isLoading ?
@@ -76,31 +76,35 @@ class DashboardPage extends Component {
           <div>
             <DashboardNavbar {...this.props} />
             <div className="row">
-              <DashboardPanel />
+              <DashboardPanel user={this.props.user} />
               {
-                selected === 'profile' &&
-                <UserProfile {...this.props} />
+                route === 'profile' &&
+                <UserProfile selected={route} {...this.props} />
               }
               {
-                selected === 'recipes' &&
-                <UserRecipe {...this.props} />
+                route === 'recipes' &&
+                <UserRecipe selected={route} {...this.props} />
               }
               {
-                selected === 'favorites' &&
-                <UserFavoriteRecipe {...this.props} />
+                route === 'favorites' &&
+                <UserFavoriteRecipe selected={route} {...this.props} />
+              }
+              {
+                route === 'notifications' &&
+                <UserNotification selected={route} {...this.props} />
               }
             </div>
             <DeleteModal
-              selected={selected}
-              dialog={selected === 'recipes' ?
+              selected={route}
+              dialog={route === 'recipes' ?
                 deletePostDialog : removeFavDialog}
               id={this.props.selectedRecipe}
-              handleAction={selected === 'recipes' ?
+              handleAction={route === 'recipes' ?
                 this.props.deletePost :
                 this.props.removeFavorite
               }
             />
-            <SideNavDashboard />
+            <SideNavDashboard user={this.props.user} />
           </div>}
       </div>
     );
@@ -109,7 +113,6 @@ class DashboardPage extends Component {
 
 const mapStateToProps = ({
   signinState,
-  routing,
   userRecipes,
   userFavorites,
   selectedRecipe,
@@ -117,7 +120,6 @@ const mapStateToProps = ({
 }) => ({
   user: signinState.user,
   isAuthenticated: signinState.isAuthenticated,
-  selected: routing.selected,
   userRecipes,
   userFavorites,
   selectedRecipe,
@@ -127,12 +129,12 @@ const mapStateToProps = ({
 });
 
 DashboardPage.defaultProps = {
-  selectedRecipe: 0
+  selectedRecipe: 0,
+  user: {}
 };
 
 DashboardPage.propTypes = {
-  routeAction: PropTypes.func.isRequired,
-  selected: PropTypes.string.isRequired,
+  user: PropTypes.shape({}),
   fetchUserRecipes: PropTypes.func.isRequired,
   userRecipes: PropTypes.shape({}).isRequired,
   userFavorites: PropTypes.shape({}).isRequired,
@@ -141,13 +143,17 @@ DashboardPage.propTypes = {
   deletePost: PropTypes.func.isRequired,
   removeFavorite: PropTypes.func.isRequired,
   isFetching: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      route: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
 };
 
 export default connect(mapStateToProps,
   {
     logoutAction,
-    routeAction,
     fetchUserRecipes,
     fetchUserFavorites,
     deletePost,

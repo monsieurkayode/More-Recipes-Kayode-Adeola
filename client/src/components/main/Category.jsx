@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
-import _ from 'lodash';
+import debounce from 'lodash/debounce';
 import PropTypes from 'proptypes';
+import { Link } from 'react-router-dom';
 
 import { searchPost } from '../../actions';
-import { CategoryCollection } from './';
 import cleanString from '../../../../shared/cleanString';
 import Categories from '../../../../shared/categories';
 import pascalCase from '../../utils/pascalCase';
@@ -38,7 +37,7 @@ class Category extends Component {
    */
   componentDidMount() {
     // eslint-disable-next-line
-    $(findDOMNode(this.search))
+    $((this.search))
       .on('change', this.handleSearchType);
   }
 
@@ -106,7 +105,14 @@ class Category extends Component {
   renderCategory = (index) => {
     const category = Categories[index];
     return (
-      <CategoryCollection key={index} category={pascalCase(category)} />
+      <li key={category}>
+        <Link
+          to={`/category/${category}`}
+          className="collapsible-header"
+        >
+          {pascalCase(category)}
+        </Link>
+      </li>
     );
   }
 
@@ -117,37 +123,37 @@ class Category extends Component {
    * @returns {JSX} JSX
    */
   render() {
-    const handleSearch = _.debounce(() => { this.handleSearch(); }, 300);
+    const handleSearch = debounce(() => { this.handleSearch(); }, 300);
     const { isAuthenticated } = this.props;
     return (
-      <div className="col l2 offset-l1 m2 hide-on-small-only">
-        <span className="">Category</span>
-        <p className="divider" />
-        <div id="category">
-          <div style={{ marginTop: 10 }}>
-            {isAuthenticated && <form onChange={handleSearch}>
-              <input
-                onChange={this.handleChange}
-                value={this.state.searchTerm}
-                className="white input-fa"
-                name="searchTerm"
-                type="text"
-                placeholder="&#xf002; Enter search keyword..."
-              />
-              <select
-                ref={(ref) => { this.search = ref; }}
-                value={this.state.searchType}
-              >
-                <option value="" disabled>Search criteria</option>
-                <option value="name">Title</option>
-                <option value="category">Category</option>
-                <option value="ingredients">Ingredients</option>
-              </select>
-            </form>}
-            <div style={{ marginTop: 20 }}>
+      <div className="col l2 offset-l1 m2 s12">
+        {isAuthenticated &&
+        <form id="search-form" onChange={handleSearch}>
+          <input
+            onChange={this.handleChange}
+            value={this.state.searchTerm}
+            className="white input-fa"
+            name="searchTerm"
+            type="text"
+            placeholder="&#xf002; Enter search keyword..."
+          />
+          <select
+            ref={(ref) => { this.search = ref; }}
+            value={this.state.searchType}
+          >
+            <option value="" disabled>Search criteria</option>
+            <option value="name">Title</option>
+            <option value="category">Category</option>
+            <option value="ingredients">Ingredients</option>
+          </select>
+        </form>}
+        <div className="category hide-on-small-only">
+          <div>
+            <div>
               <b>Featured Categories</b>
+              <p className="divider" />
             </div>
-            <ul className="collapsible z-depth-0" data-collapsible="accordion">
+            <ul className="collapsible z-depth-0">
               {Categories.slice(6).map(
                 (category, index) => this.renderCategory(index)
               )}

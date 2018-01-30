@@ -2,11 +2,9 @@
 import signupAction from './signup';
 import signinAction from './signin';
 import logoutAction from './logout';
-import routeAction from './route';
 import createPost from './createPost';
 import fetchRecipesAction from './fetchRecipes';
 import fetchSingleRecipe from './fetchSingleRecipe';
-import fetchSampleRecipes from './fetchSampleRecipes';
 import upvoteAction from './upvote';
 import downvoteAction from './downvote';
 import addFavoriteAction from './addFavorite';
@@ -22,16 +20,15 @@ import editPost from './editPost';
 import searchPost from './searchPost';
 import selectRecipe from './selectRecipe';
 import isFetching from './isFetching';
+import fetchRecipesByCategory from './fetchRecipesByCategory';
 
 export {
   signupAction,
   signinAction,
   logoutAction,
-  routeAction,
   createPost,
   fetchRecipesAction,
   fetchSingleRecipe,
-  fetchSampleRecipes,
   upvoteAction,
   downvoteAction,
   addFavoriteAction,
@@ -46,5 +43,6 @@ export {
   editPost,
   searchPost,
   selectRecipe,
-  isFetching
+  isFetching,
+  fetchRecipesByCategory
 };

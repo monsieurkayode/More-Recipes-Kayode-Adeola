@@ -10,7 +10,7 @@ import PreloaderIcon, { ICON_TYPE } from 'react-preloader-icon';
  * @return {JSX} JSX
  */
 const Loader = () => (
-  <div style={{ margin: '25% 45%' }}>
+  <div className="loader">
     <PreloaderIcon
       type={ICON_TYPE.OVAL}
       size={80}

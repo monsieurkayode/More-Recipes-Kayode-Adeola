@@ -5,7 +5,6 @@ import signupState from './signupReducer';
 import signinState from './signinReducer';
 import recipes from './recipesReducer';
 import currentRecipe from './singleRecipeReducer';
-import routing from './routeReducer';
 import isFavorite from './singleFavoriteReducer';
 import reviews from './reviewsReducer';
 import userRecipes from './userRecipesReducer';
@@ -21,7 +20,6 @@ const rootReducer = combineReducers({
   recipes,
   form,
   currentRecipe,
-  routing,
   isFavorite,
   reviews,
   userRecipes,

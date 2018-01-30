@@ -1,10 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'proptypes';
+import Avatar from 'react-avatar';
 
-import { routeAction } from '../../actions';
 import dash from '../../../assets/css/img/dash.jpg';
-import holderProfile from '../../../assets/css/img/holder-profile.png';
 
 /**
  * SideNavDashboard
@@ -15,12 +14,12 @@ import holderProfile from '../../../assets/css/img/holder-profile.png';
  * @return {JSX} JSX
  */
 const SideNavDashboard = props => (
-  <ul className="side-nav" id="dashboard">
-    <div id="dash-panel" className="col l3 teal darken-2">
-      <div className="teal darken-2">
+  <div className="side-nav" id="dashboard">
+    <div id="dash-panel" className="col l3 teal">
+      <div className="teal">
         <div
           id="profile-page-header"
-          className="card teal darken-2 z-depth-0"
+          className="card teal z-depth-0"
         >
           <div className="card-image">
             <img
@@ -29,67 +28,63 @@ const SideNavDashboard = props => (
               src={dash}
               alt="user-background"
             />
-            <figure className="card-profile-image">
-              <img
-                src={holderProfile}
-                className="z-depth-2 responsive-img"
-                alt=""
+            <div className="card-profile-image">
+              <Avatar
+                className="card-profile-avatar responsive-img"
+                name={props.user.username}
+                size={80}
+                color="#345"
+                round
               />
-            </figure>
+            </div>
           </div>
           <div id="dash-links">
             <div className="collection">
               <a
                 id="dashboard-parent"
-                className="collection-item"
+                className="collection-item teal"
               >
-                <strong>Dashboard</strong> <span
-                  className="right fa fa-user-circle"
-                />
+                <strong>
+                   Dashboard
+                </strong>
               </a>
               <br />
               <div id="myTab" className="tabs-vertical">
-                <ul className="tabs">
+                <ul className="tabs teal">
                   <li className="tab">
-                    <a
+                    <Link
+                      to="/dashboard/profile"
                       className="white-text"
-                      onClick={() => {
-                        this.props.routeAction('profile');
-                      }}
                     >
                       <i
                         className="fa fa-vcard-o white-text"
                       /> My Profile
-                    </a>
+                    </Link>
                   </li>
                   <li className="tab">
-                    <a
+                    <Link
+                      to="/dashboard/recipes"
                       className="white-text"
-                      onClick={() => {
-                        props.routeAction('recipes');
-                      }}
                     >
                       <i
                         className="fa fa-briefcase white-text"
                       /> My Recipes
-                    </a>
+                    </Link>
                   </li>
                   <li className="tab">
-                    <a
+                    <Link
+                      to="/dashboard/favorites"
                       className="white-text"
-                      onClick={() => {
-                        props.routeAction('favorites');
-                      }}
                     >
                       <i
                         className="fa fa-heart white-text"
                       /> Favorite Recipes
-                    </a>
+                    </Link>
                   </li>
                   <li className="tab">
-                    <a
+                    <Link
+                      to="/dashboard/notifications"
                       className="white-text"
-                      href=""
                     >
                       <i
                         className="fa fa-comments-o white-text"
@@ -98,7 +93,7 @@ const SideNavDashboard = props => (
                         id="not-badge"
                         className="red new badge"
                       >10</span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -107,11 +102,17 @@ const SideNavDashboard = props => (
         </div>
       </div>
     </div>
-  </ul>
+  </div>
 );
 
-SideNavDashboard.propTypes = {
-  routeAction: PropTypes.func.isRequired,
+SideNavDashboard.defaultProps = {
+  user: {}
 };
 
-export default connect(null, { routeAction })(SideNavDashboard);
+SideNavDashboard.propTypes = {
+  user: PropTypes.shape({
+    username: PropTypes.string
+  }),
+};
+
+export default SideNavDashboard;

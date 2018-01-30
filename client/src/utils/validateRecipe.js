@@ -1,16 +1,20 @@
 /**
  * Validation function for creating recipe posts
- * @function validate
+ * @function validateRecipe
  *
  * @param {object} values
  *
  * @returns {objects} errors
  */
-const validate = (values) => {
+const validateRecipe = (values) => {
   const errors = {};
 
   if (!values.recipeName) {
     errors.recipeName = 'Please enter a recipe name';
+  }
+
+  if (values.recipeName && values.recipeName.length > 50) {
+    errors.recipeName = 'Recipe name too long';
   }
 
   if (!values.ingredients) {
@@ -24,4 +28,4 @@ const validate = (values) => {
   return errors;
 };
 
-export default validate;
+export default validateRecipe;

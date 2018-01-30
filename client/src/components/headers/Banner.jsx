@@ -14,7 +14,6 @@ const Banner = () => (
     <div className="card z-depth-0">
       <div className="card-image">
         <img className="responsive-img" src={bannerImage} alt="" />
-        <span className="card-title" />
       </div>
     </div>
   </div>

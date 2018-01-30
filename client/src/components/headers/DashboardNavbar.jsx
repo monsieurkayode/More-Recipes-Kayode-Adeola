@@ -22,7 +22,7 @@ const DashboardNavbar = (props) => {
           <Link
             to="/"
             onClick={resetPage}
-            className={`${brandClass} hide-on-small-only`}
+            className={`${brandClass}`}
           >
               More-Recipes
           </Link>

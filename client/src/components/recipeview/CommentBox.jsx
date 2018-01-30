@@ -56,7 +56,7 @@ class CommentBox extends Component {
           className="materialize-textarea"
           id="reviews"
           type="text"
-          placeholder=" Add a comment.."
+          placeholder="Add a comment.."
         />
       </div>
     );

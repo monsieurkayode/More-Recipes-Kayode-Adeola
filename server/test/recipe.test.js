@@ -1,14 +1,16 @@
 import 'chai';
 import 'mocha';
 import supertest from 'supertest';
-import app from '../../app';
+import app from '../app';
 import users from '../seeders/userSeeder';
-import favorite from '../seeders/favoriteSeeder';
+import recipes from '../seeders/recipeSeeder';
 
 
 const server = supertest.agent(app),
   expect = require('chai').expect,
   validUsersLogin = users.validUsersLogin,
+  recipePosts = recipes.recipePosts,
+  editRecipe = recipePosts.every,
   userData = [];
 
 describe('User Login', () => {
@@ -48,189 +50,156 @@ describe('User Login', () => {
   });
 });
 
-describe('Favorite a recipe', () => {
-  it('allows logged in user add recipe to favorite and category', (done) => {
+describe('Create recipe post', () => {
+  it('allows a registered and logged in user post a recipe', (done) => {
     server
-      .post('/api/v1/users/2/favorites')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send(favorite[1])
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(201);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.message).to.be.equal('Recipe successfully added to favorites');
-        if (err) return done(err);
-        done();
-      });
-  });
-  it('allows logged in user delete recipe he/she has favorited', (done) => {
-    server
-      .delete('/api/v1/users/2/favorites')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send(favorite[1])
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.message).to.be.equal('Recipe successfully removed from favorites');
-        if (err) return done(err);
-        done();
-      });
-  });
-  it('allows logged in user add recipe to favorite and category', (done) => {
-    server
-      .post('/api/v1/users/2/favorites')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send(favorite[1])
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(201);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.message).to.be.equal('Recipe successfully added to favorites');
-        if (err) return done(err);
-        done();
-      });
-  });
-  it('does not allow user add same favorite more than once', (done) => {
-    server
-      .post('/api/v1/users/2/favorites')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send(favorite[1])
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(409);
-        expect(res.body.message).to.be.equal('Recipe has already been favorited');
-        if (err) return done(err);
-        done();
-      });
-  });
-  it('does not allow user favorite non-existing recipe', (done) => {
-    server
-      .post('/api/v1/users/1/favorites')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send(favorite[1])
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(404);
-        expect(res.body.message).to.be.equal('Recipe not found');
-        if (err) return done(err);
-        done();
-      });
-  });
-  it('does not allow user edit category of valid recipe not favorited', (done) => {
-    server
-      .patch('/api/v1/users/3/favorites')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send(favorite[1])
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(404);
-        expect(res.body.message).to.be.equal('Recipe has not been added to favorite');
-        if (err) return done(err);
-        done();
-      });
-  });
-  it('allows logged in user edit favorite recipe category', (done) => {
-    server
-      .patch('/api/v1/users/2/favorites')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send(favorite[0])
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.message).to.equal('Recipe added to Smoothies');
-        if (err) return done(err);
-        done();
-      });
-  });
-  it('returns existing favorite category if form is empty', (done) => {
-    server
-      .patch('/api/v1/users/2/favorites')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
-      .set('Content-Type', 'application/json')
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.message).to.equal('Recipe added to Smoothies');
-        if (err) return done(err);
-        done();
-      });
-  });
-  it('allows logged in user view his/her favorite recipes', (done) => {
-    server
-      .get('/api/v1/users/recipes/favorites')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
-      .set('Content-Type', 'application/json')
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        if (err) return done(err);
-        done();
-      });
-  });
-  it('return Your favorite recipe list is empty', (done) => {
-    server
-      .get('/api/v1/users/recipes/favorites')
+      .post('/api/v1/recipes')
       .set('Connection', 'keep alive')
       .set('Accept', 'application/json')
       .set('x-access-token', userData[0])
       .set('Content-Type', 'application/json')
+      .type('form')
+      .send(recipePosts[0])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(404);
-        expect(res.body.message).to.equal('Your favorite recipe list is empty');
+        expect(res.statusCode).to.equal(201);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Successfully created new recipe');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('allows a registered and logged in user post a recipe', (done) => {
+    server
+      .post('/api/v1/recipes')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(recipePosts[1])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Successfully created new recipe');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('allows a registered and logged in user post a recipe', (done) => {
+    server
+      .post('/api/v1/recipes')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(recipePosts[2])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Successfully created new recipe');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('does not accept empty form for recipe name', (done) => {
+    server
+      .post('/api/v1/recipes')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(recipePosts[3])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message.recipeName).to.equal('Please enter a recipe name');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('does not accept empty form for ingredients', (done) => {
+    server
+      .post('/api/v1/recipes')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(recipePosts[4])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message.ingredients).to.equal('Ingredients field cannot be empty');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('does not accept empty form for instructions', (done) => {
+    server
+      .post('/api/v1/recipes')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(recipePosts[5])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message.instructions).to.equal('Instructions field cannot be empty');
         if (err) return done(err);
         done();
       });
   });
 });
-describe('Search recipes', () => {
-  it('shows recipes with search by ingredients', (done) => {
+
+describe('Modify recipe post', () => {
+  it('allows a logged in user modify his or her posted recipe', (done) => {
     server
-      .get('/api/v1/recipes')
-      .query({ ingredients: 'cabbage' })
+      .put('/api/v1/recipes/1')
       .set('Connection', 'keep alive')
       .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
+      .set('x-access-token', userData[0])
       .set('Content-Type', 'application/json')
+      .type('form')
+      .send(editRecipe[0])
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.recipes[1].recipeName).to.equal('Coleslaw Salad');
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Recipe successfully updated');
         if (err) return done(err);
         done();
       });
   });
-  it('shows no recipes matches search if not found', (done) => {
+  it('validate if recipe exists in application', (done) => {
     server
-      .get('/api/v1/recipes')
-      .query({ category: 'smoothies' })
+      .put('/api/v1/recipes/10')
       .set('Connection', 'keep alive')
       .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(editRecipe[0])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(404);
+        expect(res.body.status).to.equal('fail');
+        expect(res.body.message).to.equal('Recipe not found');
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
+describe('Search for Recipes', () => {
+  it('return No recipe matches your search', (done) => {
+    server
+      .get('/api/v1/recipes')
+      .query({ category: 'Jargons' })
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
@@ -239,4 +208,88 @@ describe('Search recipes', () => {
         done();
       });
   });
+  it('get recipe that matches category', (done) => {
+    server
+      .get('/api/v1/recipes')
+      .query({ category: 'smooth' })
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.recipes[0].recipeName).to.equal('Kiwi Smoothie on the Rocks');
+        if (err) return done(err);
+        done();
+      });
+  });
+  it('get recipe that matches ingredient', (done) => {
+    server
+      .get('/api/v1/recipes')
+      .query({ ingredients: 'spinach' })
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.recipes[0].recipeName).to.equal('Coleslaw');
+        if (err) return done(err);
+        done();
+      });
+  });
 });
+
+describe('Delete recipe post', () => {
+  it('allows a logged in user delete his or her posted recipe', (done) => {
+    server
+      .delete('/api/v1/recipes/1')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        expect(res.body.message).to.equal('Recipe successfully deleted');
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
+describe('Keep records of recipe views', () => {
+  it('show the number of times a recipe has been viewed', (done) => {
+    server
+      .get('/api/v1/recipes/2')
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[1])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.recipe.views).to.equal(1);
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
+describe('View top recipes', () => {
+  it('show recipes with highest upvote first', (done) => {
+    server
+      .get('/api/v1/recipes')
+      .query({ sort: 'upvote', order: 'desc' })
+      .set('Connection', 'keep alive')
+      .set('Accept', 'application/json')
+      .set('x-access-token', userData[0])
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.recipes[0].recipeName).to.equal('Coleslaw');
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+

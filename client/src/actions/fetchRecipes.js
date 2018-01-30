@@ -1,8 +1,8 @@
 /* jshint esversion: 6 */
 import axios from 'axios';
+
 import actionTypes from '../actions/actionTypes';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
-import sampleRecipes from '../utils/sampleRecipes';
 
 /**
  * @summary Action creator for fetching maximum of 8 recipe posts
@@ -12,32 +12,36 @@ import sampleRecipes from '../utils/sampleRecipes';
  *
  * @function fetchRecipesAction
  *
- * @param {number} page selected page number
+ * @param {number} page - selected page number, default is 1
+ * @param {number} limit - recipes fetched limit
+ * @param {object} query - the query object
  *
  * @returns {void}
  */
-const fetchRecipesAction = page => dispatch =>
-  axios.get(`/api/v1/recipes?page=${page}`)
+const fetchRecipesAction = (page, limit) => dispatch =>
+  axios
+    .get(
+      `/api/v1/recipes?page=${page}&limit=${limit}`
+    )
     .then((response) => {
       const payload = response.data;
       dispatch({ type: actionTypes.FETCH_RECIPES, payload });
     })
     .catch((error) => {
       const { message } = error.response.data;
-      if (message !== 'Bad Token') {
-        Materialize.toast(message, 4000, 'red');
+      if (error.response.status === 404) {
+        dispatch({
+          type: actionTypes.FETCH_RECIPES_ERROR
+        });
       }
 
       if (error.response.status === 403) {
         localStorage.removeItem('token');
         setAuthorizationToken(false);
+        Materialize.toast(message, 4000, 'red');
         const user = {};
         dispatch({ type: actionTypes.SESSION_EXPIRED });
         dispatch({ type: actionTypes.LOGOUT_USER, payload: user });
-        dispatch({
-          type: actionTypes.FETCH_SAMPLE_RECIPES,
-          payload: sampleRecipes
-        });
       }
     });
 

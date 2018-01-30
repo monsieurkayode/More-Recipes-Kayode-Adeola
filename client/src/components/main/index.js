@@ -1,7 +1,5 @@
 /* jshint esversion: 6 */
-import CategorizedRecipe from './CategorizedRecipe';
 import Category from './Category';
-import CategoryCollection from './CategoryCollection';
 import Contents from './Contents';
 import Recipes from './Recipes';
 import RecipeItem from './RecipeItem';
@@ -17,9 +15,7 @@ import WelcomeMessage from './WelcomeMessage';
 import Loader from './Loader';
 
 export {
-  CategorizedRecipe,
   Category,
-  CategoryCollection,
   Contents,
   Recipes,
   RecipeItem,

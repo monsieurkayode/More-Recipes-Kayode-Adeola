@@ -25,6 +25,12 @@ class SigninForm extends Component {
     };
   }
 
+  componentWillMount() {
+    if (this.props.isAuthenticated) {
+      this.props.history.goBack();
+    }
+  }
+
   /**
    * @method componentWillUpdate
    *
@@ -115,8 +121,10 @@ const mapStateToProps = ({ signinState }) => {
 
 SigninForm.propTypes = {
   signinAction: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   history: PropTypes.shape({
-    push: PropTypes.func.isRequired
+    push: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired
   }).isRequired
 };
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import verifyToken from '../utils/verifyToken';
 
 /**
  *
@@ -10,7 +11,7 @@ import axios from 'axios';
  * @returns {void}
  */
 const setAuthorizationToken = (token) => {
-  if (token) {
+  if (verifyToken(token)) {
     axios.defaults.headers.common['x-access-token'] = `${token}`;
   } else {
     delete axios.defaults.headers.common['x-access-token'];

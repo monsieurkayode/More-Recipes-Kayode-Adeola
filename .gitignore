@@ -61,3 +61,6 @@ typings/
 
 #  Client build directory
 build
+sendgrid.env
+
+dist

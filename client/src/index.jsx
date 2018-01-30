@@ -16,25 +16,14 @@ import '../assets/css/style.scss';
 
 
 import actionTypes from './actions/actionTypes';
-import sampleRecipes from './utils/sampleRecipes';
 import setAuthorizationToken from './utils/setAuthorizationToken';
+import verifyToken from './utils/verifyToken';
 
-if (localStorage.token) {
-  const tokenExpiration = decode(localStorage.token).exp * 1000;
-  const currentTime = Date.now();
-  if (!(currentTime > tokenExpiration)) {
-    setAuthorizationToken(localStorage.token);
-    const user = decode(localStorage.token).user;
-    store.dispatch({ type: actionTypes.SET_CURRENT_USER, payload: user });
-  }
+if (verifyToken(localStorage.token)) {
+  setAuthorizationToken(localStorage.token);
+  const user = decode(localStorage.token).user;
+  store.dispatch({ type: actionTypes.SET_CURRENT_USER, payload: user });
 } else {
-  store
-    .dispatch(
-      {
-        type: actionTypes.FETCH_SAMPLE_RECIPES,
-        payload: sampleRecipes
-      }
-    );
   store.dispatch({
     type: actionTypes.LOGOUT_USER,
     payload: {}

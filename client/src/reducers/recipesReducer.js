@@ -1,5 +1,6 @@
 /* jshint esversion: 6 */
-import _ from 'lodash';
+import mapKeys from 'lodash/mapKeys';
+import omit from 'lodash/omit';
 
 import actionTypes from '../actions/actionTypes';
 
@@ -14,26 +15,30 @@ import actionTypes from '../actions/actionTypes';
  */
 const recipeReducer = (state = {}, action) => {
   switch (action.type) {
-    case actionTypes.FETCH_SAMPLE_RECIPES:
-      return {
-        recipes: _.mapKeys(action.payload, 'id'),
-        pagination: {}
-      };
     case actionTypes.DELETE_RECIPE_POST:
       return {
         ...state,
-        recipes: _.omit(state.recipes, action.payload)
+        recipes: omit(state.recipes, action.payload)
       };
     case actionTypes.FETCH_RECIPES:
       return {
-        recipes: _.mapKeys(action.payload.recipes, 'id'),
+        recipes: mapKeys(action.payload.recipes, 'id'),
         pagination: action.payload.pagination
+      };
+    case actionTypes.FETCH_RECIPES_BY_CATEGORY:
+      return {
+        recipes: mapKeys(action.payload.recipes, 'id'),
+        pagination: action.payload.pagination
+      };
+    case actionTypes.FETCH_RECIPES_BY_CATEGORY_ERROR:
+      return {
+        recipes: {},
       };
     case actionTypes.SEARCH_RECIPE_POST_ERROR:
       return action.payload;
     case actionTypes.SEARCH_RECIPE_POST:
       return {
-        recipes: _.mapKeys(action.payload.recipes, 'id'),
+        recipes: mapKeys(action.payload.recipes, 'id'),
         pagination: action.payload.pagination
       };
     case actionTypes.CREATE_POST:

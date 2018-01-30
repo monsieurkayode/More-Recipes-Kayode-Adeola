@@ -1,7 +1,7 @@
 import 'chai';
 import 'mocha';
 import supertest from 'supertest';
-import app from '../../app';
+import app from '../app';
 import users from '../seeders/userSeeder';
 import dbSync from '../helpers/clearDb';
 
@@ -49,20 +49,6 @@ describe('Response Object', () => {
         expect('Content-Type', /json/);
         expect(res.statusCode).to.equal(200);
         expect(res.body.status).to.equal('success');
-        if (err) return done(err);
-        done();
-      });
-  });
-});
-
-describe('Catch invalid routes', () => {
-  it('return a 404 if route not found', (done) => {
-    server
-      .get('/api/yuruh')
-      .set('Connection', 'keep alive')
-      .set('Content-Type', 'application/json')
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
         if (err) return done(err);
         done();
       });
