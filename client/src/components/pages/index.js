@@ -7,6 +7,8 @@ import RecipeViewPage from './RecipeViewPage';
 import PostRecipePage from './PostRecipePage';
 import IndexPage from './IndexPage';
 import EditRecipePage from './EditRecipePage';
+import HomePage from './Homepage';
+import CategoryPage from './CategoryPage';
 
 export {
   SigninPage,
@@ -17,4 +19,6 @@ export {
   PostRecipePage,
   IndexPage,
   EditRecipePage,
+  HomePage,
+  CategoryPage
 };

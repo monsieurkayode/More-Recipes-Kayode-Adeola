@@ -36,7 +36,7 @@ class TopRecipes extends Component {
     const validRecipes = isAuthenticated ? topRecipes : recipes;
     return (
       <div className="col l3 m4 s12">
-        <span>Top of the Week</span>
+        <span><b>Top of the Week</b></span>
         <p className="divider" />
         <div id="trending">
           <ul className="collection">

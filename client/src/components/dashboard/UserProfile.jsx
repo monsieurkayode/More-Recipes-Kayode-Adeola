@@ -20,7 +20,7 @@ class UserProfile extends Component {
     const { username } = this.props.user;
     return (
       <div id="user-profile" className="col l9 m12 s12 offset-l3">
-        <WelcomeDisplay />
+        <WelcomeDisplay selected={this.props.selected} />
         <div id="my-profile" className="row">
           <div className="col l12 m12 s12">
             <div className="row">
@@ -73,8 +73,9 @@ class UserProfile extends Component {
 
 UserProfile.propTypes = {
   user: PropTypes.shape({
-    username: PropTypes.string.isRequired,
-  }).isRequired
+    username: PropTypes.string.isRequired
+  }).isRequired,
+  selected: PropTypes.string.isRequired,
 };
 
 export default UserProfile;

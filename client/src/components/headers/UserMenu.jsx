@@ -20,7 +20,9 @@ const UserMenu = props => (
       </Link>
     </li>
     <li>
-      <Link to="/dashboard"><span className="fa fa-lg fa-dashboard" /> Dashboard
+      <Link
+        to="/dashboard/recipes"
+      ><span className="fa fa-lg fa-dashboard" /> Dashboard
       </Link>
     </li>
     <li className="divider" />

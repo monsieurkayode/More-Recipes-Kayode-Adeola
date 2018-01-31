@@ -18,11 +18,27 @@ import {
 import { searchUserFavsByCategory } from '../controllers/recipe';
 
 const router = express.Router();
+const baseUrl = '/api/v1/users';
 
-router.post('/api/v1/users/:recipeId/favorites', auth, validate, validUser, validRecipe, favoriteExists, addFavorite);
-router.patch('/api/v1/users/:recipeId/favorites', auth, validate, validUser, isValidFavorite, addRecipeCategory);
-router.delete('/api/v1/users/:recipeId/favorites', auth, validate, validUser, isValidFavorite, deleteFavorite);
-router.get('/api/v1/users/recipes/favorites', auth, validUser, getUserFavorites, searchUserFavsByCategory);
-router.get('/api/v1/users/:recipeId/favorites', auth, validate, validUser, isValidFavorite, getOneUserFavorite);
+router.post(
+  `${baseUrl}/:recipeId/favorites`,
+  auth, validate, validUser, validRecipe, favoriteExists, addFavorite
+);
+router.patch(
+  `${baseUrl}/:recipeId/favorites`,
+  auth, validate, validUser, isValidFavorite, addRecipeCategory
+);
+router.delete(
+  `${baseUrl}/:recipeId/favorites`,
+  auth, validate, validUser, isValidFavorite, deleteFavorite
+);
+router.get(
+  `${baseUrl}/recipes/favorites`,
+  auth, validUser, getUserFavorites, searchUserFavsByCategory
+);
+router.get(
+  `${baseUrl}/:recipeId/favorites`,
+  auth, validate, validUser, isValidFavorite, getOneUserFavorite
+);
 
 export default router;

@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'proptypes';
-import showdown from 'showdown';
 
 import FileUpload from './FileUpload';
 import { Loader } from './';
 import { createPost } from '../../actions';
-import validate from '../../utils/validate';
+import validate from '../../utils/validateRecipe';
 import categories from '../../../../shared/categories';
 import pascalCase from '../../utils/pascalCase';
 import resetPage from '../../utils/resetPage';
-
-showdown.setFlavor('github');
 
 /**
  * @summary - PostRecipe class declaration
@@ -43,9 +39,7 @@ class PostRecipe extends Component {
    * @returns {void}
    */
   componentDidMount() {
-    // eslint-disable-next-line
-    $(findDOMNode(this.category))
-      .on('change', this.handleCategory);
+    $(('#category')).on('change', this.handleCategory);
   }
 
   /**
@@ -155,12 +149,12 @@ class PostRecipe extends Component {
    * @returns {JSX} JSX
    */
   renderCategory = (field) => {
-    const { value, ref } = field;
+    const { value } = field;
     return (
       <div className="row">
         <div className="input-field col-s12 l12 m12">
           <select
-            ref={ref}
+            id="category"
             value={value}
           >
             <option value="others">Select Category</option>
@@ -184,7 +178,7 @@ class PostRecipe extends Component {
    * @returns {JSX} JSX
    */
   render() {
-    const { handleSubmit, invalid } = this.props;
+    const { handleSubmit, invalid, values } = this.props;
     const { isLoading } = this.state;
     return (
       <div className="container">
@@ -192,7 +186,7 @@ class PostRecipe extends Component {
           { isLoading ?
             <Loader /> :
             <form
-              className="col l8 m8 s12 offset-m2 offset-l2"
+              className="col l8 m8 s10 offset-m2 offset-l2 offset-s1"
               onSubmit={handleSubmit(this.onSubmit)}
             >
               <Field
@@ -206,7 +200,6 @@ class PostRecipe extends Component {
 
               <Field
                 name="category"
-                ref={(ref) => { this.category = ref; }}
                 value={this.state.selectedCategory}
                 component={this.renderCategory}
               />
@@ -233,21 +226,24 @@ class PostRecipe extends Component {
                   name="image"
                   component={FileUpload}
                 />
+                <span className="image-name">
+                  <p>
+                    {!!values.image && values.image.name}
+                  </p>
+                </span>
               </div>
-
-              <span className="right">
+              <div className="form-btn-control">
+                <Link className="white-text" to="/">
+                  <button className="btn red">Cancel</button>
+                </Link>
                 <button
-                  style={{ marginLeft: 20 }}
                   disabled={invalid}
                   type="submit"
                   className="btn"
                 >
-                Post
+                  Post
                 </button>
-              </span>
-              <Link to="/" className="right">
-                <button className="btn red">Cancel</button>
-              </Link>
+              </div>
             </form>}
         </div>
       </div>

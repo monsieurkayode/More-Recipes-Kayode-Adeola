@@ -28,7 +28,7 @@ const RecipeCard = (props) => {
         <span className="card-title">{recipe.views} views</span>
       </div>
       <div className={`card-content ${props.size}`}>
-        <span className="card-title">
+        <span className="card-title truncate">
           <strong>{recipe.recipeName}</strong>
         </span>
         <div className="divider" />

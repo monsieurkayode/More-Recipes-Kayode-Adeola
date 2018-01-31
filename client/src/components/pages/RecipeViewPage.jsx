@@ -103,11 +103,13 @@ class RecipeViewPage extends Component {
    */
   renderReviews = (index) => {
     const review = this.props.reviews[index];
-    return (<Comments
-      key={review.id}
-      index={review.id}
-      review={review}
-    />);
+    return (
+      <Comments
+        key={review.id}
+        index={review.id}
+        review={review}
+      />
+    );
   }
 
   /**
@@ -192,8 +194,20 @@ class RecipeViewPage extends Component {
             <CommentBox />
             <div id="comment-posts" className="row">
               <div className="col l7 m8 s12 offset-l4 offset-m4">
-                {Object.keys(reviews).sort((a, b) => b - a).map(index =>
-                  this.renderReviews(index))}
+                {
+                  Object
+                    .keys(reviews).sort((a, b) => b - a)
+                    .map(index =>
+                      this.renderReviews(index))
+                }
+                <div className="center-align">
+                  <span
+                    id="view-more"
+                    className="chip edit"
+                  >
+                    View more
+                  </span>
+                </div>
               </div>
             </div>
             <SideNav />

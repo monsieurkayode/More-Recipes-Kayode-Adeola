@@ -10,6 +10,7 @@ import {
   fetchRecipesAction
 } from '../../actions';
 import { RecipeItem, Loader } from './';
+import sad from '../../../assets/css/img/sad.png';
 
 /**
  * @summary - Recipes class declaration
@@ -67,6 +68,7 @@ class Recipes extends Component {
     const recipe = this.props.recipes[index];
     return (
       <RecipeItem
+        grid="l6 m10 offset-m1 s12"
         key={recipe.id}
         index={recipe.id}
         recipe={recipe}
@@ -113,11 +115,11 @@ class Recipes extends Component {
    * @returns {JSX} JSX
    */
   render() {
-    const { pagination: { page, pageCount }, isAuthenticated } = this.props;
+    const { pagination: { page, pageCount } } = this.props;
     const { isLoading } = this.state;
     return (
       <div className="col l5 m6 s12">
-        <span>You are viewing page { page || 1 } of { pageCount || 1}</span>
+        <span><b>Recipes</b></span>
         <p className="divider" />
         <div className="row">
           {this.hasRecipes() ?
@@ -130,7 +132,7 @@ class Recipes extends Component {
             </div> :
             <div className="center-align not-found">
               <img
-                src="/css/img/sad_smiley.png"
+                src={sad}
                 alt=""
               />
               <h6>
@@ -139,16 +141,21 @@ class Recipes extends Component {
             </div>
           }
         </div>
-        {this.hasRecipes() && isAuthenticated && this.renderPagination()}
+        {this.hasRecipes() && this.renderPagination()}
+        {this.hasRecipes() &&
+        <div
+          className="center-align"
+        >
+          You are viewing page { page || 1 } of { pageCount || 1}
+        </div>}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ recipes, signinState }) => ({
+const mapStateToProps = ({ recipes }) => ({
   recipes: recipes.recipes,
   pagination: recipes.pagination,
-  isAuthenticated: signinState.isAuthenticated
 });
 
 Recipes.defaultProps = {
@@ -167,7 +174,6 @@ Recipes.propTypes = {
     pageCount: PropTypes.number,
     totalCount: PropTypes.number
   }),
-  isAuthenticated: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps,

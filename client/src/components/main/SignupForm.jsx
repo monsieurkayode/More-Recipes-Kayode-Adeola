@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'proptypes';
 
 import { signupAction } from '../../actions';
-import validateInput from '../../utils/helper';
+import validateSignup from '../../utils/validateSignup';
 import { TextField } from './';
 
 /**
@@ -28,6 +28,11 @@ class SignupForm extends Component {
     };
   }
 
+  componentWillMount() {
+    if (this.props.isAuthenticated) {
+      this.props.history.goBack();
+    }
+  }
   /**
    * Handle input change
    * @method handleInputChange
@@ -51,7 +56,7 @@ class SignupForm extends Component {
    * @returns {void}
    */
   isValid() {
-    const { errors, isValid } = validateInput(this.state);
+    const { errors, isValid } = validateSignup(this.state);
     if (!isValid) {
       this.setState({ errors });
     }
@@ -72,7 +77,7 @@ class SignupForm extends Component {
     if (this.isValid()) {
       this.setState({ errors: {} });
       this.props.signupAction(user, () => {
-        this.props.history.push('/dashboard');
+        this.props.history.push('/dashboard/profile');
       });
     }
   }
@@ -147,18 +152,22 @@ class SignupForm extends Component {
   }
 }
 
-const mapStateToProps = ({ signupState }) => {
+const mapStateToProps = ({ signupState, signinState }) => {
   const { success, message } = signupState;
+  const { isAuthenticated } = signinState;
   return {
     success,
-    message
+    message,
+    isAuthenticated
   };
 };
 
 SignupForm.propTypes = {
   signupAction: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   history: PropTypes.shape({
-    push: PropTypes.func.isRequired
+    push: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired
   }).isRequired
 };
 

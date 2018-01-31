@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'proptypes';
-import showdown from 'showdown';
 
 import FileUpload from './FileUpload';
 import { editPost, fetchSingleRecipe } from '../../actions';
-import validate from '../../utils/validate';
+import validate from '../../utils/validateRecipe';
 import categories from '../../../../shared/categories';
 import pascalCase from '../../utils/pascalCase';
-
-showdown.setFlavor('github');
 
 /**
  * @summary - EditRecipe class declaration
@@ -52,9 +48,7 @@ class EditRecipe extends Component {
    * @returns {void}
    */
   componentDidMount() {
-    // eslint-disable-next-line
-    $(findDOMNode(this.category))
-      .on('change', this.handleCategory);
+    $(('#category')).on('change', this.handleCategory);
   }
 
   /**
@@ -179,12 +173,12 @@ class EditRecipe extends Component {
    * @returns {JSX} JSX
    */
   renderCategory = (field) => {
-    const { value, ref } = field;
+    const { value } = field;
     return (
       <div className="row">
         <div className="input-field col-s12 l12 m12">
           <select
-            ref={ref}
+            id="category"
             value={value}
           >
             <option value={this.state.selectedCategory}>Select Category</option>
@@ -208,12 +202,12 @@ class EditRecipe extends Component {
    * @returns {JSX} JSX
    */
   render() {
-    const { handleSubmit, invalid } = this.props;
+    const { handleSubmit, invalid, initialValues } = this.props;
     return (
       <div className="container">
         <div className="row">
           <form
-            className="col l8 m8 s12 offset-m2 offset-l2"
+            className="col l8 m8 s10 offset-s1 offset-m2 offset-l2"
             onSubmit={handleSubmit(this.onSubmit)}
           >
             <Field
@@ -227,7 +221,6 @@ class EditRecipe extends Component {
 
             <Field
               name="category"
-              ref={(ref) => { this.category = ref; }}
               value={this.state.selectedCategory}
               component={this.renderCategory}
             />
@@ -254,24 +247,28 @@ class EditRecipe extends Component {
                 name="image"
                 component={FileUpload}
               />
+              <span className="image-name">
+                <p>
+                  {!!initialValues.image && initialValues.image.name }
+                </p>
+              </span>
             </div>
 
-            <span className="right">
+            <div className="form-btn-control">
               <button
-                style={{ marginLeft: 20 }}
+                className="btn red"
+                onClick={() => this.props.history.push('/dashboard/recipes')}
+              >
+                Cancel
+              </button>
+              <button
                 disabled={invalid}
                 type="submit"
                 className="btn"
               >
                 Update
               </button>
-            </span>
-            <button
-              onClick={() => this.props.history.push('/dashboard')}
-              className="btn red right"
-            >
-              Cancel
-            </button>
+            </div>
           </form>
         </div>
       </div>

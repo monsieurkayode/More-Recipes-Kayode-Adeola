@@ -160,7 +160,7 @@ class UserRecipe extends Component {
     const { recipes } = this.props.userRecipes;
     return (
       <div id="user-recipes" className="col l9 m12 s12 offset-l3">
-        <WelcomeDisplay />
+        <WelcomeDisplay selected={this.props.selected} />
         <div id="my-recipes" className="row">
           {this.hasRecipes() ?
             <div>
@@ -173,7 +173,7 @@ class UserRecipe extends Component {
             </div> :
             <div className="center-align not-found">
               <img
-                src="/css/img/sad_smiley.png"
+                src="/css/img/sad.png"
                 alt=""
               />
               <h5>
@@ -213,8 +213,8 @@ UserRecipe.propTypes = {
     })
   }),
   deletePost: PropTypes.func,
-  isFetching: PropTypes.func.isRequired,
   selected: PropTypes.string.isRequired,
+  isFetching: PropTypes.func.isRequired,
   selectRecipe: PropTypes.func.isRequired,
   fetchUserRecipes: PropTypes.func.isRequired,
   isLoadingRecipes: PropTypes.bool.isRequired,

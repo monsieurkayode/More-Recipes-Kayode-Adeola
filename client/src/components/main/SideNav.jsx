@@ -1,38 +1,76 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'proptypes';
+import Avatar from 'react-avatar';
+
+import { logoutAction } from '../../actions';
+
+import dash from '../../../assets/css/img/dash.jpg';
+
 
 /**
- * @summary - SideNav class declaration
- * @class SideNav
- * @extends {Component}
- */
-class SideNav extends Component {
-  /**
-   * Renders the component
-   * @method render
+   * SideNav
+   * @function SideNav
+   *
+   * @param {object} props
    *
    * @returns {JSX} JSX
    */
-  render() {
-    return (
-      <ul className="side-nav teal" id="navlink">
-        <li>
-          <form>
-            <input className="white-text" type="text" placeholder="Search" />
-          </form>
-        </li>
-        <li>
-          <Link to="/" className="white-text">Top Recipes</Link>
-        </li>
-        <li>
-          <Link to="/signin" className="white-text">Log In</Link>
-        </li>
-        <li >
-          <Link to="signup" className="white-text">Sign Up</Link>
-        </li>
-      </ul>
-    );
-  }
-}
+const SideNav = props => (
+  <div>
+    <ul className="side-nav teal" id="navlink">
+      <li>
+        <div className="card-image">
+          <img
+            className="responsive-img"
+            id="dash-img"
+            src={dash}
+            alt="user-background"
+          />
+          <div id="side-nav-avatar">
+            <Avatar
+              className="responsive-img"
+              name={props.username}
+              size={80}
+              color="#345"
+              round
+            />
+          </div>
+        </div>
+      </li>
+      <li>
+        <Link className="white-text" to="/recipes/new" >
+          <span className="fa fa-lg fa-plus-circle" /> Recipe
+        </Link>
+      </li>
+      <li>
+        <Link
+          className="white-text"
+          to="/dashboard/recipes"
+        ><span className="fa fa-lg fa-dashboard" /> Dashboard
+        </Link>
+      </li>
+      <li>
+        <a className="white-text" onClick={props.logoutAction}>
+          <span className="fa fa-lg fa-sign-out" /> Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+);
 
-export default SideNav;
+const mapStateToProps = ({ signinState }) => ({
+  username: signinState.user.username
+});
+
+SideNav.defaultProps = {
+  username: ''
+};
+
+SideNav.propTypes = {
+  logoutAction: PropTypes.func.isRequired,
+  username: PropTypes.string,
+};
+
+export default connect(mapStateToProps, { logoutAction })(SideNav);

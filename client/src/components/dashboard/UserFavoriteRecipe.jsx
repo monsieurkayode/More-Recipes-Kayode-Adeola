@@ -157,7 +157,7 @@ class UserFavoriteRecipe extends Component {
     const { recipes } = this.props.userFavorites;
     return (
       <div id="favorite-recipes" className="col l9 m12 s12 offset-l3">
-        <WelcomeDisplay />
+        <WelcomeDisplay selected={this.props.selected} />
         <div id="user-favorites" className="row">
           <div className="row">
             {this.hasFavorites() ?
@@ -171,7 +171,7 @@ class UserFavoriteRecipe extends Component {
               </div> :
               <div className="center-align not-found">
                 <img
-                  src="/css/img/sad_smiley.png"
+                  src="/css/img/sad.png"
                   alt=""
                 />
                 <h5>
@@ -212,6 +212,7 @@ UserFavoriteRecipe.propTypes = {
     })
   }),
   removeFavorite: PropTypes.func,
+  selected: PropTypes.string.isRequired,
   selectRecipe: PropTypes.func.isRequired,
   fetchUserFavorites: PropTypes.func.isRequired,
   isFetching: PropTypes.func.isRequired,

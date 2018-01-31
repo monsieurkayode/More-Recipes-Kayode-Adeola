@@ -16,7 +16,8 @@ const HomeNavbar = (props) => {
           <Link
             to="/"
             onClick={resetPage}
-            className={`${brandClass} hide-on-small-only`}
+            className={`${brandClass}`}
+            style={{ whiteSpace: 'nowrap' }}
           >
             More-Recipes
           </Link>

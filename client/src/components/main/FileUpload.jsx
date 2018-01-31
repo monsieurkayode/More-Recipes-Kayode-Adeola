@@ -18,11 +18,22 @@ export default ({
   meta: omitMeta,
   ...props
 }) => (
-  <input
-    type="file"
-    onChange={handleChange(onChange)}
-    onBlur={handleChange(onBlur)}
-    {...inputProps}
-    {...props}
-  />
+  <div id="upload-btn">
+    <label htmlFor="image">
+      <input
+        type="file"
+        id="image"
+        onChange={handleChange(onChange)}
+        onBlur={handleChange(onBlur)}
+        placeholder="Upload Image"
+        {...inputProps}
+        {...props}
+      />
+      <span
+        className="btn"
+      >
+        Upload Image
+      </span>
+    </label>
+  </div>
 );

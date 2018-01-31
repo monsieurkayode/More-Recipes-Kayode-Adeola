@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'proptypes';
 import resetPage from '../../utils/resetPage';
+import sad from '../../../assets/css/img/sad.png';
 
 /**
  * @summary - NotFoundPage class declaration
@@ -29,13 +30,12 @@ class NotFoundPage extends Component {
    */
   render() {
     return (
-      <div className="center-align" style={{ marginTop: '10%' }}>
+      <div id="not-found-container" className="center-align">
         <h2 className="red-text">
           404
         </h2>
         <img
-          style={{ height: '200px' }}
-          src="/css/img/sad_smiley.png"
+          src={sad}
           alt=""
         />
         <h3>
@@ -45,8 +45,8 @@ class NotFoundPage extends Component {
           <h6> <span><i className="fa fa-home" /></span> Back to home</h6>
         </Link>
         <div
+          id="back-link"
           className="blue-text"
-          style={{ cursor: 'pointer' }}
           onClick={this.redirectBack}
         >
           <span><i className="fa fa-chevron-left" /></span> Back

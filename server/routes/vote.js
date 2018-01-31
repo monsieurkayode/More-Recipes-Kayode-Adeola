@@ -6,8 +6,14 @@ import { recipeExists } from '../middlewares/recipeValidation';
 import { validUser } from '../middlewares/userValidation';
 
 const router = express.Router();
+const baseUrl = '/api/v1/recipes/:recipeId';
 
-router.put('/api/v1/recipes/:recipeId/upvote', auth, validate, validUser, recipeExists, upvote);
-router.put('/api/v1/recipes/:recipeId/downvote', auth, validate, validUser, recipeExists, downvote);
+router.put(
+  `${baseUrl}/upvote`, auth, validate, validUser, recipeExists, upvote
+);
+
+router.put(
+  `${baseUrl}/downvote`, auth, validate, validUser, recipeExists, downvote
+);
 
 export default router;

@@ -1,23 +1,14 @@
-import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import sgMail from '@sendgrid/mail';
+
 import db from '../models/index';
 
-dotenv.load();
+dotenv.config();
+
 const Recipe = db.Recipe;
 const User = db.User;
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.USER,
-    pass: process.env.PASS
-  },
-  tls: {
-    rejectUnauthorized: false
-  }
-});
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const reviewNotification = (req, res, next) => {
   Recipe
@@ -30,13 +21,18 @@ const reviewNotification = (req, res, next) => {
     })
     .then((recipe) => {
       const mailOptions = {
-        from: '"More-Recipes Admin" <emperoarkay@gmail.com@gmail.com>',
         to: recipe.User.email,
+        from: 'More-Recipes <monsieurkayode@gmail.com>',
         subject: 'You have a new notification',
-        text: `${req.decoded.user.username} commented on your recipe post`,
+        text: `from ${req.decoded.user.username}`,
+        html: `<strong>${req.decoded.user.username}
+        commented on your recipe post
+        </strong>
+        <p>${req.body.comment}</p>
+        `,
       };
 
-      transporter.sendMail(mailOptions);
+      sgMail.send(mailOptions);
       next();
     });
 };

@@ -54,12 +54,33 @@ const resize = (req, res, next) => {
 };
 
 const upload = multer(multerOptions).single('image');
+const baseUrl = '/api/v1/recipes';
 
-router.post('/api/v1/recipes', auth, upload, validUser, recipeBasicValidation, checkMultiplePost, resize, createRecipe);
-router.get('/api/v1/recipes', auth, validUser, getRecipes, getTopRecipes, searchRecipesByIngredients, searchRecipesByCategory, searchRecipesByName);
-router.get('/api/v1/recipes/user', auth, validUser, getUserRecipes);
-router.put('/api/v1/recipes/:recipeId', auth, validate, upload, validUser, recipeExists, checkPermission, resize, updateRecipe);
-router.get('/api/v1/recipes/:recipeId', auth, validate, validUser, recipeExists, viewRecipe);
-router.delete('/api/v1/recipes/:recipeId', auth, validate, validUser, recipeExists, checkPermission, deleteRecipe);
+router.post(
+  `${baseUrl}`,
+  auth, upload, validUser, recipeBasicValidation,
+  checkMultiplePost, resize, createRecipe
+);
+
+router.get(`${baseUrl}`,
+  auth, validUser, getRecipes, getTopRecipes,
+  searchRecipesByIngredients, searchRecipesByCategory, searchRecipesByName
+);
+
+router.get(`${baseUrl}/user`, auth, validUser, getUserRecipes);
+
+router.put(`${baseUrl}/:recipeId`,
+  auth, validate, upload, validUser, recipeExists,
+  checkPermission, resize, updateRecipe
+);
+
+router.get(
+  `${baseUrl}/:recipeId`,
+  auth, validate, validUser, recipeExists, viewRecipe
+);
+
+router.delete(`${baseUrl}/:recipeId`,
+  auth, validate, validUser, recipeExists, checkPermission, deleteRecipe
+);
 
 export default router;

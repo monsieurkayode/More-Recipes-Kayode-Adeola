@@ -4,4 +4,4 @@ const cleanString = (str) => {
   return clean;
 };
 
-export default cleanString;
+module.exports = cleanString;

@@ -1,11 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'proptypes';
+import Avatar from 'react-avatar';
 
-import { routeAction } from '../../actions';
 import dash from '../../../assets/css/img/dash.jpg';
-import holderProfile from '../../../assets/css/img/holder-profile.png';
-
 
 /**
  * DashboardPanel
@@ -28,13 +26,15 @@ const DashboardPanel = props => (
           src={dash}
           alt="user-background"
         />
-        <figure className="card-profile-image">
-          <img
-            src={holderProfile}
-            alt=""
-            className="z-depth-2 responsive-img"
+        <div className="card-profile-image">
+          <Avatar
+            className="card-profile-avatar"
+            name={props.user.username}
+            size={80}
+            color="#345"
+            round
           />
-        </figure>
+        </div>
       </div>
       <div id="dash-links" >
         <div className="collection">
@@ -50,36 +50,37 @@ const DashboardPanel = props => (
           <div id="myTab" className="tabs-vertical">
             <ul className="tabs teal">
               <li className="tab">
-                <a
+                <Link
                   className="white-text"
-                  onClick={() => { props.routeAction('profile'); }}
+                  to="/dashboard/profile"
                 >
                   <i className="fa fa-vcard-o" /> My Profile
-                </a>
+                </Link>
               </li>
               <li className="tab">
-                <a
+                <Link
+                  to="/dashboard/recipes"
                   className="white-text"
-                  onClick={() => { props.routeAction('recipes'); }}
                 >
                   <i className="fa fa-briefcase" /> My Recipes
-                </a>
+                </Link>
               </li>
               <li className="tab">
-                <a
+                <Link
+                  to="/dashboard/favorites"
                   className="white-text"
-                  onClick={() => { props.routeAction('favorites'); }}
                 >
                   <i className="fa fa-heart" /> Favorite Recipes
-                </a>
+                </Link>
               </li>
               <li className="tab">
-                <a
+                <Link
+                  to="/dashboard/notifications"
                   className="white-text"
                 >
                   <i className="fa fa-comments-o" /> Notifications
                   <span id="not-badge" className="red new badge">10</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -89,8 +90,14 @@ const DashboardPanel = props => (
   </div>
 );
 
-DashboardPanel.propTypes = {
-  routeAction: PropTypes.func.isRequired,
+DashboardPanel.defaultProps = {
+  user: {}
 };
 
-export default connect(null, { routeAction })(DashboardPanel);
+DashboardPanel.propTypes = {
+  user: PropTypes.shape({
+    username: PropTypes.string
+  })
+};
+
+export default DashboardPanel;

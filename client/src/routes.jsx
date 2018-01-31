@@ -10,18 +10,34 @@ import {
   NotFoundPage,
   DashboardPage,
   RecipeViewPage,
+  CategoryPage
 } from './components/pages';
 import Authenticate from './utils/Authenticate';
 
+/**
+ * Routes
+ * @function Routes
+ *
+ * @param {void} void
+ *
+ * @return {JSX} JSX
+ */
 const Routes = () => (
   <Switch>
-    <Route path="/signin" component={SigninPage} />
-    <Route path="/signup" component={SignupPage} />
+    <Route exact path="/signin" component={SigninPage} />
+    <Route exact path="/signup" component={SignupPage} />
     <Route
-      path="/dashboard"
+      exact
+      path="/dashboard/:route"
       component={Authenticate(DashboardPage)}
     />
     <Route
+      exact
+      path="/category/:categoryName"
+      component={Authenticate(CategoryPage)}
+    />
+    <Route
+      exact
       path="/recipes/new"
       component={Authenticate(PostRecipePage)}
     />
