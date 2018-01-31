@@ -6,7 +6,7 @@ import PropTypes from 'proptypes';
 
 import FileUpload from './FileUpload';
 import { Loader } from './';
-import { createPost } from '../../actions';
+import { createPost, isFetching } from '../../actions';
 import validate from '../../utils/validateRecipe';
 import categories from '../../../../shared/categories';
 import pascalCase from '../../utils/pascalCase';
@@ -64,11 +64,11 @@ class PostRecipe extends Component {
    */
   onSubmit = (values) => {
     const category = this.state.selectedCategory;
-    this.setState({ isLoading: true });
-    this.props.createPost(category, values, () => {
+    this.props.isFetching(true, 'PostRecipe');
+    this.props.createPost(category, values, (message) => {
       resetPage();
-      this.setState({ isLoading: false });
       this.props.history.push('/');
+      setTimeout(() => Materialize.toast(message, 4000, 'grey darken-2'), 3000);
     });
   }
 
@@ -178,8 +178,8 @@ class PostRecipe extends Component {
    * @returns {JSX} JSX
    */
   render() {
-    const { handleSubmit, invalid, values } = this.props;
-    const { isLoading } = this.state;
+    const { handleSubmit, invalid, values, isLoading } = this.props;
+    // const { isLoading } = this.state;
     return (
       <div className="container">
         <div className="row">
@@ -273,14 +273,17 @@ PostRecipe.propTypes = {
     ingredients: PropTypes.string,
     instructions: PropTypes.string
   }),
+  isFetching: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = ({ form }) => ({
+const mapStateToProps = ({ form, isLoading }) => ({
   values: form.PostRecipeForm.values,
-  errors: form.PostRecipeForm.syncErrors
+  errors: form.PostRecipeForm.syncErrors,
+  isLoading: isLoading.postRecipeIsLoading
 });
 
 export default reduxForm({
   validate,
   form: 'PostRecipeForm'
-})(connect(mapStateToProps, { createPost })(PostRecipe));
+})(connect(mapStateToProps, { createPost, isFetching })(PostRecipe));

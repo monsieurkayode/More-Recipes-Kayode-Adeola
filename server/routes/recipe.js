@@ -1,9 +1,5 @@
 /* jshint esversion: 6 */
 import express from 'express';
-import multer from 'multer';
-import jimp from 'jimp';
-import uuid from 'uuid';
-import isEmpty from 'lodash/isEmpty';
 import auth from '../middlewares/auth';
 import validate from '../middlewares/validateParams';
 import {
@@ -24,42 +20,16 @@ import {
   checkPermission
 } from '../middlewares/recipeValidation';
 import { validUser } from '../middlewares/userValidation';
+import { validateImage, uploadImage } from '../middlewares/uploadImage';
 
 const router = express.Router();
-const multerOptions = {
-  storage: multer.memoryStorage(),
-  fileFilter(req, file, next) {
-    if (!isEmpty(file)) {
-      const isPhoto = file.mimetype.startsWith('image/');
-      if (isPhoto) {
-        return next(null, true);
-      }
-      return next({ message: 'File type is invalid' }, false);
-    }
-    next();
-  }
-};
 
-const resize = (req, res, next) => {
-  if (!req.file) {
-    return next();
-  }
-
-  const extension = req.file.mimetype.split('/')[1];
-  req.body.image = `${uuid.v4()}.${extension}`;
-  jimp.read(req.file.buffer)
-    .then(photo => photo.resize(800, jimp.AUTO))
-    .then(photo => photo.write(`./client/assets/uploads/${req.body.image}`));
-  next();
-};
-
-const upload = multer(multerOptions).single('image');
 const baseUrl = '/api/v1/recipes';
 
 router.post(
   `${baseUrl}`,
-  auth, upload, validUser, recipeBasicValidation,
-  checkMultiplePost, resize, createRecipe
+  auth, validateImage, validUser, recipeBasicValidation,
+  checkMultiplePost, uploadImage, createRecipe
 );
 
 router.get(`${baseUrl}`,
@@ -70,8 +40,8 @@ router.get(`${baseUrl}`,
 router.get(`${baseUrl}/user`, auth, validUser, getUserRecipes);
 
 router.put(`${baseUrl}/:recipeId`,
-  auth, validate, upload, validUser, recipeExists,
-  checkPermission, resize, updateRecipe
+  auth, validate, validateImage, validUser, recipeExists,
+  checkPermission, uploadImage, updateRecipe
 );
 
 router.get(

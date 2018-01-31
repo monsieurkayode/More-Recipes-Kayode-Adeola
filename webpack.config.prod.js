@@ -1,20 +1,49 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './client/assets/index.html',
   filename: 'index.html',
   inject: 'body',
+  minify: {
+    collapseWhitespace: true,
+    collapseInlineTagWhitespace: true,
+    removeComments: true,
+    removeRedundantAttributes: true
+  }
+});
+
+const UglifyJsWebpackPluginConfig = new webpack.optimize.UglifyJsPlugin({
+  compress: {
+    warnings: false,
+    screw_ie8: true,
+    conditionals: true,
+    unused: true,
+    comparisons: true,
+    sequences: true,
+    dead_code: true,
+    evaluate: true,
+    if_return: true,
+    join_vars: true
+  },
+  output: {
+    comments: false
+  }
+});
+
+const HashedModuleIdsPluginConfig = new webpack.HashedModuleIdsPlugin({
+  hashFunction: 'sha256',
+  hashDigest: 'hex',
+  hashDigestLength: 20
 });
 
 module.exports = {
   devtool: 'source-map',
   entry: [
-    'babel-polyfill',
-    'webpack-hot-middleware/client?path=http://localhost:5000/__webpack_hmr?reload=true',
     path.join(__dirname, '/client/src/index.jsx')
   ],
   output: {
@@ -23,7 +52,7 @@ module.exports = {
     publicPath: '/'
   },
   externals: {
-    jquery: 'jQuery'
+    jquery: 'jQuery',
   },
   module: {
     rules: [
@@ -56,17 +85,32 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+    }),
     HtmlWebpackPluginConfig,
+    UglifyJsWebpackPluginConfig,
+    HashedModuleIdsPluginConfig,
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new ExtractTextPlugin({
       filename: 'css/style.css',
-      allChunks: false
+      allChunks: true
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
+    }),
+    new webpack.HashedModuleIdsPlugin({
+      hashFunction: 'sha256',
+      hashDigest: 'hex',
+      hashDigestLength: 20
+    }),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
+      threshold: 10240,
+      minRatio: 0.8
     }),
     new CopyWebpackPlugin([
       {
@@ -83,15 +127,6 @@ module.exports = {
       },
     ])
   ],
-  devServer: {
-    hot: true,
-    inline: true,
-    contentBase: './build',
-    historyApiFallback: true,
-    proxy: {
-      '/api/v1': 'http://localhost:5000'
-    },
-  },
   node: {
     net: 'empty',
     dns: 'empty',

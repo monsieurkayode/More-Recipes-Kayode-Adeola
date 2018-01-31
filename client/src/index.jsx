@@ -4,16 +4,13 @@ import { Provider } from 'react-redux';
 import decode from 'jwt-decode';
 import { BrowserRouter } from 'react-router-dom';
 
-import store from './store';
-import Routes from './routes';
-
-import '../assets/js/jquery-3.2.1';
 import '../assets/js/materialize';
 
 import '../assets/css/font-awesome.css';
-import '../assets/css/materialize.css';
 import '../assets/css/style.scss';
 
+import store from './store';
+import Routes from './routes';
 
 import actionTypes from './actions/actionTypes';
 import setAuthorizationToken from './utils/setAuthorizationToken';

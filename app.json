@@ -16,13 +16,19 @@
     "NPM_CONFIG_PRODUCTION": {
       "required": true
     },
-    "PASS": {
-      "required": true
-    },
     "secretKey": {
       "required": true
     },
-    "USER": {
+    "SENDGRID_API_KEY": {
+      "required": true
+    },
+    "CLOUD_NAME": {
+      "required": true
+    },
+    "CLOUDINARY_API_KEY": {
+      "required": true
+    },
+    "CLOUDINARY_API_SECRET": {
       "required": true
     }
   },

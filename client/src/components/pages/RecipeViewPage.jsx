@@ -135,7 +135,7 @@ class RecipeViewPage extends Component {
                 <div className="card-image">
                   <img
                     className="responsive-img"
-                    src={`/uploads/${currentRecipe.image}`}
+                    src={currentRecipe.image}
                     alt={currentRecipe.recipeName}
                   />
                   <span className="card-title">{currentRecipe.recipeName}</span>
@@ -153,7 +153,7 @@ class RecipeViewPage extends Component {
                     <div className="card-image">
                       <img
                         className="materialboxed"
-                        src={`/uploads/${currentRecipe.image}`}
+                        src={currentRecipe.image}
                         alt=""
                       />
                       <span className="card-title right">
@@ -200,6 +200,7 @@ class RecipeViewPage extends Component {
                     .map(index =>
                       this.renderReviews(index))
                 }
+                {!isEmpty(Object.keys(reviews)) &&
                 <div className="center-align">
                   <span
                     id="view-more"
@@ -207,7 +208,7 @@ class RecipeViewPage extends Component {
                   >
                     View more
                   </span>
-                </div>
+                </div>}
               </div>
             </div>
             <SideNav />
@@ -251,7 +252,16 @@ RecipeViewPage.propTypes = {
   fetchSingleFavorite: PropTypes.func.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   fetchReviews: PropTypes.func.isRequired,
-  reviews: PropTypes.shape({}).isRequired
+  reviews: PropTypes.shape({
+    id: PropTypes.number,
+    userId: PropTypes.number,
+    createdAt: PropTypes.string,
+    updatedAt: PropTypes.string,
+    comment: PropTypes.string,
+    User: PropTypes.shape({
+      username: PropTypes.string
+    })
+  })
 };
 
 const mapStateToProps = ({ currentRecipe, isFavorite, reviews }) => ({

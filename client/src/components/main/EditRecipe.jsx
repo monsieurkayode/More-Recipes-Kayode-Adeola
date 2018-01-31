@@ -5,7 +5,8 @@ import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'proptypes';
 
 import FileUpload from './FileUpload';
-import { editPost, fetchSingleRecipe } from '../../actions';
+import Loader from './Loader';
+import { editPost, fetchSingleRecipe, isFetching } from '../../actions';
 import validate from '../../utils/validateRecipe';
 import categories from '../../../../shared/categories';
 import pascalCase from '../../utils/pascalCase';
@@ -90,9 +91,10 @@ class EditRecipe extends Component {
   onSubmit = (values, category) => {
     const { recipeId } = this.props.match.params;
     category = this.state.selectedCategory;
+    this.props.isFetching(true, 'EditRecipe');
     this.props.editPost(recipeId, category, values, (message) => {
       this.props.history.goBack();
-      Materialize.toast(message, 4000, 'grey darken-2');
+      setTimeout(() => Materialize.toast(message, 4000, 'grey darken-2'), 3000);
     });
   }
 
@@ -202,77 +204,78 @@ class EditRecipe extends Component {
    * @returns {JSX} JSX
    */
   render() {
-    const { handleSubmit, invalid, initialValues } = this.props;
+    const { handleSubmit, invalid, initialValues, isLoading } = this.props;
     return (
       <div className="container">
         <div className="row">
-          <form
-            className="col l8 m8 s10 offset-s1 offset-m2 offset-l2"
-            onSubmit={handleSubmit(this.onSubmit)}
-          >
-            <Field
-              type="text"
-              className=""
-              placeholder="Enter recipe name"
-              label="Recipe Name"
-              name="recipeName"
-              component={this.renderInput}
-            />
-
-            <Field
-              name="category"
-              value={this.state.selectedCategory}
-              component={this.renderCategory}
-            />
-
-            <Field
-              type="text"
-              placeholder="Markdown supported"
-              className="materialize-textarea"
-              label="Ingredients"
-              name="ingredients"
-              component={this.renderTextArea}
-            />
-
-            <Field
-              type="text"
-              placeholder="Markdown supported"
-              className="materialize-textarea"
-              label="Intsructions"
-              name="instructions"
-              component={this.renderTextArea}
-            />
-            <div>
+          {isLoading ?
+            <Loader /> :
+            <form
+              className="col l8 m8 s10 offset-s1 offset-m2 offset-l2"
+              onSubmit={handleSubmit(this.onSubmit)}
+            >
               <Field
-                name="image"
-                component={FileUpload}
+                type="text"
+                className=""
+                placeholder="Enter recipe name"
+                label="Recipe Name"
+                name="recipeName"
+                component={this.renderInput}
               />
-              <span className="image-name">
-                <p>
-                  {!!initialValues.image && initialValues.image.name }
-                </p>
-              </span>
-            </div>
 
-            <div className="form-btn-control">
-              <button
-                className="btn red"
-                onClick={() => this.props.history.push('/dashboard/recipes')}
-              >
+              <Field
+                name="category"
+                value={this.state.selectedCategory}
+                component={this.renderCategory}
+              />
+
+              <Field
+                type="text"
+                placeholder="Markdown supported"
+                className="materialize-textarea"
+                label="Ingredients"
+                name="ingredients"
+                component={this.renderTextArea}
+              />
+
+              <Field
+                type="text"
+                placeholder="Markdown supported"
+                className="materialize-textarea"
+                label="Intsructions"
+                name="instructions"
+                component={this.renderTextArea}
+              />
+              <div>
+                <Field
+                  name="image"
+                  component={FileUpload}
+                />
+                <span className="image-name">
+                  <p>
+                    {!!initialValues.image && initialValues.image.name }
+                  </p>
+                </span>
+              </div>
+
+              <div className="form-btn-control">
+                <button
+                  className="btn red"
+                  onClick={() => this.props.history.push('/dashboard/recipes')}
+                >
                 Cancel
-              </button>
-              <button
-                disabled={invalid}
-                type="submit"
-                className="btn"
-              >
+                </button>
+                <button
+                  disabled={invalid}
+                  type="submit"
+                  className="btn"
+                >
                 Update
-              </button>
-            </div>
-          </form>
+                </button>
+              </div>
+            </form>}
         </div>
       </div>
-
     );
   }
 }
@@ -301,10 +304,12 @@ EditRecipe.propTypes = {
     params: PropTypes.shape({
       recipeId: PropTypes.string.isRequired
     }).isRequired
-  }).isRequired
+  }).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  isFetching: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ currentRecipe }) => ({
+const mapStateToProps = ({ currentRecipe, isLoading }) => ({
   initialValues: {
     recipeName: currentRecipe.recipeName,
     category: currentRecipe.category,
@@ -314,11 +319,12 @@ const mapStateToProps = ({ currentRecipe }) => ({
       file: 'empty',
       name: currentRecipe.image
     }
-  }
+  },
+  isLoading: isLoading.editRecipeIsLoading
 });
 
 export default compose(
-  connect(mapStateToProps, { editPost, fetchSingleRecipe }),
+  connect(mapStateToProps, { editPost, fetchSingleRecipe, isFetching }),
   reduxForm({
     validate,
     form: 'EditRecipeForm',
