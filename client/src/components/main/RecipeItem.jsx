@@ -17,7 +17,7 @@ const RecipeItem = ({ recipe, upvote, downvote, grid }) =>
       <div className="card-image">
         <Link to={`/recipes/${recipe.id}`}>
           <img
-            src={`../uploads/${recipe.image}`}
+            src={recipe.image}
             alt={recipe.recipeName}
           />
         </Link>

@@ -66,12 +66,13 @@ app.use(reviewRoute);
 app.use(favoriteRoute);
 app.use(voteRoute);
 
-app.use(webpackMiddleware(webpack(webpackConfig), {
-  noInfo: true,
-  publicPath: webpackConfig.output.publicPath
-}));
-
-app.use(webpackHotMiddleware(webpack(webpackConfig)));
+if (process.env.NODE_ENV !== 'production') {
+  app.use(webpackMiddleware(webpack(webpackConfig), {
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath
+  }));
+  app.use(webpackHotMiddleware(webpack(webpackConfig)));
+}
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../build/index.html'));

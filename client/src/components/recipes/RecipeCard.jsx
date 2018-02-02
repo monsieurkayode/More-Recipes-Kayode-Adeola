@@ -21,7 +21,7 @@ const RecipeCard = (props) => {
         <Link to={`/recipes/${recipe.id}`}>
           <img
             className="responsive-img"
-            src={`../uploads/${recipe.image}`}
+            src={recipe.image}
             alt=""
           />
         </Link>

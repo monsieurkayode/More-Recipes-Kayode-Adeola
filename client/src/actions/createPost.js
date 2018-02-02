@@ -20,16 +20,30 @@ const createPost = (category, values, callback) => (dispatch) => {
   formData.append('category', category || 'others');
   formData.append('ingredients', values.ingredients);
   formData.append('instructions', values.instructions);
-  formData.append('image', values.image ? values.image.file : 'spice.jpg');
+  formData.append(
+    'image',
+    values.image ?
+      values.image.file :
+      '../uploads/spice.jpg'
+  );
   return axios.post('/api/v1/recipes', formData)
     .then(({ data }) => {
+      const { message } = data;
       dispatch({ type: actionTypes.CREATE_POST, payload: data });
-      callback();
+      dispatch({
+        type: actionTypes.IS_FETCHING,
+        payload: { status: false, componentName: 'PostRecipe' }
+      });
+      callback(message);
     })
     .catch((error) => {
       const { message } = error.response.data;
       Materialize.toast(message, 4000, 'red');
       dispatch({ type: actionTypes.CREATE_POST_ERROR });
+      dispatch({
+        type: actionTypes.IS_FETCHING,
+        payload: { status: false, componentName: 'PostRecipe' }
+      });
     });
 };
 

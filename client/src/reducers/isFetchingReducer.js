@@ -5,6 +5,8 @@ const initialState = {
   dashBoardIsLoading: false,
   userRecipesIsLoading: false,
   userFavoritesIsLoading: false,
+  postRecipeIsLoading: false,
+  editRecipeIsLoading: false
 };
 
 /**
@@ -35,6 +37,18 @@ const isFetchingReducer = (state = initialState, action) => {
         return {
           ...state,
           userFavoritesIsLoading: action.payload.status,
+        };
+      }
+      if (action.payload.componentName === 'PostRecipe') {
+        return {
+          ...state,
+          postRecipeIsLoading: action.payload.status,
+        };
+      }
+      if (action.payload.componentName === 'EditRecipe') {
+        return {
+          ...state,
+          editRecipeIsLoading: action.payload.status,
         };
       }
       break;

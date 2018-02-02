@@ -31,6 +31,10 @@ const editPost = (recipeId, category, values, callback) => (dispatch) => {
     .then((response) => {
       const { message } = response.data;
       dispatch({ type: actionTypes.EDIT_RECIPE_POST });
+      dispatch({
+        type: actionTypes.IS_FETCHING,
+        payload: { status: false, componentName: 'EditRecipe' }
+      });
       callback(message);
     })
     .catch(() => {
@@ -38,6 +42,10 @@ const editPost = (recipeId, category, values, callback) => (dispatch) => {
       Materialize.toast(message, 4000, 'red');
       dispatch({
         type: actionTypes.EDIT_RECIPE_POST_ERROR
+      });
+      dispatch({
+        type: actionTypes.IS_FETCHING,
+        payload: { status: false, componentName: 'EditRecipe' }
       });
     });
 };

@@ -1,3 +1,5 @@
+@import '../../../node_modules/materialize-css/sass/materialize.scss';
+
 html, body {
   height: 100%;
   overflow-x: hidden;
@@ -607,8 +609,9 @@ textarea {
   ul {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-self: center;
+    flex-shrink: 1;
     li {
       padding: 10px;
       div {
@@ -618,8 +621,17 @@ textarea {
         height: 60px;
         border-radius: 50%;
         border: 3px solid teal;
+        transition: all;
+        transition-duration: 1s;
+        transition-timing-function: linear;
         span {
           margin: auto
+        }
+      }
+      @media only screen and (max-width: 320px) {
+        div {
+          width: 50px;
+          height: 50px;
         }
       }
     }
