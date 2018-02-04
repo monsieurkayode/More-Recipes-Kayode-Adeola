@@ -17,11 +17,11 @@ import pascalCase from '../../utils/pascalCase';
 class Category extends Component {
   /**
    * Component constructor
-   * @param {void} void
+   * @param {object} props
    * @memberOf Category
    */
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       searchType: '',
       searchTerm: ''
@@ -36,9 +36,7 @@ class Category extends Component {
    * @returns {void}
    */
   componentDidMount() {
-    // eslint-disable-next-line
-    $((this.search))
-      .on('change', this.handleSearchType);
+    $((this.search)).on('change', this.handleSearchType);
   }
 
   /**

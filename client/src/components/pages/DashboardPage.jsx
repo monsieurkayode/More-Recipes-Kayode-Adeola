@@ -22,6 +22,7 @@ import {
 } from '../dashboard';
 import DeleteModal from '../modals';
 import { Loader } from '../main';
+import materializeJavascript from '../../utils/materializeJavascript';
 
 /**
  * @summary - DashboardPage class declaration
@@ -30,13 +31,13 @@ import { Loader } from '../main';
  */
 class DashboardPage extends Component {
   /**
-   * @method componentWillMount
+   * @method componentDidMount
    *
    * @param {void} void
    *
    * @returns {void}
    */
-  componentWillMount() {
+  componentDidMount() {
     const currentPage = localStorage.getItem('currentPageUserRecipes');
     const currentPageFav = localStorage.getItem('currentPageUserFavorites');
     this.props.isFetching(true, 'Dashboard');
@@ -52,10 +53,7 @@ class DashboardPage extends Component {
    * @returns {void}
    */
   componentDidUpdate() {
-    $('.dropdown-button').dropdown();
-    $('.button-collapse').sideNav();
-    $('#modal-delete').modal();
-    $('#modal-edit').modal();
+    materializeJavascript();
   }
 
   /**

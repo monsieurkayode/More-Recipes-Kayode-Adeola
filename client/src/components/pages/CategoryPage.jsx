@@ -14,6 +14,7 @@ import {
 import { HomeNavbar, Banner } from '../headers';
 import { RecipeItem, Loader, SideNav } from '../main';
 import Footer from '../footer';
+import materializeJavascript from '../../utils/materializeJavascript';
 import categories from '../../../../shared/categories';
 import pascalCase from '../../utils/pascalCase';
 import resetPage from '../../utils/resetPage';
@@ -30,7 +31,15 @@ class CategoryPage extends Component {
       changeSmiley: false
     };
   }
-  componentWillMount() {
+
+  /**
+   * @method componentDidMount
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
+  componentDidMount() {
     const { categoryName } = this.props.match.params;
     const { limit } = this.state;
     const currentPage = localStorage.getItem('currentCategoryPage');
@@ -46,8 +55,9 @@ class CategoryPage extends Component {
    * @returns {void}
    */
   componentDidUpdate() {
-    $('.dropdown-button').dropdown();
-    $('.button-collapse').sideNav();
+    materializeJavascript();
+    // $('.dropdown-button').dropdown();
+    // $('.button-collapse').sideNav();
   }
 
   onClick = () => {

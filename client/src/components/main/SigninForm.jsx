@@ -25,6 +25,13 @@ class SigninForm extends Component {
     };
   }
 
+  /**
+   * @method componentWillMount
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentWillMount() {
     if (this.props.isAuthenticated) {
       this.props.history.goBack();

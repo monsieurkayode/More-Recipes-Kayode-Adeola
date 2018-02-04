@@ -4,6 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './client/assets/index.html',
@@ -17,21 +18,19 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   }
 });
 
-const UglifyJsWebpackPluginConfig = new webpack.optimize.UglifyJsPlugin({
-  compress: {
-    warnings: false,
-    screw_ie8: true,
-    conditionals: true,
-    unused: true,
-    comparisons: true,
-    sequences: true,
-    dead_code: true,
-    evaluate: true,
-    if_return: true,
-    join_vars: true
-  },
-  output: {
-    comments: false
+const UglifyJsWebpackPluginConfig = new UglifyJsPlugin({
+  uglifyOptions: {
+    sourceMap: true,
+    ie8: false,
+    parallel: true,
+    compress: {
+      drop_console: true,
+      passes: 2
+    },
+    output: {
+      comments: false,
+      beautify: false
+    }
   }
 });
 
@@ -91,6 +90,7 @@ module.exports = {
     HtmlWebpackPluginConfig,
     UglifyJsWebpackPluginConfig,
     HashedModuleIdsPluginConfig,
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new ExtractTextPlugin({
       filename: 'css/style.css',
@@ -111,6 +111,9 @@ module.exports = {
       test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
       threshold: 10240,
       minRatio: 0.8
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
     }),
     new CopyWebpackPlugin([
       {

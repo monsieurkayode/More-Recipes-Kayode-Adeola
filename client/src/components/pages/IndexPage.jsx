@@ -8,9 +8,17 @@ import {
   fetchTopRecipes,
 } from '../../actions';
 import { LandingNavbar, HomeNavbar, Banner } from '../headers';
-import { Contents, WelcomeMessage, SideNav, Loader } from '../main';
+import {
+  Category,
+  Recipes,
+  TopRecipes,
+  WelcomeMessage,
+  SideNav,
+  Loader
+} from '../main';
 import Footer from '../footer';
 import Homepage from './Homepage';
+import materializeJavascript from '../../utils/materializeJavascript';
 
 /**
  * @summary - IndexPage class declaration
@@ -23,15 +31,15 @@ class IndexPage extends Component {
    * @param {object} props
    * @memberOf IndexPage
    */
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       isLoading: true
     };
   }
 
   /**
-   * @method componentWillMount
+   * @method componentDidMount
    *
    * @param {void} void
    *
@@ -56,10 +64,7 @@ class IndexPage extends Component {
    * @returns {void}
    */
   componentDidUpdate() {
-    $('select').material_select();
-    $('.dropdown-button').dropdown();
-    $('.button-collapse').sideNav();
-    $('.collapsible').collapsible();
+    materializeJavascript();
   }
 
   /**
@@ -82,7 +87,11 @@ class IndexPage extends Component {
                   <HomeNavbar {...this.props} /> : <LandingNavbar /> }
                 <Banner />
                 <WelcomeMessage />
-                <Contents />
+                <div className="row">
+                  <Category />
+                  <Recipes />
+                  <TopRecipes />
+                </div>
                 <Footer />
                 <SideNav />
               </div>}

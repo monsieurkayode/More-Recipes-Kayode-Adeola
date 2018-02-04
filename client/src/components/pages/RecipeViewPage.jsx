@@ -42,23 +42,6 @@ class RecipeViewPage extends Component {
   }
 
   /**
-   * @method componentWillMount
-   *
-   * @param {void} void
-   *
-   * @returns {void}
-   */
-  componentWillMount() {
-    const { recipeId } = this.props.match.params;
-    this.props.fetchSingleRecipe(recipeId)
-      .then(() => this.setState({
-        isLoading: false
-      }));
-    this.props.fetchSingleFavorite(recipeId);
-    this.props.fetchReviews(recipeId);
-  }
-
-  /**
    * @method componentDidMount
    *
    * @param {void} void
@@ -66,6 +49,13 @@ class RecipeViewPage extends Component {
    * @returns {void}
    */
   componentDidMount() {
+    const { recipeId } = this.props.match.params;
+    this.props.fetchSingleRecipe(recipeId)
+      .then(() => this.setState({
+        isLoading: false
+      }));
+    this.props.fetchSingleFavorite(recipeId);
+    this.props.fetchReviews(recipeId);
     window.scroll(0, 0);
   }
 

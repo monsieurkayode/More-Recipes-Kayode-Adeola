@@ -19,26 +19,14 @@ import pascalCase from '../../utils/pascalCase';
 class EditRecipe extends Component {
   /**
    * Component constructor
-   * @param {void} void
+   * @param {object} props
    * @memberOf EditRecipe
    */
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       selectedCategory: '',
     };
-  }
-
-  /**
-   * @method componentWillMount
-   *
-   * @param {void} void
-   *
-   * @returns {void}
-   */
-  componentWillMount() {
-    const { recipeId } = this.props.match.params;
-    this.props.fetchSingleRecipe(recipeId);
   }
 
   /**
@@ -49,7 +37,9 @@ class EditRecipe extends Component {
    * @returns {void}
    */
   componentDidMount() {
+    const { recipeId } = this.props.match.params;
     $(('#category')).on('change', this.handleCategory);
+    this.props.fetchSingleRecipe(recipeId);
   }
 
   /**

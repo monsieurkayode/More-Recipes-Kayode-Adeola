@@ -577,6 +577,13 @@ textarea {
   margin: auto auto;
 }
 
+@media only screen and (max-width: 420px) {
+  #modal-delete {
+    max-width: 80%;
+    margin: auto auto;
+  }
+}
+
 .pagination-container {
   display: flex;
   text-align: center;

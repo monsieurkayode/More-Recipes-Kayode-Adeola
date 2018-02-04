@@ -1,3 +1,4 @@
+// TODO change chai expect to expect assertion library
 import { expect } from 'chai';
 import cleanString from '../../shared/cleanString';
 import isEmail from '../../shared/isEmail';

@@ -9,27 +9,24 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
  *
  * @function signupAction
  *
- * @param {object} user
+ * @param {object} userDetails
  * @param {function} callback
  *
  * @returns {void}
  */
-const signupAction = (user, callback) => dispatch =>
-  axios.post('/api/v1/users/signup', user)
+const signupAction = userDetails => dispatch =>
+  axios.post('/api/v1/users/signup', userDetails)
     .then((response) => {
-      if (response.status === 201) {
-        const { token } = response.data;
-        localStorage.setItem('token', token);
-        setAuthorizationToken(token);
-        user = decode(token).user;
-        Materialize
-          .toast(`Welcome ${user.username}`, 4000, 'grey darken-2');
-        dispatch({ type: actionTypes.SIGNUP_SUCCESSFUL, payload: user });
-      }
-      callback();
+      const { token } = response.data;
+      localStorage.setItem('token', token);
+      setAuthorizationToken(token);
+      const user = decode(token).user;
+      Materialize
+        .toast(`Welcome ${user.username}`, 4000, 'grey darken-2');
+      dispatch({ type: actionTypes.SIGNUP_SUCCESSFUL, payload: user });
     })
     .catch((error) => {
-      if (error.response && error.response.status >= 400) {
+      if (error.response && error.response.status === 409) {
         const { message } = error.response.data;
         const userExists = 'Username already exists';
         const emailExists = 'Email already exists';
