@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'proptypes';
-import moment from 'moment';
 import { Link } from 'react-router-dom';
-
+import { formatTime } from '../../utils/timeFormat';
 /**
  * RecipeCard
  * @function RecipeCard
@@ -14,7 +13,8 @@ import { Link } from 'react-router-dom';
 const RecipeCard = (props) => {
   const { recipe, selected, selectRecipe } = props;
   let time = recipe.createdAt;
-  time = moment.utc(recipe.createdAt).format('MMMM DD h:mm a');
+  // time = moment.utc(recipe.createdAt).format('MMMM DD h:mm a');
+  time = formatTime(time, 'MMMM DD h:mm a');
   return (
     <div>
       <div className="card-image">

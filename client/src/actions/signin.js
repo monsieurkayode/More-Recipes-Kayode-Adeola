@@ -17,15 +17,13 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
 const signinAction = user => dispatch =>
   axios.post('/api/v1/users/signin', user)
     .then((response) => {
-      if (response.status === 200) {
-        const { Token } = response.data;
-        localStorage.setItem('token', Token);
-        setAuthorizationToken(Token);
-        user = decode(Token).user;
-        Materialize
-          .toast(`Welcome ${user.username}`, 4000, 'grey darken-2');
-        dispatch({ type: actionTypes.SIGNIN_SUCCESSFUL, payload: user });
-      }
+      const { Token } = response.data;
+      localStorage.setItem('token', Token);
+      setAuthorizationToken(Token);
+      user = decode(Token).user;
+      Materialize
+        .toast(`Welcome ${user.username}`, 4000, 'grey darken-2');
+      dispatch({ type: actionTypes.SIGNIN_SUCCESSFUL, payload: user });
     })
     .catch((error) => {
       if (error.response && error.response.status >= 401) {

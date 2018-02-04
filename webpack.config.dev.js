@@ -91,6 +91,7 @@ module.exports = {
     proxy: {
       '/api/v1': 'http://localhost:5000'
     },
+    stats: 'errors-only',
   },
   node: {
     net: 'empty',

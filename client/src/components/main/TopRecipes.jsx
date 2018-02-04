@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'proptypes';
 
-import { TopRecipeItem } from './';
+import TopRecipeItem from './TopRecipeItem';
 
 /**
  * @summary - TopRecipes class declaration

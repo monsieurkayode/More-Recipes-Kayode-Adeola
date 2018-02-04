@@ -9,7 +9,9 @@
     "node": true,
     "es6": true,
     "mocha": true,
-    "jest": true
+    "jest": true,
+    "browser": true,
+    "jquery": true
   },
   "parserOptions": {
     "ecmaVersion": 6,

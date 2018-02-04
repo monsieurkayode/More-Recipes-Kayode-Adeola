@@ -1,6 +1,5 @@
 /* jshint esversion: 6 */
 import Category from './Category';
-import Contents from './Contents';
 import Recipes from './Recipes';
 import RecipeItem from './RecipeItem';
 import TopRecipeItem from './TopRecipeItem';
@@ -16,7 +15,6 @@ import Loader from './Loader';
 
 export {
   Category,
-  Contents,
   Recipes,
   RecipeItem,
   TopRecipeItem,

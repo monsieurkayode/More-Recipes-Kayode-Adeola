@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'proptypes';
-import moment from 'moment';
 import Avatar from 'react-avatar';
+import { formatTimeFromNow } from '../../utils/timeFormat';
 
 import pascalCase from '../../utils/pascalCase';
 
 const Comments = ({ review }) => {
   let time = review.createdAt;
-  time = moment.utc(new Date(time)).fromNow();
+  time = formatTimeFromNow(time);
   return (
     <div className="review-container z-depth-2">
       <div className="review-body">

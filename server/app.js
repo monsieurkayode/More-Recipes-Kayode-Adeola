@@ -26,7 +26,6 @@ const userRoute = router.user,
 
 const app = express();
 
-app.use(logger('dev'));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -67,6 +66,7 @@ app.use(favoriteRoute);
 app.use(voteRoute);
 
 if (process.env.NODE_ENV !== 'production') {
+  app.use(logger('dev'));
   app.use(webpackMiddleware(webpack(webpackConfig), {
     noInfo: true,
     publicPath: webpackConfig.output.publicPath

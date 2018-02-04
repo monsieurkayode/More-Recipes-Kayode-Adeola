@@ -28,6 +28,13 @@ class SignupForm extends Component {
     };
   }
 
+  /**
+   * @method componentWillMount
+   *
+   * @param {void} void
+   *
+   * @returns {void}
+   */
   componentWillMount() {
     if (this.props.isAuthenticated) {
       this.props.history.goBack();
@@ -76,9 +83,8 @@ class SignupForm extends Component {
     const user = { ...this.state };
     if (this.isValid()) {
       this.setState({ errors: {} });
-      this.props.signupAction(user, () => {
-        this.props.history.push('/dashboard/profile');
-      });
+      this.props.signupAction(user)
+        .then(() => this.props.history.push('/dashboard/profile'));
     }
   }
 
