@@ -28,7 +28,7 @@ const addFavorite = (req, res) => Favorite
     status: 'success',
     message: 'Recipe successfully added to favorites'
   }))
-  .catch(error => res.status(400).send(error));
+  .catch(() => errorHandler(500, 'An error occured!', res));
 
 /**
  * @description controller function to get a user favorite recipes
@@ -66,7 +66,7 @@ const getUserFavorites = (req, res, next) => {
         favorites
       ));
     })
-    .catch(error => res.status(400).send(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 const getOneUserFavorite = (req, res) => Favorite
@@ -87,7 +87,7 @@ const getOneUserFavorite = (req, res) => Favorite
       favorite
     });
   })
-  .catch(error => res.status(400).json(error));
+  .catch(() => errorHandler(500, 'An error occured!', res));
 
 /**
  * @description controller function to delete a user favorite recipe
@@ -107,7 +107,7 @@ const deleteFavorite = (req, res) => {
         status: 'success',
         message: 'Recipe successfully removed from favorites'
       })))
-    .catch(error => res.status(400).send(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 /**
@@ -141,7 +141,7 @@ const addRecipeCategory = (req, res) => Favorite
         });
       });
   })
-  .catch(error => res.status(400).send(error));
+  .catch(() => errorHandler(500, 'An error occured!', res));
 
 export {
   addFavorite,

@@ -8,7 +8,7 @@ const uploadImage = (req, res, next) => {
     return next();
   }
   if (req.file && req.file.size > 1200000) {
-    return res.status(400).send({
+    return res.status(413).send({
       status: 'fail',
       message: 'Image too large, you can upload files up to 1MB'
     });

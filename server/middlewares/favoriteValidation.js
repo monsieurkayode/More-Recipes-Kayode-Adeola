@@ -22,7 +22,7 @@ const validRecipe = (req, res, next) => {
         404, 'Recipe not found', res
       );
     })
-    .catch(error => res.status(400).send(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 /**
@@ -48,7 +48,7 @@ const favoriteExists = (req, res, next) => {
       }
       next();
     })
-    .catch(error => res.status(400).send(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 const isValidFavorite = (req, res, next) => {
@@ -65,6 +65,6 @@ const isValidFavorite = (req, res, next) => {
       }
       next();
     })
-    .catch(error => res.status(400).send(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 export { validRecipe, favoriteExists, isValidFavorite };

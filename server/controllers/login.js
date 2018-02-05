@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { errorHandler } from '../helpers/responseHandler';
 
 import db from '../models/index';
 
@@ -44,7 +45,7 @@ const signin = (req, res) => User
       });
     }
   })
-  .catch(error => res.status(400).send(error));
+  .catch(() => errorHandler(500, 'An error occured!', res));
 
 /**
  *@export signin

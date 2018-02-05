@@ -43,6 +43,14 @@ const signinReducer = (state = initialState, action) => {
         isAuthenticated: false,
         user: {}
       };
+    case actionTypes.SIGNIN_AUTHENTICATION_ERROR:
+      return {
+        ...state,
+        success: false,
+        message: action.payload,
+        isAuthenticated: false,
+        user: {}
+      };
     case actionTypes.SIGNUP_SUCCESSFUL:
       return {
         ...state,

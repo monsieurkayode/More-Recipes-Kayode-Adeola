@@ -25,7 +25,7 @@ const auth = (req, res, next) => {
           );
         }
         return errorHandler(
-          403, 'Bad Token', res
+          422, 'Bad Token', res
         );
       }
       req.decoded = decoded;

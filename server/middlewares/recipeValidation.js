@@ -67,7 +67,7 @@ const recipeExists = (req, res, next) => {
       }
       next();
     })
-    .catch(error => res.status(400).send(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 const checkPermission = (req, res, next) => {
@@ -85,7 +85,7 @@ const checkPermission = (req, res, next) => {
       }
       next();
     })
-    .catch(error => res.status(400).send(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 const checkMultiplePost = (req, res, next) => {
@@ -100,7 +100,7 @@ const checkMultiplePost = (req, res, next) => {
       if (!recipes) return next();
       return errorHandler(409, 'You have already created post', res);
     })
-    .catch(error => res.status(400).json(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 export {

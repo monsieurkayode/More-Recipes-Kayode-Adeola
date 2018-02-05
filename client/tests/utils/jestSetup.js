@@ -55,7 +55,6 @@ global.mount = mount;
 global.mock = mock;
 global.mockStore = mockStore;
 global.localStorage = new LocalStorage();
-global.Materialize = window;
 global.decode = decode;
 global.expect = expect;
 global.document = document;

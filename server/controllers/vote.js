@@ -1,5 +1,6 @@
 // Import module dependencies
 import db from '../models/index';
+import { errorHandler } from '../helpers/responseHandler';
 
 // Reference database models
 const Recipe = db.Recipe;
@@ -69,7 +70,7 @@ const upvote = (req, res) => Vote
         });
     }
   })
-  .catch(error => res.status(400).send(error));
+  .catch(() => errorHandler(500, 'An error occured!', res));
 
 /**
  *
@@ -135,6 +136,6 @@ const downvote = (req, res) => Vote
         });
     }
   })
-  .catch(error => res.status(400).send(error));
+  .catch(() => errorHandler(500, 'An error occured!', res));
 
 export { upvote, downvote };

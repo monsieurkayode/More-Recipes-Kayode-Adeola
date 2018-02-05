@@ -20,6 +20,15 @@ const upvoteAction = recipeId => dispatch =>
         type: actionTypes.UPVOTE_POST,
         payload: { upvote, downvote, recipeId }
       });
+    })
+    .catch(() => {
+      const message = 'An error occured!';
+      Materialize.toast(message, 4000, 'red');
+      dispatch(
+        {
+          type: actionTypes.UPVOTE_POST_ERROR
+        }
+      );
     });
 
 export default upvoteAction;
