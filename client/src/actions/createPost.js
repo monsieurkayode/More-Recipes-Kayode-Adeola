@@ -16,16 +16,19 @@ import actionTypes from './actionTypes';
  */
 const createPost = (category, values, callback) => (dispatch) => {
   const formData = new FormData(); // eslint-disable-line
-  formData.append('recipeName', values.recipeName);
-  formData.append('category', category || 'others');
-  formData.append('ingredients', values.ingredients);
-  formData.append('instructions', values.instructions);
+  const { recipeName, ingredients, instructions } = values;
+
+  formData.append('recipeName', recipeName);
+  formData.append('category', category);
+  formData.append('ingredients', ingredients);
+  formData.append('instructions', instructions);
   formData.append(
     'image',
     values.image ?
       values.image.file :
       '../uploads/spice.jpg'
   );
+
   return axios.post('/api/v1/recipes', formData)
     .then(({ data }) => {
       const { message } = data;
@@ -36,8 +39,8 @@ const createPost = (category, values, callback) => (dispatch) => {
       });
       callback(message);
     })
-    .catch((error) => {
-      const { message } = error.response.data;
+    .catch(() => {
+      const message = 'An error occured!';
       Materialize.toast(message, 4000, 'red');
       dispatch({ type: actionTypes.CREATE_POST_ERROR });
       dispatch({

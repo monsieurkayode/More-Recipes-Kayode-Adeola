@@ -19,8 +19,8 @@ const addFavoriteAction = recipeId => dispatch =>
       Materialize.toast(message, 4000, 'grey darken-2');
       dispatch({ type: actionTypes.ADD_FAVORITE_POST });
     })
-    .catch((error) => {
-      const { message } = error.response.data;
+    .catch(() => {
+      const message = 'An error occured!';
       Materialize.toast(message, 4000, 'red');
       dispatch({ type: actionTypes.ADD_FAVORITE_ERROR });
     });

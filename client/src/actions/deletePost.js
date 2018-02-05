@@ -24,6 +24,9 @@ const deletePost = recipeId => dispatch =>
     })
     .catch(() => {
       Materialize.toast('An error occured!', 4000, 'red');
+      dispatch({
+        type: actionTypes.DELETE_RECIPE_POST_ERROR,
+      });
     });
 
 export default deletePost;

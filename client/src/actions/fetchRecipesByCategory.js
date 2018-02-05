@@ -32,7 +32,7 @@ const fetchRecipesByCategory = (page, limit, query) => dispatch =>
       );
     })
     .catch((error) => {
-      // const { message } = error.response.data;
+      const { message } = error.response.data;
       if (error.response.status === 404) {
         dispatch(
           {
@@ -40,6 +40,13 @@ const fetchRecipesByCategory = (page, limit, query) => dispatch =>
             payload: {}
           }
         );
+      }
+      if (error.response.status >= 500) {
+        Materialize.toast(message, 4000, 'red');
+        dispatch({
+          type: actionTypes.FETCH_RECIPES_BY_CATEGORY_ERROR,
+          payload: {}
+        });
       }
     });
 

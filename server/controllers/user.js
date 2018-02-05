@@ -39,7 +39,7 @@ const signup = (req, res) => User
       token
     });
   })
-  .catch(error => res.status(400).send(error));
+  .catch(() => errorHandler(500, 'An error occured!', res));
 
 /**
  * @description controller function that handles changing user password
@@ -71,6 +71,6 @@ const changePassword = (req, res) => User
       message: 'Your request could not be authorized'
     });
   })
-  .catch(error => res.status(400).send(error));
+  .catch(() => errorHandler(500, 'An error occured!', res));
 
 export { signup, changePassword };

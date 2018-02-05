@@ -58,13 +58,14 @@ class PostRecipe extends Component {
    *
    * @method onSubmit
    *
-   * @param {object} values
+   * @param {void} void
    *
    * @returns {void}
    */
-  onSubmit = (values) => {
+  onSubmit = () => {
     const category = this.state.selectedCategory;
     this.props.isFetching(true, 'PostRecipe');
+    const values = this.props.values;
     this.props.createPost(category, values, (message) => {
       resetPage();
       this.props.history.push('/');
@@ -179,7 +180,6 @@ class PostRecipe extends Component {
    */
   render() {
     const { handleSubmit, invalid, values, isLoading } = this.props;
-    // const { isLoading } = this.state;
     return (
       <div className="container">
         <div className="row">

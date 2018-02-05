@@ -19,6 +19,15 @@ const downvoteAction = recipeId => dispatch =>
       dispatch({ type: actionTypes.DOWNVOTE_POST,
         payload: { upvote, downvote, recipeId }
       });
+    })
+    .catch(() => {
+      const message = 'An error occured!';
+      Materialize.toast(message, 4000, 'red');
+      dispatch(
+        {
+          type: actionTypes.DOWNVOTE_POST_ERROR
+        }
+      );
     });
 
 export default downvoteAction;

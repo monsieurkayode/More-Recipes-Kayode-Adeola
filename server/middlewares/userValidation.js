@@ -71,7 +71,7 @@ const validateUsername = (req, res, next) => {
         );
       }
     })
-    .catch(error => res.status(400).send(error));
+    .catch(error => res.status(500).send(error));
 };
 
 /**
@@ -94,7 +94,7 @@ const emailValidation = (req, res, next) => {
         );
       }
     })
-    .catch(error => res.status(400).send(error));
+    .catch(error => res.status(500).send(error));
 };
 
 /**
@@ -117,7 +117,8 @@ const validUser = (req, res, next) => {
         );
       }
       next();
-    });
+    })
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 /**
@@ -152,7 +153,8 @@ const trimSpaces = (req, res, next) => {
   req.body.username = req.body.username ? cleanString(req.body.username) : '';
   req.body.email = req.body.email ? cleanString(req.body.email) : '';
   req.body.password = req.body.password ? cleanString(req.body.password) : '';
-  req.body.confirmPassword = req.body.confirmPassword ? cleanString(req.body.confirmPassword) : '';
+  req.body.confirmPassword = req.body.confirmPassword ?
+    cleanString(req.body.confirmPassword) : '';
   next();
 };
 

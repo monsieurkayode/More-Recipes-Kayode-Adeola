@@ -32,7 +32,7 @@ const reviewExists = (req, res, next) => {
       }
       next();
     })
-    .catch(error => res.status(400).send(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 export { validateComment, reviewExists };

@@ -25,6 +25,9 @@ const removeFavorite = recipeId => dispatch =>
     })
     .catch(() => {
       Materialize.toast('An error occured!', 4000, 'red');
+      dispatch({
+        type: actionTypes.REMOVE_FAVORITE_ERROR
+      });
     });
 
 export default removeFavorite;

@@ -14,13 +14,21 @@ const fetchSingleRecipe = recipeId => dispatch =>
   axios.get(`/api/v1/recipes/${recipeId}`)
     .then((response) => {
       const payload = response.data;
-      dispatch({ type: actionTypes.FETCH_SINGLE_RECIPE, payload });
+      dispatch(
+        {
+          type: actionTypes.FETCH_SINGLE_RECIPE,
+          payload
+        }
+      );
     })
     .catch((error) => {
       if (error.response.status === 403) {
+        dispatch({ type: actionTypes.FETCH_SINGLE_RECIPE_ERROR });
         return Materialize.toast('You are not logged in', 4000, 'red');
       }
-      window.location.replace('/error?no-resource');
+      if (process.env.NODE_ENV !== 'test') {
+        window.location.replace('/error?info=resource-not-found');
+      }
       dispatch({ type: actionTypes.FETCH_SINGLE_RECIPE_ERROR });
     });
 

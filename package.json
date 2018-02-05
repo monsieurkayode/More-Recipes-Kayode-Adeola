@@ -21,7 +21,7 @@
     "test:server": "NODE_ENV=test mocha --reporter progress --timeout 10000 --compilers js:babel-core/register server/test/index.test.js",
     "test": "NODE_ENV=test nyc _mocha --report lcovonly --reporter spec --timeout 20000 server/test/index.test.js && cat ./coverage/lcov.info | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "test:client": "jest /client --coverage",
+    "test:client": "jest /client",
     "test:watch": "npm run test:client -- --watch"
   },
   "repository": {
@@ -101,6 +101,7 @@
     "expect": "^22.1.0",
     "jest": "^22.1.4",
     "jsdom": "^11.6.2",
+    "npm-run-all": "^4.1.2",
     "nyc": "^11.1.0",
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^16.2.0",

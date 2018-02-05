@@ -341,7 +341,7 @@ describe('Registered User Authentication', () => {
       .type('form')
       .send(nullForm[0])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(400);
+        expect(res.statusCode).to.equal(500);
         if (err) return done(err);
         done();
       });
@@ -368,7 +368,7 @@ describe('Token Authentication', () => {
       .set('Content-Type', 'application/json')
       .set('x-access-token', 'yturuueiiwiwjh')
       .end((err, res) => {
-        expect(res.statusCode).to.equal(403);
+        expect(res.statusCode).to.equal(422);
         expect(res.body.message).to.equal('Bad Token');
         if (err) return done(err);
         done();

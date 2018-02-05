@@ -14,7 +14,6 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
  *
  * @param {number} page - selected page number, default is 1
  * @param {number} limit - recipes fetched limit
- * @param {object} query - the query object
  *
  * @returns {void}
  */
@@ -25,7 +24,12 @@ const fetchRecipesAction = (page, limit) => dispatch =>
     )
     .then((response) => {
       const payload = response.data;
-      dispatch({ type: actionTypes.FETCH_RECIPES, payload });
+      dispatch(
+        {
+          type: actionTypes.FETCH_RECIPES,
+          payload
+        }
+      );
     })
     .catch((error) => {
       const { message } = error.response.data;
@@ -42,6 +46,13 @@ const fetchRecipesAction = (page, limit) => dispatch =>
         const user = {};
         dispatch({ type: actionTypes.SESSION_EXPIRED });
         dispatch({ type: actionTypes.LOGOUT_USER, payload: user });
+      }
+      if (error.response.status >= 500) {
+        const errorMsg = 'An error occured!';
+        Materialize.toast(errorMsg, 4000, 'red');
+        dispatch({
+          type: actionTypes.FETCH_RECIPES_ERROR
+        });
       }
     });
 

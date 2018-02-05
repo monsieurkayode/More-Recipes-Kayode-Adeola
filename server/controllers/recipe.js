@@ -36,7 +36,7 @@ const createRecipe = (req, res) => Recipe
     ]
   })
   .then(recipe => recipeHandler(201, recipe, res))
-  .catch(error => res.status(400).json(error));
+  .catch(() => errorHandler(500, 'An error occured!', res));
 
 /**
  * @description controller function that handles modification posted recipes
@@ -61,7 +61,7 @@ const updateRecipe = (req, res) => Recipe
     .then(() => {
       recipeHandler(200, recipe, res);
     }))
-  .catch(error => res.status(400).json(error));
+  .catch(() => errorHandler(500, 'An error occured!', res));
 
 /**
  * @description controller function that handles deletion of posted recipes
@@ -84,7 +84,7 @@ const deleteRecipe = (req, res) => Recipe
         message: 'Recipe successfully deleted'
       });
     }))
-  .catch(error => res.status(400).json(error));
+  .catch(() => errorHandler(500, 'An error occured!', res));
 
 /**
  * @description controller function that handles getting posted recipes
@@ -121,7 +121,7 @@ const getRecipes = (req, res, next) => {
         200, res, paginate, page, limit, status, message, recipes
       );
     })
-    .catch(error => res.status(400).send(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 /**
@@ -152,7 +152,7 @@ const getUserRecipes = (req, res) => {
         200, res, paginate, page, limit, status, message, recipes
       );
     })
-    .catch(error => res.status(400).json(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 /**
@@ -190,7 +190,7 @@ const viewRecipe = (req, res) => Recipe
         }));
     }
   })
-  .catch(error => res.status(400).send(error));
+  .catch(() => errorHandler(500, 'An error occured!', res));
 
 /**
  * @description controller function that handles getting top recipes
@@ -224,7 +224,7 @@ const getTopRecipes = (req, res, next) => {
         recipes
       });
     })
-    .catch(error => res.status(400).json(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 /**
@@ -268,7 +268,7 @@ const searchRecipesByIngredients = (req, res, next) => {
         200, res, paginate, page, limit, status, message, recipes
       );
     })
-    .catch(error => res.status(400).send(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 /**
@@ -308,7 +308,7 @@ const searchRecipesByCategory = (req, res, next) => {
         200, res, paginate, page, limit, status, message, recipes
       );
     })
-    .catch(error => res.status(400).send(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 /**
@@ -347,7 +347,7 @@ const searchRecipesByName = (req, res) => {
         200, res, paginate, page, limit, status, message, recipes
       );
     })
-    .catch(error => res.status(400).send(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 /**
@@ -392,7 +392,7 @@ const searchUserFavsByCategory = (req, res) => {
         200, res, paginate, page, limit, status, message, recipes
       );
     })
-    .catch(error => res.status(400).send(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 export {

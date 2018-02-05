@@ -1,5 +1,6 @@
 import db from '../models/index';
 import { paginateReviews, paginateComments } from '../helpers/paginate';
+import { errorHandler } from '../helpers/responseHandler';
 
 const Review = db.Review,
   User = db.User;
@@ -34,7 +35,7 @@ const postReview = (req, res) => Review
         });
       });
   })
-  .catch(error => res.status(400).send(error));
+  .catch(() => errorHandler(500, 'An error occured!', res));
 
 const fetchRecipeReviews = (req, res) => {
   const { page, limit, offset } = paginateComments(req);
@@ -57,7 +58,7 @@ const fetchRecipeReviews = (req, res) => {
       `Showing ${reviews.rows.length} of ${reviews.count} comments`,
       reviews,
     )))
-    .catch(error => res.status(400).json(error));
+    .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
 const editReview = (req, res) => Review
@@ -79,7 +80,7 @@ const editReview = (req, res) => Review
         review
       }));
   })
-  .catch(error => res.status(400).json(error));
+  .catch(() => errorHandler(500, 'An error occured!', res));
 
 const deleteReview = (req, res) => Review
   .findOne({ where:
@@ -96,7 +97,7 @@ const deleteReview = (req, res) => Review
         message: 'Your comment has been deleted',
       }));
   })
-  .catch(error => res.status(400).json(error));
+  .catch(() => errorHandler(500, 'An error occured!', res));
 
 export {
   postReview,
