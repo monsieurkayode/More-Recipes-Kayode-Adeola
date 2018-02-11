@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeItem should render correctly 1`] = `
+<div
+  className="col m4"
+>
+  <div
+    className="card hoverable views-small"
+  >
+    <div
+      className="card-image"
+    >
+      <Link
+        replace={false}
+        to="/recipes/1"
+      >
+        <img
+          alt="Chicken Soup"
+          src="spice.jpg"
+        />
+      </Link>
+      <span
+        className="card-title"
+      >
+        0
+         Views
+      </span>
+    </div>
+    <div
+      className="card-content small-cards-home"
+    >
+      <div
+        className="card-title truncate"
+      >
+        <strong>
+          Chicken Soup
+        </strong>
+      </div>
+      <div
+        className="card-details"
+      >
+        <Link
+          className="chip teal white-text"
+          replace={false}
+          to="/category/specials"
+        >
+          Specials
+        </Link>
+        <span>
+          <div
+            className="unlike right"
+            onClick={[Function]}
+          >
+            <i
+              className="material-icons tiny reaction"
+            >
+              thumb_down
+            </i>
+            0
+          </div>
+          <div
+            className="like right"
+            onClick={[Function]}
+          >
+            <i
+              className="material-icons tiny reaction"
+            >
+              thumb_up
+            </i>
+            0
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

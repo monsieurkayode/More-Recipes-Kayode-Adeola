@@ -11,7 +11,7 @@ import { TextField } from './';
  * @class SignupForm
  * @extends {Component}
  */
-class SignupForm extends Component {
+export class SignupForm extends Component {
   /**
    * Component constructor
    * @param {object} props
@@ -158,12 +158,9 @@ class SignupForm extends Component {
   }
 }
 
-const mapStateToProps = ({ signupState, signinState }) => {
-  const { success, message } = signupState;
+const mapStateToProps = ({ signinState }) => {
   const { isAuthenticated } = signinState;
   return {
-    success,
-    message,
     isAuthenticated
   };
 };

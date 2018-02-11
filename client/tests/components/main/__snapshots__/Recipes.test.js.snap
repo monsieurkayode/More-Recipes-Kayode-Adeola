@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserRecipe should render correctly 1`] = `
+<div
+  className="col l5 m6 s12"
+>
+  <span>
+    <b>
+      Recipes
+    </b>
+  </span>
+  <p
+    className="divider"
+  />
+  <div
+    className="row"
+  >
+    <div>
+      <RecipeItem
+        downvote={[MockFunction]}
+        grid="l6 m10 offset-m1 s12"
+        index={1}
+        key="1"
+        recipe={
+          Object {
+            "category": "specials",
+            "createdAt": "2018-02-05T07:00:47.980Z",
+            "downvote": 0,
+            "id": 1,
+            "image": "spice.jpg",
+            "ingredients": "**A list of ingredients for preparing Chicken soup**
+                  * 1 (3 pound) whole chicken
+                  * 4 carrots, halved
+                  * 4 stalks celery, halved
+                  * 1 large onion, halved
+                  * water to cover
+                  * salt and pepper to taste
+                  * 1 teaspoon chicken bouillon granules (optional)
+                  * 1/2 teaspoon lemonade",
+            "instructions": "* Put the chicken, carrots, celery and onion in a large
+                  soup pot and cover with cold water. Heat and simmer, 
+                  uncovered, until the chicken meat falls off of the bones
+                  (skim off foam every so often).
+                  * Take everything out of the pot. Strain the broth. 
+                  Pick the meat off of the bones and chop the carrots, celery 
+                  and onion. Season the broth with salt, pepper and chicken 
+                  bouillon to taste, if desired. Return the chicken, carrots, 
+                  celery and onion to the pot, stir together, and serve.",
+            "recipeName": "Chicken Soup",
+            "upvote": 0,
+            "views": 0,
+          }
+        }
+        upvote={[MockFunction]}
+      />
+    </div>
+  </div>
+  <div
+    className="pagination-container"
+  >
+    <PaginationBoxView
+      activeClassName="active"
+      breakClassName="break-me"
+      breakLabel={
+        <a
+          href=""
+        >
+          ...
+        </a>
+      }
+      containerClassName="pagination"
+      disableInitialCallback={true}
+      disabledClassName="disabled"
+      initialPage={0}
+      marginPagesDisplayed={2}
+      nextClassName="next"
+      nextLabel={
+        <i
+          className="fa fa-chevron-right"
+        />
+      }
+      onPageChange={[Function]}
+      pageCount={1}
+      pageRangeDisplayed={5}
+      previousClassName="previous"
+      previousLabel={
+        <i
+          className="fa fa-chevron-left"
+        />
+      }
+      subContainerClassName="pages pagination"
+    />
+  </div>
+  <div
+    className="center-align"
+  >
+    You are viewing page 
+    1
+     of 
+    1
+  </div>
+</div>
+`;

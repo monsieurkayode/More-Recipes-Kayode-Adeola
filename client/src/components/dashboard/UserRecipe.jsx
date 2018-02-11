@@ -14,6 +14,16 @@ import { Loader } from '../main';
  */
 class UserRecipe extends Component {
   /**
+   * Component constructor
+   * @param {object} props
+   * @memberOf UserRecipe
+   */
+  constructor(props) {
+    super(props);
+    this.setPagination = this.setPagination.bind(this);
+    this.handlePageClick = this.handlePageClick.bind(this);
+  }
+  /**
    * @method componentWillReceiveProps
    *
    * @param {object} nextProps
@@ -45,7 +55,7 @@ class UserRecipe extends Component {
    *
    * @returns {object} pagination props
    */
-  setPagination = () => {
+  setPagination() {
     if (this.hasRecipes()) {
       const { pagination: { page, pageCount } } = this.props.userRecipes;
       return {
@@ -90,7 +100,7 @@ class UserRecipe extends Component {
    *
    * @returns {void}
    */
-  handlePageClick = ({ selected }) => {
+  handlePageClick({ selected }) {
     const page = selected + 1;
     localStorage.setItem('currentPageUserRecipes', page);
     const currentPage = localStorage.getItem('currentPageUserRecipes');
@@ -107,13 +117,12 @@ class UserRecipe extends Component {
    */
   renderUserRecipes = (index) => {
     const recipe = this.props.userRecipes.recipes[index];
-    const { deletePost, selected, selectRecipe } = this.props;
+    const { selected, selectRecipe } = this.props;
     return (
       <RecipeCardSmall
         key={recipe.id}
         index={recipe.id}
         recipe={recipe}
-        handleAction={deletePost}
         selected={selected}
         selectRecipe={selectRecipe}
       />
@@ -212,7 +221,6 @@ UserRecipe.propTypes = {
       totalCount: PropTypes.number
     })
   }),
-  deletePost: PropTypes.func,
   selected: PropTypes.string.isRequired,
   isFetching: PropTypes.func.isRequired,
   selectRecipe: PropTypes.func.isRequired,

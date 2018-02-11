@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The DeleteModal Component should render correctly 1`] = `
+<DeleteModal
+  dialog="Delete recipe"
+  handleAction={[MockFunction]}
+  id={1}
+  selected="recipes"
+>
+  <div
+    className="modal"
+    id="modal-delete"
+  >
+    <div
+      className="modal-content"
+    >
+      <h5>
+        <i
+          className="fa fa-warning"
+        />
+         
+        Delete recipe
+      </h5>
+      <p>
+        This action cannot be undone!
+      </p>
+    </div>
+    <div
+      className="modal-footer"
+    >
+      <button
+        className="modal-action modal-close edit chip"
+      >
+        Cancel
+      </button>
+      <button
+        className="modal-action modal-close delete chip"
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-trash"
+        />
+         Delete
+      </button>
+    </div>
+  </div>
+</DeleteModal>
+`;

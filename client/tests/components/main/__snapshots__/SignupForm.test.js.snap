@@ -1,0 +1,180 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignupForm should render correctly 1`] = `
+<SignupForm
+  history={
+    Object {
+      "goBack": [MockFunction],
+      "push": [MockFunction],
+    }
+  }
+  isAuthenticated={false}
+  signupAction={[MockFunction]}
+>
+  <div
+    className="container"
+    id="form"
+  >
+    <div
+      className="row"
+    >
+      <form
+        className="col l6 m8 s12 offset-l3 offset-m2"
+        onSubmit={[Function]}
+      >
+        <TextField
+          error={null}
+          field="username"
+          icon="account_circle"
+          label="Username"
+          onChange={[Function]}
+          type="text"
+          value=""
+        >
+          <div
+            className="row"
+          >
+            <div
+              className="input-field col s12"
+            >
+              <i
+                className="material-icons prefix"
+              >
+                account_circle
+              </i>
+              <input
+                name="username"
+                onChange={[Function]}
+                type="text"
+                value=""
+              />
+              <label
+                htmlFor="username"
+              >
+                Username
+              </label>
+            </div>
+          </div>
+        </TextField>
+        <TextField
+          error={null}
+          field="email"
+          icon="email"
+          label="Email"
+          onChange={[Function]}
+          type="email"
+          value=""
+        >
+          <div
+            className="row"
+          >
+            <div
+              className="input-field col s12"
+            >
+              <i
+                className="material-icons prefix"
+              >
+                email
+              </i>
+              <input
+                name="email"
+                onChange={[Function]}
+                type="email"
+                value=""
+              />
+              <label
+                htmlFor="email"
+              >
+                Email
+              </label>
+            </div>
+          </div>
+        </TextField>
+        <TextField
+          error={null}
+          field="password"
+          icon="lock_outline"
+          label="Password"
+          onChange={[Function]}
+          type="password"
+          value=""
+        >
+          <div
+            className="row"
+          >
+            <div
+              className="input-field col s12"
+            >
+              <i
+                className="material-icons prefix"
+              >
+                lock_outline
+              </i>
+              <input
+                name="password"
+                onChange={[Function]}
+                type="password"
+                value=""
+              />
+              <label
+                htmlFor="password"
+              >
+                Password
+              </label>
+            </div>
+          </div>
+        </TextField>
+        <TextField
+          error={null}
+          field="confirmPassword"
+          icon="lock"
+          label="Confirm Password"
+          onChange={[Function]}
+          type="password"
+          value=""
+        >
+          <div
+            className="row"
+          >
+            <div
+              className="input-field col s12"
+            >
+              <i
+                className="material-icons prefix"
+              >
+                lock
+              </i>
+              <input
+                name="confirmPassword"
+                onChange={[Function]}
+                type="password"
+                value=""
+              />
+              <label
+                htmlFor="confirmPassword"
+              >
+                Confirm Password
+              </label>
+            </div>
+          </div>
+        </TextField>
+        <div
+          className="center-align"
+        >
+          <button
+            className="btn waves-effect waves-light"
+            id="submit-btn"
+          >
+            Submit
+            <i
+              className="material-icons right"
+            >
+              send
+            </i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</SignupForm>
+`;

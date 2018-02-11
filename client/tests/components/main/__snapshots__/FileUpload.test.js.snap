@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FileUpload should render correctly 1`] = `
+<div
+  id="upload-btn"
+>
+  <label
+    htmlFor="image"
+  >
+    <input
+      id="image"
+      meta={null}
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Upload Image"
+      type="file"
+    />
+    <span
+      className="btn"
+    >
+      Upload Image
+    </span>
+  </label>
+</div>
+`;

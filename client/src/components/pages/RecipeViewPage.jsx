@@ -27,7 +27,7 @@ import { HomeNavbar } from '../headers';
  * @class RecipeViewPage
  * @extends {Component}
  */
-class RecipeViewPage extends Component {
+export class RecipeViewPage extends Component {
   /**
    * Component constructor
    * @param {object} props

@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PostRecipe should render correctly 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="row"
+  >
+    <form
+      className="col l8 m8 s10 offset-m2 offset-l2 offset-s1"
+    >
+      <Field
+        className=""
+        component={[Function]}
+        label="Recipe Name"
+        name="recipeName"
+        placeholder="Enter recipe name"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        name="category"
+        value="others"
+      />
+      <Field
+        className="materialize-textarea"
+        component={[Function]}
+        label="Ingredients"
+        name="ingredients"
+        placeholder="Markdown supported"
+        type="text"
+      />
+      <Field
+        className="materialize-textarea"
+        component={[Function]}
+        label="Intsructions"
+        name="instructions"
+        placeholder="Markdown supported"
+        type="text"
+      />
+      <div>
+        <Field
+          component={[Function]}
+          name="image"
+        />
+        <span
+          className="image-name"
+        >
+          <p />
+        </span>
+      </div>
+      <div
+        className="form-btn-control"
+      >
+        <Link
+          className="white-text"
+          replace={false}
+          to="/"
+        >
+          <button
+            className="btn red"
+          >
+            Cancel
+          </button>
+        </Link>
+        <button
+          className="btn"
+          disabled={true}
+          type="submit"
+        >
+          Post
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;

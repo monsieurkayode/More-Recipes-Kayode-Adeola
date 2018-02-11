@@ -14,7 +14,7 @@ import pascalCase from '../../utils/pascalCase';
  * @class Category
  * @extends {Component}
  */
-class Category extends Component {
+export class Category extends Component {
   /**
    * Component constructor
    * @param {object} props
@@ -122,10 +122,8 @@ class Category extends Component {
    */
   render() {
     const handleSearch = debounce(() => { this.handleSearch(); }, 300);
-    const { isAuthenticated } = this.props;
     return (
       <div className="col l2 offset-l1 m2 s12">
-        {isAuthenticated &&
         <form id="search-form" onChange={handleSearch}>
           <input
             onChange={this.handleChange}
@@ -144,7 +142,7 @@ class Category extends Component {
             <option value="category">Category</option>
             <option value="ingredients">Ingredients</option>
           </select>
-        </form>}
+        </form>
         <div className="category hide-on-small-only">
           <div>
             <div>
@@ -163,17 +161,8 @@ class Category extends Component {
   }
 }
 
-const mapStateToProps = ({
-  recipes,
-  signinState
-}) => ({
-  recipes,
-  isAuthenticated: signinState.isAuthenticated
-});
-
 Category.propTypes = {
-  searchPost: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
+  searchPost: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, { searchPost })(Category);
+export default connect(null, { searchPost })(Category);

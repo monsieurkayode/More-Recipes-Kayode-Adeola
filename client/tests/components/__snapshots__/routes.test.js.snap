@@ -1,0 +1,178 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Routes Component should render correctly 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <BrowserRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "blank",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <Switch>
+        <Routes
+          computedMatch={
+            Object {
+              "isExact": false,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "blank",
+              "search": "",
+              "state": undefined,
+            }
+          }
+        >
+          <Switch>
+            <Route
+              component={[Function]}
+              computedMatch={
+                Object {
+                  "isExact": true,
+                  "params": Object {
+                    "0": "blank",
+                  },
+                  "path": "*",
+                  "url": "blank",
+                }
+              }
+              location={
+                Object {
+                  "hash": "",
+                  "pathname": "blank",
+                  "search": "",
+                  "state": undefined,
+                }
+              }
+              path="*"
+            >
+              <NotFoundPage
+                history={
+                  Object {
+                    "action": "POP",
+                    "block": [Function],
+                    "createHref": [Function],
+                    "go": [Function],
+                    "goBack": [Function],
+                    "goForward": [Function],
+                    "length": 1,
+                    "listen": [Function],
+                    "location": Object {
+                      "hash": "",
+                      "pathname": "blank",
+                      "search": "",
+                      "state": undefined,
+                    },
+                    "push": [Function],
+                    "replace": [Function],
+                  }
+                }
+                location={
+                  Object {
+                    "hash": "",
+                    "pathname": "blank",
+                    "search": "",
+                    "state": undefined,
+                  }
+                }
+                match={
+                  Object {
+                    "isExact": true,
+                    "params": Object {
+                      "0": "blank",
+                    },
+                    "path": "*",
+                    "url": "blank",
+                  }
+                }
+              >
+                <div
+                  className="center-align"
+                  id="not-found-container"
+                >
+                  <h2
+                    className="red-text"
+                  >
+                    404
+                  </h2>
+                  <img
+                    alt=""
+                    src="test-file-stub"
+                  />
+                  <h3>
+                    We are sorry but there is nothing here
+                  </h3>
+                  <Link
+                    onClick={[Function]}
+                    replace={false}
+                    to="/"
+                  >
+                    <a
+                      href="/"
+                      onClick={[Function]}
+                    >
+                      <h6>
+                         
+                        <span>
+                          <i
+                            className="fa fa-home"
+                          />
+                        </span>
+                         Back to home
+                      </h6>
+                    </a>
+                  </Link>
+                  <div
+                    className="blue-text"
+                    id="back-link"
+                    onClick={[Function]}
+                  >
+                    <span>
+                      <i
+                        className="fa fa-chevron-left"
+                      />
+                    </span>
+                     Back
+                  </div>
+                </div>
+              </NotFoundPage>
+            </Route>
+          </Switch>
+        </Routes>
+      </Switch>
+    </Router>
+  </BrowserRouter>
+</Provider>
+`;

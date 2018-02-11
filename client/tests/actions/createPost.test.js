@@ -2,7 +2,7 @@
 
 import { createPost } from '../../src/actions';
 import actionTypes from '../../src/actions/actionTypes';
-import actionSeeders from '../seeders/actionSeeders';
+import mockData from '../__mocks__/mockData';
 
 /**
  * @description - Setup variables and functions for testing
@@ -13,7 +13,7 @@ import actionSeeders from '../seeders/actionSeeders';
  * @returns {object} any
  */
 const setup = () => {
-  const { recipeDetails, createPostResponse } = actionSeeders;
+  const { recipeDetails, createPostResponse } = mockData;
   return {
     recipeDetails,
     createPostResponse,
@@ -67,7 +67,7 @@ describe('Create Recipe Post', () => {
     });
 
     it('should dispatch CREATE_POST_ERROR and IS_FETCHING actions when ' +
-      'request to create recipe postfails',
+      'request to create recipe post fails',
     (done) => {
       const store = mockStore({});
 

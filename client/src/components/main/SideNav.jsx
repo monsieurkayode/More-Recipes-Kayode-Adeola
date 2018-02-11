@@ -17,7 +17,7 @@ import dash from '../../../assets/css/img/dash.jpg';
    *
    * @returns {JSX} JSX
    */
-const SideNav = props => (
+export const SideNav = props => (
   <div>
     <ul className="side-nav teal" id="navlink">
       <li>

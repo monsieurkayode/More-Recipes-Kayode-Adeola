@@ -14,6 +14,16 @@ import { RecipeCardSmall } from '../recipes';
  */
 class UserFavoriteRecipe extends Component {
   /**
+   * Component constructor
+   * @param {object} props
+   * @memberOf UserFavoriteRecipe
+   */
+  constructor(props) {
+    super(props);
+    this.setPagination = this.setPagination.bind(this);
+    this.handlePageClick = this.handlePageClick.bind(this);
+  }
+  /**
    * @method componentWillReceiveProps
    *
    * @param {object} nextProps
@@ -28,7 +38,8 @@ class UserFavoriteRecipe extends Component {
     ).length;
     if (currentPageSize !== nextPageSize) {
       const currentPage = localStorage.getItem('currentPageUserFavorites');
-      const nextFavorites = this.hasFavorites() && nextProps.userFavorites.recipes;
+      const nextFavorites = this.hasFavorites() &&
+        nextProps.userFavorites.recipes;
       if (!Object.keys(nextFavorites || {}).length && currentPage > 1) {
         localStorage.setItem('currentPageUserFavorites', currentPage - 1);
         this.props.isFetching(true, 'UserFavorites');
@@ -45,7 +56,7 @@ class UserFavoriteRecipe extends Component {
    *
    * @returns {object} pagination props
    */
-  setPagination = () => {
+  setPagination() {
     if (this.hasFavorites()) {
       const { pagination: { page, pageCount } } = this.props.userFavorites;
       return {
@@ -89,7 +100,7 @@ class UserFavoriteRecipe extends Component {
    *
    * @returns {void}
    */
-  handlePageClick = ({ selected }) => {
+  handlePageClick({ selected }) {
     const page = selected + 1;
     localStorage.setItem('currentPageUserFavorites', page);
     const currentPage = localStorage.getItem('currentPageUserFavorites');

@@ -2,10 +2,10 @@
 
 import { signinAction } from '../../src/actions';
 import actionTypes from '../../src/actions/actionTypes';
-import actionSeeders from '../seeders/actionSeeders';
+import mockData from '../__mocks__/mockData';
 
 const setup = () => {
-  const { userCredentials, signinResponse } = actionSeeders;
+  const { userCredentials, signinResponse } = mockData;
   return {
     setAuthorizationToken: jest.fn(),
     userCredentials,
@@ -56,8 +56,7 @@ describe('User Authentication', () => {
       // Declare and initialize expected actions to be received by store
       const expectedActions = [
         {
-          type: actionTypes.SIGNIN_AUTHENTICATION_ERROR,
-          payload: 'Invalid Authentication Details'
+          type: actionTypes.SIGNIN_AUTHENTICATION_ERROR
         }
       ];
 
@@ -78,8 +77,7 @@ describe('User Authentication', () => {
         // Declare and initialize expected actions to be received by store
         const expectedActions = [
           {
-            type: actionTypes.SIGNIN_UNSUCCESSFUL,
-            payload: 'An error occured!'
+            type: actionTypes.SIGNIN_UNSUCCESSFUL
           }
         ];
 

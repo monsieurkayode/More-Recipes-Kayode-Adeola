@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The NotFoundPage Component should render correctly 1`] = `
+<div
+  className="center-align"
+  id="not-found-container"
+>
+  <h2
+    className="red-text"
+  >
+    404
+  </h2>
+  <img
+    alt=""
+    src="test-file-stub"
+  />
+  <h3>
+    We are sorry but there is nothing here
+  </h3>
+  <Link
+    onClick={[Function]}
+    replace={false}
+    to="/"
+  >
+    <h6>
+       
+      <span>
+        <i
+          className="fa fa-home"
+        />
+      </span>
+       Back to home
+    </h6>
+  </Link>
+  <div
+    className="blue-text"
+    id="back-link"
+    onClick={[Function]}
+  >
+    <span>
+      <i
+        className="fa fa-chevron-left"
+      />
+    </span>
+     Back
+  </div>
+</div>
+`;

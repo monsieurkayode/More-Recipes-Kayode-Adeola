@@ -1,10 +1,17 @@
 /* eslint-disable no-undef */
 import React from 'react';
+import renderer from 'react-test-renderer';
+
 import Footer from '../../../src/components/footer';
 
-describe('<Footer />', () => {
-  const wrapper = mount(<Footer />);
-  it('should render and has a footer element wrapping', () => {
+const wrapper = mount(<Footer />);
+describe('The Footer Component', () => {
+  it('should render correctly', () => {
+    const tree = renderer.create(<Footer />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render and have a footer element', () => {
     expect(wrapper.find('footer').length).toBe(1);
   });
 

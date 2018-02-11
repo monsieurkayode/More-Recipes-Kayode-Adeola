@@ -16,7 +16,7 @@ import pascalCase from '../../utils/pascalCase';
  * @class EditRecipe
  * @extends {Component}
  */
-class EditRecipe extends Component {
+export class EditRecipe extends Component {
   /**
    * Component constructor
    * @param {object} props

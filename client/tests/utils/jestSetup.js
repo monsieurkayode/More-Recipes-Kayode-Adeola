@@ -9,6 +9,7 @@ import axios from 'axios';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import MockAdapter from 'axios-mock-adapter';
+import toJson from 'enzyme-to-json';
 
 
 // This file is written in ES5 since it's not transpiled by Babel.
@@ -32,12 +33,6 @@ const mock = new MockAdapter(axios);
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-// Disable webpack-specific features for tests since
-// Jest doesn't know what to do with them.
-require.extensions['.css'] = () => null;
-require.extensions['.png'] = () => null;
-require.extensions['.jpg'] = () => null;
-
 // Configure JSDOM and set global variables
 // to simulate a browser environment for tests.
 var jsdom = require('jsdom');
@@ -57,6 +52,7 @@ global.mockStore = mockStore;
 global.localStorage = new LocalStorage();
 global.decode = decode;
 global.expect = expect;
+global.toJson = toJson;
 global.document = document;
 global.window = document.defaultView;
 global.Materialize = window;
@@ -64,9 +60,12 @@ global.Materialize = { toast: () => {} };
 
 global.$ = $;
 global.jQuery = $;
+$.prototype.material_select = () => {};
 $.prototype.sideNav = () => {};
 $.prototype.modal = () => {};
 $.prototype.dropdown = () => {};
+$.prototype.collapsible = () => {};
+$.prototype.materialbox = () => {};
 
 Object.keys(document.defaultView).forEach((property) => {
   if (typeof global[property] === 'undefined') {

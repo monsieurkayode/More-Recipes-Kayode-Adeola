@@ -2,10 +2,12 @@
 
 import { fetchSingleRecipe } from '../../src/actions';
 import actionTypes from '../../src/actions/actionTypes';
-import actionSeeders from '../seeders/actionSeeders';
+import mockData from '../__mocks__/mockData';
+
+window.location.replace = () => {};
 
 const setup = () => {
-  const { fetchSingleRecipeResponse } = actionSeeders;
+  const { fetchSingleRecipeResponse } = mockData;
   return {
     fetchSingleRecipeResponse,
     recipeId: 1,

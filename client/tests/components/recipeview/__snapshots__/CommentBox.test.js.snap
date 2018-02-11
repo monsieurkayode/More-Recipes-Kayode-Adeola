@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommentBox should render correctly 1`] = `
+<div
+  className="row"
+  id="comment-box"
+>
+  <div
+    className="col l7 m8 s12 offset-l4 offset-m4"
+  >
+    <form>
+      <Field
+        component={[Function]}
+        name="comment"
+      />
+      <button
+        className="btn btn-flat right"
+        id="post-btn"
+        type="submit"
+      >
+        Post
+      </button>
+    </form>
+  </div>
+</div>
+`;

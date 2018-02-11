@@ -21,7 +21,7 @@
     "test:server": "NODE_ENV=test mocha --reporter progress --timeout 10000 --compilers js:babel-core/register server/test/index.test.js",
     "test": "NODE_ENV=test nyc _mocha --report lcovonly --reporter spec --timeout 20000 server/test/index.test.js && cat ./coverage/lcov.info | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "test:client": "jest /client",
+    "test:client": "jest /client -u --coverage",
     "test:watch": "npm run test:client -- --watch"
   },
   "repository": {
@@ -62,10 +62,13 @@
       "./client/src/index.jsx",
       "./client/src/routes.jsx"
     ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/client/tests/__mocks__/fileMock.js"
+    },
     "collectCoverageFrom": [
       "client/src/**/*.{js,jsx}",
-      "!**/node_modules/**",
-      "!**/vendor/**"
+      "!**/node_modules/**"
     ],
     "verbose": true
   },
@@ -92,6 +95,7 @@
     "cross-env": "^5.0.5",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-15": "^1.0.5",
+    "enzyme-to-json": "^3.3.1",
     "eslint": "^4.5.0",
     "eslint-config": "^0.3.0",
     "eslint-config-airbnb": "^15.1.0",
@@ -104,7 +108,7 @@
     "npm-run-all": "^4.1.2",
     "nyc": "^11.1.0",
     "react-addons-test-utils": "^15.6.2",
-    "react-test-renderer": "^16.2.0",
+    "react-test-renderer": "^15.6.2",
     "redux-mock-store": "^1.5.1",
     "sinon": "^4.2.2",
     "webpack-dev-middleware": "^1.12.0",

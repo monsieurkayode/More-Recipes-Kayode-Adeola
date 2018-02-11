@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Authenticate should render passed component if user is authenticated 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(Authenticate)
+    history={
+      Object {
+        "push": [MockFunction] {
+          "calls": Array [
+            Array [
+              "/signin",
+            ],
+          ],
+        },
+      }
+    }
+    isAuthenticated={true}
+  >
+    <Authenticate
+      dispatch={[Function]}
+      history={
+        Object {
+          "push": [MockFunction] {
+            "calls": Array [
+              Array [
+                "/signin",
+              ],
+            ],
+          },
+        }
+      }
+      user={
+        Object {
+          "username": "user",
+        }
+      }
+    >
+      <FooterComponent
+        dispatch={[Function]}
+        history={
+          Object {
+            "push": [MockFunction] {
+              "calls": Array [
+                Array [
+                  "/signin",
+                ],
+              ],
+            },
+          }
+        }
+        user={
+          Object {
+            "username": "user",
+          }
+        }
+      >
+        <Footer>
+          <footer
+            className="page-footer blue-grey darken-2"
+          >
+            <div
+              className="row"
+            >
+              <div
+                className="col l3 social-icon-container"
+              >
+                <ul>
+                  <li>
+                    <div>
+                      <span>
+                        <i
+                          className="fa fa-2x fa-github teal-text"
+                        />
+                      </span>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <span>
+                        <i
+                          className="fa fa-2x fa-facebook teal-text"
+                        />
+                      </span>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <span>
+                        <i
+                          className="fa fa-2x fa-twitter teal-text"
+                        />
+                      </span>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <span>
+                        <i
+                          className="fa fa-2x fa-google teal-text"
+                        />
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div
+              className="footer-copyright"
+            >
+              <div
+                className="container"
+              >
+                © Andela 2018
+                <a
+                  className="grey-text text-lighten-4 right"
+                  href="/"
+                >
+                  Created by Kayode Adeola
+                </a>
+              </div>
+            </div>
+          </footer>
+        </Footer>
+      </FooterComponent>
+    </Authenticate>
+  </Connect(Authenticate)>
+</Provider>
+`;

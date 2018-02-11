@@ -5,7 +5,6 @@ import actionTypes from '../actions/actionTypes';
 
 const initialState = {
   success: false,
-  message: null,
   isAuthenticated: false,
   user: {}
 };
@@ -39,7 +38,6 @@ const signinReducer = (state = initialState, action) => {
       return {
         ...state,
         success: false,
-        message: action.payload,
         isAuthenticated: false,
         user: {}
       };
@@ -47,7 +45,6 @@ const signinReducer = (state = initialState, action) => {
       return {
         ...state,
         success: false,
-        message: action.payload,
         isAuthenticated: false,
         user: {}
       };
@@ -62,7 +59,6 @@ const signinReducer = (state = initialState, action) => {
       return {
         ...state,
         success: isEmpty(action.payload),
-        message: 'User logged out successfully',
         isAuthenticated: !isEmpty(action.payload),
         user: action.payload
       };

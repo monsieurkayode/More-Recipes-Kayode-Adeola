@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideNav should render correctly 1`] = `
+<div>
+  <ul
+    className="side-nav teal"
+    id="navlink"
+  >
+    <li>
+      <div
+        className="card-image"
+      >
+        <img
+          alt="user-background"
+          className="responsive-img"
+          id="dash-img"
+          src="test-file-stub"
+        />
+        <div
+          id="side-nav-avatar"
+        >
+          <Avatar
+            className="responsive-img"
+            color="#345"
+            email={null}
+            facebookId={null}
+            fgColor="#FFF"
+            googleId={null}
+            maxInitials={null}
+            md5Email={null}
+            name="username"
+            round={true}
+            size={80}
+            skypeId={null}
+            style={null}
+            textSizeRatio={3}
+            twitterHandle={null}
+            unstyled={false}
+            value={null}
+            vkontakteId={null}
+          />
+        </div>
+      </div>
+    </li>
+    <li>
+      <Link
+        className="white-text"
+        replace={false}
+        to="/recipes/new"
+      >
+        <span
+          className="fa fa-lg fa-plus-circle"
+        />
+         Recipe
+      </Link>
+    </li>
+    <li>
+      <Link
+        className="white-text"
+        replace={false}
+        to="/dashboard/recipes"
+      >
+        <span
+          className="fa fa-lg fa-dashboard"
+        />
+         Dashboard
+      </Link>
+    </li>
+    <li>
+      <a
+        className="white-text"
+      >
+        <span
+          className="fa fa-lg fa-sign-out"
+        />
+         Logout
+      </a>
+    </li>
+  </ul>
+</div>
+`;

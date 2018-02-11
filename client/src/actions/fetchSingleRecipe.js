@@ -26,9 +26,7 @@ const fetchSingleRecipe = recipeId => dispatch =>
         dispatch({ type: actionTypes.FETCH_SINGLE_RECIPE_ERROR });
         return Materialize.toast('You are not logged in', 4000, 'red');
       }
-      if (process.env.NODE_ENV !== 'test') {
-        window.location.replace('/error?info=resource-not-found');
-      }
+      window.location.replace('/error?info=resource-not-found');
       dispatch({ type: actionTypes.FETCH_SINGLE_RECIPE_ERROR });
     });
 
