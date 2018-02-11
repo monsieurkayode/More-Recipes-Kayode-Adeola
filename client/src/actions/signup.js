@@ -34,8 +34,7 @@ const signupAction = userDetails => dispatch =>
           Materialize.toast(userExists, 4000, 'red');
           dispatch(
             {
-              type: actionTypes.SIGNUP_VALIDATION_USER_ERROR,
-              payload: message
+              type: actionTypes.SIGNUP_VALIDATION_USER_ERROR
             }
           );
         }
@@ -43,15 +42,18 @@ const signupAction = userDetails => dispatch =>
           Materialize.toast(emailExists, 4000, 'red');
           dispatch(
             {
-              type: actionTypes.SIGNUP_VALIDATION_EMAIL_ERROR,
-              payload: message
+              type: actionTypes.SIGNUP_VALIDATION_EMAIL_ERROR
             }
           );
         }
       } else {
         const payload = 'An error occured! Please try again';
         Materialize.toast(payload, 4000, 'red');
-        dispatch({ type: actionTypes.SIGNUP_UNSUCCESSFUL, payload });
+        dispatch(
+          {
+            type: actionTypes.SIGNUP_UNSUCCESSFUL
+          }
+        );
       }
     });
 

@@ -2,10 +2,10 @@
 
 import { editPost } from '../../src/actions';
 import actionTypes from '../../src/actions/actionTypes';
-import actionSeeders from '../seeders/actionSeeders';
+import mockData from '../__mocks__/mockData';
 
 const setup = () => {
-  const { editRecipeDetails, editPostResponse } = actionSeeders;
+  const { editRecipeDetails, editPostResponse } = mockData;
   return {
     editRecipeDetails,
     editPostResponse,

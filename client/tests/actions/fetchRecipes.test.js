@@ -2,13 +2,13 @@
 
 import { fetchRecipesAction } from '../../src/actions';
 import actionTypes from '../../src/actions/actionTypes';
-import actionSeeders from '../seeders/actionSeeders';
+import mockData from '../__mocks__/mockData';
 
-const setup = () => {
-  const { fetchRecipesResponse } = actionSeeders;
+const setup = (page, limit) => {
+  const { fetchRecipesResponse } = mockData;
   return {
-    page: 1,
-    limit: 8,
+    page,
+    limit,
     fetchRecipesResponse
   };
 };
@@ -19,7 +19,7 @@ describe('Fetch Recipe Posts', () => {
       mock.reset();
     });
 
-    const { page, limit, fetchRecipesResponse } = setup();
+    const { page, limit, fetchRecipesResponse } = setup(1, 8);
 
     it('should dispatch FETCH_RECIPES action when a recipe is fetched',
       (done) => {

@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The DashboardNavbar Component should render correctly 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "blank",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <DashboardNavbar
+      logoutAction={[MockFunction]}
+      user={
+        Object {
+          "username": "username",
+        }
+      }
+    >
+      <div
+        className="navbar-fixed"
+      >
+        <nav
+          className="header"
+        >
+          <div
+            className="nav-wrapper"
+          >
+            <Link
+              className="brand-logo font-effect-3d-float logo"
+              onClick={[Function]}
+              replace={false}
+              to="/"
+            >
+              <a
+                className="brand-logo font-effect-3d-float logo"
+                href="/"
+                onClick={[Function]}
+              >
+                More-Recipes
+              </a>
+            </Link>
+            <a
+              className="button-collapse"
+              data-activates="dashboard"
+              href=""
+            >
+              <i
+                className="material-icons"
+              >
+                menu
+              </i>
+            </a>
+            <ul
+              className="right hide-on-med-and-down return"
+            >
+              <li>
+                <a
+                  className="dropdown-button"
+                  data-activates="user-dropdown"
+                >
+                  <span
+                    className="fa fa-lg fa-user-circle"
+                  />
+                   
+                  username
+                   
+                  <span
+                    className="fa fa-lg fa-caret-down"
+                  />
+                </a>
+                <UserMenu
+                  logoutAction={[MockFunction]}
+                >
+                  <ul
+                    className="dropdown-content"
+                    id="user-dropdown"
+                  >
+                    <li>
+                      <Link
+                        replace={false}
+                        to="/recipes/new"
+                      >
+                        <a
+                          href="/recipes/new"
+                          onClick={[Function]}
+                        >
+                          <span
+                            className="fa fa-lg fa-plus-circle"
+                          />
+                           Recipe
+                        </a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        replace={false}
+                        to="/dashboard/recipes"
+                      >
+                        <a
+                          href="/dashboard/recipes"
+                          onClick={[Function]}
+                        >
+                          <span
+                            className="fa fa-lg fa-dashboard"
+                          />
+                           Dashboard
+                        </a>
+                      </Link>
+                    </li>
+                    <li
+                      className="divider"
+                    />
+                    <li>
+                      <a
+                        onClick={[MockFunction]}
+                      >
+                        <span
+                          className="fa fa-lg fa-sign-out"
+                        />
+                         Logout
+                      </a>
+                    </li>
+                  </ul>
+                </UserMenu>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </DashboardNavbar>
+  </Router>
+</BrowserRouter>
+`;

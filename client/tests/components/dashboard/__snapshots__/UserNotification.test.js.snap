@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The UserNotification Component should render correctly 1`] = `
+<UserNotification>
+  <div
+    className="col l9 m12 s12 offset-l3"
+  >
+    Notifications Will Appear Here
+  </div>
+</UserNotification>
+`;

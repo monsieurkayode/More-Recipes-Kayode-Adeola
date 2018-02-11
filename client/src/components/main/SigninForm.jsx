@@ -10,7 +10,7 @@ import { TextField } from './';
  * @class SigninForm
  * @extends {Component}
  */
-class SigninForm extends Component {
+export class SigninForm extends Component {
   /**
    * Component constructor
    * @param {object} props
@@ -28,9 +28,7 @@ class SigninForm extends Component {
   /**
    * @method componentWillMount
    *
-   * @param {void} void
-   *
-   * @returns {void}
+   * @returns {undefined}
    */
   componentWillMount() {
     if (this.props.isAuthenticated) {
@@ -122,8 +120,8 @@ class SigninForm extends Component {
 }
 
 const mapStateToProps = ({ signinState }) => {
-  const { message, isAuthenticated } = signinState;
-  return { message, isAuthenticated };
+  const { isAuthenticated } = signinState;
+  return { isAuthenticated };
 };
 
 SigninForm.propTypes = {

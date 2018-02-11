@@ -14,8 +14,9 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
  *
  * @param {number} page - selected page number, default is 1
  * @param {number} limit - recipes fetched limit
+ * @param {class} component
  *
- * @returns {void}
+ * @returns {undefined}
  */
 const fetchRecipesAction = (page, limit) => dispatch =>
   axios

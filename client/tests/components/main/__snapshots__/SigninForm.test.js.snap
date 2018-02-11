@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SigninForm should render correctly 1`] = `
+<SigninForm
+  history={
+    Object {
+      "goBack": [MockFunction],
+      "push": [MockFunction],
+    }
+  }
+  isAuthenticated={false}
+  signinAction={[MockFunction]}
+>
+  <div
+    className="container"
+    onSubmit={[Function]}
+  >
+    <div
+      className="row"
+    >
+      <form
+        className="col l6 m8 s12 offset-l3 offset-m2"
+      >
+        <TextField
+          error={null}
+          field="username"
+          icon="account_circle"
+          label="Username"
+          onChange={[Function]}
+          type="text"
+          value=""
+        >
+          <div
+            className="row"
+          >
+            <div
+              className="input-field col s12"
+            >
+              <i
+                className="material-icons prefix"
+              >
+                account_circle
+              </i>
+              <input
+                name="username"
+                onChange={[Function]}
+                type="text"
+                value=""
+              />
+              <label
+                htmlFor="username"
+              >
+                Username
+              </label>
+            </div>
+          </div>
+        </TextField>
+        <TextField
+          error={null}
+          field="password"
+          icon="lock_outline"
+          label="Password"
+          onChange={[Function]}
+          type="password"
+          value=""
+        >
+          <div
+            className="row"
+          >
+            <div
+              className="input-field col s12"
+            >
+              <i
+                className="material-icons prefix"
+              >
+                lock_outline
+              </i>
+              <input
+                name="password"
+                onChange={[Function]}
+                type="password"
+                value=""
+              />
+              <label
+                htmlFor="password"
+              >
+                Password
+              </label>
+            </div>
+          </div>
+        </TextField>
+        <div
+          className="col s12 m12 l12 center-align"
+        >
+          <button
+            className="btn waves-effect waves-light"
+            type="submit"
+          >
+            Login
+            <i
+              className="material-icons right"
+            >
+              send
+            </i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</SigninForm>
+`;

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The EditRecipePage Component should render correctly 1`] = `
+<div>
+  <Connect(HomeNavbar) />
+  <div
+    className="row center-align"
+  >
+    <div
+      className="col s12 l6 m8 offset-l3 offset-m2"
+    >
+      <h5>
+        Edit Recipe
+      </h5>
+    </div>
+  </div>
+  <Connect(ReduxForm)
+    history={
+      Object {
+        "push": [MockFunction],
+      }
+    }
+    match={Object {}}
+  />
+  <Connect(SideNav) />
+</div>
+`;

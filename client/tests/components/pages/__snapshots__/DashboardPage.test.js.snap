@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The DashboardPage Component should render correctly 1`] = `
+<div>
+  <div>
+    <DashboardNavbar
+      deletePost={[MockFunction]}
+      fetchUserFavorites={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              1,
+            ],
+          ],
+        }
+      }
+      fetchUserRecipes={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              1,
+            ],
+          ],
+        }
+      }
+      isFetching={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+              "Dashboard",
+            ],
+          ],
+        }
+      }
+      isLoading={false}
+      isLoadingFavorites={false}
+      isLoadingRecipes={false}
+      match={
+        Object {
+          "params": Object {
+            "route": "profile",
+          },
+        }
+      }
+      removeFavorite={[MockFunction]}
+      selectedRecipe={0}
+      user={Object {}}
+      userFavorites={Object {}}
+      userRecipes={Object {}}
+    />
+    <div
+      className="row"
+    >
+      <DashboardPanel
+        user={Object {}}
+      />
+      <UserProfile
+        deletePost={[MockFunction]}
+        fetchUserFavorites={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                1,
+              ],
+            ],
+          }
+        }
+        fetchUserRecipes={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                1,
+              ],
+            ],
+          }
+        }
+        isFetching={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+                "Dashboard",
+              ],
+            ],
+          }
+        }
+        isLoading={false}
+        isLoadingFavorites={false}
+        isLoadingRecipes={false}
+        match={
+          Object {
+            "params": Object {
+              "route": "profile",
+            },
+          }
+        }
+        removeFavorite={[MockFunction]}
+        selected="profile"
+        selectedRecipe={0}
+        user={Object {}}
+        userFavorites={Object {}}
+        userRecipes={Object {}}
+      />
+    </div>
+    <DeleteModal
+      dialog="Remove from favorite"
+      handleAction={[MockFunction]}
+      id={0}
+      selected="profile"
+    />
+    <SideNavDashboard
+      user={Object {}}
+    />
+  </div>
+</div>
+`;

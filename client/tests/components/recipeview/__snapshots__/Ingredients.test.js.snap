@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Ingredients should render correctly 1`] = `
+<div
+  className="col l3 m4 s12 offset-l1"
+>
+  <span
+    className=""
+  >
+    <h5>
+      Ingredients
+    </h5>
+  </span>
+  <p
+    className="divider"
+  />
+  <div
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<p><strong>A list of ingredients for preparing Chicken soup</strong><br />
+                  * 1 (3 pound) whole chicken<br />
+                  * 4 carrots, halved<br />
+                  * 4 stalks celery, halved<br />
+                  * 1 large onion, halved<br />
+                  * water to cover<br />
+                  * salt and pepper to taste<br />
+                  * 1 teaspoon chicken bouillon granules (optional)</p>",
+      }
+    }
+    id="ingredients"
+  />
+</div>
+`;

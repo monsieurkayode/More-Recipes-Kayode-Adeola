@@ -18,8 +18,8 @@ class TopRecipes extends Component {
    * @returns {JSX} JSX
    */
   renderTopRecipes = (index) => {
-    const { isAuthenticated, recipes, topRecipes } = this.props;
-    const recipe = isAuthenticated ? topRecipes[index] : recipes[index];
+    const { topRecipes } = this.props;
+    const recipe = topRecipes[index];
     return (
       <TopRecipeItem key={recipe.id} recipe={recipe} />
     );
@@ -32,15 +32,14 @@ class TopRecipes extends Component {
    * @returns {JSX} JSX
    */
   render() {
-    const { isAuthenticated, topRecipes, recipes } = this.props;
-    const validRecipes = isAuthenticated ? topRecipes : recipes;
+    const { topRecipes } = this.props;
     return (
       <div className="col l3 m4 s12">
         <span><b>Top of the Week</b></span>
         <p className="divider" />
         <div id="trending">
           <ul className="collection">
-            {Object.keys(validRecipes).map(index =>
+            {Object.keys(topRecipes).map(index =>
               this.renderTopRecipes(index))}
           </ul>
         </div>
@@ -50,24 +49,17 @@ class TopRecipes extends Component {
 }
 
 const mapStateToProps = ({
-  topRecipes,
-  recipes,
-  signinState,
+  topRecipes
 }) => ({
-  topRecipes,
-  recipes: recipes.recipes,
-  isAuthenticated: signinState.isAuthenticated
+  topRecipes
 });
 
 TopRecipes.defaultProps = {
-  topRecipes: [],
-  recipes: {}
+  topRecipes: []
 };
 
 TopRecipes.propTypes = {
-  topRecipes: PropTypes.arrayOf(PropTypes.shape),
-  recipes: PropTypes.shape({}),
-  isAuthenticated: PropTypes.bool.isRequired,
+  topRecipes: PropTypes.arrayOf(PropTypes.shape)
 };
 
 export default connect(mapStateToProps)(TopRecipes);

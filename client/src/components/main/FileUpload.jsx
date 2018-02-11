@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'proptypes';
 /**
  * Hanldes file selection for upload
  *
@@ -11,10 +12,8 @@ import React from 'react';
 const handleChange = handler => ({ target: { files } }) =>
   handler(files.length ? { file: files[0], name: files[0].name } : {});
 
-export default ({
-  // eslint-disable-next-line
+const FileUpload = ({
   input: { onChange, onBlur, value: omitValue, ...inputProps },
-  // eslint-disable-next-line
   meta: omitMeta,
   ...props
 }) => (
@@ -37,3 +36,13 @@ export default ({
     </label>
   </div>
 );
+
+FileUpload.propTypes = {
+  input: PropTypes.shape({
+    onChange: PropTypes.func.isRequired,
+    onBlur: PropTypes.func.isRequired
+  }).isRequired,
+  meta: PropTypes.shape({}).isRequired
+};
+
+export default FileUpload;

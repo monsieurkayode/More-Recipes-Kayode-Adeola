@@ -29,13 +29,11 @@ import materializeJavascript from '../../utils/materializeJavascript';
  * @class DashboardPage
  * @extends {Component}
  */
-class DashboardPage extends Component {
+export class DashboardPage extends Component {
   /**
    * @method componentDidMount
    *
-   * @param {void} void
-   *
-   * @returns {void}
+   * @returns {undefined}
    */
   componentDidMount() {
     const currentPage = localStorage.getItem('currentPageUserRecipes');
@@ -94,9 +92,8 @@ class DashboardPage extends Component {
             </div>
             <DeleteModal
               selected={route}
-              dialog={route === 'recipes' ?
-                deletePostDialog : removeFavDialog}
               id={this.props.selectedRecipe}
+              dialog={route === 'recipes' ? deletePostDialog : removeFavDialog}
               handleAction={route === 'recipes' ?
                 this.props.deletePost :
                 this.props.removeFavorite
@@ -127,15 +124,17 @@ const mapStateToProps = ({
 });
 
 DashboardPage.defaultProps = {
+  user: {},
   selectedRecipe: 0,
-  user: {}
+  userFavorites: {},
+  userRecipes: {},
 };
 
 DashboardPage.propTypes = {
   user: PropTypes.shape({}),
   fetchUserRecipes: PropTypes.func.isRequired,
-  userRecipes: PropTypes.shape({}).isRequired,
-  userFavorites: PropTypes.shape({}).isRequired,
+  userRecipes: PropTypes.shape({}),
+  userFavorites: PropTypes.shape({}),
   fetchUserFavorites: PropTypes.func.isRequired,
   selectedRecipe: PropTypes.number,
   deletePost: PropTypes.func.isRequired,

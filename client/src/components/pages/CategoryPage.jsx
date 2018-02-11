@@ -21,23 +21,35 @@ import resetPage from '../../utils/resetPage';
 import sad from '../../../assets/css/img/sad.png';
 import happySmiley from '../../../assets/css/img/happy_smiley.png';
 
-class CategoryPage extends Component {
-  constructor() {
-    super();
+/**
+ * @summary - CategoryPage class declaration
+ * @class CategoryPage
+ * @extends {Component}
+ */
+export class CategoryPage extends Component {
+  /**
+   * Component constructor
+   * @param {object} props
+   * @memberOf IndexPage
+   */
+  constructor(props) {
+    super(props);
     this.state = {
       isLoading: true,
       firstLoad: true,
       limit: 9,
       changeSmiley: false
     };
+    this.toggleSmiley = this.toggleSmiley.bind(this);
+    this.setPagination = this.setPagination.bind(this);
+    this.hasRecipes = this.hasRecipes.bind(this);
+    this.handlePageClick = this.handlePageClick.bind(this);
   }
 
   /**
    * @method componentDidMount
    *
-   * @param {void} void
-   *
-   * @returns {void}
+   * @returns {undefined}
    */
   componentDidMount() {
     const { categoryName } = this.props.match.params;
@@ -50,14 +62,10 @@ class CategoryPage extends Component {
   /**
    * @method componentDidUpdate
    *
-   * @param {void} void
-   *
-   * @returns {void}
+   * @returns {undefined}
    */
   componentDidUpdate() {
     materializeJavascript();
-    // $('.dropdown-button').dropdown();
-    // $('.button-collapse').sideNav();
   }
 
   onClick = () => {
@@ -71,7 +79,7 @@ class CategoryPage extends Component {
    *
    * @returns {object} pagination props
    */
-  setPagination = () => {
+  setPagination() {
     if (this.hasRecipes()) {
       const { pagination: { page, pageCount } } = this.props.recipes;
       return {
@@ -85,12 +93,12 @@ class CategoryPage extends Component {
     };
   }
 
-  happySmiley = () => {
+  toggleSmiley() {
     const { changeSmiley } = this.state;
     this.setState({ changeSmiley: !changeSmiley });
   }
 
-  hasRecipes = () => {
+  hasRecipes() {
     if (isEmpty(this.props.recipes)) {
       return false;
     }
@@ -105,17 +113,25 @@ class CategoryPage extends Component {
   *
   * @returns {void}
   */
- handlePageClick = ({ selected }) => {
-   this.setState({ isLoading: true });
-   const page = selected + 1;
-   const { limit } = this.state;
-   localStorage.setItem('currentCategoryPage', page);
-   const currentPage = localStorage.getItem('currentCategoryPage');
-   const { categoryName } = this.props.match.params;
-   this.props.fetchRecipesByCategory(currentPage, limit, categoryName)
-     .then(() => this.setState({ isLoading: false }));
- }
+  handlePageClick({ selected }) {
+    this.setState({ isLoading: true });
+    const page = selected + 1;
+    const { limit } = this.state;
+    localStorage.setItem('currentCategoryPage', page);
+    const currentPage = localStorage.getItem('currentCategoryPage');
+    const { categoryName } = this.props.match.params;
+    this.props.fetchRecipesByCategory(currentPage, limit, categoryName)
+      .then(() => this.setState({ isLoading: false }));
+  }
 
+  /**
+  * Render recipes by category
+  * @method renderCategoryRecipes
+  *
+  * @param {number} index
+  *
+  * @returns {JSX} JSX
+  */
   renderCategoryRecipes = (index) => {
     const recipe = this.props.recipes.recipes[index];
     return (
@@ -130,6 +146,14 @@ class CategoryPage extends Component {
     );
   }
 
+  /**
+  * Render category link items
+  * @method renderCategoryRecipes
+  *
+  * @param {number} index
+  *
+  * @returns {JSX} JSX
+  */
   renderCategoryLinks = (index) => {
     const category = categories[index];
     const { categoryName } = this.props.match.params;
@@ -236,8 +260,8 @@ class CategoryPage extends Component {
                     <h6>
                       No recipe has been created for {pascalCase(categoryName)}
                       yet. Care to <Link
-                        onMouseEnter={this.happySmiley}
-                        onMouseLeave={this.happySmiley}
+                        onMouseEnter={this.toggleSmiley}
+                        onMouseLeave={this.toggleSmiley}
                         to="/recipes/new"
                       >add</Link> one?
                     </h6>
@@ -281,5 +305,9 @@ CategoryPage.propTypes = {
 };
 
 export default connect(mapStateToProps,
-  { upvoteAction, downvoteAction, fetchRecipesByCategory }
+  {
+    upvoteAction,
+    downvoteAction,
+    fetchRecipesByCategory
+  }
 )(CategoryPage);

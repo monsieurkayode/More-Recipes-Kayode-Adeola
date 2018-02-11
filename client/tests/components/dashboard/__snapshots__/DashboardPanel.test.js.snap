@@ -1,0 +1,226 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The DashboardPanel Component should render correctly 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "blank",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <DashboardPanel
+      user={
+        Object {
+          "username": "username",
+        }
+      }
+    >
+      <div
+        className="col l3 teal hide-on-med-and-down"
+        id="dash-panel"
+      >
+        <div
+          className="card teal z-depth-0"
+          id="profile-page-header"
+        >
+          <div
+            className="card-image"
+          >
+            <img
+              alt="user-background"
+              className="responsive-img"
+              id="dash-img"
+              src="test-file-stub"
+            />
+            <div
+              className="card-profile-image"
+            >
+              <Avatar
+                className="card-profile-avatar"
+                color="#345"
+                email={null}
+                facebookId={null}
+                fgColor="#FFF"
+                googleId={null}
+                maxInitials={null}
+                md5Email={null}
+                name="username"
+                round={true}
+                size={80}
+                skypeId={null}
+                style={null}
+                textSizeRatio={3}
+                twitterHandle={null}
+                unstyled={false}
+                value={null}
+                vkontakteId={null}
+              >
+                <div
+                  className="card-profile-avatar"
+                  style={
+                    Object {
+                      "borderRadius": 500,
+                      "display": "inline-block",
+                      "height": 80,
+                      "width": 80,
+                    }
+                  }
+                >
+                  <div
+                    style={
+                      Object {
+                        "background": "#345",
+                        "borderRadius": "100%",
+                        "color": "#FFF",
+                        "font": "26px Helvetica, Arial, sans-serif",
+                        "height": 80,
+                        "lineHeight": "80px",
+                        "textAlign": "center",
+                        "textTransform": "uppercase",
+                        "width": 80,
+                      }
+                    }
+                  >
+                    U
+                  </div>
+                </div>
+              </Avatar>
+            </div>
+          </div>
+          <div
+            id="dash-links"
+          >
+            <div
+              className="collection"
+            >
+              <a
+                className="collection-item teal"
+                id="dashboard-parent"
+              >
+                <strong>
+                  <span
+                    className="fa fa-dashboard"
+                  />
+                   Dashboard
+                </strong>
+              </a>
+              <br />
+              <div
+                className="tabs-vertical"
+                id="myTab"
+              >
+                <ul
+                  className="tabs teal"
+                >
+                  <li
+                    className="tab"
+                  >
+                    <Link
+                      className="white-text"
+                      replace={false}
+                      to="/dashboard/profile"
+                    >
+                      <a
+                        className="white-text"
+                        href="/dashboard/profile"
+                        onClick={[Function]}
+                      >
+                        <i
+                          className="fa fa-vcard-o"
+                        />
+                         My Profile
+                      </a>
+                    </Link>
+                  </li>
+                  <li
+                    className="tab"
+                  >
+                    <Link
+                      className="white-text"
+                      replace={false}
+                      to="/dashboard/recipes"
+                    >
+                      <a
+                        className="white-text"
+                        href="/dashboard/recipes"
+                        onClick={[Function]}
+                      >
+                        <i
+                          className="fa fa-briefcase"
+                        />
+                         My Recipes
+                      </a>
+                    </Link>
+                  </li>
+                  <li
+                    className="tab"
+                  >
+                    <Link
+                      className="white-text"
+                      replace={false}
+                      to="/dashboard/favorites"
+                    >
+                      <a
+                        className="white-text"
+                        href="/dashboard/favorites"
+                        onClick={[Function]}
+                      >
+                        <i
+                          className="fa fa-heart"
+                        />
+                         Favorite Recipes
+                      </a>
+                    </Link>
+                  </li>
+                  <li
+                    className="tab"
+                  >
+                    <Link
+                      className="white-text"
+                      replace={false}
+                      to="/dashboard/notifications"
+                    >
+                      <a
+                        className="white-text"
+                        href="/dashboard/notifications"
+                        onClick={[Function]}
+                      >
+                        <i
+                          className="fa fa-comments-o"
+                        />
+                         Notifications
+                        <span
+                          className="red new badge"
+                          id="not-badge"
+                        >
+                          10
+                        </span>
+                      </a>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </DashboardPanel>
+  </Router>
+</BrowserRouter>
+`;

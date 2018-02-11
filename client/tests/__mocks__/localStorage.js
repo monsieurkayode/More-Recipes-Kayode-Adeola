@@ -11,7 +11,7 @@ export class LocalStorage {
    * @memberOf LocalStorage
    */
   constructor() {
-    this.store = {};
+    this.data = {};
   }
 
   /**
@@ -24,7 +24,7 @@ export class LocalStorage {
    * @return {void} void
    */
   setItem = (key, value) => {
-    this.store[key] = value;
+    this.data[key] = value;
   }
 
   /**
@@ -35,7 +35,7 @@ export class LocalStorage {
    *
    * @return {string} any
    */
-  getItem = key => this.store[key] || null;
+  getItem = key => this.data[key] || null;
 
   /**
    * Simulate localstorage removeItem
@@ -46,7 +46,7 @@ export class LocalStorage {
    * @return {void} void
    */
   removeItem = (key) => {
-    delete this.store[key];
+    delete this.data[key];
   }
 
   /**
@@ -56,6 +56,6 @@ export class LocalStorage {
    * @return {void} void
    */
   clear = () => {
-    this.store = {};
+    this.data = {};
   }
 }

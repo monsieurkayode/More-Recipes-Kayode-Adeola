@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The LandingNavbar Component should render correctly 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "blank",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <LandingNavBar>
+      <div
+        className="navbar-fixed"
+      >
+        <nav
+          className="header"
+        >
+          <div
+            className="nav-wrapper"
+          >
+            <Link
+              className="brand-logo font-effect-3d-float logo hide-on-small-only"
+              replace={false}
+              to="/"
+            >
+              <a
+                className="brand-logo font-effect-3d-float logo hide-on-small-only"
+                href="/"
+                onClick={[Function]}
+              >
+                More-Recipes
+              </a>
+            </Link>
+            <a
+              className="button-collapse"
+              data-activates="navlink"
+              href=""
+            >
+              <i
+                className="material-icons"
+              >
+                menu
+              </i>
+            </a>
+            <ul
+              className="right hide-on-med-and-down"
+            >
+              <li>
+                <SearchBar>
+                  <form
+                    id="nav-search"
+                  >
+                    <input
+                      className="white input-fa"
+                      placeholder=" Search"
+                      type="search"
+                    />
+                  </form>
+                </SearchBar>
+              </li>
+              <li>
+                <Link
+                  replace={false}
+                  to="/"
+                >
+                  <a
+                    href="/"
+                    onClick={[Function]}
+                  >
+                    <i
+                      className="fa fa-heart"
+                    />
+                     Top Recipes
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  id="new-post"
+                  replace={false}
+                  to="/recipes/new"
+                >
+                  <a
+                    href="/recipes/new"
+                    id="new-post"
+                    onClick={[Function]}
+                  >
+                    <i
+                      className="fa fa-pencil-square-o"
+                    />
+                     New Post
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="waves-effect waves-light btn navbtn"
+                  replace={false}
+                  to="/signin"
+                >
+                  <a
+                    className="waves-effect waves-light btn navbtn"
+                    href="/signin"
+                    onClick={[Function]}
+                  >
+                    Login
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="waves-effect waves-light btn navbtn"
+                  replace={false}
+                  to="/signup"
+                >
+                  <a
+                    className="waves-effect waves-light btn navbtn"
+                    href="/signup"
+                    onClick={[Function]}
+                  >
+                    Sign Up
+                  </a>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </LandingNavBar>
+  </Router>
+</BrowserRouter>
+`;

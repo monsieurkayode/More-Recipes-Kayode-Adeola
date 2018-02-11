@@ -2,7 +2,7 @@
 
 import { fetchTopRecipes } from '../../src/actions';
 import actionTypes from '../../src/actions/actionTypes';
-import actionSeeders from '../seeders/actionSeeders';
+import mockData from '../__mocks__/mockData';
 
 
 describe('Fetch Top Recipe Posts', () => {
@@ -11,7 +11,7 @@ describe('Fetch Top Recipe Posts', () => {
       mock.reset();
     });
 
-    const { fetchTopRecipesResponse } = actionSeeders;
+    const { fetchTopRecipesResponse } = mockData;
 
     it('should dispatch FETCH_TOP_RECIPES action when top recipes are fetched',
       (done) => {

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The PostRecipePage Component should render correctly 1`] = `
+<div>
+  <Connect(HomeNavbar) />
+  <div
+    className="row center-align"
+  >
+    <div
+      className="col s12 l6 m8 offset-l3 offset-m2"
+    >
+      <h5
+        className="teal-text"
+      >
+        Create Recipe
+      </h5>
+    </div>
+  </div>
+  <ReduxForm
+    history={Object {}}
+  />
+  <Connect(SideNav) />
+</div>
+`;

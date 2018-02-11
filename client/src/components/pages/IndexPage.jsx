@@ -7,7 +7,7 @@ import {
   logoutAction,
   fetchTopRecipes,
 } from '../../actions';
-import { LandingNavbar, HomeNavbar, Banner } from '../headers';
+import { HomeNavbar, Banner } from '../headers';
 import {
   Category,
   Recipes,
@@ -25,7 +25,7 @@ import materializeJavascript from '../../utils/materializeJavascript';
  * @class IndexPage
  * @extends {Component}
  */
-class IndexPage extends Component {
+export class IndexPage extends Component {
   /**
    * Component constructor
    * @param {object} props
@@ -41,12 +41,10 @@ class IndexPage extends Component {
   /**
    * @method componentDidMount
    *
-   * @param {void} void
-   *
-   * @returns {void}
+   * @returns {undefined}
    */
-  componentWillMount() {
-    if (localStorage.token && this.props.isAuthenticated) {
+  componentDidMount() {
+    if (localStorage.getItem('token') && this.props.isAuthenticated) {
       const currentPage = localStorage.getItem('currentPage');
       this.props.fetchRecipesAction(currentPage)
         .then(() => this.setState({
@@ -59,9 +57,7 @@ class IndexPage extends Component {
   /**
    * @method componentDidUpdate
    *
-   * @param {void} void
-   *
-   * @returns {void}
+   * @returns {undefined}
    */
   componentDidUpdate() {
     materializeJavascript();
@@ -83,8 +79,7 @@ class IndexPage extends Component {
             { isLoading ?
               <Loader /> :
               <div>
-                { this.props.isAuthenticated ?
-                  <HomeNavbar {...this.props} /> : <LandingNavbar /> }
+                <HomeNavbar {...this.props} />
                 <Banner />
                 <WelcomeMessage />
                 <div className="row">

@@ -17,7 +17,7 @@ import resetPage from '../../utils/resetPage';
  * @class PostRecipe
  * @extends {Component}
  */
-class PostRecipe extends Component {
+export class PostRecipe extends Component {
   /**
    * Component constructor
    * @param {object} props
@@ -26,8 +26,7 @@ class PostRecipe extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedCategory: 'others',
-      isLoading: false
+      selectedCategory: 'others'
     };
   }
 

@@ -23,20 +23,30 @@ const signinAction = user => dispatch =>
       user = decode(Token).user;
       Materialize
         .toast(`Welcome ${user.username}`, 4000, 'grey darken-2');
-      dispatch({ type: actionTypes.SIGNIN_SUCCESSFUL, payload: user });
+      dispatch(
+        {
+          type: actionTypes.SIGNIN_SUCCESSFUL,
+          payload: user
+        }
+      );
     })
     .catch((error) => {
       if (error.response && error.response.status === 401) {
         const { message } = error.response.data;
         Materialize.toast(message, 4000, 'red');
-        dispatch({
-          type: actionTypes.SIGNIN_AUTHENTICATION_ERROR,
-          payload: message
-        });
+        dispatch(
+          {
+            type: actionTypes.SIGNIN_AUTHENTICATION_ERROR
+          }
+        );
       } else {
         const message = 'An error occured!';
         Materialize.toast(message, 4000, 'red');
-        dispatch({ type: actionTypes.SIGNIN_UNSUCCESSFUL, payload: message });
+        dispatch(
+          {
+            type: actionTypes.SIGNIN_UNSUCCESSFUL
+          }
+        );
       }
     });
 

@@ -17,7 +17,7 @@ import sad from '../../../assets/css/img/sad.png';
  * @class Recipes
  * @extends {Component}
  */
-class Recipes extends Component {
+export class Recipes extends Component {
   /**
    * Component constructor
    * @param {void} void

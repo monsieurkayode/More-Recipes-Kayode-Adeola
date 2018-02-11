@@ -2,10 +2,10 @@
 
 import actionTypes from '../../src/actions/actionTypes';
 import { signupAction } from '../../src/actions';
-import actionSeeders from '../seeders/actionSeeders';
+import mockData from '../__mocks__/mockData';
 
 const setup = () => {
-  const { userDetails, signupResponse } = actionSeeders;
+  const { userDetails, signupResponse } = mockData;
   return {
     setAuthorizationToken: jest.fn(),
     userDetails,
@@ -52,8 +52,7 @@ describe('User Authentication', () => {
     (done) => {
       const expectedActions = [
         {
-          type: actionTypes.SIGNUP_VALIDATION_USER_ERROR,
-          payload: 'Username already exists'
+          type: actionTypes.SIGNUP_VALIDATION_USER_ERROR
         }
       ];
 
@@ -77,8 +76,7 @@ describe('User Authentication', () => {
     (done) => {
       const expectedActions = [
         {
-          type: actionTypes.SIGNUP_VALIDATION_EMAIL_ERROR,
-          payload: 'Email already exists'
+          type: actionTypes.SIGNUP_VALIDATION_EMAIL_ERROR
         }
       ];
 
@@ -101,8 +99,7 @@ describe('User Authentication', () => {
       (done) => {
         const expectedActions = [
           {
-            type: actionTypes.SIGNUP_UNSUCCESSFUL,
-            payload: 'An error occured! Please try again'
+            type: actionTypes.SIGNUP_UNSUCCESSFUL
           }
         ];
 

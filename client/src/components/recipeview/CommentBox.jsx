@@ -11,7 +11,7 @@ import validate from '../../utils/validateInput';
  * @class CommentBox
  * @extends {Component}
  */
-class CommentBox extends Component {
+export class CommentBox extends Component {
   /**
    * Component constructor
    * @param {object} props

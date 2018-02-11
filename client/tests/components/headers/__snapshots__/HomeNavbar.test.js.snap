@@ -1,0 +1,231 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The HomeNavbar Component should render correctly 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <BrowserRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "blank",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <Connect(HomeNavbar)
+        logoutAction={[MockFunction]}
+      >
+        <HomeNavbar
+          logoutAction={[Function]}
+          user={
+            Object {
+              "username": "username",
+            }
+          }
+        >
+          <div
+            className="navbar-fixed"
+          >
+            <nav
+              className="header"
+            >
+              <div
+                className="nav-wrapper"
+              >
+                <Link
+                  className="brand-logo font-effect-3d-float logo"
+                  onClick={[Function]}
+                  replace={false}
+                  style={
+                    Object {
+                      "whiteSpace": "nowrap",
+                    }
+                  }
+                  to="/"
+                >
+                  <a
+                    className="brand-logo font-effect-3d-float logo"
+                    href="/"
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "whiteSpace": "nowrap",
+                      }
+                    }
+                  >
+                    More-Recipes
+                  </a>
+                </Link>
+                <a
+                  className="button-collapse"
+                  data-activates="navlink"
+                  href=""
+                >
+                  <i
+                    className="material-icons"
+                  >
+                    menu
+                  </i>
+                </a>
+                <ul
+                  className="right hide-on-med-and-down"
+                >
+                  <li>
+                    <SearchBar>
+                      <form
+                        id="nav-search"
+                      >
+                        <input
+                          className="white input-fa"
+                          placeholder=" Search"
+                          type="search"
+                        />
+                      </form>
+                    </SearchBar>
+                  </li>
+                  <li>
+                    <Link
+                      onClick={[Function]}
+                      replace={false}
+                      to="/"
+                    >
+                      <a
+                        href="/"
+                        onClick={[Function]}
+                      >
+                        <i
+                          className="fa fa-home"
+                        />
+                         Home
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      id="new-post"
+                      replace={false}
+                      to="/recipes/new"
+                    >
+                      <a
+                        href="/recipes/new"
+                        id="new-post"
+                        onClick={[Function]}
+                      >
+                        <i
+                          className="fa fa-pencil-square-o"
+                        />
+                         Add Recipe
+                      </a>
+                    </Link>
+                  </li>
+                  <li
+                    className="right hide-on-med-and-down return"
+                  >
+                    <a
+                      className="dropdown-button"
+                      data-activates="user-dropdown"
+                    >
+                      <span
+                        className="fa fa-lg fa-user-circle"
+                      />
+                       
+                      username
+                       
+                      <span
+                        className="fa fa-lg fa-caret-down"
+                      />
+                    </a>
+                    <UserMenu
+                      logoutAction={[Function]}
+                      user={
+                        Object {
+                          "username": "username",
+                        }
+                      }
+                    >
+                      <ul
+                        className="dropdown-content"
+                        id="user-dropdown"
+                      >
+                        <li>
+                          <Link
+                            replace={false}
+                            to="/recipes/new"
+                          >
+                            <a
+                              href="/recipes/new"
+                              onClick={[Function]}
+                            >
+                              <span
+                                className="fa fa-lg fa-plus-circle"
+                              />
+                               Recipe
+                            </a>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            replace={false}
+                            to="/dashboard/recipes"
+                          >
+                            <a
+                              href="/dashboard/recipes"
+                              onClick={[Function]}
+                            >
+                              <span
+                                className="fa fa-lg fa-dashboard"
+                              />
+                               Dashboard
+                            </a>
+                          </Link>
+                        </li>
+                        <li
+                          className="divider"
+                        />
+                        <li>
+                          <a
+                            onClick={[Function]}
+                          >
+                            <span
+                              className="fa fa-lg fa-sign-out"
+                            />
+                             Logout
+                          </a>
+                        </li>
+                      </ul>
+                    </UserMenu>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </HomeNavbar>
+      </Connect(HomeNavbar)>
+    </Router>
+  </BrowserRouter>
+</Provider>
+`;

@@ -2,10 +2,10 @@
 
 import { postReview } from '../../src/actions';
 import actionTypes from '../../src/actions/actionTypes';
-import actionSeeders from '../seeders/actionSeeders';
+import mockData from '../__mocks__/mockData';
 
 const setup = () => {
-  const { postReviewResponse } = actionSeeders;
+  const { postReviewResponse } = mockData;
   return {
     recipeId: 1,
     comment: 'Awesome recipe',
