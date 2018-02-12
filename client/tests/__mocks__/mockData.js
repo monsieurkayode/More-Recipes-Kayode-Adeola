@@ -274,5 +274,78 @@ export default {
         username: 'username'
       }
     }
-  }
+  },
+
+  recipeFetched: {
+    status: 'success',
+    message: 'Showing 1 of 1 recipes found',
+    recipe: {
+      id: 1,
+      views: 0,
+      upvote: 0,
+      downvote: 0,
+      recipeName: 'Chicken Soup',
+      category: 'specials',
+      ingredients: `**A list of ingredients for preparing Chicken soup**
+                  * 1 (3 pound) whole chicken
+                  * 4 carrots, halved
+                  * 4 stalks celery, halved
+                  * 1 large onion, halved
+                  * water to cover
+                  * salt and pepper to taste
+                  * 1 teaspoon chicken bouillon granules (optional)
+                  * 1/2 teaspoon lemonade`,
+      instructions: `* Put the chicken, carrots, celery and onion in a large
+                  soup pot and cover with cold water. Heat and simmer, 
+                  uncovered, until the chicken meat falls off of the bones
+                  (skim off foam every so often).
+                  * Take everything out of the pot. Strain the broth. 
+                  Pick the meat off of the bones and chop the carrots, celery 
+                  and onion. Season the broth with salt, pepper and chicken 
+                  bouillon to taste, if desired. Return the chicken, carrots, 
+                  celery and onion to the pot, stir together, and serve.`,
+      image: 'spice.jpg',
+      createdAt: '2018-02-05T07:00:47.980Z'
+    }
+  },
+  fetchFavoritesResponse: {
+    status: 'success',
+    message: 'Showing 1 of 1 recipes found',
+    pagination: {
+      page: 1,
+      pageCount: 1,
+      pageSize: 1,
+      totalCount: 1
+    },
+    recipes: [{
+      Recipe: {
+        id: 1,
+        views: 0,
+        upvote: 0,
+        downvote: 0,
+        recipeName: 'Chicken Soup',
+        category: 'specials',
+        ingredients: `**A list of ingredients for preparing Chicken soup**
+                  * 1 (3 pound) whole chicken
+                  * 4 carrots, halved
+                  * 4 stalks celery, halved
+                  * 1 large onion, halved
+                  * water to cover
+                  * salt and pepper to taste
+                  * 1 teaspoon chicken bouillon granules (optional)
+                  * 1/2 teaspoon lemonade`,
+        instructions: `* Put the chicken, carrots, celery and onion in a large
+                  soup pot and cover with cold water. Heat and simmer, 
+                  uncovered, until the chicken meat falls off of the bones
+                  (skim off foam every so often).
+                  * Take everything out of the pot. Strain the broth. 
+                  Pick the meat off of the bones and chop the carrots, celery 
+                  and onion. Season the broth with salt, pepper and chicken 
+                  bouillon to taste, if desired. Return the chicken, carrots, 
+                  celery and onion to the pot, stir together, and serve.`,
+        image: 'spice.jpg',
+        createdAt: '2018-02-05T07:00:47.980Z'
+      }
+    }]
+  },
 };
