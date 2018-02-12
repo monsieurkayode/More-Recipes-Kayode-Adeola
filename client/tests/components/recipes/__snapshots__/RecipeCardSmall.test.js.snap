@@ -174,7 +174,7 @@ exports[`The RecipeCardSmall Component should render correctly 1`] = `
                     <p
                       className="created-at"
                     >
-                      February 11 10:57 pm
+                      February 12 3:12 am
                     </p>
                   </span>
                 </span>

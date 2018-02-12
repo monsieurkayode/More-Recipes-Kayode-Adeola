@@ -58,7 +58,7 @@ const signinReducer = (state = initialState, action) => {
     case actionTypes.LOGOUT_USER:
       return {
         ...state,
-        success: isEmpty(action.payload),
+        success: !isEmpty(action.payload),
         isAuthenticated: !isEmpty(action.payload),
         user: action.payload
       };
