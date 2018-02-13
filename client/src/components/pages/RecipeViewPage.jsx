@@ -79,7 +79,10 @@ export class RecipeViewPage extends Component {
    */
   componentDidUpdate() {
     $('.dropdown-button').dropdown();
-    $('.button-collapse').sideNav();
+    $('.button-collapse').sideNav({
+      closeOnClick: true,
+      draggable: false
+    });
     $('.materialboxed').materialbox();
   }
 

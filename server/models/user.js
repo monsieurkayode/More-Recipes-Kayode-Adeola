@@ -41,7 +41,34 @@ const userModel = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
+    firstName: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [3, 30],
+          msg: 'First name must be minimum 3 and maximum 30 letters'
+        }
+      }
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [3, 30],
+          msg: 'Last name must be minimum 3 and maximum 30 letters'
+        }
+      }
+    },
+    bio: {
+      type: DataTypes.TEXT
+    },
+    imageUrl: {
+      type: DataTypes.STRING
+    },
+    dashCtrlImageUrl: {
+      type: DataTypes.STRING
+    },
   }, {
     hooks: {
       beforeCreate: (user) => {

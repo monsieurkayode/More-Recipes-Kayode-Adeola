@@ -66,11 +66,67 @@ const changePassword = (req, res) => User
           }));
       }
     }
-    return res.status(401).send({
-      status: 'fail',
-      message: 'Your request could not be authorized'
-    });
+
+    return errorHandler(401, 'Your request could not be authorized', res);
   })
   .catch(() => errorHandler(500, 'An error occured!', res));
 
-export { signup, changePassword };
+const getUserDetails = (req, res) => User
+  .findById(req.decoded.user.id)
+  .then((user) => {
+    if (!user) {
+      return errorHandler(404, 'User does not exist', res);
+    }
+
+    if (req.decoded.user.id === user.id) {
+      return res.status(200).send({
+        status: 'success',
+        message: 'User profile fetched successfully',
+        userDetails: {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          bio: user.bio,
+          imageUrl: user.imageUrl,
+          dashCtrlImageUrl: user.dashCtrlImageUrl
+        }
+      });
+    }
+    return errorHandler(401, 'Your request could not be authorized', res);
+  })
+  .catch(() => errorHandler(500, 'An error occured!', res));
+
+const updateUserProfile = (req, res) => User
+  .findById(req.decoded.user.id)
+  .then((user) => {
+    if (!user) {
+      return errorHandler(404, 'User does not exist', res);
+    }
+    if (req.decoded.user.id === user.id) {
+      return user
+        .update({
+          firstName: req.body.firstName || user.firstName,
+          lastName: req.body.lastName || user.lastName,
+          bio: req.body.bio || user.bio,
+          imageUrl: req.upload || user.imageUrl,
+        }, {
+          fields: [
+            'firstName', 'lastName', 'bio', 'imageUrl'
+          ]
+        })
+        .then(() => res.status(200).send({
+          status: 'success',
+          message: 'Profile saved',
+          userDetails: {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            bio: user.bio,
+            imageUrl: user.imageUrl,
+            dashCtrlImageUrl: user.dashCtrlImageUrl
+          }
+        }));
+    }
+    return errorHandler(401, 'Your request could not be authorized', res);
+  })
+  .catch(() => errorHandler(500, 'An error occured!', res));
+
+export { signup, changePassword, updateUserProfile, getUserDetails };

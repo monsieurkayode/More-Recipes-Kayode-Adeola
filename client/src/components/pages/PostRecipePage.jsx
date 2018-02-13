@@ -19,7 +19,10 @@ class PostRecipePage extends Component {
    */
   componentDidMount() {
     $('.dropdown-button').dropdown();
-    $('.button-collapse').sideNav();
+    $('.button-collapse').sideNav({
+      closeOnClick: true,
+      draggable: false
+    });
   }
 
   /**

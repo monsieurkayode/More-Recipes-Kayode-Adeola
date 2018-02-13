@@ -31,9 +31,7 @@ export class SignupForm extends Component {
   /**
    * @method componentWillMount
    *
-   * @param {void} void
-   *
-   * @returns {void}
+   * @returns {undefined}
    */
   componentWillMount() {
     if (this.props.isAuthenticated) {
@@ -46,7 +44,7 @@ export class SignupForm extends Component {
    *
    * @param {object} event
    *
-   * @returns {void}
+   * @returns {undefined}
    */
   handleInputChange = (event) => {
     this.setState({
@@ -58,9 +56,7 @@ export class SignupForm extends Component {
    * Handle client-side input validation
    * @method isValid
    *
-   * @param {void} void
-   *
-   * @returns {void}
+   * @returns {undefined}
    */
   isValid() {
     const { errors, isValid } = validateSignup(this.state);
@@ -76,7 +72,7 @@ export class SignupForm extends Component {
    *
    * @param {object} event
    *
-   * @returns {void}
+   * @returns {undefined}
    */
   handleSubmit = (event) => {
     event.preventDefault();

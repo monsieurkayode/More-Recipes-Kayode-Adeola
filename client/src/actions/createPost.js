@@ -1,7 +1,9 @@
 /* jshint esversion: 6 */
 import axios from 'axios';
+import { has } from 'lodash';
 
 import actionTypes from './actionTypes';
+
 
 /**
  * @summary - Action creator for creating a recipe post
@@ -15,19 +17,15 @@ import actionTypes from './actionTypes';
  * @returns {void}
  */
 const createPost = (category, values, callback) => (dispatch) => {
-  const formData = new FormData(); // eslint-disable-line
-  const { recipeName, ingredients, instructions } = values;
+  const formData = new FormData();
+  const { recipeName, ingredients, instructions, image } = values;
+  const checkImage = has(values, 'image');
 
   formData.append('recipeName', recipeName);
   formData.append('category', category);
   formData.append('ingredients', ingredients);
   formData.append('instructions', instructions);
-  formData.append(
-    'image',
-    values.image ?
-      values.image.file :
-      '../uploads/spice.jpg'
-  );
+  formData.append('image', checkImage ? image.file : {});
 
   return axios.post('/api/v1/recipes', formData)
     .then(({ data }) => {

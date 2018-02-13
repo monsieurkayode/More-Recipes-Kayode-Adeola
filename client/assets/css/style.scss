@@ -250,12 +250,23 @@ input {
 }
 
 #profile-form {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', sans-serif;
   textarea {
+    color: gray;
+    font-weight: bolder;
     border: 1px outset #eee;
     border-bottom: 1px solid #ddd;
+    min-height: 6rem;
+    max-height: 10rem;
+    overflow-y: scroll;
+    padding-left: .3rem;
+    width: 101%;
   }
   .browser-default {
     input[type="text"] {
+      font-size: 1.1rem;
+      font-weight: bolder;
+      padding-left: .3rem;
       border: 1px outset #eee;
       border-bottom: 1px solid #ddd;
     }
@@ -863,4 +874,45 @@ span.image-name {
 
 #view-more {
   margin-top: 1rem;
+}
+
+#profile-image-btn input[type=file] {
+  display:none;
+}
+
+#profile-image-btn {
+  display: flex;
+  width: 100%;
+  input[type=file] {
+    display:none;
+  }
+  label {
+    margin-top: .8rem;
+    width: 100%;
+    }
+    @media only screen and (max-width: 420px) {
+      label {
+        margin-bottom: .8rem;
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+      }
+  }
+}
+
+.profile-edit-btn {
+  margin-top: 1rem;
+  margin-right: -0.4rem;
+}
+
+.profile-btn-group {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  button {
+    margin: .4rem;
+    &:last-child{
+      margin-right: -0.4rem;
+    }
+  }
 }

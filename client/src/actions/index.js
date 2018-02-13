@@ -21,6 +21,8 @@ import searchPost from './searchPost';
 import selectRecipe from './selectRecipe';
 import isFetching from './isFetching';
 import fetchRecipesByCategory from './fetchRecipesByCategory';
+import fetchUserDetailsAction from './fetchUserDetails';
+import updateProfileAction from './updateProfile';
 
 export {
   signupAction,
@@ -44,5 +46,7 @@ export {
   searchPost,
   selectRecipe,
   isFetching,
-  fetchRecipesByCategory
+  fetchRecipesByCategory,
+  fetchUserDetailsAction,
+  updateProfileAction
 };
