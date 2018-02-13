@@ -150,13 +150,50 @@ const validatePassword = (req, res, next) => {
  * @returns {object} user inputs
  */
 const trimSpaces = (req, res, next) => {
-  req.body.username = req.body.username ? cleanString(req.body.username) : '';
-  req.body.email = req.body.email ? cleanString(req.body.email) : '';
+  req.body.username = req.body.username ?
+    cleanString(req.body.username.toLowerCase()) : '';
+  req.body.email = req.body.email ?
+    cleanString(req.body.email.toLowerCase()) : '';
   req.body.password = req.body.password ? cleanString(req.body.password) : '';
   req.body.confirmPassword = req.body.confirmPassword ?
     cleanString(req.body.confirmPassword) : '';
   next();
 };
 
-export { basicValidation, validateUsername,
-  emailValidation, validUser, validatePassword, trimSpaces };
+const validateProfileUpdate = (req, res, next) => {
+  const errors = {};
+  const { firstName, lastName } = req.body;
+
+  const exp = /^[A-Za-z-]+$/;
+
+  if (!validator.isLength(firstName, 3, 30)) {
+    errors.firstName = 'First name should be at least three characters';
+  }
+
+  if (!validator.isLength(lastName, 3, 30)) {
+    errors.lastName = 'Last name should be at least three characters';
+  }
+
+  if (!firstName.match(exp)) {
+    errors.firstName = 'First name must contain alphabets and hyphen only';
+  }
+
+  if (!lastName.match(exp)) {
+    errors.lastName = 'Last name must contain alphabets and hyphen only';
+  }
+
+  if (isEmpty(errors)) {
+    return next();
+  }
+  return errorHandler(400, errors, res);
+};
+
+export {
+  basicValidation,
+  validateUsername,
+  emailValidation,
+  validUser,
+  validatePassword,
+  trimSpaces,
+  validateProfileUpdate
+};

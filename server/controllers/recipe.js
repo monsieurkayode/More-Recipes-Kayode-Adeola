@@ -29,7 +29,7 @@ const createRecipe = (req, res) => Recipe
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
     userId: req.decoded.user.id,
-    image: req.body.image
+    image: req.upload || '../uploads/spice.jpg'
   }, {
     fields: [
       'recipeName', 'ingredients', 'instructions', 'userId', 'category', 'image'
@@ -56,7 +56,7 @@ const updateRecipe = (req, res) => Recipe
       category: req.body.category || recipe.category,
       ingredients: req.body.ingredients || recipe.ingredients,
       instructions: req.body.instructions || recipe.instructions,
-      image: req.body.image || recipe.image
+      image: req.upload || recipe.image
     })
     .then(() => {
       recipeHandler(200, recipe, res);

@@ -18,7 +18,10 @@ class SigninPage extends Component {
    * @returns {void}
    */
   componentDidMount() {
-    $('.button-collapse').sideNav();
+    $('.button-collapse').sideNav({
+      closeOnClick: true,
+      draggable: false
+    });
   }
 
   /**

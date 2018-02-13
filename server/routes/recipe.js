@@ -1,5 +1,5 @@
-/* jshint esversion: 6 */
 import express from 'express';
+
 import auth from '../middlewares/auth';
 import validate from '../middlewares/validateParams';
 import {
@@ -20,11 +20,13 @@ import {
   checkPermission
 } from '../middlewares/recipeValidation';
 import { validUser } from '../middlewares/userValidation';
-import { validateImage, uploadImage } from '../middlewares/uploadImage';
+import imageUploader, { uploadImage } from '../middlewares/uploadImage';
 
 const router = express.Router();
 
 const baseUrl = '/api/v1/recipes';
+
+const { validateImage } = imageUploader('image');
 
 router.post(
   `${baseUrl}`,

@@ -9,7 +9,7 @@
     "copy:files": "gulp",
     "server:dev": "nodemon --watch server --watch client --exec babel-node ./server/bin/www",
     "client:dev": "webpack-dev-server --config webpack.config.dev.js",
-    "start:devServer": "concurrently \"npm run server:dev\" \"npm run client:dev\" \"npm run test:watch\"",
+    "start:devServer": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "build:server": "rm -rf dist && babel --presets es2015 server -d dist/",
     "build:client": "rm -rf build && webpack --progress --config webpack.config.dev.js",
     "client:prod": "rm -rf build && webpack --config webpack.config.prod.js",
@@ -73,7 +73,7 @@
     "verbose": true
   },
   "author": "Kayode Adeola",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/monsieurkayode/More-Recipes/issues"
   },

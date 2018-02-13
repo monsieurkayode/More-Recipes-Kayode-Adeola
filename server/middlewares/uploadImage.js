@@ -3,7 +3,16 @@ import multer from 'multer';
 import cloudinary from '../config/cloudinary.config';
 import imageUploadValidation from '../middlewares/imageUploadValidation';
 
-const uploadImage = (req, res, next) => {
+/**
+ * @function uploadImage
+ *
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ *
+ * @returns {object} server response
+ */
+export const uploadImage = (req, res, next) => {
   if (!req.file) {
     return next();
   }
@@ -21,12 +30,14 @@ const uploadImage = (req, res, next) => {
         message: 'There was an error uploading your image'
       });
     } else {
-      req.body.image = secure_url; // eslint-disable-line
+      req.upload = secure_url; // eslint-disable-line
       next();
     }
   }).end(buffer);
 };
 
-const validateImage = multer(imageUploadValidation).single('image');
+const imageUploader = columnName => ({
+  validateImage: multer(imageUploadValidation).single(columnName),
+});
 
-export { uploadImage, validateImage };
+export default imageUploader;

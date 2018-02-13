@@ -12,6 +12,7 @@ import userFavorites from './userFavoritesReducer';
 import topRecipes from './topRecipesReducer';
 import selectedRecipe from './selectedRecipeReducer';
 import isLoading from './isFetchingReducer';
+import userDetails from './userProfileReducer';
 
 const rootReducer = combineReducers({
   isLoading,
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   userRecipes,
   userFavorites,
   topRecipes,
-  selectedRecipe
+  selectedRecipe,
+  userDetails
 });
 
 export default rootReducer;
