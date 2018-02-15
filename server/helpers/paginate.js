@@ -7,7 +7,6 @@
  * @param {string} status
  * @param {string} message
  * @param {object} result
- * @param {any} key
  *
  * @returns {object} pagination recipes
  */
@@ -22,9 +21,20 @@ const paginate = (page, limit, status, message, result) =>
       totalCount: result.count
     },
     recipes: result.rows
-  })
-;
+  });
 
+/**
+ * @description A helper function that returns
+ * the pagination object for reviews
+ *
+ * @param {integer} page
+ * @param {integer} limit
+ * @param {string} status
+ * @param {string} message
+ * @param {object} result
+ *
+ * @returns {object} pagination recipes
+ */
 const paginateReviews = (page, limit, status, message, result) =>
   ({
     status,
@@ -36,8 +46,7 @@ const paginateReviews = (page, limit, status, message, result) =>
       totalCount: result.count
     },
     comments: result.rows
-  })
-;
+  });
 
 /**
  * @description A helper function that validates
@@ -48,7 +57,7 @@ const paginateReviews = (page, limit, status, message, result) =>
  *
  * @returns {object} page limit offset
  */
-const validatePaginate = (req) => {
+const validatePagination = (req) => {
   const page = Number.isInteger(parseInt(req.query.page, 10))
   && req.query.page > 0 ? req.query.page : 1;
   const limit = Number.isInteger(parseInt(req.query.limit, 10))
@@ -58,14 +67,4 @@ const validatePaginate = (req) => {
   return { page, limit, offset };
 };
 
-const paginateComments = (req) => {
-  const page = Number.isInteger(parseInt(req.query.page, 10))
-  && req.query.page > 0 ? req.query.page : 1;
-  const limit = Number.isInteger(parseInt(req.query.limit, 10))
-  && req.query.limit > 0 ? req.query.limit : 10;
-  const offset = (page - 1) * limit;
-
-  return { page, limit, offset };
-};
-
-export { paginate, validatePaginate, paginateReviews, paginateComments };
+export { paginate, validatePagination, paginateReviews };

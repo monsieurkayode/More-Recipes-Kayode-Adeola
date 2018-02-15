@@ -1,12 +1,11 @@
-/* jshint esversion: 6 */
 import validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 
-import db from '../models/index';
+import models from '../models/index';
 import cleanString from '../../shared/cleanString';
 import { errorHandler } from '../helpers/responseHandler';
 
-const User = db.User;
+const User = models.User;
 
 /**
  * @description Middleware function for validating user input
@@ -48,7 +47,7 @@ const basicValidation = (req, res, next) => {
   if (isEmpty(errors)) {
     return next();
   }
-  return errorHandler(400, errors, res);
+  return errorHandler(422, errors, res);
 };
 
 /**
@@ -134,7 +133,7 @@ const validUser = (req, res, next) => {
 const validatePassword = (req, res, next) => {
   if (req.body.password !== req.body.confirmPassword) {
     return errorHandler(
-      409, 'Password does not match', res
+      422, 'Password does not match', res
     );
   }
   next();

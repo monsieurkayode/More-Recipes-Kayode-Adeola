@@ -1,5 +1,4 @@
-/* jshint esversion: 6 */
-import _ from 'lodash';
+import mapKeys from 'lodash/mapKeys';
 
 import actionTypes from '../actions/actionTypes';
 
@@ -16,7 +15,7 @@ const reviewsReducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.FETCH_REVIEWS:
       return {
-        comments: _.mapKeys(action.payload.comments, 'id'),
+        comments: mapKeys(action.payload.comments, 'id'),
         pagination: action.payload.pagination
       };
     case actionTypes.POST_REVIEW:

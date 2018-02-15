@@ -1,13 +1,20 @@
-import db from '../models/index';
+import models from '../models';
 import { errorHandler } from '../helpers/responseHandler';
-import { paginate, validatePaginate } from '../helpers/paginate';
+import { paginate, validatePagination } from '../helpers/paginate';
 
-const Favorite = db.Favorite,
-  Recipe = db.Recipe,
+const Favorite = models.Favorite,
+  Recipe = models.Recipe,
   include = [
-    'id', 'views', 'upvote', 'downvote',
-    'recipeName', 'category', 'ingredients',
-    'instructions', 'image', 'createdAt'
+    'id',
+    'views',
+    'image',
+    'upvote',
+    'downvote',
+    'category',
+    'createdAt',
+    'recipeName',
+    'ingredients',
+    'instructions',
   ];
 
 /**
@@ -42,7 +49,7 @@ const addFavorite = (req, res) => Favorite
 const getUserFavorites = (req, res, next) => {
   if (req.query.category) return next();
   const userId = req.decoded.user.id;
-  const { page, limit, offset } = validatePaginate(req);
+  const { page, limit, offset } = validatePagination(req);
   return Favorite
     .findAndCountAll({ where: { userId },
       include: [{
@@ -103,10 +110,12 @@ const deleteFavorite = (req, res) => {
   return Favorite
     .findOne({ where: { userId, recipeId } })
     .then(favorite =>
-      favorite.destroy().then(() => res.status(200).send({
-        status: 'success',
-        message: 'Recipe successfully removed from favorites'
-      })))
+      favorite
+        .destroy()
+        .then(() => res.status(200).send({
+          status: 'success',
+          message: 'Recipe successfully removed from favorites'
+        })))
     .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
@@ -122,8 +131,11 @@ const deleteFavorite = (req, res) => {
  * @returns {object} status message
  */
 const addRecipeCategory = (req, res) => Favorite
-  .findOne({ where:
-        { userId: req.decoded.user.id, recipeId: req.params.recipeId }
+  .findOne({
+    where: {
+      userId: req.decoded.user.id,
+      recipeId: req.params.recipeId
+    }
   })
   .then((recipe) => {
     if (req.body.category === 'undefined') {

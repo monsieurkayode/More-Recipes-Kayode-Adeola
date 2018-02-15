@@ -1,5 +1,6 @@
-/* jshint esversion: 6 */
-import _ from 'lodash';
+import mapKeys from 'lodash/mapKeys';
+import isEmpty from 'lodash/isEmpty';
+import omit from 'lodash/omit';
 
 import actionTypes from '../actions/actionTypes';
 
@@ -17,13 +18,13 @@ const userFavoritesReducer = (state = {}, action) => {
     case actionTypes.FETCH_USER_FAVORITES:
       return {
         pagination: action.payload.pagination,
-        recipes: _.mapKeys(action.payload.recipes, 'Recipe.id'),
+        recipes: mapKeys(action.payload.recipes, 'Recipe.id'),
       };
     case actionTypes.REMOVE_FAVORITE:
-      if (!_.isEmpty(state)) {
+      if (!isEmpty(state)) {
         return {
           ...state,
-          recipes: _.omit(state.recipes, action.payload),
+          recipes: omit(state.recipes, action.payload),
           pagination: {
             ...state.pagination,
             pageSize: state.pagination.pageSize - 1,

@@ -1,4 +1,3 @@
-/* jshint esversion: 6 */
 import mapKeys from 'lodash/mapKeys';
 import omit from 'lodash/omit';
 

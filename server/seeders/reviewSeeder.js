@@ -1,13 +1,8 @@
-const reviews = [
-  {
+export default {
+  review: {
     comment: 'This is an awesome recipe',
   },
-  {
-    comment: 'It would be nice if you could throw in some ginger',
-  },
-  {
-    comment: 'Pretty please can I have some?',
+  updateReview: {
+    comment: 'This is not an awesome recipe',
   }
-];
-
-export default reviews;
+};

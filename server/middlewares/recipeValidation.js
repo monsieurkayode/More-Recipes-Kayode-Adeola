@@ -1,13 +1,13 @@
 /* jshint esversion: 6 */
 import isNull from 'lodash/isEmpty';
 
-import db from '../models/index';
+import models from '../models';
 import isEmpty from '../helpers/isEmpty';
 import categories from '../../shared/categories';
 import cleanString from '../../shared/cleanString';
 import { errorHandler } from '../helpers/responseHandler';
 
-const Recipe = db.Recipe;
+const Recipe = models.Recipe;
 
 /**
  * @description Middleware function for handles input
@@ -43,7 +43,7 @@ const recipeBasicValidation = (req, res, next) => {
   if (isNull(errors)) {
     return next();
   }
-  return errorHandler(400, errors, res);
+  return errorHandler(422, errors, res);
 };
 
 /**
@@ -70,6 +70,16 @@ const recipeExists = (req, res, next) => {
     .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
+/**
+ * @description Middleware function that validates if recipe
+ * was created by current user
+ *
+ * @param {object} req http request object to server
+ * @param {object} res http response object from server
+ * @param {object} next
+ *
+ * @returns {(function|object)} response
+ */
 const checkPermission = (req, res, next) => {
   Recipe
     .find({ where:
@@ -88,6 +98,16 @@ const checkPermission = (req, res, next) => {
     .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
+/**
+ * @description Middleware function that validates if recipe
+ * has already been created by same user
+ *
+ * @param {object} req http request object to server
+ * @param {object} res http response object from server
+ * @param {object} next
+ *
+ * @returns {(function|object)} response
+ */
 const checkMultiplePost = (req, res, next) => {
   const { recipeName } = req.body;
   return Recipe

@@ -240,6 +240,7 @@ class UserProfile extends Component {
                     <textarea
                       name="bio"
                       value={this.state.bio}
+                      spellCheck={false}
                       onChange={this.handleInputChange}
                       disabled={this.state.disableForm}
                     />

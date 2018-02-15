@@ -1,8 +1,8 @@
-import db from '../models/index';
+import models from '../models';
 import { errorHandler } from '../helpers/responseHandler';
 
-const Favorite = db.Favorite;
-const Recipe = db.Recipe;
+const Favorite = models.Favorite;
+const Recipe = models.Recipe;
 
 /**
  * @description Middleware function for validating if a recipe exists
@@ -15,7 +15,11 @@ const Recipe = db.Recipe;
  */
 const validRecipe = (req, res, next) => {
   Recipe
-    .find({ where: { id: req.params.recipeId } })
+    .find({
+      where: {
+        id: req.params.recipeId
+      }
+    })
     .then((recipe) => {
       if (recipe) return next();
       return errorHandler(
@@ -51,6 +55,18 @@ const favoriteExists = (req, res, next) => {
     .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
+/**
+ * @description Middleware function for validating if a favorite
+ * has not been added by a user
+ *
+ * @function isValidFavorite
+ *
+ * @param {object} req http request object to server
+ * @param {object} res http response object from server
+ * @param {function} next
+ *
+ * @returns {object} status message
+ */
 const isValidFavorite = (req, res, next) => {
   Favorite
     .find({ where: {
@@ -67,4 +83,8 @@ const isValidFavorite = (req, res, next) => {
     })
     .catch(() => errorHandler(500, 'An error occured!', res));
 };
-export { validRecipe, favoriteExists, isValidFavorite };
+export {
+  validRecipe,
+  favoriteExists,
+  isValidFavorite
+};
