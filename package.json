@@ -22,7 +22,8 @@
     "test": "NODE_ENV=test nyc _mocha --report lcovonly --reporter spec --timeout 20000 server/test/index.test.js && cat ./coverage/lcov.info | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test:client": "jest /client -u --coverage",
-    "test:watch": "npm run test:client -- --watch"
+    "test:watch": "npm run test:client -- --watch",
+    "test:e2e": "NODE_ENV=test npm run unmigrate && NODE_ENV=test npm run migrate && NODE_ENV=test nightwatch"
   },
   "repository": {
     "type": "git",
@@ -63,8 +64,7 @@
       "./client/src/routes.jsx"
     ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-        "<rootDir>/client/tests/__mocks__/fileMock.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/client/tests/__mocks__/fileMock.js"
     },
     "collectCoverageFrom": [
       "client/src/**/*.{js,jsx}",
@@ -110,6 +110,7 @@
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^15.6.2",
     "redux-mock-store": "^1.5.1",
+    "selenium-standalone": "^6.12.0",
     "sinon": "^4.2.2",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.7.1",

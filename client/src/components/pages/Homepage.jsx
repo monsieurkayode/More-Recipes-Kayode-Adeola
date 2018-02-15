@@ -16,10 +16,10 @@ const Homepage = () => (
         <h3>Welcome to awesome tastefullness!</h3>
         <h5>Creating and sharing recipes has never been much fun</h5>
         <Link to="/signup" >
-          <button className="btn btn-home">Sign up</button>
+          <button id="signup" className="btn btn-home">Sign up</button>
         </Link>
         <Link to="/signin" >
-          <button className="btn btn-home">Sign In</button>
+          <button id="signin" className="btn btn-home">Sign In</button>
         </Link>
       </div>
     </div>
