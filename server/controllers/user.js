@@ -1,17 +1,17 @@
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 
-import db from '../models/index';
+import models from '../models';
 import cleanString from '../../shared/cleanString';
 import { errorHandler } from '../helpers/responseHandler';
 
 dotenv.load();
-const secret = process.env.secretKey;
-const issuer = process.env.issuer;
-const jwtid = process.env.jwtid;
-const expiresIn = process.env.expiresIn;
+const secret = process.env.SECRET_KEY;
+const issuer = process.env.ISSUER;
+const jwtid = process.env.JWT_ID;
+const expiresIn = process.env.EXPIRES_IN;
 
-const User = db.User;
+const User = models.User;
 
 /**
  *
@@ -67,7 +67,7 @@ const changePassword = (req, res) => User
       }
     }
 
-    return errorHandler(401, 'Your request could not be authorized', res);
+    return errorHandler(422, 'Your request could not be processed', res);
   })
   .catch(() => errorHandler(500, 'An error occured!', res));
 
@@ -104,13 +104,16 @@ const updateUserProfile = (req, res) => User
     if (req.decoded.user.id === user.id) {
       return user
         .update({
-          firstName: req.body.firstName || user.firstName,
-          lastName: req.body.lastName || user.lastName,
+          firstName: req.body.firstName.trim() || user.firstName,
+          lastName: req.body.lastName.trim() || user.lastName,
           bio: req.body.bio || user.bio,
           imageUrl: req.upload || user.imageUrl,
         }, {
           fields: [
-            'firstName', 'lastName', 'bio', 'imageUrl'
+            'firstName',
+            'lastName',
+            'bio',
+            'imageUrl'
           ]
         })
         .then(() => res.status(200).send({

@@ -123,7 +123,7 @@ export class Recipes extends Component {
         <p className="divider" />
         <div className="row">
           {this.hasRecipes() ?
-            <div>
+            <div id="recipes">
               {isLoading ? <Loader /> :
                 Object
                   .keys(this.props.recipes)

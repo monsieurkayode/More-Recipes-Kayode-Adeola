@@ -1,5 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
 
+import cleanString from '../../../shared/cleanString';
+
 /**
  * @description - Function for handling client-side validation
  * of user profile update
@@ -11,15 +13,15 @@ import isEmpty from 'lodash/isEmpty';
  */
 const validateProfileUpdate = (values) => {
   const errors = {};
-  const exp = /^[A-Za-z-]+$/;
+  const exp = /^[A-Za-z- ]+$/;
 
   if (!values.firstName || isEmpty(values.firstName)) {
     errors.firstName = 'First name field is required';
   }
-  if (values.firstName.length < 3) {
+  if (!isEmpty(values.firstName) && cleanString(values.firstName).length < 3) {
     errors.firstName = 'First name should be minimum of 3 characters';
   }
-  if (values.firstName.length > 30) {
+  if (!isEmpty(values.firstName) && cleanString(values.firstName).length > 30) {
     errors.firstName = 'First name should be maximum of 30 characters';
   }
   if (!isEmpty(values.firstName) && !values.firstName.match(exp)) {
@@ -28,10 +30,10 @@ const validateProfileUpdate = (values) => {
   if (!values.lastName || isEmpty(values.lastName)) {
     errors.lastName = 'Last name field is required';
   }
-  if (values.lastName.length < 3) {
+  if (!isEmpty(values.lastName) && cleanString(values.lastName).length < 3) {
     errors.lastName = 'Last name should be minimum of 3 characters';
   }
-  if (values.lastName.length > 30) {
+  if (!isEmpty(values.lastName) && cleanString(values.lastName).length > 30) {
     errors.lastName = 'Last name should be maximum of 30 characters';
   }
   if (!isEmpty(values.lastName) && !values.lastName.match(exp)) {

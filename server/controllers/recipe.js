@@ -1,17 +1,23 @@
-/* jshint esversion: 6 */
-import db from '../models/index';
-import { paginate, validatePaginate } from '../helpers/paginate';
+import models from '../models';
+import { paginate, validatePagination } from '../helpers/paginate';
 import {
   recipeHandler,
   errorHandler,
   handleResponse } from '../helpers/responseHandler';
 
-const Recipe = db.Recipe,
-  Favorite = db.Favorite,
+const Recipe = models.Recipe,
+  Favorite = models.Favorite,
   include = [
-    'id', 'views', 'upvote', 'downvote',
-    'recipeName', 'category', 'ingredients',
-    'instructions', 'image', 'createdAt'
+    'id',
+    'views',
+    'image',
+    'upvote',
+    'category',
+    'downvote',
+    'createdAt',
+    'recipeName',
+    'ingredients',
+    'instructions',
   ];
 
 /**
@@ -32,7 +38,12 @@ const createRecipe = (req, res) => Recipe
     image: req.upload || '../uploads/spice.jpg'
   }, {
     fields: [
-      'recipeName', 'ingredients', 'instructions', 'userId', 'category', 'image'
+      'recipeName',
+      'ingredients',
+      'instructions',
+      'userId',
+      'category',
+      'image'
     ]
   })
   .then(recipe => recipeHandler(201, recipe, res))
@@ -102,7 +113,7 @@ const getRecipes = (req, res, next) => {
       req.query.category ||
       req.query.name) return next();
 
-  const { page, limit, offset } = validatePaginate(req);
+  const { page, limit, offset } = validatePagination(req);
 
   return Recipe
     .findAndCountAll({
@@ -134,7 +145,7 @@ const getRecipes = (req, res, next) => {
  * @returns {object} status message recipe
  */
 const getUserRecipes = (req, res) => {
-  const { page, limit, offset } = validatePaginate(req);
+  const { page, limit, offset } = validatePagination(req);
   return Recipe
     .findAndCountAll({ where: { userId: req.decoded.user.id },
       attributes: include,
@@ -169,15 +180,17 @@ const viewRecipe = (req, res) => Recipe
   })
   .then((recipe) => {
     if (req.decoded.user.id !== recipe.userId) {
-      recipe.increment('views').then(() => Recipe
-        .findOne({ where: { id: req.params.recipeId },
-          attributes: include,
-        })
-        .then(result => res.status(200).send({
-          status: 'success',
-          message: `Viewing post with id of ${recipe.id}`,
-          recipe: result
-        })));
+      recipe
+        .increment('views')
+        .then(() => Recipe
+          .findOne({ where: { id: req.params.recipeId },
+            attributes: include,
+          })
+          .then(result => res.status(200).send({
+            status: 'success',
+            message: `Viewing post with id of ${recipe.id}`,
+            recipe: result
+          })));
     } else {
       Recipe
         .findOne({ where: { id: req.params.recipeId },
@@ -243,7 +256,7 @@ const searchRecipesByIngredients = (req, res, next) => {
   if (!req.query.ingredients) return next();
 
   const ingredients = req.query.ingredients.split(' ');
-  const { page, limit, offset } = validatePaginate(req);
+  const { page, limit, offset } = validatePagination(req);
 
   const query = ingredients.map(keyword => ({
     ingredients: {
@@ -283,7 +296,7 @@ const searchRecipesByIngredients = (req, res, next) => {
 const searchRecipesByCategory = (req, res, next) => {
   if (!req.query.category) return next();
   const category = req.query.category.split(' ');
-  const { page, limit, offset } = validatePaginate(req);
+  const { page, limit, offset } = validatePagination(req);
 
   const query = category.map(keyword => ({
     category: {
@@ -322,7 +335,7 @@ const searchRecipesByCategory = (req, res, next) => {
  */
 const searchRecipesByName = (req, res) => {
   const name = req.query.name.split(' ');
-  const { page, limit, offset } = validatePaginate(req);
+  const { page, limit, offset } = validatePagination(req);
 
   const query = name.map(keyword => ({
     recipeName: {
@@ -361,7 +374,7 @@ const searchRecipesByName = (req, res) => {
  */
 const searchUserFavsByCategory = (req, res) => {
   const category = req.query.category.split(' ');
-  const { page, limit, offset } = validatePaginate(req);
+  const { page, limit, offset } = validatePagination(req);
 
   const query = category.map(keyword => ({
     category: {

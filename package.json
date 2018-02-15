@@ -23,7 +23,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test:client": "jest /client -u --coverage",
     "test:watch": "npm run test:client -- --watch",
-    "test:e2e": "NODE_ENV=test npm run unmigrate && NODE_ENV=test npm run migrate && NODE_ENV=test nightwatch"
+    "test:e2e": "NODE_ENV=test npm run unmigrate && NODE_ENV=test npm run migrate && nightwatch"
   },
   "repository": {
     "type": "git",
@@ -105,7 +105,6 @@
     "expect": "^22.1.0",
     "jest": "^22.1.4",
     "jsdom": "^11.6.2",
-    "npm-run-all": "^4.1.2",
     "nyc": "^11.1.0",
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^15.6.2",
@@ -139,7 +138,6 @@
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
     "extract-text-webpack-plugin": "3.0.0",
-    "faker": "^4.1.0",
     "file-loader": "0.11.2",
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0",
@@ -179,7 +177,6 @@
     "redux": "^3.7.2",
     "redux-form": "^6.6.3",
     "redux-thunk": "^2.2.0",
-    "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
     "sequelize": "^3.30.4",
     "sequelize-cli": "^2.8.0",
@@ -193,7 +190,6 @@
     "validator": "^9.1.1",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^1.12.0",
-    "webpack-hot-middleware": "^2.20.0",
-    "webpack-merge": "^4.1.1"
+    "webpack-hot-middleware": "^2.20.0"
   }
 }

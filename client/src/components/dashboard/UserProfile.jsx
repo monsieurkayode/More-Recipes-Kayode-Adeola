@@ -56,10 +56,10 @@ class UserProfile extends Component {
         imageUrl
       } = nextProps.userDetails;
       this.setState({
-        bio,
-        firstName,
-        lastName,
-        imageUrl
+        bio: bio || '',
+        firstName: firstName || '',
+        lastName: lastName || '',
+        imageUrl: imageUrl || ''
       });
     }
   }
@@ -240,6 +240,7 @@ class UserProfile extends Component {
                     <textarea
                       name="bio"
                       value={this.state.bio}
+                      spellCheck={false}
                       onChange={this.handleInputChange}
                       disabled={this.state.disableForm}
                     />

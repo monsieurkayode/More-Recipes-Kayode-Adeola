@@ -1,13 +1,11 @@
-const favorite = [
-  {
-    category: 'Smoothies',
+export default {
+  smoothies: {
+    category: 'Smoothies'
   },
-  {
-    category: 'Salad',
+  salad: {
+    category: 'Salad'
   },
-  {
-    category: 'Fruit Smoothie',
+  fruitSmoothie: {
+    category: 'Fruit Smoothie'
   }
-];
-
-export default favorite;
+};

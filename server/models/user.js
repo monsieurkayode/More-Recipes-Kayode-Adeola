@@ -61,13 +61,13 @@ const userModel = (sequelize, DataTypes) => {
       }
     },
     bio: {
-      type: DataTypes.TEXT
+      type: DataTypes.TEXT,
     },
     imageUrl: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     dashCtrlImageUrl: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
   }, {
     hooks: {

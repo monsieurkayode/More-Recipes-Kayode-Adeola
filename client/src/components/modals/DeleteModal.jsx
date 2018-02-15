@@ -20,7 +20,7 @@ const DeleteModal = props => (
           Cancel
       </button>
       <button
-        onClick={props.handleAction.bind(// eslint-disable-line react/jsx-no-bind
+        onClick={props.handleAction.bind(// eslint-disable-line
           null, props.id
         )}
         className="modal-action modal-close delete chip"

@@ -1,18 +1,36 @@
 import validator from 'validator';
 
-import db from '../models/index';
+import models from '../models';
 import { errorHandler } from '../helpers/responseHandler';
 
-const Review = db.Review;
+const Review = models.Review;
 
+/**
+ * @description Function for validating comment input
+ *
+ * @param {*} req http request object to server
+ * @param {*} res http response object from server
+ * @param {*} next
+ *
+ * @returns {(object|function)} response
+ */
 const validateComment = (req, res, next) => {
   const { comment } = req.body;
   if (!comment || validator.isEmpty(comment)) {
-    return (errorHandler(400, 'Comment cannot be empty', res));
+    return (errorHandler(422, 'Comment cannot be empty', res));
   }
   next();
 };
 
+/**
+ * @description Function for validating if a review exists
+ *
+ * @param {*} req http request object to server
+ * @param {*} res http response object from server
+ * @param {*} next
+ *
+ * @returns {(object|function)} response
+ */
 const reviewExists = (req, res, next) => {
   Review
     .find({ where:
@@ -35,4 +53,7 @@ const reviewExists = (req, res, next) => {
     .catch(() => errorHandler(500, 'An error occured!', res));
 };
 
-export { validateComment, reviewExists };
+export {
+  validateComment,
+  reviewExists
+};

@@ -4,19 +4,19 @@
     "postdeploy": "npm run migrate"
   },
   "env": {
-    "expiresIn": {
+    "EXPIRES_IN": {
       "required": true
     },
-    "issuer": {
+    "ISSUER": {
       "required": true
     },
-    "jwtid": {
+    "JWT_ID": {
       "required": true
     },
     "NPM_CONFIG_PRODUCTION": {
       "required": true
     },
-    "secretKey": {
+    "SECRET_KEY": {
       "required": true
     },
     "SENDGRID_API_KEY": {

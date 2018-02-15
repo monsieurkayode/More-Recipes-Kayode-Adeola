@@ -7,12 +7,12 @@ const recipeModel = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: {
-          args: [3, 50],
-          msg: 'Title must be minimum 3 and maximum 50 characters'
+          args: [3, 30],
+          msg: 'Recipe name must be minimum 3 and maximum 30 characters'
         },
         notEmpty: {
           args: true,
-          msg: 'Title cannot be empty'
+          msg: 'Recipe name is required'
         }
       }
     },
@@ -21,7 +21,7 @@ const recipeModel = (sequelize, DataTypes) => {
       defaultValue: 'others',
       isIn: {
         args: [categories],
-        msg: 'Invalid category type!'
+        msg: 'Invalid category type selected'
       }
     },
     ingredients: {

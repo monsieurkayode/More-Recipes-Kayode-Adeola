@@ -3,6 +3,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import isEmail from '../../../shared/isEmail';
 import isAlphaNumeneric from '../../../shared/isAlphaNum';
+import cleanString from '../../../shared/cleanString';
 
 /**
  * @description - Function for handling client-side validation
@@ -18,13 +19,16 @@ const validateSignup = (values) => {
   if (!values.username || isEmpty(values.username)) {
     errors.username = 'Username is required';
   }
-  if (!isEmpty(values.username) && values.username.length < 3) {
+  if (!isEmpty(values.username)
+    && cleanString(values.username).length < 3) {
     errors.username = 'Username too short';
   }
-  if (!isEmpty(values.username) && values.username.length > 30) {
+  if (!isEmpty(values.username)
+    && cleanString(values.username).length > 30) {
     errors.username = 'Username too long';
   }
-  if (!isEmpty(values.username) && !isAlphaNumeneric(values.username)) {
+  if (!isEmpty(values.username)
+    && !isAlphaNumeneric(cleanString(values.username))) {
     errors.username = 'Username should contain alphabets and numbers only';
   }
   if (!values.email || isEmpty(values.email)) {
@@ -43,8 +47,9 @@ const validateSignup = (values) => {
     errors.confirmPassword = 'Confirm password';
   }
   if (values.password.length >= 6
+    && !isEmpty(values.confirmPassword)
     && values.password !== values.confirmPassword) {
-    errors.confirmPassword = 'Passwords does not match';
+    errors.confirmPassword = 'Passwords do not match';
   }
 
   return {

@@ -37,8 +37,8 @@ const createPost = (category, values, callback) => (dispatch) => {
       });
       callback(message);
     })
-    .catch(() => {
-      const message = 'An error occured!';
+    .catch((error) => {
+      const { message } = error.response.data;
       Materialize.toast(message, 4000, 'red');
       dispatch({ type: actionTypes.CREATE_POST_ERROR });
       dispatch({

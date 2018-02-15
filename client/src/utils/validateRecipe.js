@@ -13,7 +13,7 @@ const validateRecipe = (values) => {
     errors.recipeName = 'Please enter a recipe name';
   }
 
-  if (values.recipeName && values.recipeName.length > 50) {
+  if (values.recipeName && values.recipeName.length > 30) {
     errors.recipeName = 'Recipe name too long';
   }
 

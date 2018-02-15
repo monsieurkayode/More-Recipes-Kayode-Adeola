@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 
+/**
+ * @summary - UserNotification class declaration
+ * @class UserNotification
+ * @extends {Component}
+ */
 class UserNotification extends Component {
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     return (
       <div

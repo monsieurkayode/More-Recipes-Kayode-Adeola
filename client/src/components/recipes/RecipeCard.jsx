@@ -13,7 +13,6 @@ import { formatTime } from '../../utils/timeFormat';
 const RecipeCard = (props) => {
   const { recipe, selected, selectRecipe } = props;
   let time = recipe.createdAt;
-  // time = moment.utc(recipe.createdAt).format('MMMM DD h:mm a');
   time = formatTime(time, 'MMMM DD h:mm a');
   return (
     <div>

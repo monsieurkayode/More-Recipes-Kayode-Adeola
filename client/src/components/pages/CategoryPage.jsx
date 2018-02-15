@@ -93,11 +93,24 @@ export class CategoryPage extends Component {
     };
   }
 
+  /**
+   * Toggle smiley from sad face to
+   * happy face
+   * @method toggleSmiley
+   *
+   * @returns {undefined}
+   */
   toggleSmiley() {
     const { changeSmiley } = this.state;
     this.setState({ changeSmiley: !changeSmiley });
   }
 
+  /**
+   * Checks if there are recipes to display
+   * @method hasRecipes
+   *
+   * @returns {boolean} boolean
+   */
   hasRecipes() {
     if (isEmpty(this.props.recipes)) {
       return false;
@@ -201,6 +214,12 @@ export class CategoryPage extends Component {
     );
   }
 
+  /**
+   * Renders the component
+   * @method render
+   *
+   * @returns {JSX} JSX
+   */
   render() {
     const { recipes } = this.props.recipes;
     const { isLoading, firstLoad } = this.state;
@@ -259,7 +278,7 @@ export class CategoryPage extends Component {
                     />
                     <h6>
                       No recipe has been created for {pascalCase(categoryName)}
-                      yet. Care to <Link
+                      . Care to <Link
                         onMouseEnter={this.toggleSmiley}
                         onMouseLeave={this.toggleSmiley}
                         to="/recipes/new"
