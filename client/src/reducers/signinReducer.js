@@ -1,4 +1,3 @@
-/* jshint esversion: 6 */
 import isEmpty from 'lodash/isEmpty';
 
 import actionTypes from '../actions/actionTypes';

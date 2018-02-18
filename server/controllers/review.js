@@ -1,9 +1,9 @@
-import db from '../models/index';
-import { paginateReviews, paginateComments } from '../helpers/paginate';
+import models from '../models';
+import { paginateReviews, validatePagination } from '../helpers/paginate';
 import { errorHandler } from '../helpers/responseHandler';
 
-const Review = db.Review,
-  User = db.User;
+const Review = models.Review,
+  User = models.User;
 
 /**
  * @description controller function that handles posting reviews to recipes
@@ -38,7 +38,7 @@ const postReview = (req, res) => Review
   .catch(() => errorHandler(500, 'An error occured!', res));
 
 const fetchRecipeReviews = (req, res) => {
-  const { page, limit, offset } = paginateComments(req);
+  const { page, limit, offset } = validatePagination(req);
   return Review
     .findAndCountAll({ where:
       { recipeId: req.params.recipeId },

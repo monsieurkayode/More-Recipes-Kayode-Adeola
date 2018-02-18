@@ -1,10 +1,10 @@
 // Import module dependencies
-import db from '../models/index';
+import models from '../models';
 import { errorHandler } from '../helpers/responseHandler';
 
 // Reference database models
-const Recipe = db.Recipe;
-const Vote = db.Vote;
+const Recipe = models.Recipe;
+const Vote = models.Vote;
 
 /**
  *
@@ -138,4 +138,7 @@ const downvote = (req, res) => Vote
   })
   .catch(() => errorHandler(500, 'An error occured!', res));
 
-export { upvote, downvote };
+export {
+  upvote,
+  downvote
+};

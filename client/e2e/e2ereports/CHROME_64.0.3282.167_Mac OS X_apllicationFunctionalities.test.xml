@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="44">
+
+  <testsuite name="apllicationFunctionalities.test"
+    errors="0" failures="0" hostname="" id="" package="apllicationFunctionalities.test" skipped="0"
+    tests="44" time="332.1" timestamp="Fri, 16 Feb 2018 16:38:39 GMT">
+  
+    <testcase name="Display landing page and ensure all element are available" classname="apllicationFunctionalities.test" time="9.596" assertions="11">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Signin authentication should fail if user is not registered" classname="apllicationFunctionalities.test" time="9.413" assertions="17">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Signup should fail if an empty form is submitted" classname="apllicationFunctionalities.test" time="3.629" assertions="22">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Signup should fail if username is less than 3 characters" classname="apllicationFunctionalities.test" time="3.150" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Signup should fail if username is more than 30 characters" classname="apllicationFunctionalities.test" time="3.311" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Signup should fail if username contains special characters" classname="apllicationFunctionalities.test" time="4.179" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Signup should fail if no email is provided" classname="apllicationFunctionalities.test" time="3.249" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Signup should fail if provided email address not valid" classname="apllicationFunctionalities.test" time="3.216" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Signup should if no password is provided" classname="apllicationFunctionalities.test" time="3.303" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Signup should fail if password length is less than six" classname="apllicationFunctionalities.test" time="3.156" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Signup should fail if password confirmation is not provided" classname="apllicationFunctionalities.test" time="3.148" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Signup should fail if password and password confirmation does not match" classname="apllicationFunctionalities.test" time="3.164" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Signup should be successful if all provided registration details are valid" classname="apllicationFunctionalities.test" time="6.217" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Newly registered user should be redirected to his/her profile details page" classname="apllicationFunctionalities.test" time="2.233" assertions="9">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Profile update should fail if an empty form is submitted" classname="apllicationFunctionalities.test" time="2.223" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Profile update should fail if provided name lengths are less than 3" classname="apllicationFunctionalities.test" time="3.244" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Profile update should fail if provided name lengths are more than 30" classname="apllicationFunctionalities.test" time="3.679" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Profile update should fail if provided names contain special character(s)" classname="apllicationFunctionalities.test" time="6.263" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Profile update should be successful if valid update details are provided" classname="apllicationFunctionalities.test" time="10.28" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="User should be have access to create recipe when authenticated" classname="apllicationFunctionalities.test" time="5.434" assertions="8">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Post button for creating recipe should be disabled if a field is empty" classname="apllicationFunctionalities.test" time="2.038" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Creating recipe should display errors if user does not fill required fields" classname="apllicationFunctionalities.test" time="2.462" assertions="5">
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Creating recipe should display error if recipe name length is more than 30" classname="apllicationFunctionalities.test" time="3.738" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Creating recipe should be successful if all form fields have valid input" classname="apllicationFunctionalities.test" time="32.08" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Creating recipe should fail if recipe has been created by same user" classname="apllicationFunctionalities.test" time="27.75" assertions="11">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="User should be able create recipes with name they have not created" classname="apllicationFunctionalities.test" time="21.48" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Creating recipe with no image should set a default image for the recipe" classname="apllicationFunctionalities.test" time="30.39" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Users should be able to search for recipes, defaults to search by title" classname="apllicationFunctionalities.test" time="18.10" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Authenticated user should be able to view details of a recipe" classname="apllicationFunctionalities.test" time="4.907" assertions="11">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Authenticated user should be able to upvote a recipe" classname="apllicationFunctionalities.test" time="2.070" assertions="0">
+    </testcase>
+  
+    <testcase name="Authenticated user should be able to downvote a recipe" classname="apllicationFunctionalities.test" time="2.050" assertions="0">
+    </testcase>
+  
+    <testcase name="Authenticated user should be able to favorite a recipe" classname="apllicationFunctionalities.test" time="6.088" assertions="0">
+    </testcase>
+  
+    <testcase name="Authenticated user should be able to review a recipe" classname="apllicationFunctionalities.test" time="9.455" assertions="0">
+    </testcase>
+  
+    <testcase name="Authenticated user should be able to view his/her personal dashboard" classname="apllicationFunctionalities.test" time="4.256" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Authenticated user should be able to view his/her favorite recipes" classname="apllicationFunctionalities.test" time="2.100" assertions="0">
+    </testcase>
+  
+    <testcase name="Authenticated user should be able to remove favorite recipe" classname="apllicationFunctionalities.test" time="6.188" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Authenticated user should be able to view recipes they created" classname="apllicationFunctionalities.test" time="2.108" assertions="0">
+    </testcase>
+  
+    <testcase name="Authenticated user should be able to delete his/her recipes" classname="apllicationFunctionalities.test" time="6.200" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Authenticated user should be able to update his/her recipes" classname="apllicationFunctionalities.test" time="5.405" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Authenticated user should be able to view recipes by category" classname="apllicationFunctionalities.test" time="18.90" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="User should be able to logout of the application" classname="apllicationFunctionalities.test" time="6.779" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Signup should fail if provided username already exists" classname="apllicationFunctionalities.test" time="6.966" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Signin should be successful if provided credentials are valid" classname="apllicationFunctionalities.test" time="7.854" assertions="0">
+    </testcase>
+  
+    <testcase name="Non existent routes or resource should return a not found page" classname="apllicationFunctionalities.test" time="10.66" assertions="0">
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>

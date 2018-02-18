@@ -1,244 +1,253 @@
-// TODO change chai expect to expect assertion library
-import 'chai';
-import 'mocha';
-import supertest from 'supertest';
-import app from '../app';
-import users from '../seeders/userSeeder';
-import review from '../seeders/reviewSeeder';
+import models from '../models';
+import userSeeder from '../seeders/userSeeder';
+import reviewSeeder from '../seeders/reviewSeeder';
 
+import { signin, server, expect } from '../utils/testSetup';
 
-const server = supertest.agent(app),
-  expect = require('chai').expect,
-  validUsersLogin = users.validUsersLogin,
-  userData = [];
+const authenticationToken = {};
 
-describe('User Login', () => {
-  it('allows a registered user to signin', (done) => {
-    server
-      .post('/api/v1/users/signin')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send(validUsersLogin[0])
-      .end((err, res) => {
-        userData[0] = res.body.Token;
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.message).to.equal('Token successfully generated');
-        if (err) return done(err);
-        done();
+describe('Review Endpoint', () => {
+  /**
+ *
+ * @description Hook for cleaning up the test database
+ * before any test block have been run
+ *
+ * @return {undefined}
+ */
+  before((done) => {
+    models.Review.destroy({ where: {} })
+      .then(() => {
+        const { validSignupDetails1, validSignupDetails2 } = userSeeder;
+        signin(validSignupDetails1, done, (token) => {
+          authenticationToken.authUser1 = token;
+          signin(validSignupDetails2, done, (token2) => {
+            authenticationToken.authUser2 = token2;
+            done();
+          });
+        });
+      })
+      .catch((error) => {
+        done(error);
       });
   });
-  it('allows a registered user to signin', (done) => {
-    server
-      .post('/api/v1/users/signin')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send(validUsersLogin[1])
-      .end((err, res) => {
-        userData[1] = res.body.Token;
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.message).to.equal('Token successfully generated');
-        if (err) return done(err);
-        done();
-      });
-  });
-});
 
-describe('Review a recipe', () => {
-  it('allows logged in user review a posted recipe', (done) => {
-    server
-      .post('/api/v1/recipes/2/reviews')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send(review[0])
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(201);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.review.comment).to.be.equal('This is an awesome recipe');
-        if (err) return done(err);
-        done();
-      });
-  });
-  it('allows logged in user review a posted recipe', (done) => {
-    server
-      .post('/api/v1/recipes/2/reviews')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[0])
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send(review[1])
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(201);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.review.comment).to.be.equal('It would be nice if you could throw in some ginger');
-        if (err) return done(err);
-        done();
-      });
-  });
-  it('allows logged in user review a posted recipe', (done) => {
-    server
-      .post('/api/v1/recipes/2/reviews')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
-      .set('Content-Type', 'application/json')
-      .type('form')
-      .send(review[2])
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(201);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.message).to.equal('Review successfully posted');
-        expect(res.body.review.comment).to.be.equal('Pretty please can I have some?');
-        if (err) return done(err);
-        done();
-      });
-  });
-});
+  describe('Post review', () => {
+    it('should post review for a recipe and respond with success message ' +
+    'and status 201 if user is authenticated',
+    (done) => {
+      const { review } = reviewSeeder;
+      server
+        .post('/api/v1/recipes/2/reviews')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', authenticationToken.authUser1)
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(review)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(201);
+          expect(res.body.status).to.equal('success');
+          expect(res.body.review.comment)
+            .to
+            .equal('This is an awesome recipe');
+          if (err) return done(err);
+          done();
+        });
+    });
 
-describe('Vote a recipe', () => {
-  it('allows logged in user upvote a posted recipe', (done) => {
-    server
-      .put('/api/v1/recipes/2/upvote')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[0])
-      .set('Content-Type', 'application/json')
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.upvote).to.equal(1);
-        expect(res.body.downvote).to.equal(0);
-        expect(res.body.message).to.be.equal('Your vote has been recorded');
-        if (err) return done(err);
-        done();
-      });
+    it('should throw error message with status 422 if an empty review ' +
+    'form is submitted',
+    (done) => {
+      server
+        .post('/api/v1/recipes/2/reviews')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', authenticationToken.authUser1)
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send({})
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(422);
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message)
+            .to
+            .equal('Comment cannot be empty');
+          if (err) return done(err);
+          done();
+        });
+    });
   });
-  it('allows logged in user remove his upvote on a posted recipe', (done) => {
-    server
-      .put('/api/v1/recipes/2/upvote')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[0])
-      .set('Content-Type', 'application/json')
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.upvote).to.equal(0);
-        expect(res.body.downvote).to.equal(0);
-        expect(res.body.message).to.be.equal('Your vote has been removed');
-        if (err) return done(err);
-        done();
-      });
+
+  describe('Update review', () => {
+    it('should update review posted by an authenticated user and respond ' +
+    'with a success message and status 200',
+    (done) => {
+      const { updateReview } = reviewSeeder;
+      server
+        .patch('/api/v1/recipes/2/reviews/1')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', authenticationToken.authUser1)
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(updateReview)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('success');
+          expect(res.body.message).to.equal('Comment updated successfully');
+          expect(res.body.review.comment)
+            .to
+            .equal('This is not an awesome recipe');
+          if (err) return done(err);
+          done();
+        });
+    });
+
+    it('should throw error message with status 404 when an authenticated ' +
+    'user attempts to update a review that does not exist',
+    (done) => {
+      const { updateReview } = reviewSeeder;
+      server
+        .patch('/api/v1/recipes/2/reviews/4')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', authenticationToken.authUser1)
+        .set('Content-Type', 'application/json')
+        .type('form')
+        .send(updateReview)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('Review not found');
+          if (err) return done(err);
+          done();
+        });
+    });
   });
-  it('allows logged in user downvote a posted recipe', (done) => {
-    server
-      .put('/api/v1/recipes/2/downvote')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
-      .set('Content-Type', 'application/json')
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.upvote).to.equal(0);
-        expect(res.body.downvote).to.equal(1);
-        expect(res.body.message).to.be.equal('Your vote has been recorded');
-        if (err) return done(err);
-        done();
-      });
+
+  describe('Fetch reviews', () => {
+    it('should fetch reviews posted for a recipe and respond with a success ' +
+    'message and status 200',
+    (done) => {
+      server
+        .get('/api/v1/recipes/2/reviews')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', authenticationToken.authUser1)
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('success');
+          expect(res.body.message).to.equal('Showing 1 of 1 comments');
+          if (err) return done(err);
+          done();
+        });
+    });
   });
-  it('allows logged in user remove downvote on a posted recipe', (done) => {
-    server
-      .put('/api/v1/recipes/2/downvote')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
-      .set('Content-Type', 'application/json')
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.upvote).to.equal(0);
-        expect(res.body.downvote).to.equal(0);
-        expect(res.body.message).to.be.equal('Your vote has been removed');
-        if (err) return done(err);
-        done();
-      });
+
+  describe('Delete review', () => {
+    it('should delete review posted by an authenticated user and respond ' +
+    'with a success message and status 200',
+    (done) => {
+      server
+        .delete('/api/v1/recipes/2/reviews/1')
+        .set('Connection', 'keep alive')
+        .set('Accept', 'application/json')
+        .set('x-access-token', authenticationToken.authUser1)
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.status).to.equal('success');
+          expect(res.body.message).to.equal('Your comment has been deleted');
+          if (err) return done(err);
+          done();
+        });
+    });
   });
-  it('allows logged in user upvote a posted recipe', (done) => {
-    server
-      .put('/api/v1/recipes/2/upvote')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[0])
-      .set('Content-Type', 'application/json')
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.upvote).to.equal(1);
-        expect(res.body.downvote).to.equal(0);
-        expect(res.body.message).to.be.equal('Your vote has been recorded');
-        if (err) return done(err);
-        done();
+
+  describe('Vote Endpoint', () => {
+    describe('Upvote recipe', () => {
+      it('should increment recipe upvote count by one and respond with ' +
+      'success mesage and status 200 if user is authenticated',
+      (done) => {
+        server
+          .put('/api/v1/recipes/2/upvote')
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', authenticationToken.authUser1)
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('success');
+            expect(res.body.upvote).to.equal(1);
+            expect(res.body.downvote).to.equal(0);
+            expect(res.body.message).to.be.equal('Your vote has been recorded');
+            if (err) return done(err);
+            done();
+          });
       });
-  });
-  it('allows user that has upvoted to downvote same recipe', (done) => {
-    server
-      .put('/api/v1/recipes/2/downvote')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[0])
-      .set('Content-Type', 'application/json')
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.upvote).to.equal(0);
-        expect(res.body.downvote).to.equal(1);
-        expect(res.body.message).to.be.equal('Your vote has been recorded');
-        if (err) return done(err);
-        done();
+
+      it('should decrement recipe upvote count by one and respond with ' +
+      'success mesage and status 200 if user has already upvoted recipe',
+      (done) => {
+        server
+          .put('/api/v1/recipes/2/upvote')
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', authenticationToken.authUser1)
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('success');
+            expect(res.body.upvote).to.equal(0);
+            expect(res.body.downvote).to.equal(0);
+            expect(res.body.message).to.be.equal('Your vote has been removed');
+            if (err) return done(err);
+            done();
+          });
       });
-  });
-  it('allows logged in user downvote a posted recipe', (done) => {
-    server
-      .put('/api/v1/recipes/2/downvote')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
-      .set('Content-Type', 'application/json')
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.upvote).to.equal(0);
-        expect(res.body.downvote).to.equal(2);
-        expect(res.body.message).to.be.equal('Your vote has been recorded');
-        if (err) return done(err);
-        done();
+    });
+
+    describe('Downvote recipe', () => {
+      it('should increment recipe downvote count by one and respond with ' +
+        'success mesage and status 200 if user is authenticated',
+      (done) => {
+        server
+          .put('/api/v1/recipes/2/downvote')
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', authenticationToken.authUser1)
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('success');
+            expect(res.body.upvote).to.equal(0);
+            expect(res.body.downvote).to.equal(1);
+            expect(res.body.message).to.be.equal('Your vote has been recorded');
+            if (err) return done(err);
+            done();
+          });
       });
-  });
-  it('allows user upvote same recipe he/she has downvoted', (done) => {
-    server
-      .put('/api/v1/recipes/2/upvote')
-      .set('Connection', 'keep alive')
-      .set('Accept', 'application/json')
-      .set('x-access-token', userData[1])
-      .set('Content-Type', 'application/json')
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.status).to.equal('success');
-        expect(res.body.upvote).to.equal(1);
-        expect(res.body.downvote).to.equal(1);
-        expect(res.body.message).to.be.equal('Your vote has been recorded');
-        if (err) return done(err);
-        done();
+
+      it('should decrement recipe downvote count by one and respond with ' +
+        'success mesage and status 200 if user has already downvoted recipe',
+      (done) => {
+        server
+          .put('/api/v1/recipes/2/downvote')
+          .set('Connection', 'keep alive')
+          .set('Accept', 'application/json')
+          .set('x-access-token', authenticationToken.authUser1)
+          .set('Content-Type', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.status).to.equal('success');
+            expect(res.body.upvote).to.equal(0);
+            expect(res.body.downvote).to.equal(0);
+            expect(res.body.message).to.be.equal('Your vote has been removed');
+            if (err) return done(err);
+            done();
+          });
       });
+    });
   });
 });

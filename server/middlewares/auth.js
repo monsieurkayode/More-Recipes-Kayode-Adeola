@@ -1,9 +1,11 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+
 import { errorHandler } from '../helpers/responseHandler';
 
 dotenv.load();
-const secret = process.env.secretKey;
+
+const secret = process.env.SECRET_KEY;
 
 /**
  * @description Middleware for token authentication

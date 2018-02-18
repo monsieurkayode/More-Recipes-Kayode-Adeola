@@ -22,7 +22,11 @@ const signupAction = userDetails => dispatch =>
       setAuthorizationToken(token);
       const user = decode(token).user;
       Materialize
-        .toast(`Welcome ${user.username}`, 4000, 'grey darken-2');
+        .toast(
+          `Welcome ${user.username}! Update your profile`,
+          4000,
+          'grey darken-2'
+        );
       dispatch({ type: actionTypes.SIGNUP_SUCCESSFUL, payload: user });
     })
     .catch((error) => {

@@ -17,10 +17,10 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
 const signinAction = user => dispatch =>
   axios.post('/api/v1/users/signin', user)
     .then((response) => {
-      const { Token } = response.data;
-      localStorage.setItem('token', Token);
-      setAuthorizationToken(Token);
-      user = decode(Token).user;
+      const { token } = response.data;
+      localStorage.setItem('token', token);
+      setAuthorizationToken(token);
+      user = decode(token).user;
       Materialize
         .toast(`Welcome ${user.username}`, 4000, 'grey darken-2');
       dispatch(

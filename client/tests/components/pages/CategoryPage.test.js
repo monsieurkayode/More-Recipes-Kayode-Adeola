@@ -81,11 +81,12 @@ describe('CategoryPage', () => {
     done();
   });
 
-  it('should set the class of a category link to active onClick', (done) => {
-    wrapper.find('.collapsible-header').first().simulate('click');
-    expect(wrapper.find('.active').length).toEqual(1);
-    done();
-  });
+  it('should make a category link active when the link is clicked',
+    (done) => {
+      wrapper.find('.collapsible-header').first().simulate('click');
+      expect(wrapper.find('.active').length).toEqual(1);
+      done();
+    });
 
   it('should call setPagination', (done) => {
     expect(setPaginationSpy).toHaveBeenCalled();
@@ -114,7 +115,9 @@ describe('CategoryPage', () => {
       done();
     });
 
-    it('onMouseEnter or onMouseLeave add, should call toggleSmiley', (done) => {
+    it('should change the smiley displayed with error message when the add ' +
+    'text below the smiley image is hovered on',
+    (done) => {
       noRecipesWrapper.find('Link').last().simulate('mouseEnter');
       noRecipesWrapper.find('Link').last().simulate('mouseLeave');
       expect(toggleSmileySpy).toHaveBeenCalled();
@@ -132,7 +135,7 @@ describe('CategoryPage', () => {
       done();
     });
 
-    it('should set page and pageCount to 1 if no recipes are found',
+    it('set page and pageCount to 1 if no recipes are found',
       (done) => {
         expect(noRecipesWrapper
           .instance()

@@ -1,4 +1,3 @@
-/* jshint esversion: 6 */
 import actionTypes from '../actions/actionTypes';
 
 const initialState = {

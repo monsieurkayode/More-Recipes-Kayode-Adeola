@@ -4,6 +4,11 @@ import PropTypes from 'proptypes';
 
 import { SignupForm } from '../main';
 
+/**
+ * @summary - SignupPage class declaration
+ * @class SignupPage
+ * @extends {Component}
+ */
 class SignupPage extends Component {
   /**
    * @method componentDidMount
