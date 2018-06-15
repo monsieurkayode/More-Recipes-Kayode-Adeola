@@ -15,7 +15,13 @@ const voteModel = (sequelize, DataTypes) => {
   }, {
     timestamps: false,
     classMethods: {
-      associate: () => {
+      associate: (models) => {
+        Vote.belongsTo(models.User, {
+          foreignKey: 'userId'
+        });
+        Vote.belongsTo(models.Recipe, {
+          foreignKey: 'recipeId'
+        });
       }
     }
   });
