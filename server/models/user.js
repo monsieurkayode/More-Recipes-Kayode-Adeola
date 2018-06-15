@@ -88,15 +88,23 @@ const userModel = (sequelize, DataTypes) => {
       associate(models) {
         User.hasMany(models.Recipe, {
           foreignKey: 'userId',
-          as: 'recipes'
+          as: 'recipes',
+          onDelete: 'CASCADE'
         });
         User.hasMany(models.Review, {
           foreignKey: 'userId',
-          as: 'reviews'
+          as: 'reviews',
+          onDelete: 'CASCADE'
         });
         User.hasMany(models.Favorite, {
           foreignKey: 'userId',
-          as: 'favoriteRecipes'
+          as: 'favoriteRecipes',
+          onDelete: 'CASCADE'
+        });
+        User.hasMany(models.Vote, {
+          foreignKey: 'userId',
+          as: 'votes',
+          onDelete: 'CASCADE'
         });
       }
     }
