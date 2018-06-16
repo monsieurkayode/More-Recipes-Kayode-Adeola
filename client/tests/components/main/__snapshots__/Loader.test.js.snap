@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader should render correctly 1`] = `
+<Loader>
+  <div
+    className="loader"
+  >
+    <PreloaderIcon
+      className=""
+      duration={800}
+      size={80}
+      strokeColor="#006664"
+      strokeWidth={7}
+      type="oval"
+      unit="px"
+    >
+      <div
+        className="preloader-icon "
+        style={
+          Object {
+            "height": "80px",
+            "width": "80px",
+          }
+        }
+      >
+        <div
+          className="preloader-icon__inner"
+          style={
+            Object {
+              "height": "100%",
+              "lineHeight": 0,
+              "overflow": "hidden",
+              "position": "relative",
+              "transform": "translate3d(0, 0, 0)",
+              "width": "100%",
+            }
+          }
+        >
+          <em
+            className="preloader-icon__title"
+            style={
+              Object {
+                "fontSize": 0,
+                "height": 0,
+                "left": 0,
+                "overflow": "hidden",
+                "position": "absolute",
+                "top": 0,
+                "visibility": "hidden",
+                "width": 0,
+              }
+            }
+          >
+            Loading...
+          </em>
+          <Oval
+            duration={800}
+            strokeColor="#006664"
+            strokeWidth={7}
+          >
+            <div
+              className="preloader-icon__oval"
+              style={
+                Object {
+                  "height": "100%",
+                }
+              }
+            >
+              <svg
+                height="100%"
+                stroke="#006664"
+                viewBox="0 0 102 102"
+                width="100%"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g
+                  fill="none"
+                >
+                  <g
+                    strokeWidth={7}
+                    transform="translate(1 1)"
+                  >
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r={46.5}
+                      stroke="#006664"
+                      strokeOpacity=".5"
+                    />
+                    <path
+                      d="M50,3.5 A46.5,46.5,0,0,1,96.5,50"
+                    />
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </Oval>
+        </div>
+      </div>
+    </PreloaderIcon>
+  </div>
+</Loader>
+`;

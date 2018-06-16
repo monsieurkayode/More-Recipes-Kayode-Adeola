@@ -1,0 +1,287 @@
+/* .fullbg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 100% 50%;
+  background-image: url();
+  background-repeat: no-repeat;
+} */
+
+html, body, .block {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#nav-search input[type=search]:not(.browser-default) {
+  height: 30px;
+  margin-right: 2em;
+  border-radius: 20px;
+} 
+.header {
+  background: teal;
+}
+
+.logo {
+  font-family: Pacifico, cursive;
+  font-size: 1.5rem !important;
+  margin-left: 1em;
+}
+
+#form {
+  /* margin-top: 1rem; */
+}
+
+.navbtn {
+  background: coral;
+}
+
+.return {
+  font-family: Roboto;
+  font-size: 1rem !important;
+  margin-left: 1em;
+}
+
+.input-fa {
+  font-family: FontAwesome;
+}
+
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default),
+input[type=email]:not(.browser-default) {
+  margin-bottom: 0.2em; 
+}
+
+#dashboard-parent {
+  cursor: text;
+}
+
+#dash-panel {
+  height: 100vh;
+  padding: 0;
+  position: fixed;
+}
+
+#dash-img {
+  margin-top: -7px;
+  max-width: 100%;
+}
+
+.collection {
+  border:  none;
+}
+
+#dash-links .collection a.collection-item {
+  background-color: #00796b;
+  color: #eee;
+  line-height: 1.5rem;
+  padding: 10px 20px;
+  margin: 0;
+  border-bottom: none;
+}
+
+#dash-links .collection a.collection-item:not(.active):hover,
+#dash-links .collection .collection-item.active {
+  background-color: cornflowerblue;
+}
+
+#dash-links .collection a.collection-item:not(.active):hover:first-child {
+  background-color: #00796b;
+}
+
+#category .collapsible,
+#category .collapsible .collapsible-header{
+  border: none;
+  padding-left: 0;
+  font-weight: bolder;
+}
+
+#category .collapsible .collapsible-body {
+  padding-left: 0.5em;
+  padding-top: 0;
+  padding-bottom: 0.5em;
+  font-weight: normal;
+}
+
+#category .collapsible .collapsible-body li {
+  padding-left: 0.5em;
+  padding-top: 0;
+  padding-bottom: 0.5em;
+}
+
+#profile-page-header .card-profile-image img {
+  width: 80px;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 50%;
+}
+
+#user-dropdown {
+  margin-top: 60px;
+  font-family: FontAwesome;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+/* #slide-out {
+  z-index: -1;
+  background: teal;
+} */
+
+#banner {
+  padding: 0;
+  margin: -7px;
+}
+
+#recipe-img {
+  padding: 0;
+  margin: -7px;
+}
+
+
+#recipe-img .card-image img{
+  height: 360px;
+  opacity: 0.7;
+}
+
+#comment-box textarea {
+  border: 2px ridge #ddd;
+}
+
+#comment-box .input-field textarea[type=text]:focus {
+  border-bottom: 0px solid #ddd;
+  box-shadow: 0 2px 0 0 #ccc;
+}
+
+#post-btn {
+  border: 2px double grey;
+}
+
+a#post-btn:hover {
+  background: grey;
+}
+
+#trending .collection .collection-item {
+  border: none;
+}
+
+#trending .collection a {
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+}
+
+.square {
+  border-radius: 0;
+} 
+
+#trending .collection .collection-item.avatar img {
+  position: absolute;
+  width: 80px;
+  height: 60px;
+  overflow: hidden;
+  top: -10px;
+  left: 25px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#trending .title {
+  position: absolute;
+  left: 120px;
+}
+
+#profile-form textarea,
+#profile-form .browser-default input[type="text"] {
+  border: 1px outset #eee;
+  border-bottom: 1px solid #ddd;
+}
+
+#profile-form .browser-default label {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: black;
+  font-weight: bold;
+}
+
+
+.tabs-vertical .tabs {
+  background-color: #00796b;
+  height: auto;
+  flex-direction: column;
+}
+
+.tabs-vertical .tab {
+  width: 100%;
+  flex-grow: 1;
+  display: block;
+  float: left;
+  text-align: left;
+  line-height: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 0;
+  text-transform: none;
+  text-overflow: ellipsis; 
+}
+
+.tabs-vertical .tab .active {
+  transition: border-color .5s ease;
+  border-right: 3px solid coral;
+}
+
+.tabs-vertical .tab a {
+  color: #3f51b5;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: color 0.28s ease; 
+}
+
+.tabs-vertical .tab a.active {
+  background: #8591d5;;
+}
+
+.tabs-vertical .tab a:hover {
+  color: #8591d5;
+  background: #8591d5;
+}
+
+.tabs-vertical .tab a:hover {
+  color: #8591d5;
+  background: #8591d5;
+}
+.tabs-vertical .tab.disabled a {
+  color: #8591d5;
+  cursor: default; 
+}
+
+.tabs-vertical .indicator {
+  display: none; 
+}
+
+#not-badge {
+  margin-top: 14px;
+}
+
+#modal-register,
+#modal-login {
+  overflow-y: hidden;
+  max-height: 85%;
+  max-width: 35%
+}
+
+#modal-register .modal-content,
+#modal-login .modal-content{
+  padding: 0;
+}

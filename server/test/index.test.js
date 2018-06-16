@@ -1,0 +1,11 @@
+import './helpers/helpers.test';
+import './helpers/paginate.test';
+import './helpers/responseHandler.test';
+import './user.test';
+import './recipe.test';
+import './favorite.test';
+import './review.test';
+import './models/user.test';
+import './models/recipe.test';
+import './models/favorite.test';
+import './models/vote.test';

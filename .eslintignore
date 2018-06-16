@@ -1,0 +1,11 @@
+logs
+*.log
+coverage/*
+.env
+.nyc_output/*
+.vscode/*
+template/*
+client/assets/*
+!client/src
+webpack.*
+server/bin

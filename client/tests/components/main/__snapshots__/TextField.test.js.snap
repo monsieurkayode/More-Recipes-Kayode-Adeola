@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextField should render correctly 1`] = `
+<TextField
+  error={null}
+  field={<div />}
+  onChange={[MockFunction]}
+  type="text"
+  value=""
+>
+  <div
+    className="row"
+  >
+    <div
+      className="input-field col s12"
+    >
+      <i
+        className="material-icons prefix"
+      />
+      <input
+        name={<div />}
+        onChange={[MockFunction]}
+        type="text"
+        value=""
+      />
+      <label
+        htmlFor={<div />}
+      />
+    </div>
+  </div>
+</TextField>
+`;

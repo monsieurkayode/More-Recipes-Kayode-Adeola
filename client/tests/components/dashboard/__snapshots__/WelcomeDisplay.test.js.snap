@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The WelcomeDisplay Component should render correctly 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(WelcomeDisplay)
+    selected="recipes"
+  >
+    <WelcomeDisplay
+      dispatch={[Function]}
+      selected="recipes"
+      user={
+        Object {
+          "username": "username",
+        }
+      }
+    >
+      <div
+        className="card-panel grey lighten-4"
+        id="welcome-panel"
+      >
+        <span
+          className="card-content"
+        >
+          <h5>
+            Welcome 
+            username
+            !
+          </h5>
+          <span>
+            Dashboard / My 
+            recipes
+          </span>
+        </span>
+      </div>
+    </WelcomeDisplay>
+  </Connect(WelcomeDisplay)>
+</Provider>
+`;

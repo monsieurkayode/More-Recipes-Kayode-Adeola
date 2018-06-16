@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Instructions should render correctly 1`] = `
+<div
+  className="col l12 m12 s12"
+>
+  <h4>
+    Instructions
+  </h4>
+  <div
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "",
+      }
+    }
+    id="instructions"
+  />
+</div>
+`;

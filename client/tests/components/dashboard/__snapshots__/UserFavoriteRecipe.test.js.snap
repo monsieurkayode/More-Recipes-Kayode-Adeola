@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserFavoriteRecipe should render correctly 1`] = `
+<div
+  className="col l9 m12 s12 offset-l3"
+  id="favorite-recipes"
+>
+  <Connect(WelcomeDisplay)
+    selected="favorites"
+  />
+  <div
+    className="row"
+    id="user-favorites"
+  >
+    <div
+      className="row"
+    >
+      <div>
+        <RecipeCardSmall
+          handleAction={null}
+          index={1}
+          key="1"
+          selectRecipe={[MockFunction]}
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="pagination-container"
+  >
+    <PaginationBoxView
+      activeClassName="active"
+      breakClassName="break-me"
+      breakLabel={
+        <a
+          href=""
+        >
+          ...
+        </a>
+      }
+      containerClassName="pagination"
+      disableInitialCallback={true}
+      disabledClassName="disabled"
+      initialPage={0}
+      marginPagesDisplayed={2}
+      nextClassName="next"
+      nextLabel={
+        <i
+          className="fa fa-chevron-right"
+        />
+      }
+      onPageChange={[Function]}
+      pageCount={1}
+      pageRangeDisplayed={5}
+      previousClassName="previous"
+      previousLabel={
+        <i
+          className="fa fa-chevron-left"
+        />
+      }
+      subContainerClassName="pages pagination"
+    />
+  </div>
+</div>
+`;

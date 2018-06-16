@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="css/materialize.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico:400,700&effect=3d-float" rel="stylesheet">
+  </head>
+  <body>
+    <div class="navbar-fixed">
+      <nav class="header">
+        <div class="nav-wrapper">
+          <a class="brand-logo font-effect-3d-float logo hide-on-small-only" href="#!">More-Recipies</a>
+          <a href="#" data-activates="dashboard" class="button-collapse"><i class="material-icons">menu</i></a>         
+            <ul class="right hide-on-med-and-down return">
+              <li>
+                <a class="dropdown-button" href="#" data-activates="user-dropdown"><span class="fa fa-lg fa-user-circle"></span> Kayode Adeola <span class="fa fa-lg fa-caret-down"></span></a>
+              </li>
+            </ul> 
+        </div>
+      </nav>
+    </div>
+    <!-- <div class="row">
+      <div class="col l3">
+        <ul id="slide-out" class="side-nav fixed">
+          <div  class="teal darken-2">
+            <div id="profile-page-header" class="card teal darken-2">
+              <div class="card-image">
+                <img class="responsive-img" id="dash-img" src="css/img/dash.jpg" alt="user-background">
+                <figure class="card-profile-image">
+                  <img src="css/img/holder-profile.png" alt="profile image" class="z-depth-2 responsive-img">
+                </figure>
+              </div>
+              <ul class="collection">
+                <li>
+                  <a class="collection-item " href="">Dashboard</a>
+                </li>
+                <li>
+                  <a class="collection-item " href="">Dashboard</a>
+                </li>
+                <li>
+                  <a class="collection-item " href="">Dashboard</a>
+                </li>
+                <li>
+                  <a class="collection-item " href="">Dashboard</a>
+                </li>
+                <li>
+                  <a class="collection-item " href=""></a>
+                </li>
+                <li>
+                  <a class="collection-item " href=""></a>
+                </li>
+                <li>
+                  <a class="collection-item " href=""></a>
+                </li>
+                <li>
+                  <a class="collection-item " href=""></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </ul>
+      </div>
+      <div id="dash-header" class="col l9 m12 s12">
+        <div class="card-panel grey lighten-4">
+          <span class="card-content">
+            <h5>Welcome Kayode!</h5>
+            <span>Dashboard/My Recicpes</span>
+          </span>
+        </div>
+      </div>
+    </div> -->
+    <div class="row">
+      <div id="dash-panel" class="col l3 teal darken-2 hide-on-med-and-down">
+        <div  class="teal darken-2">
+        <div id="profile-page-header" class="card teal darken-2 z-depth-0">
+          <div class="card-image">
+            <img class="responsive-img" id="dash-img" src="css/img/dash.jpg" alt="user-background">
+            <figure class="card-profile-image">
+              <img src="css/img/user.jpg" alt="profile image" class="z-depth-2 responsive-img">
+            </figure>
+          </div>
+          <div id="dash-links" >
+            <div class="collection">
+              <a id="dashboard-parent" href="#!" class="collection-item"><strong>Dashboard</strong> <span class="right fa fa-user-circle"></a>
+              <br>
+              <a href="#" class="collection-item active">My Profile <span class="right fa fa-user-circle"></a>
+              <a href="#" class="collection-item">My Recipes <span class="right fa fa-user-circle"></a>
+              <a href="#!" class="collection-item">Favorite Recipes <span class="right fa fa-user-circle"></a>
+              <a href="#!" class="collection-item">Notifications <span class="red new badge">10</span></a>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div id="user-profile" class="col l9 m12 s12 offset-l3">
+        <div class="card-panel grey lighten-4">
+          <span class="card-content">
+            <h5>Welcome Kayode!</h5>
+            <span>Dashboard > My Profile</span>
+          </span>
+        </div>
+         <div id="my-profile" class="row"> 
+          <div class="col l12 m12 s12">
+            <div class="row">
+              <div class="col l4 m4">
+                <div class="card z-depth-2">
+                  <div class="card-image">
+                    <img class="responsive-img" src="css/img/user.jpg" alt="">
+                  </div>
+                </div>
+              </div>
+              <div class="col l8 m8 s12">
+                <form id="profile-form" class="">
+                  <div class="browser-default">
+                    <label class="" for="name">First Name</label>
+                    <input type="text" id="first-name">
+                  </div>
+                  <div class="browser-default">
+                    <label class="" for="last-name">Last Name</label>
+                    <input type="text" id="last-name">
+                  </div>
+                  <div class="browser-default">
+                    <label class="" for="handle">Public Display Name</label>
+                    <input type="text" id="handle">
+                  </div>
+                  <div class="browser-default">
+                    <label class="" for="about-me">About Me</label>
+                    <textarea class="" id="about-me"></textarea>
+                  </div>
+                  <a class="btn right blue" href="" action="submit">Save Profile Details</a>
+                </form>
+              </div>
+            </div>
+          </div>
+         </div> 
+      </div>
+    </div>
+    </div>
+    <ul id="user-dropdown" class="dropdown-content">
+      <li><a class="" href="#!"><span class="fa fa-lg fa-user-circle"></span> Edit Profile</a></li>
+      <li><a href="#!"><span class="fa fa-lg fa-user-circle"></span> Settings</a></li>
+      <li class="divider"></li>
+      <li><a href="#!"><span class="fa fa-lg fa-user-circle"></span> Logout</a></li>
+    </ul>
+    <footer>
+      
+    </footer>
+    <ul class="side-nav" id="dashboard">
+      <div id="dash-panel" class="col l3 teal darken-2">
+        <div  class="teal darken-2">
+        <div id="profile-page-header" class="card teal darken-2 z-depth-0">
+          <div class="card-image">
+            <img class="responsive-img" id="dash-img" src="css/img/dash.jpg" alt="user-background">
+            <figure class="card-profile-image">
+              <img src="css/img/user.jpg" alt="profile image" class="z-depth-2 responsive-img">
+            </figure>
+          </div>
+          <div id="dash-links" >
+            <div class="collection">
+              <a id="dashboard-parent" href="#!" class="collection-item"><strong>Dashboard</strong> <span class="right fa fa-user-circle"></a>
+              <br>
+              <a href="#" class="collection-item active">My Profile <span class="right fa fa-user-circle"></a>
+              <a href="#!" class="collection-item">My Recipes <span class="right fa fa-user-circle"></a>
+              <a href="#!" class="collection-item">Favorite Recipes <span class="right fa fa-user-circle"></a>
+              <a href="#!" class="collection-item">Notifications <span class="red new badge">10</span></a>
+            </div>
+          </div> 
+        </div>
+        </div>
+      </div>
+    </ul>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

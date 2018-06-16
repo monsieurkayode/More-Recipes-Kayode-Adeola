@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Comments should render correctly 1`] = `
+<div
+  className="review-container z-depth-2"
+>
+  <div
+    className="review-body"
+  >
+    <div
+      className="user-avatar"
+    >
+      <Avatar
+        className="responsive-img"
+        color={null}
+        email={null}
+        facebookId={null}
+        fgColor="#FFF"
+        googleId={null}
+        maxInitials={null}
+        md5Email={null}
+        name="username"
+        round={true}
+        size={60}
+        skypeId={null}
+        style={null}
+        textSizeRatio={3}
+        twitterHandle={null}
+        unstyled={false}
+        value={null}
+        vkontakteId={null}
+      />
+    </div>
+    <div
+      className="review-content-block"
+    >
+      <div>
+        <p
+          className="username"
+        >
+          Username
+        </p>
+        <p
+          className="review-time"
+        >
+          7 days ago
+        </p>
+      </div>
+      <div
+        className="review-text"
+      >
+        <p>
+          Love this
+        </p>
+      </div>
+      <div
+        className="review-controls"
+      >
+        <i
+          className="fa fa-pencil"
+        >
+           
+          <span>
+            Edit
+          </span>
+           
+        </i>
+        <i
+          className="fa fa-trash"
+        >
+           
+          <span>
+            Delete
+          </span>
+        </i>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The RecipeCardSmall Component should render correctly 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "blank",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <RecipeCardSmall
+      recipe={
+        Object {
+          "category": "specials",
+          "id": 1,
+          "ingredients": "**A list of ingredients for preparing Chicken soup**
+                  * 1 (3 pound) whole chicken
+                  * 4 carrots, halved
+                  * 4 stalks celery, halved
+                  * 1 large onion, halved
+                  * water to cover
+                  * salt and pepper to taste
+                  * 1 teaspoon chicken bouillon granules (optional)",
+          "instructions": "* Put the chicken, carrots, celery and onion in a large soup
+                  pot and cover with cold water. Heat and simmer, uncovered,
+                  until the chicken meat falls off of the bones
+                  (skim off foam every so often).
+                  * Take everything out of the pot. Strain the broth. 
+                  Pick the meat off of the bones and chop the carrots, celery 
+                  and onion. Season the broth with salt, pepper and chicken 
+                  bouillon to taste, if desired. Return the chicken, carrots, 
+                  celery and onion to the pot, stir together, and serve.",
+          "recipeName": "Chicken Soup",
+        }
+      }
+      selectRecipe={[MockFunction]}
+      selected="recipes"
+    >
+      <div
+        className="col l3 m8 s12 offset-m2"
+      >
+        <div
+          className="card hoverable views-small"
+        >
+          <RecipeCard
+            recipe={
+              Object {
+                "category": "specials",
+                "id": 1,
+                "ingredients": "**A list of ingredients for preparing Chicken soup**
+                  * 1 (3 pound) whole chicken
+                  * 4 carrots, halved
+                  * 4 stalks celery, halved
+                  * 1 large onion, halved
+                  * water to cover
+                  * salt and pepper to taste
+                  * 1 teaspoon chicken bouillon granules (optional)",
+                "instructions": "* Put the chicken, carrots, celery and onion in a large soup
+                  pot and cover with cold water. Heat and simmer, uncovered,
+                  until the chicken meat falls off of the bones
+                  (skim off foam every so often).
+                  * Take everything out of the pot. Strain the broth. 
+                  Pick the meat off of the bones and chop the carrots, celery 
+                  and onion. Season the broth with salt, pepper and chicken 
+                  bouillon to taste, if desired. Return the chicken, carrots, 
+                  celery and onion to the pot, stir together, and serve.",
+                "recipeName": "Chicken Soup",
+              }
+            }
+            selectRecipe={[MockFunction]}
+            selected="recipes"
+            size="small-cards"
+          >
+            <div>
+              <div
+                className="card-image"
+              >
+                <Link
+                  replace={false}
+                  to="/recipes/1"
+                >
+                  <a
+                    href="/recipes/1"
+                    onClick={[Function]}
+                  >
+                    <img
+                      alt=""
+                      className="responsive-img"
+                    />
+                  </a>
+                </Link>
+                <span
+                  className="card-title"
+                >
+                   views
+                </span>
+              </div>
+              <div
+                className="card-content small-cards"
+              >
+                <span
+                  className="card-title truncate"
+                >
+                  <strong>
+                    Chicken Soup
+                  </strong>
+                </span>
+                <div
+                  className="divider"
+                />
+                <Link
+                  className="edit chip"
+                  replace={false}
+                  to="/recipes/1/edit"
+                >
+                  <a
+                    className="edit chip"
+                    href="/recipes/1/edit"
+                    onClick={[Function]}
+                  >
+                    <i
+                      className="fa fa-pencil"
+                    />
+                     Edit
+                  </a>
+                </Link>
+                <span>
+                  <a
+                    className="delete chip modal-trigger"
+                    href="#modal-delete"
+                    onClick={[Function]}
+                  >
+                    <i
+                      className="fa fa-trash-o"
+                    />
+                     Delete
+                  </a>
+                  <br />
+                  <span
+                    className="right"
+                  >
+                    <i
+                      className="material-icons tiny reaction"
+                    >
+                      thumb_down
+                    </i>
+                  </span>
+                  <span
+                    className="right"
+                  >
+                    <i
+                      className="material-icons tiny reaction"
+                    >
+                      thumb_up
+                    </i>
+                  </span>
+                  <span>
+                    <p
+                      className="created-at"
+                    >
+                      February 12 3:12 am
+                    </p>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </RecipeCard>
+        </div>
+      </div>
+    </RecipeCardSmall>
+  </Router>
+</BrowserRouter>
+`;
