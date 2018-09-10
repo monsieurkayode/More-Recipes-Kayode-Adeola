@@ -15,6 +15,11 @@ const updateProfileAction = updateDetails => (dispatch) => {
   formData.append('lastName', lastName);
   formData.append('imageUrl', imageUrl);
 
+  dispatch({
+    type: actionTypes.IS_FETCHING,
+    payload: { status: true, componentName: 'UserProfile' }
+  });
+
   return axios.patch('/api/v1/users/updateProfile', formData)
     .then((response) => {
       const { message, userDetails } = response.data;
@@ -24,6 +29,11 @@ const updateProfileAction = updateDetails => (dispatch) => {
           payload: userDetails
         }
       );
+
+      dispatch({
+        type: actionTypes.IS_FETCHING,
+        payload: { status: false, componentName: 'UserProfile' }
+      });
 
       Materialize.toast(message, 4000, 'grey darken-2');
     })
@@ -36,6 +46,10 @@ const updateProfileAction = updateDetails => (dispatch) => {
           type: actionTypes.UPDATE_USER_PROFILE_ERROR
         }
       );
+      dispatch({
+        type: actionTypes.IS_FETCHING,
+        payload: { status: false, componentName: 'UserProfile' }
+      });
     });
 };
 

@@ -23,11 +23,7 @@ const fetchUserRecipes = page => dispatch =>
       });
       dispatch({
         type: actionTypes.IS_FETCHING,
-        payload: { status: false, componentName: 'Dashboard' }
-      });
-      dispatch({
-        type: actionTypes.IS_FETCHING,
-        payload: { status: false, componentName: 'UserRecipes' }
+        payload: { status: false, componentName: 'DashboardPage' }
       });
     })
     .catch((error) => {
@@ -41,7 +37,11 @@ const fetchUserRecipes = page => dispatch =>
       }
       dispatch({
         type: actionTypes.IS_FETCHING,
-        payload: { status: false, componentName: 'Dashboard' }
+        payload: { status: false, componentName: 'DashboardPage' }
+      });
+      dispatch({
+        type: actionTypes.IS_FETCHING,
+        payload: { status: false, componentName: 'UserRecipes' }
       });
     });
 

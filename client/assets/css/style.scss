@@ -834,7 +834,9 @@ span.image-name {
 }
 
 .loader {
-  margin: 25% 45%
+  display: flex;
+  justify-content: center;
+  margin: 25% 0;
 }
 
 #side-nav-avatar {

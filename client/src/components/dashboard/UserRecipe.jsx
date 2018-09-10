@@ -16,22 +16,38 @@ class UserRecipe extends Component {
   /**
    * Component constructor
    * @param {object} props
-   * @memberOf UserRecipe
+   * @memberof UserRecipe
    */
   constructor(props) {
     super(props);
     this.setPagination = this.setPagination.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
   }
+
   /**
-   * @method componentWillReceiveProps
+   * @method componentDidMount
+   *
+   * @returns {undefined}
+   */
+  componentDidMount() {
+    const { isFetching, fetchUserRecipes } = this.props;
+    const currentPage = localStorage.getItem('currentPageUserRecipes');
+    isFetching(true, 'UserRecipes');
+    fetchUserRecipes(currentPage).then(() => {
+      isFetching(false, 'UserRecipes');
+    });
+  }
+
+  /**
+   * @method componentWillUpdate
    *
    * @param {object} nextProps
    *
    * @returns {*} any
    */
-  componentWillReceiveProps(nextProps) {
-    const { recipes } = this.props.userRecipes;
+  componentWillUpdate(nextProps) {
+    const { userRecipes, fetchUserRecipes } = this.props;
+    const { recipes } = userRecipes;
     const currentPageSize = Object.keys(recipes || {}).length;
     const nextPageSize = Object.keys(
       nextProps.userRecipes.recipes || {}
@@ -41,10 +57,9 @@ class UserRecipe extends Component {
       const nextRecipes = this.hasRecipes() && nextProps.userRecipes.recipes;
       if (!Object.keys(nextRecipes || {}).length && currentPage > 1) {
         localStorage.setItem('currentPageUserRecipes', currentPage - 1);
-        this.props.isFetching(true, 'UserRecipes');
-        return this.props.fetchUserRecipes(currentPage - 1);
+        return fetchUserRecipes(currentPage - 1);
       }
-      this.props.fetchUserRecipes(currentPage);
+      fetchUserRecipes(currentPage);
     }
   }
 
@@ -105,7 +120,9 @@ class UserRecipe extends Component {
     localStorage.setItem('currentPageUserRecipes', page);
     const currentPage = localStorage.getItem('currentPageUserRecipes');
     this.props.isFetching(true, 'UserRecipes');
-    this.props.fetchUserRecipes(currentPage, this);
+    this.props.fetchUserRecipes(currentPage).then(() => {
+      this.props.isFetching(false, 'UserRecipes');
+    });
   }
 
   /**
@@ -171,16 +188,15 @@ class UserRecipe extends Component {
       <div id="user-recipes" className="col l9 m12 s12 offset-l3">
         <WelcomeDisplay selected={this.props.selected} />
         <div id="my-recipes" className="row">
-          {this.hasRecipes() ?
-            <div>
-              { this.props.isLoadingRecipes ? <Loader /> :
+          { this.props.isLoadingRecipes && <Loader /> }
+          { !this.props.isLoadingRecipes && this.hasRecipes() &&
                 Object
                   .keys(recipes)
                   .sort((a, b) => b - a)
                   .map(index => this.renderUserRecipes(index))
-              }
-            </div> :
-            <div className="center-align not-found">
+          }
+          { !this.props.isLoadingRecipes && !this.hasRecipes() &&
+            (<div className="center-align not-found">
               <img
                 src="/css/img/sad.png"
                 alt=""
@@ -188,7 +204,8 @@ class UserRecipe extends Component {
               <h5>
                 There is nothing here, create and share awesome recipes.
               </h5>
-            </div>}
+            </div>)
+          }
         </div>
         {this.hasRecipes() && this.renderPagination()}
       </div>

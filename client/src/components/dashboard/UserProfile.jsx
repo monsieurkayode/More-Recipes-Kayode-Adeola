@@ -7,6 +7,7 @@ import validateProfileUpdate from '../../utils/validateProfileUpdate';
 import { fetchUserDetailsAction, updateProfileAction } from '../../actions';
 import holderProfile from '../../../assets/css/img/holder-profile.png';
 import { WelcomeDisplay } from './';
+import { Loader } from '../main';
 
 /**
  * @summary - UserProfile class declaration
@@ -194,6 +195,8 @@ class UserProfile extends Component {
       <div id="user-profile" className="col l9 m12 s12 offset-l3">
         <WelcomeDisplay selected={this.props.selected} />
         <div id="my-profile" className="row">
+          { this.props.isLoadingProfile && <Loader /> }
+          { !this.props.isLoadingProfile &&
           <div className="col l12 m12 s12">
             <div className="row">
               <div className="col l4 m4">
@@ -287,7 +290,7 @@ class UserProfile extends Component {
                 </form>
               </div>
             </div>
-          </div>
+          </div>}
         </div>
       </div>
     );
@@ -310,7 +313,8 @@ UserProfile.propTypes = {
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     imageUrl: PropTypes.string,
-  })
+  }),
+  isLoadingProfile: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = ({ userDetails }) => ({ userDetails });

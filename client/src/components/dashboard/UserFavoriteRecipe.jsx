@@ -23,14 +23,29 @@ class UserFavoriteRecipe extends Component {
     this.setPagination = this.setPagination.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
   }
+
   /**
-   * @method componentWillReceiveProps
+   * @method componentDidMount
+   *
+   * @returns {undefined}
+   */
+  componentDidMount() {
+    const { fetchUserFavorites, isFetching } = this.props;
+    const currentPage = localStorage.getItem('currentPageUserFavorites');
+    isFetching(true, 'UserFavoriteRecipe');
+    fetchUserFavorites(currentPage).then(() => {
+      isFetching(false, 'UserFavoriteRecipe');
+    });
+  }
+
+  /**
+   * @method componentWillUpdate
    *
    * @param {object} nextProps
    *
    * @returns {*} any
    */
-  componentWillReceiveProps(nextProps) {
+  componentWillUpdate(nextProps) {
     const { recipes } = this.props.userFavorites;
     const currentPageSize = Object.keys(recipes || {}).length;
     const nextPageSize = Object.keys(
@@ -42,7 +57,6 @@ class UserFavoriteRecipe extends Component {
         nextProps.userFavorites.recipes;
       if (!Object.keys(nextFavorites || {}).length && currentPage > 1) {
         localStorage.setItem('currentPageUserFavorites', currentPage - 1);
-        this.props.isFetching(true, 'UserFavorites');
         return this.props.fetchUserFavorites(currentPage - 1);
       }
       this.props.fetchUserFavorites(currentPage);
@@ -102,10 +116,13 @@ class UserFavoriteRecipe extends Component {
    */
   handlePageClick({ selected }) {
     const page = selected + 1;
+    const { fetchUserFavorites, isFetching } = this.props;
     localStorage.setItem('currentPageUserFavorites', page);
     const currentPage = localStorage.getItem('currentPageUserFavorites');
-    this.props.isFetching(true, 'UserFavorites');
-    this.props.fetchUserFavorites(currentPage);
+    isFetching(true, 'UserFavoriteRecipe');
+    fetchUserFavorites(currentPage).then(() => {
+      isFetching(false, 'UserFavoriteRecipe');
+    });
   }
 
   /**
@@ -170,26 +187,24 @@ class UserFavoriteRecipe extends Component {
       <div id="favorite-recipes" className="col l9 m12 s12 offset-l3">
         <WelcomeDisplay selected={this.props.selected} />
         <div id="user-favorites" className="row">
-          <div className="row">
-            {this.hasFavorites() ?
-              <div>
-                { this.props.isLoadingFavorites ? <Loader /> :
+          { this.props.isLoadingFavorites && <Loader /> }
+          { !this.props.isLoadingFavorites && this.hasFavorites() &&
                   Object
                     .keys(recipes)
                     .sort((a, b) => b - a)
                     .map(index => this.renderUserFavorites(index))
-                }
-              </div> :
-              <div className="center-align not-found">
-                <img
-                  src="/css/img/sad.png"
-                  alt=""
-                />
-                <h5>
-                  You have not added any favorites.
-                </h5>
-              </div>}
-          </div>
+          }
+          { !this.props.isLoadingFavorites && !this.hasFavorites() &&
+            (<div className="center-align not-found">
+              <img
+                src="/css/img/sad.png"
+                alt=""
+              />
+              <h5>
+                You have not added any favorites.
+              </h5>
+            </div>)
+          }
         </div>
         {this.hasFavorites() && this.renderPagination()}
       </div>

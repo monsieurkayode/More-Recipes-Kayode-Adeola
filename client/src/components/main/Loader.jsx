@@ -13,8 +13,8 @@ const Loader = () => (
   <div className="loader">
     <PreloaderIcon
       type={ICON_TYPE.OVAL}
-      size={80}
-      strokeWidth={7}
+      size={50}
+      strokeWidth={15}
       strokeColor="#006664"
       duration={800}
     />
