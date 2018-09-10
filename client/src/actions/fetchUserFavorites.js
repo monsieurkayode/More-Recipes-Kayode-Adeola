@@ -23,11 +23,19 @@ const fetchUserFavorites = page => dispatch =>
       });
       dispatch({
         type: actionTypes.IS_FETCHING,
-        payload: { status: false, componentName: 'UserFavorites' }
+        payload: { status: false, componentName: 'DashboardPage' }
       });
     })
     .catch(() => {
       dispatch({ type: actionTypes.FETCH_USER_FAVORITES_ERROR });
+      dispatch({
+        type: actionTypes.IS_FETCHING,
+        payload: { status: false, componentName: 'DashboardPage' }
+      });
+      dispatch({
+        type: actionTypes.IS_FETCHING,
+        payload: { status: false, componentName: 'UserFavoriteRecipe' }
+      });
     });
 
 export default fetchUserFavorites;

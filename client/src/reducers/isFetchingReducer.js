@@ -1,7 +1,8 @@
 import actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  dashBoardIsLoading: false,
+  dashboardIsLoading: false,
+  userProfileIsLoading: false,
   userRecipesIsLoading: false,
   userFavoritesIsLoading: false,
   postRecipeIsLoading: false,
@@ -20,10 +21,16 @@ const initialState = {
 const isFetchingReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.IS_FETCHING:
-      if (action.payload.componentName === 'Dashboard') {
+      if (action.payload.componentName === 'DashboardPage') {
         return {
           ...state,
-          dashBoardIsLoading: action.payload.status,
+          dashboardIsLoading: action.payload.status,
+        };
+      }
+      if (action.payload.componentName === 'UserProfile') {
+        return {
+          ...state,
+          userProfileIsLoading: action.payload.status,
         };
       }
       if (action.payload.componentName === 'UserRecipes') {
@@ -32,7 +39,7 @@ const isFetchingReducer = (state = initialState, action) => {
           userRecipesIsLoading: action.payload.status,
         };
       }
-      if (action.payload.componentName === 'UserFavorites') {
+      if (action.payload.componentName === 'UserFavoriteRecipe') {
         return {
           ...state,
           userFavoritesIsLoading: action.payload.status,

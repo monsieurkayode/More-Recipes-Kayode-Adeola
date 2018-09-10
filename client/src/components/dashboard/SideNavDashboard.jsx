@@ -54,7 +54,9 @@ const SideNavDashboard = props => (
                   <li className="tab">
                     <Link
                       to="/dashboard/profile"
-                      className="white-text"
+                      className={`white-text 
+                        ${props.route === 'profile' && 'active'}`
+                      }
                     >
                       <i
                         className="fa fa-vcard-o white-text"
@@ -64,7 +66,9 @@ const SideNavDashboard = props => (
                   <li className="tab">
                     <Link
                       to="/dashboard/recipes"
-                      className="white-text"
+                      className={`white-text 
+                        ${props.route === 'recipes' && 'active'}`
+                      }
                     >
                       <i
                         className="fa fa-briefcase white-text"
@@ -74,7 +78,9 @@ const SideNavDashboard = props => (
                   <li className="tab">
                     <Link
                       to="/dashboard/favorites"
-                      className="white-text"
+                      className={`white-text 
+                        ${props.route === 'favorites' && 'active'}`
+                      }
                     >
                       <i
                         className="fa fa-heart white-text"
@@ -84,7 +90,9 @@ const SideNavDashboard = props => (
                   <li className="tab">
                     <Link
                       to="/dashboard/notifications"
-                      className="white-text"
+                      className={`white-text 
+                        ${props.route === 'notifications' && 'active'}`
+                      }
                     >
                       <i
                         className="fa fa-comments-o white-text"
@@ -113,6 +121,7 @@ SideNavDashboard.propTypes = {
   user: PropTypes.shape({
     username: PropTypes.string
   }),
+  route: PropTypes.string.isRequired,
 };
 
 export default SideNavDashboard;

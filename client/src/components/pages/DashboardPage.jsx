@@ -21,6 +21,7 @@ import {
   UserNotification
 } from '../dashboard';
 import DeleteModal from '../modals';
+import { NotFoundPage } from '../pages';
 import { Loader } from '../main';
 import materializeJavascript from '../../utils/materializeJavascript';
 
@@ -31,16 +32,12 @@ import materializeJavascript from '../../utils/materializeJavascript';
  */
 export class DashboardPage extends Component {
   /**
-   * @method componentDidMount
+   * @method componentWillMount
    *
    * @returns {undefined}
    */
-  componentDidMount() {
-    const currentPage = localStorage.getItem('currentPageUserRecipes');
-    const currentPageFav = localStorage.getItem('currentPageUserFavorites');
-    this.props.isFetching(true, 'Dashboard');
-    this.props.fetchUserRecipes(currentPage);
-    this.props.fetchUserFavorites(currentPageFav);
+  componentWillMount() {
+    this.props.isFetching(true, 'DashboardPage');
   }
 
   /**
@@ -61,46 +58,56 @@ export class DashboardPage extends Component {
    * @returns {JSX} JSX
    */
   render() {
-    const { isLoading } = this.props;
     const deletePostDialog = 'Delete recipe';
     const removeFavDialog = 'Remove from favorite';
-    const { route } = this.props.match.params;
+    const { match, user, selectedRecipe, isLoadingDashboard } = this.props;
+    const { route } = match.params;
+    const routes = ['profile', 'recipes', 'favorites', 'notifications'];
+
+    if (!routes.includes(route)) {
+      return <NotFoundPage {...this.props} />;
+    }
+
+    if (isLoadingDashboard) {
+      return <Loader />;
+    }
+
     return (
       <div>
-        {isLoading ?
-          <Loader /> :
-          <div>
-            <DashboardNavbar {...this.props} />
-            <div className="row">
-              <DashboardPanel user={this.props.user} />
-              {
-                route === 'profile' &&
-                <UserProfile selected={route} {...this.props} />
-              }
-              {
-                route === 'recipes' &&
-                <UserRecipe selected={route} {...this.props} />
-              }
-              {
-                route === 'favorites' &&
+        { isLoadingDashboard && <Loader /> }
+        { !isLoadingDashboard &&
+        <div>
+          <DashboardNavbar {...this.props} />
+          <div className="row">
+            <DashboardPanel user={this.props.user} route={route} />
+            {
+              route === 'profile' &&
+              <UserProfile selected={route} {...this.props} />
+            }
+            {
+              route === 'recipes' &&
+              <UserRecipe selected={route} {...this.props} />
+            }
+            {
+              route === 'favorites' &&
                 <UserFavoriteRecipe selected={route} {...this.props} />
-              }
-              {
-                route === 'notifications' &&
+            }
+            {
+              route === 'notifications' &&
                 <UserNotification selected={route} {...this.props} />
-              }
-            </div>
-            <DeleteModal
-              selected={route}
-              id={this.props.selectedRecipe}
-              dialog={route === 'recipes' ? deletePostDialog : removeFavDialog}
-              handleAction={route === 'recipes' ?
-                this.props.deletePost :
-                this.props.removeFavorite
-              }
-            />
-            <SideNavDashboard user={this.props.user} />
-          </div>}
+            }
+          </div>
+          <DeleteModal
+            selected={route}
+            id={selectedRecipe}
+            dialog={route === 'recipes' ? deletePostDialog : removeFavDialog}
+            handleAction={route === 'recipes' ?
+              this.props.deletePost :
+              this.props.removeFavorite
+            }
+          />
+          <SideNavDashboard user={user} route={route} />
+        </div>}
       </div>
     );
   }
@@ -118,7 +125,8 @@ const mapStateToProps = ({
   userRecipes,
   userFavorites,
   selectedRecipe,
-  isLoading: isLoading.dashBoardIsLoading,
+  isLoadingDashboard: isLoading.dashboardIsLoading,
+  isLoadingProfile: isLoading.userProfileIsLoading,
   isLoadingRecipes: isLoading.userRecipesIsLoading,
   isLoadingFavorites: isLoading.userFavoritesIsLoading
 });
@@ -140,7 +148,7 @@ DashboardPage.propTypes = {
   deletePost: PropTypes.func.isRequired,
   removeFavorite: PropTypes.func.isRequired,
   isFetching: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoadingDashboard: PropTypes.bool.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       route: PropTypes.string.isRequired

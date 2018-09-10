@@ -51,7 +51,9 @@ const DashboardPanel = props => (
             <ul className="tabs teal">
               <li className="tab">
                 <Link
-                  className="white-text"
+                  className={`white-text 
+                    ${props.route === 'profile' && 'active'}`
+                  }
                   to="/dashboard/profile"
                 >
                   <i className="fa fa-vcard-o" /> My Profile
@@ -60,7 +62,9 @@ const DashboardPanel = props => (
               <li className="tab">
                 <Link
                   to="/dashboard/recipes"
-                  className="white-text"
+                  className={`white-text
+                    ${props.route === 'recipes' && 'active'}`
+                  }
                 >
                   <i className="fa fa-briefcase" /> My Recipes
                 </Link>
@@ -68,7 +72,9 @@ const DashboardPanel = props => (
               <li className="tab">
                 <Link
                   to="/dashboard/favorites"
-                  className="white-text"
+                  className={`white-text 
+                    ${props.route === 'favorites' && 'active'}`
+                  }
                 >
                   <i className="fa fa-heart" /> Favorite Recipes
                 </Link>
@@ -76,7 +82,9 @@ const DashboardPanel = props => (
               <li className="tab">
                 <Link
                   to="/dashboard/notifications"
-                  className="white-text"
+                  className={`white-text 
+                    ${props.route === 'notifications' && 'active'}`
+                  }
                 >
                   <i className="fa fa-comments-o" /> Notifications
                   <span id="not-badge" className="red new badge">10</span>
@@ -97,7 +105,8 @@ DashboardPanel.defaultProps = {
 DashboardPanel.propTypes = {
   user: PropTypes.shape({
     username: PropTypes.string
-  })
+  }),
+  route: PropTypes.string.isRequired
 };
 
 export default DashboardPanel;
